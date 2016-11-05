@@ -1,0 +1,19 @@
+.tab {
+  display:none;
+  &.visible {
+    display:block;
+  }
+}
+
+.tab-lesson-plans {
+  border-top:solid 1px $gray-lightest;
+  padding-bottom:1rem;
+  margin-bottom:1rem;
+  border-bottom:solid 2px $gray-lightest;
+  .icon-download {
+    font-size:$font-size-sm;
+    font-weight:200;
+    border-bottom:dotted 1px $gray-lighter;
+    margin-right:auto;
+  }
+}

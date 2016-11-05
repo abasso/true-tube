@@ -1,0 +1,10 @@
+.info {
+  margin: 1rem .75rem 1rem 0;
+  display:flex;
+  align-self: center;
+  position:relative;
+  font-weight:200;
+  border-right:solid 1px $gray-lighter;
+  padding-right:.75rem;
+  line-height:auto;
+}

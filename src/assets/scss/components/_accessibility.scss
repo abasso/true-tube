@@ -1,0 +1,16 @@
+.accessibility-nav {
+  text-align:right;
+  .btn-dyslexia {
+    border-right:solid 1px $gray-lightest;
+    padding-right:1rem;
+    margin-right:1rem;
+  }
+  .btn-font-smaller {
+    font-size:$font-size-sm;
+    margin-right:1rem;
+  }
+}
+
+.dyslexia {
+  font-family: $font-family-body-dyslexia;
+}

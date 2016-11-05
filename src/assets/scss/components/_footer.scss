@@ -1,0 +1,139 @@
+.partners-carousel {
+  margin-top:1rem;
+  background:$gray-lightest;
+  padding:.5rem 0 1rem;
+  .partners-carousel-header {
+    display:flex;
+    align-items: center;
+    .partners-carousel-link {
+      margin-left:auto;
+      border-bottom:dotted 1px $gray-lighter;
+    }
+  }
+  .swiper-wrapper {
+    padding-bottom:3.5rem;
+  }
+  .swiper-slide {
+    padding:1rem;
+    text-align:center;
+    border-radius:$border-radius-lg;
+    background:#fff;
+  }
+  .swiper-pagination {
+    border:none;
+  }
+  // h3 {
+  //   padding-bottom:1rem;
+  // }
+  img {
+    width:100%;
+    min-height:0;
+  }
+}
+
+footer {
+  font-size:$font-size-sm;
+
+  .container {
+    display:flex;
+    flex-direction:column;
+    margin:2rem;
+    @media(max-width: $breakpoint-lg) {
+      margin:1rem;
+    }
+    @media(min-width: $breakpoint-xl) {
+      margin:2rem auto;
+    }
+  }
+  a {
+    color:white;
+    &:hover {
+      color:$brand-yellow;
+    }
+  }
+  padding:1rem 0;
+  background:$brand-grey;
+  color:$gray;
+  font-weight:200;
+
+  .footer-nav-container {
+    display:flex;
+    flex-direction:column;
+    @media(min-width: $breakpoint-md) {
+      flex-direction:row;
+    }
+    .footer-nav {
+      min-width:200px;
+      display:flex;
+      flex-direction:column;
+      a {
+        color:white;
+        border-bottom:dotted 1px $gray;
+        margin:.25rem 0;
+        &:hover {
+          color:$brand-yellow;
+        }
+        @media(min-width: $breakpoint-xl) {
+          flex-direction:row;
+        }
+      }
+    }
+  }
+  .footer-address {
+    color:white;
+    @media(max-width: $breakpoint-md) {
+    border-top:solid 2px $gray;
+    padding:1rem 0;
+    margin:1rem 0 0;
+  }
+    @media(min-width: $breakpoint-md) {
+      margin-left:auto;
+      text-align:right;
+    }
+  }
+
+  .footer-info {
+    font-size:$font-size-xs;
+    margin-bottom:0;
+    display:flex;
+    flex-direction:column;
+    @media(min-width: $breakpoint-md) {
+      margin-top:3rem;
+      flex-direction:row;
+      align-items: center;
+    }
+
+  }
+}
+
+.copyright {
+  @media(max-width: $breakpoint-md) {
+    order:2;
+  }
+}
+
+.footer-produced-by {
+  display:flex;
+  align-items: center;
+  align-self: baseline;
+  color:white;
+  margin-left:auto;
+  @media(max-width: $breakpoint-md) {
+    order:1;
+    width:100%;
+    border-top:solid 1px $gray;
+    border-bottom:solid 1px $gray;
+    padding:1rem 0;
+    margin-bottom:1rem;
+  }
+  a {
+    background:no-repeat bottom right url("/assets/images/ctvc-logo.svg");
+    background-size:contain;
+    height:30px;
+    width:100px;
+    margin-left:.5rem;
+    @media(max-width: $breakpoint-lg) {
+      margin-left:auto;
+    }
+  }
+}
