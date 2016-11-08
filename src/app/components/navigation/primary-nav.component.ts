@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Auth } from './../../services/auth.service';
 
 @Component({
   selector: 'app-primary-nav',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./primary-nav.component.sass']
 })
 export class PrimaryNavComponent {
+  constructor(private auth: Auth) {}
+
   items = [
     {
       label: "Videos",
@@ -24,4 +27,5 @@ export class PrimaryNavComponent {
       href: ""
     }
   ]
+  loggedIn = false;
 }

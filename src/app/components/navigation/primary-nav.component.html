@@ -1,7 +1,7 @@
 <div class="primary-nav__wrapper">
   <div *ngFor="let item of items" class="primary-nav__item"><a href="" class="primary-nav__link">{{ item.label }}</a></div>
-
 </div>
-<div class="primary-nav__item primary-nav__account"><a href="" class="primary-nav__link" data-toggle="modal" data-target="#modalLogin">login</a></div>
-<div class="primary-nav__item primary-nav__account"><a href="/patterns/03-pages-04-register/03-pages-04-register.html" class="primary-nav__link">register</a></div>
+<div class="primary-nav__item primary-nav__account" (click)="auth.logout()" *ngIf="auth.authenticated()"><a href="/patterns/03-pages-04-register/03-pages-04-register.html" class="primary-nav__link">Logout</a></div>
+<div class="primary-nav__item primary-nav__account" (click)="auth.login()" *ngIf="!auth.authenticated()"><a href="" class="primary-nav__link" data-toggle="modal" data-target="#modalLogin">Login</a></div>
+<div class="primary-nav__item primary-nav__account" *ngIf="!auth.authenticated()"><a href="/patterns/03-pages-04-register/03-pages-04-register.html" class="primary-nav__link">Register</a></div>
 <app-search class="primary-nav__search"></app-search>

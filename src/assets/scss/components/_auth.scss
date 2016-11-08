@@ -1,0 +1,38 @@
+.auth0-lock.auth0-lock {
+  font-family: $font-family-sans-serif;
+  .auth0-lock-header-bg {
+    background:black;
+    display:none;
+  }
+  .auth0-lock-header {
+    background:black;
+    color:white;
+    padding:0;
+    height:auto;
+  }
+  .auth0-lock-tabs li a {
+    font-weight:200;
+  }
+  .auth0-lock-header-logo {
+    width:auto;
+    margin:1rem;
+    display:block;
+    height:45px;
+  }
+  .auth0-lock-name {
+    display:none;
+    background:$brand-grey;
+    font-weight:200;
+    padding:.5rem 0;
+    font-size:$font-size-base;
+  }
+  .auth0-lock-submit {
+    color:black;
+    text-transform:capitalize;
+    span {
+      span {
+        display:none;
+      }
+    }
+  }
+}
