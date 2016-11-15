@@ -10,12 +10,15 @@ export const myConfig: AuthConfiguration = {
     options: {
       languageDictionary: {
         emailInputPlaceholder: "something@youremail.com",
-        title: ""
+        title: "",
+        signUpLabel: "Register"
       },
+      popupOptions: { width: 500 },
+
       // socialButtonStyle: 'small',
       // allowSignUp: false,
       theme: {
-          logo: 'https://truetube.localtunnel.me/assets/images/true-tube-logo_white.svg',
+          logo: '/assets/images/true-tube-logo_black.svg',
           primaryColor: '#FBE407'
         }
     }

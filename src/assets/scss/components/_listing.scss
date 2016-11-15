@@ -40,6 +40,8 @@
   background:rgba(0,0,0,0.6);
   color:#fff;
   padding:.2rem .5rem;
+  margin:.25rem;
+  border-radius:$border-radius-sm;
 
 }
 
@@ -50,11 +52,9 @@
 }
 
 .block-media__categories {
-  margin-top:0.5rem;
+  margin-top:.5rem;
 
-  .btn {
-    margin-left:0;
-  }
+
 }
 
 .list-item {

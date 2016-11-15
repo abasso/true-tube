@@ -1,17 +1,37 @@
 .auth0-lock.auth0-lock {
   font-family: $font-family-sans-serif;
+
+  .auth0-lock-widget {
+    width:400px;
+  }
   .auth0-lock-header-bg {
-    background:black;
     display:none;
   }
   .auth0-lock-header {
-    background:black;
+    background:$gray-lightest;
     color:white;
     padding:0;
     height:auto;
   }
-  .auth0-lock-tabs li a {
-    font-weight:200;
+
+  .auth0-lock-content {
+    padding:10px;
+  }
+  .auth0-lock-tabs-container {
+    margin:-10px -10px 20px;
+  }
+  .auth0-lock-tabs {
+    box-shadow:none;
+     li {
+       background:$gray-lighter;
+       a {
+         font-weight:200;
+      }
+      &.auth0-lock-tabs-current {
+        background:white;
+        box-shadow:none;
+      }
+    }
   }
   .auth0-lock-header-logo {
     width:auto;

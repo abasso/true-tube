@@ -1,0 +1,16 @@
+<div class="list-item">
+  	<div class="block-media__media">
+      <a href="{{ item.url }}" class="block-media__link">
+        <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" />
+        <!-- <span *ngIf="{{ time }}" class="listing-time">{{ time }}</span> -->
+      </a>
+  </div>
+  <div class="block-media__body">
+    <a href="{{ item.url }}" class="block-media__link">
+  	<h6 class="block-media__headline">{{ item.title }}</h6></a>
+  		<p class="block-media__description small">{{ item.description }}</p>
+  		<div class="block-media__categories">
+        <a href="{{ category.url }}" *ngFor="let category of item.categories" class="btn {{ category.class }}"><span>{{ category.label }}</span></a>
+  		</div>
+  	</div>
+</div>
