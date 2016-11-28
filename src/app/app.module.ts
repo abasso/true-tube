@@ -15,11 +15,12 @@ import { CallToActionComponent } from './components/messaging/call-to-action.com
 import { Auth } from './services/auth.service';
 import _ from 'lodash';
 import Cookies from 'js-cookie';
-import { SearchTermPipe } from './pipes/search-term.pipe';
 import { ListingComponent } from './components/content/listing/listing.component';
-import { FilterComponent } from './components/content/listing/filter.component';
+import { ListFilter } from './components/content/listing/filter.component';
 import { ListComponent } from './components/content/listing/list.component';
+import { SearchTermPipe } from './pipes/search-term.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
+import { KeystagePipe } from './pipes/keystage.pipe';
 
 @NgModule({
   declarations: [
@@ -31,9 +32,10 @@ import { CategoryPipe } from './pipes/category.pipe';
     CallToActionComponent,
     SearchTermPipe,
     ListingComponent,
-    FilterComponent,
+    ListFilter,
     ListComponent,
-    CategoryPipe
+    CategoryPipe,
+    KeystagePipe
   ],
   imports: [
     BrowserModule,

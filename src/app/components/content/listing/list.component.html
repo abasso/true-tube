@@ -1,82 +1,42 @@
-
-<div class="grid-filter">
-  <div class="grid-filter-header"><h5>Filter </h5><span class="clear">Clear All</span></div>
-
-  <fieldset>
-    <legend>
-      <a href="#" class="collapse-toggle">Search Term</a>
-    </legend>
-    <input class="form-control" type="text" [(ngModel)]="filterSearch" placeholder="e.g. Social studies" />
-  </fieldset>
-  <fieldset class="flex-none">
-    <legend>
-      <a href="#" class="collapse-toggle">Content Type(s)<span class="clear">Clear</span></a>
-    </legend>
-    <button class="btn btn-sm" *ngFor="let category of categories" [(ngModel)]="filterCategories" (click)="setValue(category)" [ngClass]="{active: isActive(category)}" ngDefaultControl>{{category}}</button>
-  </fieldset>
-  <fieldset>
-    <legend>
-      <a href="#" class="collapse-toggle">Subject</a>
-    </legend>
-
-  </fieldset>
-  <fieldset class="flex-none filter-keystage">
-    <legend>
-      <a href="#" class="collapse-toggle">Key Stage(s)<span class="clear">Clear</span></a>
-    </legend>
-
-  </fieldset>
-  <fieldset>
-    <legend>
-      <a href="#" class="collapse-toggle">Categories<span class="clear">Clear</span></a>
-    </legend>
-
-  </fieldset>
-
-  <fieldset>
-    <legend>
-      <a href="#" class="collapse-toggle">Topics<span class="clear">Clear</span></a>
-    </legend>
-
-  </fieldset>
-
-</div>
-
-
-<!--
-<input class="form-control" type="text" [(ngModel)]="filterSearch" />
-<button class="btn btn-sm" *ngFor="let category of categories" [(ngModel)]="filterCategories" (click)="setValue(category)" [ngClass]="{active: isActive(category)}" ngDefaultControl>{{category}}</button> -->
-<!-- <template ngFor let-item [ngForOf]="categories" let-i="index" [ngForTrackBy]="trackByFn">
-  <button [(ngModel)]="filterCategory" (click)="setValue('{{category}}')" ngDefaultControl>{{category}}</button>
-</template> -->
-<div class="row grid-row content-grid" *ngIf="items.length > 0">
-  <!-- <app-listing *ngFor="let item of items"></app-listing> -->
-
-  <div class="list-item" *ngFor="let item of items | CategoryPipe:filterCategories | SearchTermPipe:filterSearch">
-    <div class="block-media__media" *ngIf="item.image">
-      <a href="{{ item.url }}" class="block-media__link">
-        <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" />
-        <div class="listing-time" *ngIf="item.time">
-          {{ item.time }}
-        </div>
-      </a>
-    </div>
-    <div class="block-media__body">
-      <a href="{{ item.url }}" class="block-media__link">
-        <h6 class="block-media__headline" *ngIf="item.title">
-          {{ item.title }}
-        </h6>
-      </a>
-      <p class="block-media__description small" *ngIf="item.description">
-        {{ item.description }}
-      </p>
-      <div class="block-media__categories" *ngIf="item.categories">
-        <a href="{{ category.url }}" *ngFor="let category of item.categories" class="btn btn-sm {{ category.class }}">
-          <span>
-            {{ category.label }}
-          </span>
+<div class="row">
+  <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right">
+    <app-filter #filter (listChange)="filterEvent($event);"></app-filter>
+  </div>
+  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
+  <h1 class="page-title">{{listService.pageTitle(filter.filterCategories, filter.filterSearch)}}</h1>
+  <div class="row grid-row content-grid" *ngIf="itemCount === 0">
+    <div class="list-item">
+    No results.
+  </div>
+  </div>
+  <div class="row grid-row content-grid">
+    <div class="list-item" *ngFor="let item of items | CategoryPipe:filter.filterCategories | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch">
+      <div class="block-media__media" *ngIf="item.image">
+        <a href="{{ item.url }}" class="block-media__link">
+          <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" />
+          <div class="listing-time" *ngIf="item.time">
+            {{ item.time }}
+          </div>
         </a>
+      </div>
+      <div class="block-media__body">
+        <a href="{{ item.url }}" class="block-media__link">
+          <h6 class="block-media__headline" *ngIf="item.title">
+            {{ item.title }}
+          </h6>
+        </a>
+        <p class="block-media__description small" *ngIf="item.description">
+          {{ item.description }}
+        </p>
+        <div class="block-media__categories" *ngIf="item.categories">
+          <a href="{{ category.url }}" *ngFor="let category of item.categories" class="btn btn-sm {{ category.class }}">
+            <span>
+              {{ category.label }}
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { ListingComponent } from './listing.component';
+import { Component, Input, OnInit } from '@angular/core';
 import { SearchTermPipe } from './../../../pipes/search-term.pipe';
 import { CategoryPipe } from './../../../pipes/category.pipe';
+import { KeystagePipe } from './../../../pipes/keystage.pipe';
+import { ListService } from './../../../services/list.service';
+
 import _ from "lodash";
 
 @Component({
@@ -10,57 +12,29 @@ import _ from "lodash";
   styleUrls: ['./list.component.scss'],
   providers: [
     SearchTermPipe,
-    CategoryPipe
+    CategoryPipe,
+    KeystagePipe,
+    ListService
   ]
 })
 
-export class ListComponent {
-  constructor(private SearchTermPipe: SearchTermPipe, private CategoryPipe: CategoryPipe) {
+export class ListComponent implements OnInit {
 
+  itemCount: number;
+
+  constructor(private listService: ListService) {
+    this.itemCount = listService.getListLength();
   }
 
-  categories = [
-    "Videos",
-    "Lesson Plans",
-    "Assembly Scripts",
-    "Interactive"
-  ];
-
-  filterCategories = [
-    "Videos",
-    "Lesson Plans",
-    "Assembly Scripts",
-    "Interactive"
-  ];
-
-  filterObject = {
-    "Videos": false,
-    "Lesson Plans": false,
-    "Assembly Scripts": false,
-    "Interactive": false
-  };
-
-  filterSearch:string = '';
-  noResults = false;
-
-  setValue(value) {
-    this.filterCategories.length = 0;
-    let valueIndex = _.findIndex(this.filterCategories, value);
-    this.filterObject[value] = (this.filterObject[value] === false) ? true : false;
-    _.forEach(this.filterObject, (value, key) => {
-      if(value == true) {
-        this.filterCategories.push(key);
-      }
-    });
-    // Clone itself to trigger the ng update.
-    this.filterCategories = _.clone(this.filterCategories);
-    // If there are no category filters show all the categories.
-    if(this.filterCategories.length === 0) this.filterCategories = _.clone(this.categories);
-    console.log(this.filterCategories);
+  ngOnInit() {
+    this.listService.setListLength(this.items);
+    this.itemCount = this.listService.getListLength();
   }
 
-  isActive(value) {
-    if (this.filterObject[value] === true) return true;
+  filterEvent(event) {
+    setTimeout(() => {
+      this.itemCount = this.listService.getListLength();
+    }, 1);
   }
 
   items = [
@@ -79,6 +53,11 @@ export class ListComponent {
           class: 'btn-lesson-plan',
           url: 'something'
         }
+      ],
+      keystages: [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -101,6 +80,9 @@ export class ListComponent {
           class: 'btn-lesson-plan',
           url: 'something'
         }
+      ],
+      keystages: [
+        1
       ]
     },
     {
@@ -118,6 +100,10 @@ export class ListComponent {
           class: 'btn-video',
           url: 'something'
         }
+      ],
+      keystages: [
+        1,
+        3
       ]
     },
     {
@@ -139,6 +125,10 @@ export class ListComponent {
           class: 'btn-lesson-plan',
           url: 'something'
         }
+      ],
+      keystages: [
+        2,
+        3
       ]
     },
     {
@@ -161,6 +151,11 @@ export class ListComponent {
           class: 'btn-lesson-plan',
           url: 'something'
         }
+      ],
+      keystages: [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -183,19 +178,13 @@ export class ListComponent {
           class: 'btn-lesson-plan',
           url: 'something'
         }
+      ],
+      keystages: [
+        1,
+        2,
+        3
       ]
     }
   ]
 
-  itemsVisible(items) {
-    console.log(items);
-    if(items.length) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-  // hasProperty(property) {
-  //   if (property) return true;
-  // }
 }

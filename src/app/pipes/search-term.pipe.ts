@@ -1,6 +1,7 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, Output } from '@angular/core';
 import _ from 'lodash';
 import { Location } from '@angular/common';
+import { ListService } from './../services/list.service';
 
 const FuzzySearch = require('fuzzysearch-js');
 const levenshteinFS = require('fuzzysearch-js/js/modules/LevenshteinFS');
@@ -8,10 +9,14 @@ const indexOfFS = require('fuzzysearch-js/js/modules/IndexOfFS');
 const wordCountFS = require('fuzzysearch-js/js/modules/WordCountFS');
 
 @Pipe({
-  name: 'SearchTermPipe'
+  name: 'SearchTermPipe',
+  pure:false
 })
 export class SearchTermPipe implements PipeTransform {
   filteredResults = [];
+  constructor(private listService: ListService) {
+
+  }
   transform(value: string, queryString: string): any {
     let fuzzySearch = new FuzzySearch(value, {'minimumScore': 300, 'termPath': 'title'});
 
@@ -25,7 +30,9 @@ export class SearchTermPipe implements PipeTransform {
         this.filteredResults.push(item.value);
     })
 
-    return (queryString) ? this.filteredResults : value;
+    let result = (queryString) ? this.filteredResults : value;
+    this.listService.setListLength(result);
+    return result;
   }
 
 }

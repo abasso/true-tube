@@ -1,3 +1,50 @@
-<p>
-  filter works!
-</p>
+
+<div class="grid-filter">
+  <div class="grid-filter-header"><h5>Filter </h5><span class="clear">Clear All</span></div>
+
+  <fieldset>
+    <legend>
+      <a href="#" class="collapse-toggle">Search Term<span class="clear" *ngIf="filterSearch" (click)="clear('filterSearch')">Clear</span></a>
+    </legend>
+    <input id="filterSearch" class="form-control filter-search-term" type="text" [(ngModel)]="filterSearch" (keyup)="search(filterSearch)" placeholder="e.g. Social studies" />
+
+  </fieldset>
+  <fieldset class="flex-none">
+    <legend>
+      <a href="#" class="collapse-toggle">Content Type(s)<span class="clear" *ngIf="filterCategoriesActive(categoryObject)" (click)="clear('filterCategories')">Clear</span></a>
+    </legend>
+    <button class="btn btn-sm" *ngFor="let category of categories" (click)="setCategory(category)" [ngClass]="{active: isActive(category, 'categoryObject')}" ngDefaultControl>{{category}}</button>
+  </fieldset>
+  <fieldset>
+    <legend>
+      <a href="#" class="collapse-toggle">Subject</a>
+    </legend>
+    <select id="select" class="custom-select form-control" >
+      <optgroup label="Select">
+        <option>All</option>
+        <option>Option Two</option>
+        <option>Option Three</option>
+      </optgroup>
+    </select>
+  </fieldset>
+  <fieldset class="flex-none filter-keystage">
+    <legend>
+      <a href="#" class="collapse-toggle">Key Stage(s)<span class="clear"  *ngIf="filterCategoriesActive(keyStagesObject)" (click)="clear('filterKeystages')">Clear</span></a>
+    </legend>
+    <button class="btn btn-sm" *ngFor="let key of keystages" [(ngModel)]="filterKeystages" (click)="setKey(key)" [ngClass]="{active: isActive(key, 'keyStagesObject')}" ngDefaultControl>{{key}}</button>
+  </fieldset>
+  <fieldset>
+    <legend>
+      <a href="#" class="collapse-toggle">Categories<span class="clear">Clear</span></a>
+    </legend>
+
+  </fieldset>
+
+  <fieldset>
+    <legend>
+      <a href="#" class="collapse-toggle">Topics<span class="clear">Clear</span></a>
+    </legend>
+
+  </fieldset>
+
+</div>
