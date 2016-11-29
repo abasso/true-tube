@@ -3,14 +3,14 @@
     <app-filter #filter (listChange)="filterEvent($event);"></app-filter>
   </div>
   <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
-  <h1 class="page-title">{{listService.pageTitle(filter.filterCategories, filter.filterSearch)}}</h1>
+  <h1 class="page-title">{{listService.pageTitle(filter.filterKeystages, filter.filterCategories, filter.filterSearch)}}</h1>
   <div class="row grid-row content-grid" *ngIf="itemCount === 0">
     <div class="list-item">
     No results.
   </div>
   </div>
   <div class="row grid-row content-grid">
-    <div class="list-item" *ngFor="let item of items | CategoryPipe:filter.filterCategories | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch">
+    <div class="list-item" *ngFor="let item of items | CategoryPipe:filter.categoryObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch">
       <div class="block-media__media" *ngIf="item.image">
         <a href="{{ item.url }}" class="block-media__link">
           <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" />
@@ -28,6 +28,11 @@
         <p class="block-media__description small" *ngIf="item.description">
           {{ item.description }}
         </p>
+        <!-- <a *ngFor="let key of item.keystages">
+          <span>
+            {{ key }}
+          </span>
+        </a> -->
         <div class="block-media__categories" *ngIf="item.categories">
           <a href="{{ category.url }}" *ngFor="let category of item.categories" class="btn btn-sm {{ category.class }}">
             <span>

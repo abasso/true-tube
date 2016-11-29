@@ -21,6 +21,8 @@ import { ListComponent } from './components/content/listing/list.component';
 import { SearchTermPipe } from './pipes/search-term.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
 import { KeystagePipe } from './pipes/keystage.pipe';
+import { SubjectPipe } from './pipes/subject.pipe';
+import { CategoryFilterPipe } from './pipes/category-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { KeystagePipe } from './pipes/keystage.pipe';
     ListFilter,
     ListComponent,
     CategoryPipe,
-    KeystagePipe
+    KeystagePipe,
+    SubjectPipe,
+    CategoryFilterPipe
   ],
   imports: [
     BrowserModule,

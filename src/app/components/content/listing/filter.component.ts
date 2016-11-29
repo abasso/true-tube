@@ -1,13 +1,17 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { ListComponent } from "./list.component";
 import { ListService } from './../../../services/list.service';
+import { CategoryFilterPipe } from './../../../pipes/category-filter.pipe';
 
 import _ from "lodash";
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss']
+  styleUrls: ['./filter.component.scss'],
+  providers: [
+    CategoryFilterPipe
+  ]
 })
 
 export class ListFilter implements OnInit {
@@ -18,23 +22,13 @@ export class ListFilter implements OnInit {
   private filterSearch: string;
   private filterCategories: string[];
   private filterKeystages: number[];
-
+  private filterSubjects: string[];
   @Output() listChange = new EventEmitter();
 
   ngOnInit() {
-    this.filterCategories = [
-      "Videos",
-      "Lesson Plans",
-      "Assembly Scripts",
-      "Interactive"
-    ];
-    this.filterKeystages = [
-      1,
-      2,
-      3,
-      4,
-      5
-    ]
+    this.filterCategories = _.clone(this.categories);
+    this.filterKeystages = _.clone(this.keystages);
+    this.filterSubjects = ["All"];
   }
 
   categories = [
@@ -43,6 +37,17 @@ export class ListFilter implements OnInit {
     "Assembly Scripts",
     "Interactive"
   ];
+
+  subjects = [
+    {
+      label: "Citizenship",
+      selected: "selected"
+    }, {
+      label: "PHSE"
+    }, {
+      label: "RE"
+    }
+  ]
 
   categoryObject = {
     "Videos": false,
@@ -67,8 +72,8 @@ export class ListFilter implements OnInit {
     "5": false
   }
 
-  resetCategories() {
-    _.forEach(this.categoryObject, (category, key, collection) => {
+  resetFilterState(object) {
+    _.forEach(this[object], (category, key, collection) => {
       collection[key] = false;
     })
   }
@@ -79,12 +84,16 @@ export class ListFilter implements OnInit {
     })
   }
 
-  clear(toClear) {
+  clear(event, toClear) {
+    event.preventDefault();
     if(typeof this[toClear] === "string") {
       this[toClear] = "";
     } else if(toClear === "filterCategories" ) {
       this.filterCategories = _.clone(this.categories);
-      this.resetCategories()
+      this.resetFilterState("categoryObject")
+    } else if(toClear === "filterKeystages" ) {
+      this.filterKeystages = _.clone(this.keystages);
+      this.resetFilterState("keyStagesObject")
     }
     this.listService.setListLength(this.listComponent.items.length);
     setTimeout(() => {
@@ -92,7 +101,8 @@ export class ListFilter implements OnInit {
     }, 1);
   }
 
-  setCategory(value) {
+  setCategory(event, value) {
+    event.preventDefault();
     this.filterCategories.length = 0;
     let valueIndex = _.findIndex(this.filterCategories, value);
     this.categoryObject[value] = (this.categoryObject[value] === false) ? true : false;
@@ -101,7 +111,6 @@ export class ListFilter implements OnInit {
         this.filterCategories.push(key);
       }
     });
-
     // Clone itself to trigger the ng update.
     this.filterCategories = _.clone(this.filterCategories);
     // If there are no category filters show all the categories.
@@ -112,7 +121,9 @@ export class ListFilter implements OnInit {
     return this.filterCategories;
   }
 
-  setKey(value) {
+  setKey(event, value) {
+    event.preventDefault();
+    this.filterKeystages.length = 0;
     let valueIndex = _.findIndex(this.filterKeystages, value);
     this.keyStagesObject[value] = (this.keyStagesObject[value] === false) ? true : false;
     _.forEach(this.keyStagesObject, (value, key) => {
@@ -130,6 +141,12 @@ export class ListFilter implements OnInit {
     return this.filterKeystages;
   }
 
+  setSubject(event: Event):void {
+    let value:string = (<HTMLSelectElement>event.srcElement).value;
+    console.log(value);
+    // this.filterSubjects.splice(0, 1, subject);
+  }
+
   filterCategoriesActive(filterObject) {
     let isActive = false;
     _.forEach(filterObject, (item) => {
@@ -139,7 +156,6 @@ export class ListFilter implements OnInit {
   }
 
   isActive(value, type) {
-    console.log(this[type])
     if (this[type][value] === true) return true;
   }
 }

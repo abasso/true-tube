@@ -12,13 +12,17 @@ export class CategoryPipe implements PipeTransform {
     this.filteredResults.length = 0;
     _.forEach(value, (item) => {
       _.forEach(item.categories, (itemCategory) => {
-        _.forEach(categories, (category) => {
-          if(category === itemCategory.label) this.filteredResults.push(item);
+        _.forEach(categories, (value, key) => {
+          if(key === itemCategory.label && value === true) this.filteredResults.push(item);
         });
       });
     });
     this.filteredResults = _.uniq(this.filteredResults);
-    let result = (categories.length < 4) ? this.filteredResults : value;
+
+    let categoriesObject = _.values(categories);
+    categoriesObject = _.uniq(categoriesObject);
+
+    let result = (categoriesObject.length > 1) ? this.filteredResults : value;
     return result;
   }
 
