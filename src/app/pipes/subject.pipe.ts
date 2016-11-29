@@ -2,10 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import _ from "lodash";
 
 @Pipe({
-  name: 'subject'
+  name: 'SubjectPipe'
 })
 export class SubjectPipe implements PipeTransform {
   transform(value: any, subject?: any): any {
-    return _.filter(value, subject);
+    return (subject === "All") ? value : _.filter(value, {subject: subject});
   }
 }

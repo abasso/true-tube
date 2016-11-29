@@ -9,8 +9,8 @@
     <a href="{{ item.url }}" class="block-media__link">
   	<h6 class="block-media__headline">{{ item.title }}</h6></a>
   		<p class="block-media__description small">{{ item.description }}</p>
-  		<div class="block-media__categories">
-        <a href="{{ category.url }}" *ngFor="let category of item.categories" class="btn {{ category.class }}"><span>{{ category.label }}</span></a>
+  		<div class="block-media__types">
+        <a href="{{ type.url }}" *ngFor="let type of item.types" class="btn {{ type.class }}"><span>{{ type.label }}</span></a>
   		</div>
   	</div>
 </div>

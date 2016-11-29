@@ -11,8 +11,6 @@ export class Auth {
   lock = new Auth0Lock(myConfig.clientID, myConfig.domain, myConfig.options);
 
   constructor() {
-    console.log(myConfig.options);
-
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);

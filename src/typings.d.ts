@@ -4,3 +4,4 @@
 declare var System: any;
 declare module 'js-cookie';
 declare module 'lodash';
+declare module 'sortablejs';

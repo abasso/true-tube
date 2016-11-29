@@ -19,6 +19,7 @@
   .grid-filter-header {
     display:flex;
     flex-direction:row;
+    min-height:19px;
     margin-bottom:1.5rem;
     @media(min-width: $breakpoint-xl) {
       margin-bottom:1rem;

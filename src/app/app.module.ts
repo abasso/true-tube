@@ -19,10 +19,11 @@ import { ListingComponent } from './components/content/listing/listing.component
 import { ListFilter } from './components/content/listing/filter.component';
 import { ListComponent } from './components/content/listing/list.component';
 import { SearchTermPipe } from './pipes/search-term.pipe';
-import { CategoryPipe } from './pipes/category.pipe';
+import { TypePipe } from './pipes/type.pipe';
 import { KeystagePipe } from './pipes/keystage.pipe';
 import { SubjectPipe } from './pipes/subject.pipe';
-import { CategoryFilterPipe } from './pipes/category-filter.pipe';
+import { TypeFilterPipe } from './pipes/type-filter.pipe';
+import { CategoryPipe } from './pipes/category.pipe';
 
 @NgModule({
   declarations: [
@@ -36,11 +37,12 @@ import { CategoryFilterPipe } from './pipes/category-filter.pipe';
     ListingComponent,
     ListFilter,
     ListComponent,
-    CategoryPipe,
+    TypePipe,
     KeystagePipe,
     SubjectPipe,
-    CategoryFilterPipe
-  ],
+    TypeFilterPipe,
+    CategoryPipe
+],
   imports: [
     BrowserModule,
     FormsModule,

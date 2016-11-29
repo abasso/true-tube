@@ -5,13 +5,16 @@ import _ from "lodash";
 export class ListService {
 
   listLength: number;
+
+  constructor() {
+  }
+
   getListLength() {
     return this.listLength;
   }
 
   setListLength(list) {
     this.listLength = list.length;
-    //this.subject.next(list);
   }
 
   isListEmpty() {
@@ -23,11 +26,12 @@ export class ListService {
     return arrayString.replace(/,([^,]*)$/, ' & $1');
   }
 
-  pageTitle(keystages, categories, term) {
+  pageTitle(subject, keystages, types, term) {
+    subject = (subject === "All") ? "" : subject;
     keystages = (keystages.length === 5 || keystages.length === 0) ? "" : "Key Stage " + this.stringifyTitleArray(keystages);
-    categories = (categories.length === 4) ? "" : this.stringifyTitleArray(categories);
+    types = (types.length === 4) ? "" : this.stringifyTitleArray(types);
     term = (_.isUndefined(term) || term === "") ? "" : term;
-    if(keystages === "" && categories === "" && term === "") return "All Content (" + this.getListLength() + ")";
-    return keystages + " " + term + " " + categories + " (" + this.getListLength() + ")";
+    if(subject === "" && keystages === "" && types === "" && term === "") return "All Content (" + this.getListLength() + " Items)";
+    return subject + " " + keystages + " " + term + " " + types + " (" + this.getListLength() + " Items)";
   }
 }

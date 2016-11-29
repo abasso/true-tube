@@ -1,55 +1,90 @@
 
 <div class="grid-filter">
-  <div class="grid-filter-header"><h5>Filter </h5><span class="clear">Clear All</span></div>
-
+  <div class="grid-filter-header">
+    <h5>
+      Filter
+    </h5>
+    <span class="clear" *ngIf="filterSearch || filterTypesActive(typeObject) " (click)="clear($event, 'all')">
+      Clear All
+    </span>
+  </div>
   <fieldset>
     <legend>
-      <a href="#" class="collapse-toggle">Search Term<span class="clear" *ngIf="filterSearch" (click)="clear($event, 'filterSearch')">Clear</span></a>
+      <a href="#" class="collapse-toggle">
+        Search Term
+        <span class="clear" *ngIf="filterSearch" (click)="clear($event, 'filterSearch')">
+          Clear
+        </span>
+      </a>
     </legend>
     <input id="filterSearch" class="form-control filter-search-term" type="text" [(ngModel)]="filterSearch" (keyup)="search(filterSearch)" placeholder="e.g. Social studies" />
-
   </fieldset>
   <fieldset class="flex-none">
     <legend>
-      <a href="#" class="collapse-toggle">Content Type(s)<span class="clear" *ngIf="filterCategoriesActive(categoryObject)" (click)="clear($event, 'filterCategories')">Clear</span></a>
+      <a href="#" class="collapse-toggle">
+        Content Type(s)
+        <span class="clear" *ngIf="filterTypesActive(typeObject)" (click)="clear($event, 'filterTypes')">
+          Clear
+        </span>
+      </a>
     </legend>
-    <button class="btn btn-sm" *ngFor="let category of categories" (click)="setCategory($event, category)" [ngClass]="{active: isActive(category, 'categoryObject')}" ngDefaultControl>{{category}}</button>
+    <button class="btn btn-sm" *ngFor="let type of types" (click)="setType($event, type)" [ngClass]="{active: isActive(type, 'typeObject')}" ngDefaultControl>{{type}}</button>
   </fieldset>
   <fieldset>
     <legend>
-      <a href="#" class="collapse-toggle">Subject</a>
+      <a href="#" class="collapse-toggle">Subject <span class="clear" *ngIf="subjectsActive(filterSubjects)" (click)="clear($event, 'filterSubjects')">Clear</span></a>
     </legend>
-    <!-- <select id="select" class="custom-select form-control" >
-      <optgroup label="Select">
-        <option>All</option>
-        <option>Citizenship</option>
-        <option>PSHE</option>
-        <option>RE</option>
-      </optgroup>
-    </select> -->
     <select [ngModel]="filterSubjects" (change)="setSubject($event, value)" class="custom-select form-control">
-      <option selected>All</option>
+      <option selected>
+        All
+      </option>
       <option *ngFor="let subject of subjects" [value]="subject.label">{{subject.label}}</option>
     </select>
   </fieldset>
   <fieldset class="flex-none filter-keystage">
     <legend>
-      <a href="#" class="collapse-toggle">Key Stage(s)<span class="clear"  *ngIf="filterCategoriesActive(keyStagesObject)" (click)="clear($event, 'filterKeystages')">Clear</span></a>
+      <a href="#" class="collapse-toggle">
+        Key Stage(s)
+        <span class="clear"  *ngIf="filterTypesActive(keyStagesObject)" (click)="clear($event, 'filterKeystages')">
+          Clear
+        </span>
+      </a>
     </legend>
     <button class="btn btn-sm" *ngFor="let key of keystages" [(ngModel)]="filterKeystages" (click)="setKey($event, key)" [ngClass]="{active: isActive(key, 'keyStagesObject')}" ngDefaultControl>{{key}}</button>
   </fieldset>
   <fieldset>
     <legend>
-      <a href="#" class="collapse-toggle">Categories<span class="clear">Clear</span></a>
+      <a href="#" class="collapse-toggle">
+        Categories
+        <span class="clear">
+          Clear
+        </span>
+      </a>
     </legend>
-
+    <div class="form-group" *ngFor="let category of categories">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" name="{{category.label}}" (change)="displaySubCategories($event)">
+        <div class="custom-control-indicator"></div>
+        <span class="custom-control-description">{{category.label}} ({{category.count}})</span>
+      </label>
+    </div>
   </fieldset>
-
-  <fieldset>
+  <fieldset *ngIf="subCategories.length">
     <legend>
-      <a href="#" class="collapse-toggle">Topics<span class="clear">Clear</span></a>
+      <a href="#" class="collapse-toggle">
+        Topics
+        <span class="clear">
+          Clear
+        </span>
+      </a>
     </legend>
-
+    <div class="form-group" *ngFor="let subcategory of subCategories">
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input ">
+        <div class="custom-control-indicator"></div>
+        <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span>
+      </label>
+    </div>
   </fieldset>
 
 </div>
