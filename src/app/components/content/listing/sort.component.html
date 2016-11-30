@@ -1,0 +1,24 @@
+<div class="grid-nav">
+  <div class="display-group">
+    <div class="input-group">
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="custom-control custom-checkbox">
+            <input type="checkbox" checked class="custom-control-input toggle-descriptions" />
+            <div class="custom-control-indicator"></div>
+            <span class="custom-control-description" (click)="hideDescriptions($event)">Show Descriptions</span>
+          </label>
+        </div>
+        <ol class="list-mode" id="contentGrid">
+          <li [ngClass]="{'page-item':true, 'grid-nav-item':true, 'display-grid':true, 'active': listComponent.displayGrid}">
+            <a href="#" (click)="setListDisplay('grid')">Grid</a>
+          </li>
+          <li [ngClass]="{'page-item':true, 'grid-nav-item':true, 'display-list':true, 'active': listComponent.displayList}">
+            <a href="#" (click)="setListDisplay('list')">List</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+</div>

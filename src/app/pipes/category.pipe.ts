@@ -6,12 +6,12 @@ import _ from "lodash";
 })
 export class CategoryPipe implements PipeTransform {
   filteredResults = [];
-  transform(value: any, categories?: any, subcategories?: any): any {
+  transform(value: any, category?: any, subCategories?: any): any {
     this.filteredResults.length = 0;
-    if(subcategories.length) {
+    if(subCategories.length) {
       _.forEach(value, (item) => {
-        _.forEach(item.subcategories, (itemSubCategory) => {
-          _.forEach(subcategories, (subCategory) => {
+        _.forEach(item.subCategories, (itemSubCategory) => {
+          _.forEach(subCategories, (subCategory) => {
             if(itemSubCategory === subCategory) {
               this.filteredResults.push(item);
             }
@@ -19,14 +19,12 @@ export class CategoryPipe implements PipeTransform {
         });
       });
       return this.filteredResults;
-    } else if(categories.length) {
+    } else if(category) {
       _.forEach(value, (item) => {
         _.forEach(item.categories, (itemCategory) => {
-          _.forEach(categories, (category) => {
-            if(itemCategory === category) {
-              this.filteredResults.push(item);
-            }
-          });
+          if(itemCategory === category) {
+            this.filteredResults.push(item);
+          }
         });
       });
       return this.filteredResults;

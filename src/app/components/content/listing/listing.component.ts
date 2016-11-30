@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListingComponent implements OnInit {
 
+  showDescriptions = true;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.showDescriptions)
   }
 
 }

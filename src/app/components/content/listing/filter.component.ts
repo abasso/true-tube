@@ -4,7 +4,7 @@ import { ListService } from './../../../services/list.service';
 import { TypeFilterPipe } from './../../../pipes/type-filter.pipe';
 import { CategoryPipe } from './../../../pipes/category.pipe';
 import { Categories } from './mock-categories';
-import sortable from "sortablejs";
+import Sortable from "sortablejs";
 
 import _ from "lodash";
 
@@ -21,16 +21,18 @@ export class ListFilter implements OnInit {
   constructor(private listService: ListService, private listComponent: ListComponent) {
     this.categories = Categories;
     this.subCategories = [];
-    this.filterCategories = [];
     this.filterSubCategories = [];
+    this.filterCategory = "";
+
   }
 
   @Output() listChange = new EventEmitter();
   private filterSearch: string;
   private filterTypes: string[];
   private filterKeystages: number[];
-  private filterCategories: any[];
+  private filterCategory: string;
   private filterSubCategories: any[];
+  private filterSubCategoriesStatus = [];
   private filterSubjects: string;
   private categories: any[];
   private subCategories: any[];
@@ -39,6 +41,9 @@ export class ListFilter implements OnInit {
     this.filterTypes = _.clone(this.types);
     this.filterKeystages = _.clone(this.keystages);
     this.filterSubjects = "All";
+
+    var el = document.getElementById('GridFilter');
+    var sortable = Sortable.create(el);
   }
 
   types = [
@@ -96,12 +101,25 @@ export class ListFilter implements OnInit {
 
   clear(event, toClear) {
     event.preventDefault();
-    console.log(toClear);
     if(toClear === "filterSearch" || toClear === "all") {
-      this["filterSearch"] = "";
+      this.filterSearch = "";
     }
     if(toClear === "filterSubjects" || toClear === "all") {
-      this["filterSubjects"] = "All";
+      this.filterSubjects = "All";
+    }
+    if(toClear === "categories" || toClear === "all") {
+      this.filterCategory = "";
+      this.subCategories = [];
+      this.filterSubCategories.length = 0;
+      _.forEach(this.subCategories, (subCategory) => {
+        subCategory.checked = false;
+      })
+    }
+    if(toClear === "subCategories" || toClear === "all") {
+      this.filterSubCategories.length = 0;
+      _.forEach(this.subCategories, (subCategory) => {
+        subCategory.checked = false;
+      })
     }
     if(toClear === "filterTypes" || toClear === "all") {
       this.filterTypes = _.clone(this.types);
@@ -167,25 +185,29 @@ export class ListFilter implements OnInit {
   setSubCategories(event) {
     event.preventDefault();
     if(event.target.checked) {
-      this.filterSubCategories.push(event.target.name);
+      this.filterSubCategories.push(event.target.value);
     } else {
-      this.filterSubCategories = _.pull(this.filterSubCategories, event.target.name);
+      this.filterSubCategories = _.pull(this.filterSubCategories, event.target.value);
     }
     this.filterSubCategories = _.clone(this.filterSubCategories);
+    this.listChange.emit({
+      "type": "subCategory"
+    })
   }
 
   displaySubCategories(event) {
     event.preventDefault();
-    let category = _.filter(this.categories, {label: event.target.name})
-    if(event.target.checked) {
-      this.filterCategories.push(event.target.name);
-      this.subCategories = _.sortBy(_.compact(_.uniq(_.concat(this.subCategories, category[0].subCategories))), "label");
-    } else {
-      this.filterCategories = _.pull(this.filterCategories, event.target.name);
-      this.subCategories = _.pullAll(this.subCategories, category[0].subCategories);
-      this.filterSubCategories = _.pullAll(this.filterSubCategories, category[0].subCategories);
-    }
-    this.filterCategories = _.clone(this.filterCategories);
+    this.filterSubCategories.length = 0;
+    _.forEach(this.subCategories, (subCategory) => {
+      subCategory.checked = false;
+    })
+    let category = _.filter(this.categories, {label: event.target.id})
+    this.filterCategory = event.target.id;
+    this.subCategories = [];
+    this.subCategories = _.sortBy(_.concat(this.subCategories, category[0].subCategories), "label");
+    this.listChange.emit({
+      "type": "category"
+    })
   }
 
   filterTypesActive(filterObject) {
@@ -196,11 +218,54 @@ export class ListFilter implements OnInit {
     return isActive;
   }
 
+  filterActive() {
+    return (this.filterSearch || this.filterSubjects !== 'All' || this.filterTypes.length !== 4 && this.filterTypes.length !== 0 || this.filterKeystages.length !== 5 || this.filterCategory !== "") ? true : false;
+  }
+
   subjectsActive(subject) {
     if(subject !== "All") return true;
   }
 
   isActive(value, type) {
     if (this[type][value] === true) return true;
+  }
+
+  toggleFilter(event) {
+    event.preventDefault()
+    if(event.target.tagName === "SPAN") return;
+    let parent = event.target.parentElement.parentElement;
+    if (parent.classList) {
+      parent.classList.toggle("collapsed");
+    } else {
+      let classes = parent.className.split(" ");
+      let i = classes.indexOf("collapsed");
+      if (i >= 0) {
+        classes.splice(i, 1);
+      }
+      else {
+        classes.push("collapsed");
+        parent.className = classes.join(" ");
+      }
+    }
+  }
+
+  showFilter(event) {
+    event.preventDefault()
+    let parent = event.target.parentElement;
+    event.target.innerHTML = (event.target.innerHTML === "Show") ? "Hide" : "Show";
+
+    if (parent.classList) {
+      parent.classList.toggle("show");
+    } else {
+      let classes = parent.className.split(" ");
+      let i = classes.indexOf("show");
+      if (i >= 0) {
+        classes.splice(i, 1);
+      }
+      else {
+        classes.push("show");
+        parent.className = classes.join(" ");
+      }
+    }
   }
 }

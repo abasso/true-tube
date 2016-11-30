@@ -5,15 +5,16 @@
   </div>
   <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
     <h1 class="page-title">
-      {{listService.pageTitle(filter.filterSubjects, filter.filterKeystages, filter.filterTypes, filter.filterSearch, filter.filterCategories, filter.filterSubCategories)}}
+      {{listService.pageTitle(filter.filterSubjects, filter.filterKeystages, filter.filterTypes, filter.filterSearch, filter.filterCategory, filter.filterSubCategories)}}
     </h1>
+    <app-sort *ngIf="itemCount !== 0"></app-sort>
     <div class="row grid-row content-grid" *ngIf="itemCount === 0">
       <div class="list-item">
         No results.
       </div>
     </div>
-    <div class="row grid-row content-grid">
-      <div class="list-item" *ngFor="let item of items | CategoryPipe: filter.filterCategories:filter.filterSubCategories | SubjectPipe:filter.filterSubjects | TypePipe:filter.typeObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch">
+    <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}">
+      <div class="list-item" *ngFor="let item of items | CategoryPipe: filter.filterCategory:filter.filterSubCategories | SubjectPipe:filter.filterSubjects | TypePipe:filter.typeObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch">
         <div class="block-media__media" *ngIf="item.image">
           <a href="{{ item.url }}" class="block-media__link">
             <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" />
@@ -28,23 +29,18 @@
               {{ item.title }}
             </h6>
           </a>
-          <p class="block-media__description small" *ngIf="item.description">
+          <p class="block-media__description small" *ngIf="showDescriptions">
             {{ item.description }}
           </p>
-          <!-- <a *ngFor="let key of item.keystages">
-          <span>
-          {{ key }}
-        </span>
-      </a> -->
-      <div class="block-media__types" *ngIf="item.types">
-        <a href="{{ type.url }}" *ngFor="let type of item.types" class="btn btn-sm {{ type.class }}">
-          <span>
-            {{ type.label }}
-          </span>
-        </a>
+          <div class="block-media__types" *ngIf="item.types">
+            <a href="{{ type.url }}" *ngFor="let type of item.types" class="btn btn-sm {{ type.class }}">
+              <span>
+                {{ type.label }}
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>

@@ -24,6 +24,9 @@ export class ListComponent implements OnInit {
 
   public itemCount: number;
   public items: any[];
+  showDescriptions = true;
+  displayGrid = true;
+  displayList = false;
   constructor(private listService: ListService) {
     this.itemCount = listService.getListLength();
     this.items = Items;

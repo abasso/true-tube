@@ -87,6 +87,9 @@
     display:flex;
     .block-media__media  {
       top:5px;
+      img {
+        width:240px;
+      }
     }
     .block-media__body {
       margin-left:2rem;

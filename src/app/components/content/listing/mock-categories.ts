@@ -62,5 +62,84 @@ export const Categories = [
         url: ""
       }
     ]
-  }
+  },
+  {
+    label: "Relationships",
+    count: 115,
+    url: "",
+    subCategories: [
+      {
+        label: "Love & Sex",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Loss",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Gang Culture",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Sexual Equality",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Sexuality",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Friends & Family",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Bullying",
+        count: 25,
+        url: ""
+      }
+    ]
+  },
+  {
+    label: "Culture",
+    count: 115,
+    url: "",
+    subCategories: [
+      {
+        label: "Film",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Celebrities",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Art",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Media",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Music",
+        count: 25,
+        url: ""
+      },
+      {
+        label: "Poetry",
+        count: 25,
+        url: ""
+      }
+    ]
+  },
 ]

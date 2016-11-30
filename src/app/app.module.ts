@@ -24,6 +24,7 @@ import { KeystagePipe } from './pipes/keystage.pipe';
 import { SubjectPipe } from './pipes/subject.pipe';
 import { TypeFilterPipe } from './pipes/type-filter.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
+import { SortComponent } from './components/content/listing/sort.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CategoryPipe } from './pipes/category.pipe';
     KeystagePipe,
     SubjectPipe,
     TypeFilterPipe,
-    CategoryPipe
+    CategoryPipe,
+    SortComponent
 ],
   imports: [
     BrowserModule,

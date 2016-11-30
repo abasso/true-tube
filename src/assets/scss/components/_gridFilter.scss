@@ -39,6 +39,11 @@
   .form-group {
     font-size:$font-size-sm;
     margin-bottom:.35rem;
+    padding-left:2px;
+  }
+
+  .form-check {
+    padding-left:2px;
   }
   .btn {
     background:$gray-lightest;
