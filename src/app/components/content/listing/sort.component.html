@@ -1,4 +1,28 @@
 <div class="grid-nav">
+  <div class="pagination-group">
+  <div class="input-group">
+    <div class="form-inline">
+<div class="form-group">
+<label for="" class="c-field__label ">Items Per Page</label>
+<select id="select" class="custom-select form-control">
+	<optgroup label="Select">
+			<option>9</option>
+			<option>18</option>
+			<option>36</option>
+			<option>ALL</option>
+	</optgroup>
+</select>
+</div>
+
+      <label>Page</label>
+      <ol class="pagination">
+          <li *ngFor="let page of pages" [ngClass]="{'page-item': true, 'grid-nav-item': true, active: page.active}">
+            <a href="#" class="" (click)="setPage($event, page.number)">{{page.number}}</a>
+          </li>
+      </ol>
+    </div>
+  </div>
+</div>
   <div class="display-group">
     <div class="input-group">
       <div class="form-inline">

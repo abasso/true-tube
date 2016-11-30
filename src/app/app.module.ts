@@ -25,6 +25,7 @@ import { SubjectPipe } from './pipes/subject.pipe';
 import { TypeFilterPipe } from './pipes/type-filter.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
 import { SortComponent } from './components/content/listing/sort.component';
+import { PaginationPipe } from './pipes/pagination.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SortComponent } from './components/content/listing/sort.component';
     SubjectPipe,
     TypeFilterPipe,
     CategoryPipe,
-    SortComponent
+    SortComponent,
+    PaginationPipe
 ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right">
+
     <app-filter #filter (listChange)="filterEvent($event);">
     </app-filter>
   </div>
@@ -14,7 +15,7 @@
       </div>
     </div>
     <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}">
-      <div class="list-item" *ngFor="let item of items | CategoryPipe: filter.filterCategory:filter.filterSubCategories | SubjectPipe:filter.filterSubjects | TypePipe:filter.typeObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch">
+      <div class="list-item" *ngFor="let item of items | CategoryPipe: filter.filterCategory:filter.filterSubCategories | SubjectPipe:filter.filterSubjects | TypePipe:filter.typeObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch | PaginationPipe:paginationData">
         <div class="block-media__media" *ngIf="item.image">
           <a href="{{ item.url }}" class="block-media__link">
             <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" />
