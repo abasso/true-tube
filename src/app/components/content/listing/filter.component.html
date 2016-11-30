@@ -78,9 +78,10 @@
         </span>
       </a>
     </legend>
+    <label class="col-form-label col-form-label-sm">Global</label>
     <div class="form-group" *ngFor="let subcategory of subCategories">
       <label class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input ">
+        <input type="checkbox" class="custom-control-input" name="{{subcategory.label}}" (change)="setSubCategories($event)">
         <div class="custom-control-indicator"></div>
         <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span>
       </label>

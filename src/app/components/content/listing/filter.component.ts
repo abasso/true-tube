@@ -21,6 +21,8 @@ export class ListFilter implements OnInit {
   constructor(private listService: ListService, private listComponent: ListComponent) {
     this.categories = Categories;
     this.subCategories = [];
+    this.filterCategories = [];
+    this.filterSubCategories = [];
   }
 
   @Output() listChange = new EventEmitter();
@@ -162,14 +164,28 @@ export class ListFilter implements OnInit {
     return this.filterSubjects;
   }
 
+  setSubCategories(event) {
+    event.preventDefault();
+    if(event.target.checked) {
+      this.filterSubCategories.push(event.target.name);
+    } else {
+      this.filterSubCategories = _.pull(this.filterSubCategories, event.target.name);
+    }
+    this.filterSubCategories = _.clone(this.filterSubCategories);
+  }
+
   displaySubCategories(event) {
     event.preventDefault();
     let category = _.filter(this.categories, {label: event.target.name})
     if(event.target.checked) {
+      this.filterCategories.push(event.target.name);
       this.subCategories = _.sortBy(_.compact(_.uniq(_.concat(this.subCategories, category[0].subCategories))), "label");
     } else {
+      this.filterCategories = _.pull(this.filterCategories, event.target.name);
       this.subCategories = _.pullAll(this.subCategories, category[0].subCategories);
+      this.filterSubCategories = _.pullAll(this.filterSubCategories, category[0].subCategories);
     }
+    this.filterCategories = _.clone(this.filterCategories);
   }
 
   filterTypesActive(filterObject) {

@@ -18,6 +18,7 @@ export class SearchTermPipe implements PipeTransform {
 
   }
   transform(value: string, queryString: string): any {
+    console.log(value);
     let fuzzySearch = new FuzzySearch(value, {'minimumScore': 300, 'termPath': 'title'});
 
     fuzzySearch.addModule(levenshteinFS({'maxDistanceTolerance': 3, 'factor': 3}));
