@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { ListComponent } from "./list.component";
+import { SortComponent } from "./sort.component";
 import { ListService } from './../../../services/list.service';
 import { TypeFilterPipe } from './../../../pipes/type-filter.pipe';
 import { CategoryPipe } from './../../../pipes/category.pipe';
 import { Categories } from './mock-categories';
 import Sortable from "sortablejs";
-
 import _ from "lodash";
 
 @Component({
@@ -38,12 +38,18 @@ export class ListFilter implements OnInit {
   private subCategories: any[];
 
   ngOnInit() {
-    this.filterTypes = _.clone(this.types);
+    if(!_.isUndefined(this.listService.getCurrentType())) {
+      this.filterTypes = this.listService.getCurrentType()
+      this.typeObject[this.listService.getCurrentType()[0]] = true;
+    } else {
+      this.filterTypes = _.clone(this.types);
+    }
+    // this.filterTypes = (this.listService.getCurrentType() !== null) ? this.listService.getCurrentType() : _.clone(this.types);
     this.filterKeystages = _.clone(this.keystages);
     this.filterSubjects = "All";
-
     var el = document.getElementById('GridFilter');
     var sortable = Sortable.create(el);
+
   }
 
   types = [
@@ -94,6 +100,7 @@ export class ListFilter implements OnInit {
   }
 
   search(value) {
+    this.listComponent.resetPagination();
     this.listChange.emit({
       "type" : "search"
     })
@@ -129,6 +136,7 @@ export class ListFilter implements OnInit {
       this.filterKeystages = _.clone(this.keystages);
       this.resetFilterState("keyStagesObject")
     }
+    this.listComponent.resetPagination();
     this.listService.setListLength(this.listComponent.items.length);
 
     setTimeout(() => {
@@ -153,6 +161,7 @@ export class ListFilter implements OnInit {
     this.listChange.emit({
       "type": "type"
     })
+    this.listComponent.resetPagination();
     return this.filterTypes;
   }
 
@@ -171,6 +180,7 @@ export class ListFilter implements OnInit {
     this.listChange.emit({
       "type": "keys"
     })
+    this.listComponent.resetPagination();
     return this.filterKeystages;
   }
 
@@ -179,6 +189,7 @@ export class ListFilter implements OnInit {
     this.listChange.emit({
       "type": "subject"
     })
+    this.listComponent.resetPagination();
     return this.filterSubjects;
   }
 
@@ -193,6 +204,7 @@ export class ListFilter implements OnInit {
     this.listChange.emit({
       "type": "subCategory"
     })
+    this.listComponent.resetPagination();
   }
 
   displaySubCategories(event) {
@@ -208,6 +220,7 @@ export class ListFilter implements OnInit {
     this.listChange.emit({
       "type": "category"
     })
+    this.listComponent.resetPagination();
   }
 
   filterTypesActive(filterObject) {

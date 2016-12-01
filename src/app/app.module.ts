@@ -51,11 +51,19 @@ import { PaginationPipe } from './pipes/pagination.pipe';
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: ListComponent
+      },
+      {
+        path: 'type/:type',
+        component: ListComponent
+      }
+    ])
   ],
   providers: [
     AUTH_PROVIDERS,
-    Location,
     Auth
   ],
   bootstrap: [

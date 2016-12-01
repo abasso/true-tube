@@ -9,11 +9,8 @@ import _ from "lodash";
 export class PaginationPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    // console.log(args);
-    console.log("THE PIPPPPPEEE");
-
-    let chunkedValue = _.chunk(value, args.itemsPerPage);
-
+    let perPage = (args.itemsPerPageCurrent === "All") ? 100000 : args.itemsPerPageCurrent;
+    let chunkedValue = _.chunk(value, perPage);
     return chunkedValue[args.currentPage];
   }
 

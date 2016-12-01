@@ -5,6 +5,7 @@ import _ from "lodash";
 export class ListService {
 
   listLength: number;
+  currentType = null;
 
   getListLength() {
     return this.listLength;
@@ -16,6 +17,24 @@ export class ListService {
 
   isListEmpty() {
     return (this.getListLength) ? false : true;
+  }
+
+  getCurrentType() {
+    return this.currentType;
+  }
+
+  setCurrentType(type) {
+    console.log("THIS IS THE TYPE", type)
+    let typeMap = {
+      "lesson-plans": "Lesson Plans",
+      "interactive": "Interactive",
+      "videos": "Videos",
+      "assembly-scripts": "Assembly Scripts"
+    }
+
+    let mappedType = typeMap[type.type];
+
+    this.currentType = [mappedType];
   }
 
   stringifyTitleArray(array) {
