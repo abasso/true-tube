@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { Location } from '@angular/common';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
@@ -26,6 +27,7 @@ import { TypeFilterPipe } from './pipes/type-filter.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
 import { SortComponent } from './components/content/listing/sort.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
+import { TransformPipe } from './pipes/transform.pipe';
 
 @NgModule({
   declarations: [
@@ -45,12 +47,15 @@ import { PaginationPipe } from './pipes/pagination.pipe';
     TypeFilterPipe,
     CategoryPipe,
     SortComponent,
-    PaginationPipe
+    PaginationPipe,
+    TransformPipe
 ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
+    JsonpModule,
     RouterModule.forRoot([
       {
         path: '',

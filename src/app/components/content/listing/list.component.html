@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right">
 
-    <app-filter #filter (listChange)="filterEvent($event);">
+    <!-- <app-filter #filter (listChange)="filterEvent($event);"> -->
+      <app-filter #filter>
     </app-filter>
   </div>
   <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
     <h1 class="page-title">
-      {{listService.pageTitle(filter.filterSubjects, filter.filterKeystages, filter.filterTypes, filter.filterSearch, filter.filterCategory, filter.filterSubCategories)}}
+      {{listService.pageTitle(filter.filterSubjects, filter.filterKeystages, filter.filterTypes, filter.filterSearch, filter.filterCategory, filter.filterSubCategories, itemCount)}}
     </h1>
     <app-sort *ngIf="itemCount !== 0"></app-sort>
     <div class="row grid-row content-grid" *ngIf="itemCount === 0">
@@ -15,10 +16,11 @@
       </div>
     </div>
     <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}">
-      <div class="list-item" *ngFor="let item of items | CategoryPipe: filter.filterCategory:filter.filterSubCategories | SubjectPipe:filter.filterSubjects | TypePipe:filter.typeObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch | PaginationPipe:paginationData">
-        <div class="block-media__media" *ngIf="item.image">
+      <!-- <div class="list-item" *ngFor="let item of items | CategoryPipe: filter.filterCategory:filter.filterSubCategories | SubjectPipe:filter.filterSubjects | TypePipe:filter.typeObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch | PaginationPipe:paginationData"> -->
+        <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
+        <div class="block-media__media" *ngIf="item._source.thumbnail">
           <a href="{{ item.url }}" class="block-media__link">
-            <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" />
+            <img [src]="item._source.thumbnail" />
             <div class="listing-time" *ngIf="item.time">
               {{ item.time }}
             </div>
@@ -26,15 +28,14 @@
         </div>
         <div class="block-media__body">
           <a href="{{ item.url }}" class="block-media__link">
-            <h6 class="block-media__headline" *ngIf="item.title">
-              {{ item.title }}
+            <h6 class="block-media__headline" *ngIf="item._source.title">
+              {{ item._source.title }}
             </h6>
           </a>
-          <p class="block-media__description small" *ngIf="showDescriptions">
-            {{ item.description }}
+          <p class="block-media__description small" *ngIf="showDescriptions" [innerHTML]="item._source.description">
           </p>
-          <div class="block-media__types" *ngIf="item.types">
-            <a href="{{ type.url }}" *ngFor="let type of item.types" class="btn btn-sm {{ type.class }}">
+          <div class="block-media__types" *ngIf="item.contenttypes">
+            <a href="{{ type.url }}" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
               <span>
                 {{ type.label }}
               </span>

@@ -12,7 +12,7 @@ export class ListService {
   }
 
   setListLength(list) {
-    this.listLength = list.length;
+    //this.listLength = list.hits.hits.length;
   }
 
   isListEmpty() {
@@ -24,7 +24,6 @@ export class ListService {
   }
 
   setCurrentType(type) {
-    console.log("THIS IS THE TYPE", type)
     let typeMap = {
       "lesson-plans": "Lesson Plans",
       "interactive": "Interactive",
@@ -42,7 +41,8 @@ export class ListService {
     return arrayString.replace(/,([^,]*)$/, ' & $1');
   }
 
-  pageTitle(subject, keystages, types, term, categories, subCategories) {
+  pageTitle(subject, keystages, types, term, categories, subCategories, total) {
+    total = (_.isUndefined(total)) ? "" : " (" + total + " Items)";
     categories = (_.isUndefined(categories) || categories === "") ? "" : categories;
     subCategories = (subCategories.length) ? this.stringifyTitleArray(subCategories) : "";
     if (subCategories !== "") categories = "";
@@ -50,7 +50,7 @@ export class ListService {
     keystages = (keystages.length === 5 || keystages.length === 0) ? "" : "Key Stage " + this.stringifyTitleArray(keystages);
     types = (types.length === 4) ? "" : this.stringifyTitleArray(types);
     term = (_.isUndefined(term) || term === "") ? "" : term;
-    if(categories === "" && subCategories === "" && subject === "" && keystages === "" && types === "" && term === "") return "All Content (" + this.getListLength() + " Items)";
-    return categories + " " + subCategories + " " + subject + " " + keystages + " " + term + " " + types + " (" + this.getListLength() + " Items)";
+    if(categories === "" && subCategories === "" && subject === "" && keystages === "" && types === "" && term === "") return "All Content" + total;
+    return categories + " " + subCategories + " " + subject + " " + keystages + " " + term + " " + types + total;
   }
 }

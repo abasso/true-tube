@@ -10,6 +10,7 @@ export class CategoryPipe implements PipeTransform {
     this.filteredResults.length = 0;
     if(subCategories.length) {
       _.forEach(value, (item) => {
+        console.log(item);
         _.forEach(item.subCategories, (itemSubCategory) => {
           _.forEach(subCategories, (subCategory) => {
             if(itemSubCategory === subCategory) {

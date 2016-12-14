@@ -1,13 +1,20 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ListComponent } from "./list.component";
 import { SortComponent } from "./sort.component";
 import { ListService } from './../../../services/list.service';
+import { DataService } from './../../../services/data.service'
 import { TypeFilterPipe } from './../../../pipes/type-filter.pipe';
 import { CategoryPipe } from './../../../pipes/category.pipe';
 import { Categories } from './mock-categories';
+import { Observable } from 'rxjs/Rx';
+
 import Sortable from "sortablejs";
 import _ from "lodash";
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -18,7 +25,7 @@ import _ from "lodash";
 
 export class ListFilter implements OnInit {
 
-  constructor(private listService: ListService, private listComponent: ListComponent) {
+  constructor(private listService: ListService, private listComponent: ListComponent, private dataService: DataService) {
     this.categories = Categories;
     this.subCategories = [];
     this.filterSubCategories = [];
@@ -36,8 +43,11 @@ export class ListFilter implements OnInit {
   private filterSubjects: string;
   private categories: any[];
   private subCategories: any[];
+  private items;
 
   ngOnInit() {
+    this.listComponent.term = new FormControl();
+
     if(!_.isUndefined(this.listService.getCurrentType())) {
       this.filterTypes = this.listService.getCurrentType()
       this.typeObject[this.listService.getCurrentType()[0]] = true;
@@ -49,6 +59,44 @@ export class ListFilter implements OnInit {
     this.filterSubjects = "All";
     var el = document.getElementById('GridFilter');
     var sortable = Sortable.create(el);
+
+   this.listComponent.data = this.listComponent.term.valueChanges
+                    .debounceTime(400)
+                    .distinctUntilChanged()
+                    .switchMap(term => this.dataService.search(term));
+
+                    this.items = this.listComponent.data.subscribe(
+                      (data) => {
+                        this.listComponent.paginationData.totalItems = data.hits.hits.length;
+                        this.listComponent.resetPagination();
+                        _.forEach(data.hits.hits, (item) => {
+                          let embedTypes = {}
+                          item.typesCount = _.countBy(item._source.embedded, 'type');
+                          item.contenttypes = [];
+                          _.forEach(item.typesCount, (type, key) => {
+                            key = (key === 'film') ? "video" : key;
+                            let typestring = (type > 1) ? key.replace("_", " ") + "s" : key.replace("_", " ");
+                              item.contenttypes.push({'label': typestring, 'class': "btn-" + key.replace("_", "-")});
+                          });
+                        //   _.forEach(item._source.embedded, (embed) => {
+                        //     console.log(embed.type);
+                        //     embedTypes[embed.type] = (_.isUndefined(embedTypes[embed.type])) ? 0 : embedTypes[embed.type]++;
+                        //     // if(embed.type === "film") {
+                        //     //   embed.label = "Video";
+                        //     //   embed.class = "btn-video";
+                        //     // }
+                        //     // if(embed.type === "assembly-script") {
+                        //     //   embed.label = "Assembly Scripts";
+                        //     //   embed.class = "btn-assembly-scripts";
+                        //     // }
+                        // })
+                      });
+                        this.listComponent.itemCount = data.hits.total;
+                        this.listComponent.items = data.hits.hits;
+                        console.log(this.listComponent.items);
+
+                      }
+                    )
 
   }
 
@@ -137,10 +185,10 @@ export class ListFilter implements OnInit {
       this.resetFilterState("keyStagesObject")
     }
     this.listComponent.resetPagination();
-    this.listService.setListLength(this.listComponent.items.length);
+    //this.listService.setListLength(this.listComponent.items.length);
 
     setTimeout(() => {
-      this.listComponent.itemCount = this.listService.getListLength();
+      //this.listComponent.itemCount = this.listService.getListLength();
     }, 1);
   }
 
