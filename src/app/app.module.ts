@@ -28,6 +28,7 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { SortComponent } from './components/content/listing/sort.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { TransformPipe } from './pipes/transform.pipe';
+// import {CountUpDirective} from 'countup.js/dist/countUp.directive';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { TransformPipe } from './pipes/transform.pipe';
     CategoryPipe,
     SortComponent,
     PaginationPipe,
-    TransformPipe
+    TransformPipe,
 ],
   imports: [
     BrowserModule,

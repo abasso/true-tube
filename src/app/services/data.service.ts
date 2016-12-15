@@ -11,49 +11,60 @@ export class DataService {
   constructor(private http: Http, private jsonp: Jsonp) {
   }
 
-  private baseUrl = 'http://139.162.232.95/resource/_search?size=1000'
+  private baseUrl = 'http://api.truetube.co.uk/resource/_search?size=1000'
 
-  search(term: string, types: string[], subjects: string[], keystages: string[], topics: string[]) {
-    let aggTerm = ''
-    if(term) aggTerm += term
-    if(!_.isUndefined(types)) {
-      let typeTerm = '(embedded.type:'
+  search(data, types, keys, subject, topics) {
+    console.log(data);
+    let termArray = [];
+
+    if(data.term) termArray.push(data.term);
+
+    if(_.findLastIndex(types, {'active': true}) !== -1) {
+      let typeString = '(embedded.type:'
       _.forEach(types, (type, index) => {
-        typeTerm += (index === types.length) ? type + ')' : type + '%20AND%20'
+        if(type.active === true) {
+          typeString += type.term;
+          if(types.length > 1 && index !== _.findLastIndex(types, {'active': true})) typeString += ' AND ';
+          if(index === _.findLastIndex(types, {'active': true})) typeString += ')';
+        }
       })
-      aggTerm += typeTerm
+      termArray.push(typeString);
     }
-    console.log(aggTerm);
+
+    if(_.findLastIndex(keys, {'active': true}) !== -1) {
+      let keyString = '(keystage:'
+      _.forEach(keys, (key, index) => {
+        if(key.active === true) {
+          keyString += key.term;
+          if(keys.length > 1 && index !== _.findLastIndex(keys, {'active': true})) keyString += ' AND ';
+          if(index === _.findLastIndex(keys, {'active': true})) keyString += ')';
+        }
+      })
+      termArray.push(keyString);
+    }
+
+    if(topics.length) {
+      let topicString = '(topic:'
+      _.forEach(topics, (topic, index) => {
+        topicString += topic.term;
+        if(topics.length > 1 && index !== topics.length - 1) topicString += ' AND ';
+        if(index === topics.length - 1) topicString += ')';
+      })
+      termArray.push(topicString);
+    }
+
+    if(_.isString(subject) && subject !== 'All') termArray.push('(subjects:' + subject + ')');
+
+    let termString = (termArray.length) ? termArray.join(' AND ') : '';
     let search = new URLSearchParams()
-    if(aggTerm !== '') search.set('q', aggTerm);
-    search.set('size', '1000')
+    if(termString !== '') search.set('q', termString);
+    search.set('size', '1000');
     return this.http
-      .get('http://139.162.232.95/resource/_search', { search })
+      .get('http://api.truetube.co.uk/resource/_search', { search })
       .map((response) => ( response.json() )
     )
   }
-}
 
-// @Injectable()
-// export class DataService {
-//
-//   constructor(private http: Http, private jsonp: Jsonp) {
-//   }
-//
-//   private baseUrl = 'http://139.162.232.95/resource/_search?size=1000';
-//
-//   search(term: string) {
-//     let search = new URLSearchParams();
-//     let body = {};
-//     body.query = {};
-//     body.query.queryString = {}
-//     if(term) body.query.queryString = term;
-//     // search.set('q', term)
-//
-//     // search.set('size', '1000')
-//     return this.http
-//       .post('http://139.162.232.95/resource/resource/_search', body, { search })
-//       .map((response) => ( response.json() )
-//     );
-//   }
-// }
+
+
+}

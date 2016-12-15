@@ -17,6 +17,7 @@ import { ListService } from './../../../services/list.service';
 
 import { Items } from './mock-listing';
 import Cookies from 'js-cookie';
+// import {CountUpDirective} from '/node_modules/countup.js/dist/countUp.directive';
 
 import _ from 'lodash';
 
@@ -38,16 +39,14 @@ import _ from 'lodash';
 export class ListComponent implements OnInit {
 
   public itemCount: number;
-  //public items: any[];
-  public cats: any[];
-  term = new FormControl();
-
   public data: Observable<Array<any>>;
   public items: Observable<Array<any>>;
   public showDescriptions:boolean;
   public displayGrid:boolean = true;
   public displayList:boolean = false;
   public count;
+  public startVal: number;
+  public endVal: number;
   public paginationData: {
     currentPage: number,
     itemsPerPage: number,
@@ -70,17 +69,9 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listService.setCurrentType("Videos");
   }
-  //
-  // filterEvent(event) {
-  //   setTimeout(() => {
-  //     this.itemCount = this.listService.getListLength();
-  //   }, 1);
-  // }
 
   resetPagination() {
-    console.log(this.paginationData.totalItems);
     setTimeout(() => {
       this.paginationData.pages = [];
       this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent);
@@ -89,5 +80,4 @@ export class ListComponent implements OnInit {
   }, 1);
 
   }
-
 }

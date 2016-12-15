@@ -31,7 +31,6 @@ export class SearchTermPipe implements PipeTransform {
     })
 
     let result = (queryString) ? this.filteredResults : value;
-    this.listService.setListLength(result);
     return result;
   }
 

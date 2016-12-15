@@ -1,16 +1,17 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ListComponent } from "./list.component";
-import { SortComponent } from "./sort.component";
+import { FormControl, FormGroup } from '@angular/forms';
+import { ListComponent } from './list.component';
+import { SortComponent } from './sort.component';
 import { ListService } from './../../../services/list.service';
 import { DataService } from './../../../services/data.service'
 import { TypeFilterPipe } from './../../../pipes/type-filter.pipe';
 import { CategoryPipe } from './../../../pipes/category.pipe';
 import { Categories } from './mock-categories';
 import { Observable } from 'rxjs/Rx';
+import {CountUpDirective} from 'countup.js/dist/countUp.directive';
 
-import Sortable from "sortablejs";
-import _ from "lodash";
+import Sortable from 'sortablejs';
+import _ from 'lodash';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -29,14 +30,11 @@ export class ListFilter implements OnInit {
     this.categories = Categories;
     this.subCategories = [];
     this.filterSubCategories = [];
-    this.filterCategory = "";
-
+    this.filterCategory = '';
   }
 
   @Output() listChange = new EventEmitter();
   private filterSearch: string;
-  private filterTypes: string[];
-  private filterKeystages: number[];
   private filterCategory: string;
   private filterSubCategories: any[];
   private filterSubCategoriesStatus = [];
@@ -45,198 +43,186 @@ export class ListFilter implements OnInit {
   private subCategories: any[];
   private items;
 
-  ngOnInit() {
-    this.listComponent.term = new FormControl();
+  filter = new FormGroup({
+    term: new FormControl(),
+    typeVideo: new FormControl(),
+    typeAssembly: new FormControl(),
+    typeLesson: new FormControl(),
+    typeInteractive: new FormControl(),
+    subject: new FormControl(),
+    keyStage1: new FormControl(),
+    keyStage2: new FormControl(),
+    keyStage3: new FormControl(),
+    keyStage4: new FormControl(),
+    keyStage5: new FormControl(),
+  })
 
-    if(!_.isUndefined(this.listService.getCurrentType())) {
-      this.filterTypes = this.listService.getCurrentType()
-      this.typeObject[this.listService.getCurrentType()[0]] = true;
-    } else {
-      this.filterTypes = _.clone(this.types);
-    }
-    // this.filterTypes = (this.listService.getCurrentType() !== null) ? this.listService.getCurrentType() : _.clone(this.types);
-    this.filterKeystages = _.clone(this.keystages);
-    this.filterSubjects = "All";
+  ngOnInit() {
+    this.filterSubjects = 'All';
     var el = document.getElementById('GridFilter');
     var sortable = Sortable.create(el);
+    this.filter.patchValue({subject: 'All'});
+    this.listComponent.data = this.filter.valueChanges
+      .debounceTime(400)
+      .distinctUntilChanged()
+      .switchMap(data => this.dataService.search(data, this.types, this.keystages, this.filterSubjects, this.filterSubCategories));
 
-   this.listComponent.data = this.listComponent.term.valueChanges
-                    .debounceTime(400)
-                    .distinctUntilChanged()
-                    .switchMap(term => this.dataService.search(term));
-
-                    this.items = this.listComponent.data.subscribe(
-                      (data) => {
-                        this.listComponent.paginationData.totalItems = data.hits.hits.length;
-                        this.listComponent.resetPagination();
-                        _.forEach(data.hits.hits, (item) => {
-                          let embedTypes = {}
-                          item.typesCount = _.countBy(item._source.embedded, 'type');
-                          item.contenttypes = [];
-                          _.forEach(item.typesCount, (type, key) => {
-                            key = (key === 'film') ? "video" : key;
-                            let typestring = (type > 1) ? key.replace("_", " ") + "s" : key.replace("_", " ");
-                              item.contenttypes.push({'label': typestring, 'class': "btn-" + key.replace("_", "-")});
-                          });
-                        //   _.forEach(item._source.embedded, (embed) => {
-                        //     console.log(embed.type);
-                        //     embedTypes[embed.type] = (_.isUndefined(embedTypes[embed.type])) ? 0 : embedTypes[embed.type]++;
-                        //     // if(embed.type === "film") {
-                        //     //   embed.label = "Video";
-                        //     //   embed.class = "btn-video";
-                        //     // }
-                        //     // if(embed.type === "assembly-script") {
-                        //     //   embed.label = "Assembly Scripts";
-                        //     //   embed.class = "btn-assembly-scripts";
-                        //     // }
-                        // })
-                      });
-                        this.listComponent.itemCount = data.hits.total;
-                        this.listComponent.items = data.hits.hits;
-                        console.log(this.listComponent.items);
-
-                      }
-                    )
-
+      this.items = this.listComponent.data.subscribe(
+        (data) => {
+          this.listComponent.paginationData.totalItems = data.hits.hits.length;
+          this.listComponent.resetPagination();
+          _.forEach(data.hits.hits, (item) => {
+            let embedTypes = {}
+            item.typesCount = _.countBy(item._source.embedded, 'type');
+            item.contenttypes = [];
+            _.forEach(item.typesCount, (type, key) => {
+              key = (key === 'film') ? 'video' : key;
+              let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ');
+                item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')});
+            });
+        });
+          this.listComponent.itemCount = data.hits.total;
+          this.listComponent.items = data.hits.hits;
+        }
+      )
   }
 
   types = [
-    "Videos",
-    "Lesson Plans",
-    "Assembly Scripts",
-    "Interactive"
+    {
+        label: 'Videos',
+        name: 'typeVideo',
+        term: 'film',
+        class: 'btn-video',
+        active: false
+    },
+    {
+        label: 'Lesson Plans',
+        name: 'typeLesson',
+        term: 'lesson_plan',
+        class: 'btn-lesson-plans',
+        active: false
+    },
+    {
+        label: 'Assembly Scripts',
+        name: 'typeAssembly',
+        term: 'assembly_plan',
+        class: 'btn-assembly-scripts',
+        active: false
+    },
+    {
+        label: 'Interactive',
+        name: 'typeInteractive',
+        term: 'interactive',
+        class: 'btn-interactive',
+        active: false
+    }
+  ];
+
+  keystages = [
+    {
+        label: '1',
+        name: 'keyStage1',
+        term: 'Key stage 1',
+        active: false
+    },
+    {
+        label: '2',
+        name: 'keyStage2',
+        term: 'Key stage 2',
+        active: false
+    },
+    {
+        label: '3',
+        name: 'keyStage3',
+        term: 'Key stage 3',
+        active: false
+    },
+    {
+        label: '4',
+        name: 'keyStage4',
+        term: 'Key stage 4',
+        active: false
+    },
+    {
+        label: '5',
+        name: 'keyStage5',
+        term: 'Key stage 5',
+        active: false
+    }
   ];
 
   subjects = [
     {
-      label: "Citizenship",
-      selected: "selected"
+      label: 'Citizenship',
     }, {
-      label: "PHSE"
+      label: 'PHSE'
     }, {
-      label: "RE"
+      label: 'RE'
     }
   ]
 
-  typeObject = {
-    "Videos": false,
-    "Lesson Plans": false,
-    "Assembly Scripts": false,
-    "Interactive": false
-  };
-
-  keystages = [
-    1,
-    2,
-    3,
-    4,
-    5
-  ];
-
-  keyStagesObject = {
-    "1": false,
-    "2": false,
-    "3": false,
-    "4": false,
-    "5": false
-  }
-
   resetFilterState(object) {
-    _.forEach(this[object], (type, key, collection) => {
-      collection[key] = false;
-    })
+    _.forEach(object, (item) => {
+      item.active = false;
+      let name = object.name;
+      this.filter.patchValue({name: null})
+    });
   }
 
   search(value) {
     this.listComponent.resetPagination();
     this.listChange.emit({
-      "type" : "search"
+      'type' : 'search'
     })
   }
 
   clear(event, toClear) {
     event.preventDefault();
-    if(toClear === "filterSearch" || toClear === "all") {
-      this.filterSearch = "";
+    if(toClear === 'term' || toClear === 'all') {
+      this.filter.patchValue({term: ''});
     }
-    if(toClear === "filterSubjects" || toClear === "all") {
-      this.filterSubjects = "All";
+    if(toClear === 'subjects' || toClear === 'all') {
+      this.filter.patchValue({subject: 'All'});
+      this.filterSubjects = 'All';
     }
-    if(toClear === "categories" || toClear === "all") {
-      this.filterCategory = "";
+    if(toClear === 'categories' || toClear === 'all') {
+      this.filterCategory = '';
       this.subCategories = [];
       this.filterSubCategories.length = 0;
       _.forEach(this.subCategories, (subCategory) => {
         subCategory.checked = false;
       })
     }
-    if(toClear === "subCategories" || toClear === "all") {
+    if(toClear === 'subCategories' || toClear === 'all') {
       this.filterSubCategories.length = 0;
       _.forEach(this.subCategories, (subCategory) => {
         subCategory.checked = false;
       })
     }
-    if(toClear === "filterTypes" || toClear === "all") {
-      this.filterTypes = _.clone(this.types);
-      this.resetFilterState("typeObject")
+    if(toClear === 'types' || toClear === 'all') {
+      this.resetFilterState(this.types)
     }
-    if(toClear === "filterKeystages" || toClear === "all") {
-      this.filterKeystages = _.clone(this.keystages);
-      this.resetFilterState("keyStagesObject")
+    if(toClear === 'keystages' || toClear === 'all') {
+      this.resetFilterState(this.keystages)
     }
     this.listComponent.resetPagination();
-    //this.listService.setListLength(this.listComponent.items.length);
-
-    setTimeout(() => {
-      //this.listComponent.itemCount = this.listService.getListLength();
-    }, 1);
   }
 
-  setType(event, value) {
+  setFilter(event, value) {
     event.preventDefault();
-    this.filterTypes.length = 0;
-    let valueIndex = _.findIndex(this.filterTypes, value);
-    this.typeObject[value] = (this.typeObject[value] === false) ? true : false;
-    _.forEach(this.typeObject, (value, key) => {
-      if(value == true) {
-        this.filterTypes.push(key);
-      }
-    });
-    // Clone itself to trigger the ng update.
-    this.filterTypes = _.clone(this.filterTypes);
-    // If there are no type filters show all the types.
-    if(this.filterTypes.length === 0) this.filterTypes = _.clone(this.types);
-    this.listChange.emit({
-      "type": "type"
-    })
+    console.log(value);
+    if(value.active) {
+      value.active = false;
+      this.filter.patchValue({value: false});
+    } else {
+      value.active = true;
+      this.filter.patchValue({value: true});
+    }
     this.listComponent.resetPagination();
-    return this.filterTypes;
-  }
-
-  setKey(event, value) {
-    event.preventDefault();
-    this.filterKeystages.length = 0;
-    let valueIndex = _.findIndex(this.filterKeystages, value);
-    this.keyStagesObject[value] = (this.keyStagesObject[value] === false) ? true : false;
-    _.forEach(this.keyStagesObject, (value, key) => {
-      if(value == true) {
-        this.filterKeystages.push(key);
-      }
-    });
-    this.filterKeystages = _.clone(this.filterKeystages);
-    if(this.filterKeystages.length === 0) this.filterKeystages = _.clone(this.filterKeystages);
-    this.listChange.emit({
-      "type": "keys"
-    })
-    this.listComponent.resetPagination();
-    return this.filterKeystages;
   }
 
   setSubject(event: Event) {
     this.filterSubjects = (<HTMLSelectElement>event.srcElement).value;
-    this.listChange.emit({
-      "type": "subject"
-    })
     this.listComponent.resetPagination();
     return this.filterSubjects;
   }
@@ -250,7 +236,7 @@ export class ListFilter implements OnInit {
     }
     this.filterSubCategories = _.clone(this.filterSubCategories);
     this.listChange.emit({
-      "type": "subCategory"
+      'type': 'subCategory'
     })
     this.listComponent.resetPagination();
   }
@@ -264,68 +250,68 @@ export class ListFilter implements OnInit {
     let category = _.filter(this.categories, {label: event.target.id})
     this.filterCategory = event.target.id;
     this.subCategories = [];
-    this.subCategories = _.sortBy(_.concat(this.subCategories, category[0].subCategories), "label");
+    this.subCategories = _.sortBy(_.concat(this.subCategories, category[0].subCategories), 'label');
     this.listChange.emit({
-      "type": "category"
+      'type': 'category'
     })
     this.listComponent.resetPagination();
   }
 
-  filterTypesActive(filterObject) {
+  checkboxesActive(data) {
+    return (_.findIndex(data, { 'active': true}) !== -1) true : false;
+  }
+
+  filterActive() {
+    return (this.filter.value.term || this.filterSubjects !== 'All' || _.findIndex(this.types, { 'active': true}) !== -1 || _.findIndex(this.keystages, { 'active': true}) !== -1 || this.filterCategory !== '') ? true : false;
+  }
+
+  subjectsActive(subject) {
+    if(subject !== 'All') return true;
+  }
+
+  isActive(value, collection) {
     let isActive = false;
-    _.forEach(filterObject, (item) => {
-      if(item === true) isActive = true;
+    _.forEach(collection, (item) => {
+      if(item.active === true && item) isActive = true;
     });
     return isActive;
   }
 
-  filterActive() {
-    return (this.filterSearch || this.filterSubjects !== 'All' || this.filterTypes.length !== 4 && this.filterTypes.length !== 0 || this.filterKeystages.length !== 5 || this.filterCategory !== "") ? true : false;
-  }
-
-  subjectsActive(subject) {
-    if(subject !== "All") return true;
-  }
-
-  isActive(value, type) {
-    if (this[type][value] === true) return true;
-  }
-
   toggleFilter(event) {
     event.preventDefault()
-    if(event.target.tagName === "SPAN") return;
+    if(event.target.tagName === 'SPAN') return;
     let parent = event.target.parentElement.parentElement;
     if (parent.classList) {
-      parent.classList.toggle("collapsed");
+      parent.classList.toggle('collapsed');
     } else {
-      let classes = parent.className.split(" ");
-      let i = classes.indexOf("collapsed");
+      let classes = parent.className.split(' ');
+      let i = classes.indexOf('collapsed');
       if (i >= 0) {
         classes.splice(i, 1);
       }
       else {
-        classes.push("collapsed");
-        parent.className = classes.join(" ");
+        classes.push('collapsed');
+        parent.className = classes.join(' ');
       }
     }
   }
 
   showFilter(event) {
     event.preventDefault()
-    let parent = event.target.parentElement;
-    event.target.innerHTML = (event.target.innerHTML === "Show") ? "Hide" : "Show";
+    let parent = event.target.parentElement.parentElement;
+    event.target.innerHTML = (event.target.innerHTML === 'Show') ? 'Hide' : 'Show';
 
     if (parent.classList) {
-      parent.classList.toggle("show");
+      parent.classList.toggle('show');
     } else {
-      let classes = parent.className.split(" ");
-      let i = classes.indexOf("show");
+      let classes = parent.className.split(' ');
+      let i = classes.indexOf('show');
       if (i >= 0) {
         classes.splice(i, 1);
       }
       else {
-        classes.push("show");
-        parent.className = classes.join(" ");
+        classes.push('show');
+        parent.className = classes.join(' ');
       }
     }
   }

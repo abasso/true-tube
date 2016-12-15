@@ -1,14 +1,18 @@
 <div class="row">
   <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right">
-
-    <!-- <app-filter #filter (listChange)="filterEvent($event);"> -->
       <app-filter #filter>
     </app-filter>
   </div>
   <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
     <h1 class="page-title">
-      {{listService.pageTitle(filter.filterSubjects, filter.filterKeystages, filter.filterTypes, filter.filterSearch, filter.filterCategory, filter.filterSubCategories, itemCount)}}
+      {{listService.pageTitle(filter.filterSubjects, filter.keystages, filter.types, filter.filter.value.term, filter.filterCategory, filter.filterSubCategories, itemCount)}}
     </h1>
+    <!-- <h2 countUp="{useEasing: false}"
+            [startVal]="myStartVal"
+            [endVal]="myEndVal"
+            [reanimateOnClick]="false">
+
+          </h2> -->
     <app-sort *ngIf="itemCount !== 0"></app-sort>
     <div class="row grid-row content-grid" *ngIf="itemCount === 0">
       <div class="list-item">
@@ -16,7 +20,6 @@
       </div>
     </div>
     <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}">
-      <!-- <div class="list-item" *ngFor="let item of items | CategoryPipe: filter.filterCategory:filter.filterSubCategories | SubjectPipe:filter.filterSubjects | TypePipe:filter.typeObject | KeystagePipe:filter.filterKeystages | SearchTermPipe:filter.filterSearch | PaginationPipe:paginationData"> -->
         <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
         <div class="block-media__media" *ngIf="item._source.thumbnail">
           <a href="{{ item.url }}" class="block-media__link">
@@ -45,6 +48,5 @@
       </div>
     </div>
     <app-sort class="last-sort" *ngIf="itemCount !== 0"></app-sort>
-
   </div>
 </div>
