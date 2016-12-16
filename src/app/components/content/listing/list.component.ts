@@ -4,12 +4,7 @@ import { FormControl } from '@angular/forms';
 
 import 'rxjs/add/operator/switchMap';
 import { Location } from '@angular/common';
-import { SubjectPipe } from './../../../pipes/subject.pipe';
-import { SearchTermPipe } from './../../../pipes/search-term.pipe';
-import { TransformPipe } from './../../../pipes/transform.pipe';
-import { TypePipe } from './../../../pipes/type.pipe';
 import { PaginationPipe } from './../../../pipes/pagination.pipe';
-import { KeystagePipe } from './../../../pipes/keystage.pipe';
 import { Observable } from 'rxjs/Rx';
 
 import { DataService } from './../../../services/data.service';
@@ -17,30 +12,22 @@ import { ListService } from './../../../services/list.service';
 
 import { Items } from './mock-listing';
 import Cookies from 'js-cookie';
-// import {CountUpDirective} from '/node_modules/countup.js/dist/countUp.directive';
-
 import _ from 'lodash';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   providers: [
-    SubjectPipe,
-    SearchTermPipe,
-    TypePipe,
-    KeystagePipe,
-    TransformPipe,
     PaginationPipe,
     ListService,
     DataService
   ]
 })
-
-export class ListComponent implements OnInit {
+export class ListComponent {
 
   public itemCount: number;
-  public data: Observable<Array>;
-  public items: Observable<Array>;
+  public data: Observable<any>;
+  public items: Observable<any>;
   public showDescriptions:boolean;
   public displayGrid:boolean = true;
   public displayList:boolean = false;
@@ -66,9 +53,6 @@ export class ListComponent implements OnInit {
       itemsPerPageCurrent: 9
     }
     this.showDescriptions = true;
-  }
-
-  ngOnInit() {
   }
 
   resetPagination() {

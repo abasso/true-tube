@@ -4,10 +4,10 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-import { Location } from '@angular/common';
+// import { Location } from '@angular/common';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
-
 import { AppComponent } from './app.component';
+import { ListComponent } from './components/content/listing/list.component';
 import { HeaderComponent } from './components/global/header.component';
 import { PrimaryNavComponent } from './components/navigation/primary-nav.component';
 import { SecondaryNavComponent } from './components/navigation/secondary-nav.component';
@@ -17,9 +17,7 @@ import { Auth } from './services/auth.service';
 import _ from 'lodash';
 import Cookies from 'js-cookie';
 //import {CountUpDirective} from 'countup.js';
-import { ListingComponent } from './components/content/listing/listing.component';
 import { ListFilter } from './components/content/listing/filter.component';
-import { ListComponent } from './components/content/listing/list.component';
 import { SearchTermPipe } from './pipes/search-term.pipe';
 import { TypePipe } from './pipes/type.pipe';
 import { KeystagePipe } from './pipes/keystage.pipe';
@@ -30,18 +28,23 @@ import { SortComponent } from './components/content/listing/sort.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { TransformPipe } from './pipes/transform.pipe';
 
+const appRoutes: Routes = [
+  { path: 'list/:type', component: ListComponent },
+  { path: '', component: ListComponent },
+];
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    ListComponent,
     HeaderComponent,
     PrimaryNavComponent,
     SecondaryNavComponent,
     SearchComponent,
     CallToActionComponent,
     SearchTermPipe,
-    ListingComponent,
     ListFilter,
-    ListComponent,
     TypePipe,
     KeystagePipe,
     SubjectPipe,
@@ -49,7 +52,7 @@ import { TransformPipe } from './pipes/transform.pipe';
     CategoryPipe,
     SortComponent,
     PaginationPipe,
-    TransformPipe,
+    TransformPipe
 ],
   imports: [
     BrowserModule,
@@ -57,16 +60,7 @@ import { TransformPipe } from './pipes/transform.pipe';
     ReactiveFormsModule,
     HttpModule,
     JsonpModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: ListComponent
-      },
-      {
-        path: 'list/:type',
-        component: ListComponent
-      }
-    ])
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     AUTH_PROVIDERS,

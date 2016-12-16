@@ -6,11 +6,9 @@ import { ListComponent } from './list.component';
 import { SortComponent } from './sort.component';
 import { ListService } from './../../../services/list.service';
 import { DataService } from './../../../services/data.service'
-import { TypeFilterPipe } from './../../../pipes/type-filter.pipe';
-import { CategoryPipe } from './../../../pipes/category.pipe';
 import { Categories } from './mock-categories';
 import { Observable } from 'rxjs/Rx';
-import {CountUpDirective} from 'countup.js/dist/countUp.directive';
+// import {CountUpDirective} from 'countup.js/dist/countUp.directive';
 import 'rxjs/add/operator/switchMap';
 
 import Sortable from 'sortablejs';
@@ -21,10 +19,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-filter',
-  templateUrl: './filter.component.html',
-  providers: [
-    TypeFilterPipe
-  ]
+  templateUrl: './filter.component.html'
 })
 
 export class ListFilter implements OnInit {
@@ -38,6 +33,7 @@ export class ListFilter implements OnInit {
 
   @Output() listChange = new EventEmitter();
   private filterSearch: string;
+  private contentLoading: boolean = false;
   private filterCategory: string;
   private filterSubCategories: any[];
   private filterSubCategoriesStatus = [];
@@ -73,6 +69,7 @@ export class ListFilter implements OnInit {
 
       this.items = this.listComponent.data.subscribe(
         (data) => {
+          this.contentLoading = false;
           this.listComponent.paginationData.totalItems = data.hits.hits.length;
           this.listComponent.resetPagination();
           _.forEach(data.hits.hits, (item) => {
@@ -101,22 +98,45 @@ export class ListFilter implements OnInit {
           });
         });
         _.forEach(this.categories, (category) => {
+          category.count = 0;
           _.forEach(category.subCategories, (subCategory) => {
             category.count += subCategory.count;
           });
         });
-        console.log(this.listComponent.items);
-
         }
       )
-      // NEEDS REPLACING WITH AN OBSERVABLE METHOD
-      console.log(this.route.params);
-      if(this.route.params.value.type) {
-        let pathType = _.find(this.types, { slug: this.route.params.value.type});
-        pathType.active = true;
-        let pathName = pathType.name
-        this.filter.patchValue({pathName: true});
-      }
+
+      this.route.params
+      .map(params => params['type'])
+      .subscribe((type) => {
+        console.log(type);
+        if(!_.isUndefined(type)) {
+          this.filter.patchValue({type: true});
+          let pathType = _.find(this.types, { slug: type});
+          pathType.active = true;
+        }
+      });
+
+      // this.route.query
+      // .map(query => params['type'])
+      // .subscribe((type) => {
+      //   console.log(type);
+      //   if(!_.isUndefined(type)) {
+      //     this.filter.patchValue({type: true});
+      //     let pathType = _.find(this.types, { slug: type});
+      //     pathType.active = true;
+      //   }
+      // });
+
+
+      // // NEEDS REPLACING WITH AN OBSERVABLE METHOD
+      // console.log(this.route.params);
+      // if(this.route.params.value.type) {
+      //   let pathType = _.find(this.types, { slug: this.route.params.value.type});
+      //   pathType.active = true;
+      //   let pathName = pathType.name
+      //   this.filter.patchValue({pathName: true});
+      // }
 
   }
 
@@ -203,19 +223,21 @@ export class ListFilter implements OnInit {
     }
   ]
 
-  resetFilterState(object) {
-    _.forEach(object, (item) => {
+  resetFilterState(filter) {
+    _.forEach(filter, (item) => {
       item.active = false;
-      let name = object.name;
+      let name = filter.name;
       this.filter.patchValue({name: null})
     });
   }
 
   search(value) {
+    this.contentLoading = true;
     this.listComponent.resetPagination();
   }
 
   clear(event, toClear) {
+    this.contentLoading = true;
     event.preventDefault();
     if(toClear === 'term' || toClear === 'all') {
       this.filter.patchValue({term: ''});
@@ -249,6 +271,7 @@ export class ListFilter implements OnInit {
 
   setFilter(event, value) {
     event.preventDefault();
+    this.contentLoading = true;
     if(value.active) {
       value.active = false;
       this.filter.patchValue({value: false});
@@ -261,12 +284,14 @@ export class ListFilter implements OnInit {
   }
 
   setSubject(event: Event) {
+    this.contentLoading = true;
     this.filterSubjects = (<HTMLSelectElement>event.srcElement).value;
     this.listComponent.resetPagination();
     return this.filterSubjects;
   }
 
   setSubCategories(event) {
+    this.contentLoading = true;
     event.preventDefault();
     if(event.target.checked) {
       this.filterSubCategories.push(event.target.value);

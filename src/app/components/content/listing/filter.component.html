@@ -20,7 +20,7 @@
       </a>
     </legend>
     <!-- <input id="filterSearch" [formControl]="term" class="form-control filter-search-term" type="text" [(ngModel)]="filterSearch" (keyup)="search(filterSearch)" placeholder="e.g. Social studies" /> -->
-    <input id="filterSearch" formControlName="term" class="form-control filter-search-term" type="text" placeholder="e.g. Social studies"/>
+    <input id="filterSearch" formControlName="term" class="form-control filter-search-term" type="text" placeholder="e.g. Social studies" (keyup)="search()"/>
   </fieldset>
   <fieldset class="filter-fieldset flex-none">
     <legend>
