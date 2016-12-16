@@ -39,8 +39,8 @@ import _ from 'lodash';
 export class ListComponent implements OnInit {
 
   public itemCount: number;
-  public data: Observable<Array<any>>;
-  public items: Observable<Array<any>>;
+  public data: Observable<Array>;
+  public items: Observable<Array>;
   public showDescriptions:boolean;
   public displayGrid:boolean = true;
   public displayList:boolean = false;

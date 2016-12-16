@@ -12,19 +12,19 @@ export class PrimaryNavComponent {
   items = [
     {
       label: "Videos",
-      href: "/type/videos"
+      href: "/list/videos"
     },
     {
       label: "Lesson Plans",
-      href: "/type/lesson-plans"
+      href: "/list/lesson-plans"
     },
     {
       label: "Assembly Scripts",
-      href: "/type/assembly-scripts"
+      href: "/list/assembly-scripts"
     },
     {
       label: "Interactive",
-      href: "/type/interactive"
+      href: "/list/interactive"
     }
   ]
   loggedIn = false;

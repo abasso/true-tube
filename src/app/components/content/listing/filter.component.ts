@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ListComponent } from './list.component';
@@ -28,7 +29,7 @@ import 'rxjs/add/operator/switchMap';
 
 export class ListFilter implements OnInit {
 
-  constructor(private listService: ListService, private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService) {
+  constructor(private listService: ListService, private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService, private location: Location) {
     this.categories = Categories;
     this.subCategories = [];
     this.filterSubCategories = [];
@@ -61,8 +62,6 @@ export class ListFilter implements OnInit {
 
   ngOnInit() {
 
-
-
     this.filterSubjects = 'All';
     var el = document.getElementById('GridFilter');
     var sortable = Sortable.create(el);
@@ -88,15 +87,37 @@ export class ListFilter implements OnInit {
         });
           this.listComponent.itemCount = data.hits.total;
           this.listComponent.items = data.hits.hits;
+
+          _.forEach(this.listComponent.items, (item) => {
+            _.forEach(this.categories, (category) => {
+              _.forEach(category.subCategories, (subCategory) => {
+                _.forEach(item._source.topic, (topic) => {
+                  if(topic === subCategory.label) {
+                    subCategory.count++;
+                    item._source.category = category;
+                  }
+              });
+            });
+          });
+        });
+        _.forEach(this.categories, (category) => {
+          _.forEach(category.subCategories, (subCategory) => {
+            category.count += subCategory.count;
+          });
+        });
+        console.log(this.listComponent.items);
+
         }
       )
-
+      // NEEDS REPLACING WITH AN OBSERVABLE METHOD
+      console.log(this.route.params);
       if(this.route.params.value.type) {
         let pathType = _.find(this.types, { slug: this.route.params.value.type});
         pathType.active = true;
         let pathName = pathType.name
         this.filter.patchValue({pathName: true});
       }
+
   }
 
   types = [
@@ -138,30 +159,35 @@ export class ListFilter implements OnInit {
     {
         label: '1',
         name: 'keyStage1',
+        slug: 'key-stage-1',
         term: 'Key stage 1',
         active: false
     },
     {
         label: '2',
         name: 'keyStage2',
+        slug: 'key-stage-2',
         term: 'Key stage 2',
         active: false
     },
     {
         label: '3',
         name: 'keyStage3',
+        slug: 'key-stage-3',
         term: 'Key stage 3',
         active: false
     },
     {
         label: '4',
         name: 'keyStage4',
+        slug: 'key-stage-4',
         term: 'Key stage 4',
         active: false
     },
     {
         label: '5',
         name: 'keyStage5',
+        slug: 'key-stage-5',
         term: 'Key stage 5',
         active: false
     }
@@ -187,9 +213,6 @@ export class ListFilter implements OnInit {
 
   search(value) {
     this.listComponent.resetPagination();
-    this.listChange.emit({
-      'type' : 'search'
-    })
   }
 
   clear(event, toClear) {
@@ -226,11 +249,11 @@ export class ListFilter implements OnInit {
 
   setFilter(event, value) {
     event.preventDefault();
-    console.log(value);
     if(value.active) {
       value.active = false;
       this.filter.patchValue({value: false});
     } else {
+      this.location.replaceState("/list/" + value.slug);
       value.active = true;
       this.filter.patchValue({value: true});
     }
@@ -251,9 +274,6 @@ export class ListFilter implements OnInit {
       this.filterSubCategories = _.pull(this.filterSubCategories, event.target.value);
     }
     this.filterSubCategories = _.clone(this.filterSubCategories);
-    this.listChange.emit({
-      'type': 'subCategory'
-    })
     this.listComponent.resetPagination();
   }
 
@@ -267,14 +287,11 @@ export class ListFilter implements OnInit {
     this.filterCategory = event.target.id;
     this.subCategories = [];
     this.subCategories = _.sortBy(_.concat(this.subCategories, category[0].subCategories), 'label');
-    this.listChange.emit({
-      'type': 'category'
-    })
     this.listComponent.resetPagination();
   }
 
   checkboxesActive(data) {
-    return (_.findIndex(data, { 'active': true}) !== -1) true : false;
+    return (_.findIndex(data, { 'active': true}) !== -1) ? true : false;
   }
 
   filterActive() {
@@ -282,7 +299,7 @@ export class ListFilter implements OnInit {
   }
 
   subjectsActive(subject) {
-    if(subject !== 'All') return true;
+    return (subject !== 'All') ? true : false;
   }
 
   isActive(value, collection) {

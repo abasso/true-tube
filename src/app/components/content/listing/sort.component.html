@@ -1,5 +1,5 @@
 <div class="grid-nav">
-  <div class="pagination-group">
+  <div class="pagination-group hidden-lg-down">
     <div class="input-group">
       <div class="form-inline">
         <div class="form-group">
@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <div class="display-group">
+  <div class="display-group hidden-lg-down">
     <div class="input-group">
       <div class="form-inline">
         <div class="form-group">
@@ -48,5 +48,7 @@
       </div>
     </div>
   </div>
-
+  <div class="load-more hidden-xl-up">
+      <a href="" class="btn-load-more" (click)="loadMore($event)">Load More</a>
+  </div>
 </div>

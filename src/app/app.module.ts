@@ -63,7 +63,7 @@ import { TransformPipe } from './pipes/transform.pipe';
         component: ListComponent
       },
       {
-        path: 'type/:type',
+        path: 'list/:type',
         component: ListComponent
       }
     ])

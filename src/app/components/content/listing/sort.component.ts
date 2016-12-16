@@ -5,8 +5,7 @@ import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-sort',
-  templateUrl: './sort.component.html',
-  styleUrls: ['./sort.component.scss']
+  templateUrl: './sort.component.html'
 })
 export class SortComponent {
 
@@ -14,10 +13,11 @@ export class SortComponent {
   itemsPerPageCurrent: any;
   itemsPerPage: string[];
   currentPage: number;
+  loadMoreCount: number;
 
   constructor(private listComponent: ListComponent) {
     this.itemsPerPage = [
-      "9",
+      "12",
       "18",
       "36",
       "All"
@@ -30,6 +30,7 @@ export class SortComponent {
     this.listComponent.paginationData.totalPages = Math.ceil(this.listComponent.paginationData.totalItems / this.listComponent.paginationData.itemsPerPageCurrent);
     for(let i=0;i<this.listComponent.paginationData.totalPages;i++) this.listComponent.paginationData.pages.push(i+1);
     this.pages = this.listComponent.paginationData.pages;
+    this.loadMoreCount = 12;
     this.listComponent.paginationData.currentPage = this.currentPage;
   }
 
@@ -49,22 +50,8 @@ export class SortComponent {
     this.listComponent.paginationData.currentPage = 0;
   }
 
-  setCurrentPage() {
-
-  }
-
-  //
-  // setSubject(event: Event) {
-  //   this.filterSubjects = (<HTMLSelectElement>event.srcElement).value;
-  //   this.listChange.emit({
-  //     "type": "subject"
-  //   })
-  //   return this.filterSubjects;
-  // }
   hideDescriptions(event) {
     this.listComponent.showDescriptions = (this.listComponent.showDescriptions == true) ? false : true;
-    // Cookies.set("show-descriptions", this.listComponent.showDescriptions);
-
   }
 
   setListDisplay(type) {
@@ -72,8 +59,16 @@ export class SortComponent {
     this.listComponent.displayGrid = (type === "grid") ? true : false;
     this.listComponent.displayList = (type === "list") ? true : false;
   }
+
   listDisplayClick(event, type) {
     event.preventDefault();
     this.setListDisplay(type);
+  }
+
+  loadMore(event) {
+    event.preventDefault();
+    console.log("Loading more");
+    this.loadMoreCount = this.loadMoreCount + 12;
+    this.listComponent.paginationData.itemsPerPageCurrent = this.loadMoreCount;
   }
 }
