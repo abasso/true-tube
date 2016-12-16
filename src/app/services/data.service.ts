@@ -14,7 +14,7 @@ export class DataService {
   private baseUrl = 'http://api.truetube.co.uk/resource/_search?size=1000'
 
   search(data, types, keys, subject, topics) {
-    console.log(data);
+    console.log("GETTING DATA");
     let termArray = [];
 
     if(data.term) termArray.push(data.term);

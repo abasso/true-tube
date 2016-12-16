@@ -56,7 +56,7 @@ export class ListComponent implements OnInit {
     itemsPerPageCurrent: any
   };
 
-  constructor(private listService: ListService,private route: ActivatedRoute, private location: Location, private dataService: DataService) {
+  constructor(private listService: ListService, private route: ActivatedRoute, private location: Location, private dataService: DataService) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,

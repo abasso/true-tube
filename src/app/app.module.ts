@@ -16,6 +16,7 @@ import { CallToActionComponent } from './components/messaging/call-to-action.com
 import { Auth } from './services/auth.service';
 import _ from 'lodash';
 import Cookies from 'js-cookie';
+//import {CountUpDirective} from 'countup.js';
 import { ListingComponent } from './components/content/listing/listing.component';
 import { ListFilter } from './components/content/listing/filter.component';
 import { ListComponent } from './components/content/listing/list.component';
@@ -28,7 +29,6 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { SortComponent } from './components/content/listing/sort.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
 import { TransformPipe } from './pipes/transform.pipe';
-// import {CountUpDirective} from 'countup.js/dist/countUp.directive';
 
 @NgModule({
   declarations: [

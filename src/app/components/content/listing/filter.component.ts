@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ListComponent } from './list.component';
 import { SortComponent } from './sort.component';
 import { ListService } from './../../../services/list.service';
@@ -9,6 +10,7 @@ import { CategoryPipe } from './../../../pipes/category.pipe';
 import { Categories } from './mock-categories';
 import { Observable } from 'rxjs/Rx';
 import {CountUpDirective} from 'countup.js/dist/countUp.directive';
+import 'rxjs/add/operator/switchMap';
 
 import Sortable from 'sortablejs';
 import _ from 'lodash';
@@ -26,7 +28,7 @@ import 'rxjs/add/operator/switchMap';
 
 export class ListFilter implements OnInit {
 
-  constructor(private listService: ListService, private listComponent: ListComponent, private dataService: DataService) {
+  constructor(private listService: ListService, private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService) {
     this.categories = Categories;
     this.subCategories = [];
     this.filterSubCategories = [];
@@ -58,6 +60,9 @@ export class ListFilter implements OnInit {
   })
 
   ngOnInit() {
+
+
+
     this.filterSubjects = 'All';
     var el = document.getElementById('GridFilter');
     var sortable = Sortable.create(el);
@@ -85,11 +90,19 @@ export class ListFilter implements OnInit {
           this.listComponent.items = data.hits.hits;
         }
       )
+
+      if(this.route.params.value.type) {
+        let pathType = _.find(this.types, { slug: this.route.params.value.type});
+        pathType.active = true;
+        let pathName = pathType.name
+        this.filter.patchValue({pathName: true});
+      }
   }
 
   types = [
     {
         label: 'Videos',
+        slug: 'videos',
         name: 'typeVideo',
         term: 'film',
         class: 'btn-video',
@@ -97,6 +110,7 @@ export class ListFilter implements OnInit {
     },
     {
         label: 'Lesson Plans',
+        slug: 'lesson-plans',
         name: 'typeLesson',
         term: 'lesson_plan',
         class: 'btn-lesson-plans',
@@ -104,6 +118,7 @@ export class ListFilter implements OnInit {
     },
     {
         label: 'Assembly Scripts',
+        slug: 'assembly-scripts',
         name: 'typeAssembly',
         term: 'assembly_plan',
         class: 'btn-assembly-scripts',
@@ -111,6 +126,7 @@ export class ListFilter implements OnInit {
     },
     {
         label: 'Interactive',
+        slug: 'interactive',
         name: 'typeInteractive',
         term: 'interactive',
         class: 'btn-interactive',
