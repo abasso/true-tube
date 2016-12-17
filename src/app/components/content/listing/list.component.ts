@@ -72,16 +72,21 @@ export class ListComponent {
     return arrayString.replace(/,([^,]*)$/, ' & $1');
   }
 
-  pageTitle(subject, keystages, types, term, categories, topics) {
-    categories = (_.isUndefined(categories) || categories === '') ? '' : categories;
-    topics = (topics.length) ? this.stringifyTitleArray(topics) : '';
-    if (topics !== '') categories = '';
+  pageTitle(subject, keystages, types, term, category, topics) {
+    let showTopics = false;
+    if(!_.isUndefined(category) && category !== null) {
+      console.log(category);
+      if(_.findIndex(category[0].topics, { 'active': false}) !== -1 && _.findIndex(category[0].topics, { 'active': true}) !== -1) showTopics = true;
+    }
+
+    topics = (showTopics) ? this.stringifyTitleArray(topics) : '';
+    category = (_.isUndefined(category) || category === null || category === '') ? '' : category[0].label;
     subject = (subject === 'All') ? '' : subject;
     keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages);
     types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types);
     term = (term === null || term === '') ? '' : term;
-    if(categories === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content';
-    return categories + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types;
+    if(category === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content';
+    return category + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types;
   }
 
 }

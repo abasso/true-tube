@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ListComponent } from './list.component';
 import { SortComponent } from './sort.component';
@@ -23,42 +23,47 @@ import 'rxjs/add/operator/finally';
 })
 
 export class ListFilter implements OnInit {
-
-  constructor(private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService, private location: Location) {
-    this.categories = Categories;
-    this.topics = [];
-    this.topics = [];
-    this.filterCategory = '';
-  }
-
   @Output() listChange = new EventEmitter();
   private filterSearch: string;
   private contentLoading: boolean = true;
-  private filterCategory: string;
-  private topics: any[];
-  private topicsStatus = [];
+  private topics: any[] = [];
   private filterSubjects: string;
   private categories: any[];
+  private category;
   private currentItemCount: number;
   private items;
   private itemsTotal: number = 0;
   private itemsTotalLabel: string = "Items";
-  filter = new FormGroup({
-    term: new FormControl(),
-    typeVideo: new FormControl(),
-    typeAssembly: new FormControl(),
-    typeLesson: new FormControl(),
-    typeInteractive: new FormControl(),
-    subject: new FormControl(),
-    keyStage1: new FormControl(),
-    keyStage2: new FormControl(),
-    keyStage3: new FormControl(),
-    keyStage4: new FormControl(),
-    keyStage5: new FormControl(),
-    categories: new FormControl(),
-    topics: new FormControl()
 
-  })
+  private filter: FormGroup;
+
+  constructor(private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService, private location: Location, private formBuilder: FormBuilder) {
+    this.categories = Categories;
+    this.category = null;
+    let formElements = {
+      term: '',
+      subject: '',
+      category: ''
+    }
+
+    _.forEach(this.types, (type) => {
+      formElements[type.name] = '';
+    })
+
+    _.forEach(this.keystages, (keystage) => {
+      formElements[keystage.name] = '';
+    });
+
+    _.forEach(this.categories, (category) => {
+      formElements[category.name] = '';
+      _.forEach(category.topics, (topic) => {
+        formElements[topic.name] = '';
+      });
+    });
+
+    this.filter = formBuilder.group(formElements);
+
+  }
 
   ngOnInit() {
     this.filterSubjects = 'All';
@@ -68,7 +73,7 @@ export class ListFilter implements OnInit {
     this.listComponent.data = this.filter.valueChanges
     .debounceTime(400)
     .distinctUntilChanged()
-    .switchMap(data => this.dataService.search(data, this.types, this.keystages, this.filterSubjects, this.topics));
+    .switchMap(data => this.dataService.search(data, this.types, this.keystages, this.filterSubjects, this.topics, this.category));
 
     this.items = this.listComponent.data.subscribe(
       (data) => {
@@ -87,30 +92,29 @@ export class ListFilter implements OnInit {
         });
         this.listComponent.itemCount = data.hits.total;
         this.listComponent.items = data.hits.hits;
-        _.forEach(this.categories, (category) => {
-          _.forEach(category.topics, (topic) => {
-            topic.count = 0;
-          });
-        });
+        // _.forEach(this.categories, (category) => {
+        //   _.forEach(category.topics, (topic) => {
+        //     topic.count = 0;
+        //   });
+        // });
         _.forEach(this.listComponent.items, (item) => {
-          console.log('The item', item);
           _.forEach(this.categories, (category) => {
             _.forEach(category.topics, (subCategory) => {
               _.forEach(item._source.topic, (topic) => {
                 if(topic === subCategory.label) {
-                  subCategory.count++;
+                  //subCategory.count++;
                   item._source.category = category;
                 }
               });
             });
           });
         });
-        _.forEach(this.categories, (category) => {
-          category.count = 0;
-          _.forEach(category.topics, (subCategory) => {
-            category.count += subCategory.count;
-          });
-        });
+        // _.forEach(this.categories, (category) => {
+        //   category.count = 0;
+        //   _.forEach(category.topics, (subCategory) => {
+        //     category.count += subCategory.count;
+        //   });
+        // });
         if(_.isUndefined(this.currentItemCount)) {
           this.currentItemCount = this.listComponent.itemCount;
         }
@@ -283,17 +287,26 @@ export class ListFilter implements OnInit {
       this.filterSubjects = 'All';
     }
     if(toClear === 'categories' || toClear === 'all') {
-      this.filterCategory = '';
-      this.topics = [];
-      this.topics.length = 0;
-      _.forEach(this.topics, (subCategory) => {
-        subCategory.checked = false;
+      this.category = null;
+      _.forEach(this.topics, (topic) => {
+        let toClear = {}
+        toClear[topic.name] = '';
+        this.filter.patchValue(toClear);
+        topic.active = false;
+      })
+      _.forEach(this.categories, (category) => {
+        let toClear = {}
+        toClear[category.name] = '';
+        this.filter.patchValue(toClear);
+        category.active = false;
       })
     }
     if(toClear === 'topics' || toClear === 'all') {
-      this.topics.length = 0;
-      _.forEach(this.topics, (subCategory) => {
-        subCategory.checked = false;
+      _.forEach(this.topics, (topic) => {
+        let toClear = {}
+        toClear[topic.name] = '';
+        this.filter.patchValue(toClear);
+        topic.active = false;
       })
     }
     if(toClear === 'types' || toClear === 'all') {
@@ -304,6 +317,7 @@ export class ListFilter implements OnInit {
     }
     if(toClear === "all") {
       this.filter.reset();
+      this.resetFilterState(this.types)
       this.filter.patchValue({subject: 'All'});
       this.filterSubjects = 'All';
     }
@@ -329,30 +343,52 @@ export class ListFilter implements OnInit {
   }
 
   setTopics(event) {
-    this.contentLoading = true;
     event.preventDefault();
-    console.log(event.target.value);
-    console.log(this.topics);
-    if(event.target.checked) {
-      this.topics.push(event.target.value);
-    } else {
-      this.topics = _.pull(this.topics, event.target.value);
+    this.contentLoading = true;
+    if(_.findIndex(this.topics, { 'active': false}) === -1) {
+      _.forEach(this.topics, (topic) => {
+        topic.active = false;
+      })
     }
-
+    _.forEach(this.topics, (topic) => {
+      console.log(topic.label === event.target.value);
+      if(topic.label === event.target.value) topic.active = (event.target.checked) ? true : false;
+      console.log(topic.active);
+    })
+    if(_.findIndex(this.topics, { 'active': true}) === -1) {
+      _.forEach(this.topics, (topic) => {
+        topic.active = true;
+      })
+    }
   }
 
   displayTopics(event) {
     event.preventDefault();
     this.topics.length = 0;
-
-    let category = _.filter(this.categories, {label: event.target.id})
-    this.filterCategory = event.target.id;
-    this.topics = _.sortBy(_.concat(this.topics, category[0].topics), 'label');
-    this.topics = _.remove(this.topics, (topic) => {
-      return topic.count !== 0;
+    this.category = _.filter(this.categories, {name: event.target.id})
+    this.topics = _.sortBy(this.category[0].topics, 'label');
+    // Remove the blank topics
+    // this.topics = _.remove(this.topics, (topic) => {
+    //   return topic.count !== 0;
+    // })
+    _.forEach(this.categories, (category) => {
+      let toClear = {}
+      toClear[category.name] = '';
+      this.filter.patchValue(toClear);
+      category.active = false;
     })
     _.forEach(this.topics, (topic) => {
-      topic.active = true;
+      let toClear = {}
+      toClear[topic.name] = '';
+      this.filter.patchValue(toClear);
+      topic.active = false;
+    })
+    this.category[0].active = true;
+    let toSet = {}
+    toSet[event.target.id] = true;
+    this.filter.patchValue(toSet);
+    _.forEach(this.topics, (topic) => {
+      topic.active = false;
     });
   }
 
@@ -361,17 +397,17 @@ export class ListFilter implements OnInit {
   }
 
   filterActive() {
-    return (this.filter.value.term || this.filterSubjects !== 'All' || _.findIndex(this.types, { 'active': true}) !== -1 || _.findIndex(this.keystages, { 'active': true}) !== -1 || this.filterCategory !== '') ? true : false;
+    return (this.filter.value.term || this.filterSubjects !== 'All' || _.findIndex(this.types, { 'active': true}) != -1 || _.findIndex(this.keystages, { 'active': true}) != -1 || this.category !== null ) ? true : false;
   }
 
   subjectsActive(subject) {
     return (subject !== 'All') ? true : false;
   }
 
-  isActive(value, collection) {
+  isActive(collection) {
     let isActive = false;
     _.forEach(collection, (item) => {
-      if(item.active === true && item) isActive = true;
+      if(item.active === true) isActive = true;
     });
     return isActive;
   }

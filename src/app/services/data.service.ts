@@ -13,9 +13,8 @@ export class DataService {
 
   private baseUrl = 'http://api.truetube.co.uk/resource/_search?size=1000'
 
-  search(data, types, keys, subject, topics) {
-    console.log("GETTING DATA")
-    console.log(topics)
+  search(data, types, keys, subject, topics, category) {
+
     let termArray = []
 
     if(data.term) termArray.push(data.term)
@@ -44,12 +43,26 @@ export class DataService {
       termArray.push(keyString)
     }
 
-    if(topics.length) {
+    let topicArray = [];
+
+    if(topics.length && category) {
       let topicString = '(topic:"'
       _.forEach(topics, (topic, index) => {
-        topicString += topic.label
-        if(topics.length > 1 && index !== topics.length - 1) topicString += '" OR "'
-        if(index === topics.length - 1) topicString += '")'
+        if(topic.active === true) {
+          topicArray.push(topic.label);
+        }
+      })
+      let count = _.countBy(topics, 'active');
+      if(count.false === topics.length) {
+        _.forEach(topics, (topic, index) => {
+          topicArray.push(topic.label);
+        })
+      }
+
+      _.forEach(topicArray, (topic, index) => {
+        topicString += topic;
+        if(topicArray.length > 1 && index !== topicArray.length - 1) topicString += '" OR "'
+        if(index === topicArray.length - 1) topicString += '")'
       })
       termArray.push(topicString)
     }
@@ -61,10 +74,10 @@ export class DataService {
     if(termString !== '') search.set('q', termString)
     search.set('size', '1000')
     return this.http
-      .get('http://api.truetube.co.uk/resource/_search', { search })
-      .map((response) => ( response.json() )
-    )
-  }
+    .get('http://api.truetube.co.uk/resource/_search', { search })
+    .map((response) => ( response.json() )
+  )
+}
 
 
 

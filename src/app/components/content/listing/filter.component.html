@@ -1,6 +1,6 @@
 
 <div class="grid-filter" id="GridFilter">
-  <form [formGroup]="filter">
+  <div [formGroup]="filter">
   <div class="grid-filter-header">
     <h5>
       Filter
@@ -77,7 +77,7 @@
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Categories
-        <span class="clear" *ngIf="filterCategory" (click)="clear($event, 'categories')">
+        <span class="clear" *ngIf="category" (click)="clear($event, 'categories')">
           Clear
         </span>
       </a>
@@ -86,30 +86,32 @@
       <div class="form-check">
         <label class="form-check-label">
           <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" formControlName="categories" [value]="category.label" id="{{category.label}}" (change)="displayTopics($event)">
+            <input type="radio" class="custom-control-input" [(checked)]="category.active" name="{{category.name}}" formControlName="{{category.name}}" [value]="category.label" id="{{category.name}}" (change)="displayTopics($event)">
             <div class="custom-control-indicator"></div>
           </div>
-          {{category.label}} ({{category.count}})
+          <!-- {{category.label}} ({{category.count}}) -->
+          {{category.label}}
         </label>
       </div>
     </div>
   </fieldset>
-  <fieldset class="filter-fieldset" *ngIf="topics.length">
+  <fieldset class="filter-fieldset" *ngIf="category">
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Topics
-        <span class="clear" *ngIf="topics.length" (click)="clear($event, 'topics')">
+        <span class="clear" *ngIf="isActive(topics)" (click)="clear($event, 'topics')">
           Clear
         </span>
       </a>
     </legend>
-    <div class="form-group" *ngFor="let subcategory of topics">
+    <div class="form-group" *ngFor="let topic of topics">
       <label class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" value="{{subcategory.label}}" (change)="setTopics($event)" disabled>
+        <input type="checkbox" class="custom-control-input" formControlName="{{topic.name}}" value="{{topic.label}}" (change)="setTopics($event)">
         <div class="custom-control-indicator"></div>
-        <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span>
+        <span class="custom-control-description">{{topic.label}}</span>
+        <!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->
       </label>
     </div>
   </fieldset>
-</form>
+</div>
 </div>
