@@ -307,7 +307,7 @@ export class ListFilter implements OnInit {
         toClear[topic.name] = '';
         this.filter.patchValue(toClear);
         topic.active = false;
-      })
+      });
     }
     if(toClear === 'types' || toClear === 'all') {
       this.resetFilterState(this.types)
@@ -345,19 +345,12 @@ export class ListFilter implements OnInit {
   setTopics(event) {
     event.preventDefault();
     this.contentLoading = true;
-    if(_.findIndex(this.topics, { 'active': false}) === -1) {
-      _.forEach(this.topics, (topic) => {
-        topic.active = false;
-      })
-    }
     _.forEach(this.topics, (topic) => {
-      console.log(topic.label === event.target.value);
       if(topic.label === event.target.value) topic.active = (event.target.checked) ? true : false;
-      console.log(topic.active);
     })
     if(_.findIndex(this.topics, { 'active': true}) === -1) {
       _.forEach(this.topics, (topic) => {
-        topic.active = true;
+        topic.active = false;
       })
     }
   }

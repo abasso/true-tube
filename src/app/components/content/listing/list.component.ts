@@ -75,10 +75,8 @@ export class ListComponent {
   pageTitle(subject, keystages, types, term, category, topics) {
     let showTopics = false;
     if(!_.isUndefined(category) && category !== null) {
-      console.log(category);
       if(_.findIndex(category[0].topics, { 'active': false}) !== -1 && _.findIndex(category[0].topics, { 'active': true}) !== -1) showTopics = true;
     }
-
     topics = (showTopics) ? this.stringifyTitleArray(topics) : '';
     category = (_.isUndefined(category) || category === null || category === '') ? '' : category[0].label;
     subject = (subject === 'All') ? '' : subject;
