@@ -18,8 +18,8 @@ export class SortComponent {
   constructor(private listComponent: ListComponent) {
     this.itemsPerPage = [
       "12",
-      "18",
-      "36",
+      "24",
+      "48",
       "All"
     ];
 

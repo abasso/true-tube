@@ -5,14 +5,9 @@
   </div>
   <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
     <h1 class="page-title">
-      {{listService.pageTitle(filter.filterSubjects, filter.keystages, filter.types, filter.filter.value.term, filter.filterCategory, filter.filterSubCategories, itemCount)}}
+      {{pageTitle(filter.filterSubjects, filter.keystages, filter.types, filter.filter.value.term, filter.filterCategory, filter.topics)}}
+      <span *ngIf="filter.itemsTotal !== 0">({{filter.itemsTotal}} {{filter.itemsTotalLabel}})</span>
     </h1>
-    <!-- <h2 countUp="{useEasing: false}"
-            [startVal]="myStartVal"
-            [endVal]="myEndVal"
-            [reanimateOnClick]="false">
-
-          </h2> -->
     <app-sort class="hidden-lg-down" *ngIf="itemCount !== 0"></app-sort>
     <div class="row grid-row content-grid" *ngIf="itemCount === 0">
       <div class="list-item">

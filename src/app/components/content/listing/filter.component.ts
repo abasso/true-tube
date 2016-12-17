@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ListComponent } from './list.component';
 import { SortComponent } from './sort.component';
-import { ListService } from './../../../services/list.service';
 import { DataService } from './../../../services/data.service'
 import { Categories } from './mock-categories';
 import { Observable } from 'rxjs/Rx';
@@ -17,6 +16,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/finally';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html'
@@ -24,24 +24,25 @@ import 'rxjs/add/operator/switchMap';
 
 export class ListFilter implements OnInit {
 
-  constructor(private listService: ListService, private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService, private location: Location) {
+  constructor(private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService, private location: Location) {
     this.categories = Categories;
-    this.subCategories = [];
-    this.filterSubCategories = [];
+    this.topics = [];
+    this.topics = [];
     this.filterCategory = '';
   }
 
   @Output() listChange = new EventEmitter();
   private filterSearch: string;
-  private contentLoading: boolean = false;
+  private contentLoading: boolean = true;
   private filterCategory: string;
-  private filterSubCategories: any[];
-  private filterSubCategoriesStatus = [];
+  private topics: any[];
+  private topicsStatus = [];
   private filterSubjects: string;
   private categories: any[];
-  private subCategories: any[];
+  private currentItemCount: number;
   private items;
-
+  private itemsTotal: number = 0;
+  private itemsTotalLabel: string = "Items";
   filter = new FormGroup({
     term: new FormControl(),
     typeVideo: new FormControl(),
@@ -54,162 +55,159 @@ export class ListFilter implements OnInit {
     keyStage3: new FormControl(),
     keyStage4: new FormControl(),
     keyStage5: new FormControl(),
+    categories: new FormControl(),
+    topics: new FormControl()
+
   })
 
   ngOnInit() {
-
     this.filterSubjects = 'All';
     var el = document.getElementById('GridFilter');
     var sortable = Sortable.create(el);
     this.filter.patchValue({subject: 'All'});
     this.listComponent.data = this.filter.valueChanges
-      .debounceTime(400)
-      .distinctUntilChanged()
-      .switchMap(data => this.dataService.search(data, this.types, this.keystages, this.filterSubjects, this.filterSubCategories));
+    .debounceTime(400)
+    .distinctUntilChanged()
+    .switchMap(data => this.dataService.search(data, this.types, this.keystages, this.filterSubjects, this.topics));
 
-      this.items = this.listComponent.data.subscribe(
-        (data) => {
-          this.contentLoading = false;
-          this.listComponent.paginationData.totalItems = data.hits.hits.length;
-          this.listComponent.resetPagination();
-          _.forEach(data.hits.hits, (item) => {
-            let embedTypes = {}
-            item.typesCount = _.countBy(item._source.embedded, 'type');
-            item.contenttypes = [];
-            _.forEach(item.typesCount, (type, key) => {
-              key = (key === 'film') ? 'video' : key;
-              let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ');
-                item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')});
-            });
+    this.items = this.listComponent.data.subscribe(
+      (data) => {
+        this.contentLoading = false;
+        this.listComponent.paginationData.totalItems = data.hits.hits.length;
+        this.listComponent.resetPagination();
+        _.forEach(data.hits.hits, (item) => {
+          let embedTypes = {}
+          item.typesCount = _.countBy(item._source.embedded, 'type');
+          item.contenttypes = [];
+          _.forEach(item.typesCount, (type, key) => {
+            key = (key === 'film') ? 'video' : key;
+            let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ');
+            item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')});
+          });
         });
-          this.listComponent.itemCount = data.hits.total;
-          this.listComponent.items = data.hits.hits;
-
-          _.forEach(this.listComponent.items, (item) => {
-            _.forEach(this.categories, (category) => {
-              _.forEach(category.subCategories, (subCategory) => {
-                _.forEach(item._source.topic, (topic) => {
-                  if(topic === subCategory.label) {
-                    subCategory.count++;
-                    item._source.category = category;
-                  }
+        this.listComponent.itemCount = data.hits.total;
+        this.listComponent.items = data.hits.hits;
+        _.forEach(this.categories, (category) => {
+          _.forEach(category.topics, (topic) => {
+            topic.count = 0;
+          });
+        });
+        _.forEach(this.listComponent.items, (item) => {
+          console.log('The item', item);
+          _.forEach(this.categories, (category) => {
+            _.forEach(category.topics, (subCategory) => {
+              _.forEach(item._source.topic, (topic) => {
+                if(topic === subCategory.label) {
+                  subCategory.count++;
+                  item._source.category = category;
+                }
               });
             });
           });
         });
         _.forEach(this.categories, (category) => {
           category.count = 0;
-          _.forEach(category.subCategories, (subCategory) => {
+          _.forEach(category.topics, (subCategory) => {
             category.count += subCategory.count;
           });
         });
+        if(_.isUndefined(this.currentItemCount)) {
+          this.currentItemCount = this.listComponent.itemCount;
         }
-      )
+        this.updateTotal(this.currentItemCount, this.listComponent.itemCount);
+        this.listComponent.resetPagination();
+      }
+    )
+    let pageData = this.route.snapshot.data[0];
 
-      this.route.params
-      .map(params => params['type'])
-      .subscribe((type) => {
-        console.log(type);
-        if(!_.isUndefined(type)) {
-          this.filter.patchValue({type: true});
-          let pathType = _.find(this.types, { slug: type});
-          pathType.active = true;
-        }
-      });
+    if(!_.isUndefined(pageData)) {
+      this.filter.patchValue({pageData: true});
+      pageData = _.find(this.types, {name: pageData});
+      pageData.active = true;
+    }
 
-      // this.route.query
-      // .map(query => params['type'])
-      // .subscribe((type) => {
-      //   console.log(type);
-      //   if(!_.isUndefined(type)) {
-      //     this.filter.patchValue({type: true});
-      //     let pathType = _.find(this.types, { slug: type});
-      //     pathType.active = true;
-      //   }
-      // });
-
-
-      // // NEEDS REPLACING WITH AN OBSERVABLE METHOD
-      // console.log(this.route.params);
-      // if(this.route.params.value.type) {
-      //   let pathType = _.find(this.types, { slug: this.route.params.value.type});
-      //   pathType.active = true;
-      //   let pathName = pathType.name
-      //   this.filter.patchValue({pathName: true});
-      // }
+    // this.route.queryParams
+    // .map(params => params['type'])
+    // .subscribe((type) => {
+    //   if(!_.isUndefined(type)) {
+    //     this.filter.patchValue({type: true});
+    //     let pathType = _.find(this.types, { slug: type});
+    //     pathType.active = true;
+    //   }
+    // });
 
   }
 
   types = [
     {
-        label: 'Videos',
-        slug: 'videos',
-        name: 'typeVideo',
-        term: 'film',
-        class: 'btn-video',
-        active: false
+      label: 'Videos',
+      slug: 'videos',
+      name: 'typeVideo',
+      term: 'film',
+      class: 'btn-video',
+      active: false
     },
     {
-        label: 'Lesson Plans',
-        slug: 'lesson-plans',
-        name: 'typeLesson',
-        term: 'lesson_plan',
-        class: 'btn-lesson-plans',
-        active: false
+      label: 'Lesson Plans',
+      slug: 'lesson-plans',
+      name: 'typeLesson',
+      term: 'lesson_plan',
+      class: 'btn-lesson-plans',
+      active: false
     },
     {
-        label: 'Assembly Scripts',
-        slug: 'assembly-scripts',
-        name: 'typeAssembly',
-        term: 'assembly_plan',
-        class: 'btn-assembly-scripts',
-        active: false
+      label: 'Assembly Scripts',
+      slug: 'assembly-scripts',
+      name: 'typeAssembly',
+      term: 'assembly_plan',
+      class: 'btn-assembly-scripts',
+      active: false
     },
     {
-        label: 'Interactive',
-        slug: 'interactive',
-        name: 'typeInteractive',
-        term: 'interactive',
-        class: 'btn-interactive',
-        active: false
+      label: 'Interactive',
+      slug: 'interactive',
+      name: 'typeInteractive',
+      term: 'interactive',
+      class: 'btn-interactive',
+      active: false
     }
   ];
 
   keystages = [
     {
-        label: '1',
-        name: 'keyStage1',
-        slug: 'key-stage-1',
-        term: 'Key stage 1',
-        active: false
+      label: '1',
+      name: 'keyStage1',
+      slug: 'key-stage-1',
+      term: 'Key stage 1',
+      active: false
     },
     {
-        label: '2',
-        name: 'keyStage2',
-        slug: 'key-stage-2',
-        term: 'Key stage 2',
-        active: false
+      label: '2',
+      name: 'keyStage2',
+      slug: 'key-stage-2',
+      term: 'Key stage 2',
+      active: false
     },
     {
-        label: '3',
-        name: 'keyStage3',
-        slug: 'key-stage-3',
-        term: 'Key stage 3',
-        active: false
+      label: '3',
+      name: 'keyStage3',
+      slug: 'key-stage-3',
+      term: 'Key stage 3',
+      active: false
     },
     {
-        label: '4',
-        name: 'keyStage4',
-        slug: 'key-stage-4',
-        term: 'Key stage 4',
-        active: false
+      label: '4',
+      name: 'keyStage4',
+      slug: 'key-stage-4',
+      term: 'Key stage 4',
+      active: false
     },
     {
-        label: '5',
-        name: 'keyStage5',
-        slug: 'key-stage-5',
-        term: 'Key stage 5',
-        active: false
+      label: '5',
+      name: 'keyStage5',
+      slug: 'key-stage-5',
+      term: 'Key stage 5',
+      active: false
     }
   ];
 
@@ -231,6 +229,44 @@ export class ListFilter implements OnInit {
     });
   }
 
+  updateTotal(currentCount, newCount) {
+
+    let countSpeed = 3;
+
+    if(this.itemsTotal > newCount) {
+      countSpeed = Math.ceil(newCount / currentCount);
+      if(countSpeed <= 1 && currentCount - newCount > 200) countSpeed = 10;
+      if(countSpeed === 0) countSpeed = 1;
+      if(currentCount === newCount) countSpeed = currentCount;
+    } else {
+      countSpeed = Math.ceil(currentCount / newCount)
+      if(countSpeed <= 1 && newCount - currentCount > 200) countSpeed = 10;
+      if(countSpeed === 0) countSpeed = 1;
+      if(currentCount === newCount) countSpeed = currentCount;
+    }
+
+    let totalLoop = setInterval( () => {
+      if(this.itemsTotal > newCount) {
+        this.itemsTotal -= countSpeed
+        if(this.itemsTotal <= newCount) {
+          clearInterval(totalLoop);
+          this.itemsTotal = this.listComponent.itemCount;
+          this.currentItemCount = this.listComponent.itemCount;
+          this.itemsTotalLabel = (newCount > 1) ? "Items" : "Item";
+        }
+      } else {
+        this.itemsTotal += countSpeed
+        if(this.itemsTotal >= newCount) {
+          clearInterval(totalLoop);
+          this.itemsTotal = this.listComponent.itemCount;
+          this.currentItemCount = this.listComponent.itemCount;
+          this.itemsTotalLabel = (newCount > 1) ? "Items" : "Item";
+        }
+      }
+
+    }, 1);
+  }
+
   search(value) {
     this.contentLoading = true;
     this.listComponent.resetPagination();
@@ -239,7 +275,7 @@ export class ListFilter implements OnInit {
   clear(event, toClear) {
     this.contentLoading = true;
     event.preventDefault();
-    if(toClear === 'term' || toClear === 'all') {
+    if(toClear === 'term') {
       this.filter.patchValue({term: ''});
     }
     if(toClear === 'subjects' || toClear === 'all') {
@@ -248,15 +284,15 @@ export class ListFilter implements OnInit {
     }
     if(toClear === 'categories' || toClear === 'all') {
       this.filterCategory = '';
-      this.subCategories = [];
-      this.filterSubCategories.length = 0;
-      _.forEach(this.subCategories, (subCategory) => {
+      this.topics = [];
+      this.topics.length = 0;
+      _.forEach(this.topics, (subCategory) => {
         subCategory.checked = false;
       })
     }
-    if(toClear === 'subCategories' || toClear === 'all') {
-      this.filterSubCategories.length = 0;
-      _.forEach(this.subCategories, (subCategory) => {
+    if(toClear === 'topics' || toClear === 'all') {
+      this.topics.length = 0;
+      _.forEach(this.topics, (subCategory) => {
         subCategory.checked = false;
       })
     }
@@ -266,7 +302,11 @@ export class ListFilter implements OnInit {
     if(toClear === 'keystages' || toClear === 'all') {
       this.resetFilterState(this.keystages)
     }
-    this.listComponent.resetPagination();
+    if(toClear === "all") {
+      this.filter.reset();
+      this.filter.patchValue({subject: 'All'});
+      this.filterSubjects = 'All';
+    }
   }
 
   setFilter(event, value) {
@@ -276,43 +316,44 @@ export class ListFilter implements OnInit {
       value.active = false;
       this.filter.patchValue({value: false});
     } else {
-      this.location.replaceState("/list/" + value.slug);
+      this.location.replaceState(value.slug);
       value.active = true;
       this.filter.patchValue({value: true});
     }
-    this.listComponent.resetPagination();
   }
 
   setSubject(event: Event) {
     this.contentLoading = true;
     this.filterSubjects = (<HTMLSelectElement>event.srcElement).value;
-    this.listComponent.resetPagination();
     return this.filterSubjects;
   }
 
-  setSubCategories(event) {
+  setTopics(event) {
     this.contentLoading = true;
     event.preventDefault();
+    console.log(event.target.value);
+    console.log(this.topics);
     if(event.target.checked) {
-      this.filterSubCategories.push(event.target.value);
+      this.topics.push(event.target.value);
     } else {
-      this.filterSubCategories = _.pull(this.filterSubCategories, event.target.value);
+      this.topics = _.pull(this.topics, event.target.value);
     }
-    this.filterSubCategories = _.clone(this.filterSubCategories);
-    this.listComponent.resetPagination();
+
   }
 
-  displaySubCategories(event) {
+  displayTopics(event) {
     event.preventDefault();
-    this.filterSubCategories.length = 0;
-    _.forEach(this.subCategories, (subCategory) => {
-      subCategory.checked = false;
-    })
+    this.topics.length = 0;
+
     let category = _.filter(this.categories, {label: event.target.id})
     this.filterCategory = event.target.id;
-    this.subCategories = [];
-    this.subCategories = _.sortBy(_.concat(this.subCategories, category[0].subCategories), 'label');
-    this.listComponent.resetPagination();
+    this.topics = _.sortBy(_.concat(this.topics, category[0].topics), 'label');
+    this.topics = _.remove(this.topics, (topic) => {
+      return topic.count !== 0;
+    })
+    _.forEach(this.topics, (topic) => {
+      topic.active = true;
+    });
   }
 
   checkboxesActive(data) {

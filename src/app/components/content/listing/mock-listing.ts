@@ -51,7 +51,7 @@ export const Items = [
     categories: [
       "Global"
     ],
-    subCategories: [
+    topics: [
       "Europe"
     ]
   },

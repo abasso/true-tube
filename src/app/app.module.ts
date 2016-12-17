@@ -18,19 +18,15 @@ import _ from 'lodash';
 import Cookies from 'js-cookie';
 //import {CountUpDirective} from 'countup.js';
 import { ListFilter } from './components/content/listing/filter.component';
-import { SearchTermPipe } from './pipes/search-term.pipe';
-import { TypePipe } from './pipes/type.pipe';
-import { KeystagePipe } from './pipes/keystage.pipe';
-import { SubjectPipe } from './pipes/subject.pipe';
-import { TypeFilterPipe } from './pipes/type-filter.pipe';
-import { CategoryPipe } from './pipes/category.pipe';
 import { SortComponent } from './components/content/listing/sort.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
-import { TransformPipe } from './pipes/transform.pipe';
 
 const appRoutes: Routes = [
-  { path: 'list/:type', component: ListComponent },
-  { path: '', component: ListComponent },
+  { path: 'list', component: ListComponent},
+  { path: 'videos', component: ListComponent, data: ['typeVideo'] },
+  { path: 'lesson-plans', component: ListComponent, data: ['typeLesson']},
+  { path: 'assembly-scripts', component: ListComponent, data: ['typeAssembly']},
+  { path: 'interactive', component: ListComponent, data: ['typeInteractive']},
 ];
 
 
@@ -43,16 +39,9 @@ const appRoutes: Routes = [
     SecondaryNavComponent,
     SearchComponent,
     CallToActionComponent,
-    SearchTermPipe,
     ListFilter,
-    TypePipe,
-    KeystagePipe,
-    SubjectPipe,
-    TypeFilterPipe,
-    CategoryPipe,
     SortComponent,
-    PaginationPipe,
-    TransformPipe
+    PaginationPipe
 ],
   imports: [
     BrowserModule,

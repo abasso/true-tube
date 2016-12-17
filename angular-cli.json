@@ -24,7 +24,8 @@
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/tether/dist/js/tether.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/picturefill/dist/picturefill.min.js"
+        "../node_modules/picturefill/dist/picturefill.min.js",
+        "../node_modules/countup.js/dist/countUp.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

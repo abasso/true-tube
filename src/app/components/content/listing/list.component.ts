@@ -8,24 +8,24 @@ import { PaginationPipe } from './../../../pipes/pagination.pipe';
 import { Observable } from 'rxjs/Rx';
 
 import { DataService } from './../../../services/data.service';
-import { ListService } from './../../../services/list.service';
 
 import { Items } from './mock-listing';
 import Cookies from 'js-cookie';
 import _ from 'lodash';
+import CountUp from 'countup.js';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   providers: [
     PaginationPipe,
-    ListService,
     DataService
   ]
 })
 export class ListComponent {
 
   public itemCount: number;
+  public currentItemCount: number;
   public data: Observable<any>;
   public items: Observable<any>;
   public showDescriptions:boolean;
@@ -43,7 +43,7 @@ export class ListComponent {
     itemsPerPageCurrent: any
   };
 
-  constructor(private listService: ListService, private route: ActivatedRoute, private location: Location, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private location: Location, private dataService: DataService) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,
@@ -64,4 +64,24 @@ export class ListComponent {
   }, 1);
 
   }
+
+  stringifyTitleArray(array) {
+    array = _.filter(array, {active: true});
+    array = _.map(array, 'label');
+    let arrayString = array.join(', ');
+    return arrayString.replace(/,([^,]*)$/, ' & $1');
+  }
+
+  pageTitle(subject, keystages, types, term, categories, topics) {
+    categories = (_.isUndefined(categories) || categories === '') ? '' : categories;
+    topics = (topics.length) ? this.stringifyTitleArray(topics) : '';
+    if (topics !== '') categories = '';
+    subject = (subject === 'All') ? '' : subject;
+    keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages);
+    types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types);
+    term = (term === null || term === '') ? '' : term;
+    if(categories === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content';
+    return categories + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types;
+  }
+
 }

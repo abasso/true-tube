@@ -86,7 +86,7 @@
       <div class="form-check">
         <label class="form-check-label">
           <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="filterCategories" [value]="category.label" id="{{category.label}}" (change)="displaySubCategories($event)">
+            <input type="radio" class="custom-control-input" formControlName="categories" [value]="category.label" id="{{category.label}}" (change)="displayTopics($event)">
             <div class="custom-control-indicator"></div>
           </div>
           {{category.label}} ({{category.count}})
@@ -94,18 +94,18 @@
       </div>
     </div>
   </fieldset>
-  <fieldset class="filter-fieldset" *ngIf="subCategories.length">
+  <fieldset class="filter-fieldset" *ngIf="topics.length">
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Topics
-        <span class="clear" *ngIf="filterSubCategories.length" (click)="clear($event, 'subCategories')">
+        <span class="clear" *ngIf="topics.length" (click)="clear($event, 'topics')">
           Clear
         </span>
       </a>
     </legend>
-    <div class="form-group" *ngFor="let subcategory of subCategories">
+    <div class="form-group" *ngFor="let subcategory of topics">
       <label class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" value="{{subcategory.label}}" (change)="setSubCategories($event)">
+        <input type="checkbox" class="custom-control-input" value="{{subcategory.label}}" (change)="setTopics($event)" disabled>
         <div class="custom-control-indicator"></div>
         <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span>
       </label>

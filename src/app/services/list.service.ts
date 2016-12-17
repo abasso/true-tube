@@ -4,6 +4,8 @@ import _ from 'lodash';
 @Injectable()
 export class ListService {
 
+  currentTotal:number;
+
   stringifyTitleArray(array) {
     array = _.filter(array, {active: true});
     array = _.map(array, 'label');
@@ -11,23 +13,20 @@ export class ListService {
     return arrayString.replace(/,([^,]*)$/, ' & $1');
   }
 
-  pageTitle(subject, keystages, types, term, categories, subCategories, total) {
-    // console.log(subject);
-    // console.log(keystages);
-    // console.log(types);
-    // console.log(term);
-    // console.log(categories);
-    // console.log(subCategories);
-    // console.log(total);
-    total = (_.isUndefined(total)) ? '' : ' (' + total + ' Items)';
+  pageTitle(subject, keystages, types, term, categories, topics, total) {
+    this.currentTotal = (_.isUndefined(this.currentTotal)) ? total : this.currentTotal;
+    console.log("current total", this.currentTotal);
+    console.log("new total", total);
+    this.currentTotal = total;
+    total = (_.isUndefined(total)) ? ' (0 Items)' : ' (' + total + ' Items)';
     categories = (_.isUndefined(categories) || categories === '') ? '' : categories;
-    subCategories = (subCategories.length) ? this.stringifyTitleArray(subCategories) : '';
-    if (subCategories !== '') categories = '';
+    topics = (_.findIndex(types, { 'active': true}) === -1 || (_.findLastIndex(types, { 'active': true}) === types.length)) ? this.stringifyTitleArray(topics) : '';
+    if (topics !== '') categories = '';
     subject = (subject === 'All') ? '' : subject;
     keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages);
     types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types);
     term = (term === null || term === '') ? '' : term;
-    if(categories === '' && subCategories === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content' + total;
-    return categories + ' ' + subCategories + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types + total;
+    if(categories === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content' + total;
+    return categories + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types + total;
   }
 }
