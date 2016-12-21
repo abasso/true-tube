@@ -1,11 +1,10 @@
-
 <div class="grid-filter" id="GridFilter">
   <div [formGroup]="filter">
   <div class="grid-filter-header">
     <h5>
       Filter
     </h5>
-    <span class="clear" *ngIf="filterActive()" (click)="clear($event, 'all')">
+    <span class="clear" *ngIf="filterActive()" (click)="clearAll($event)">
       Clear All
     </span>
   </div>
@@ -14,7 +13,7 @@
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Search Term
-        <span class="clear" *ngIf="filter.value.term" (click)="clear($event, 'term')">
+        <span class="clear" *ngIf="filter.value.term" (click)="clearTerm($event)">
           Clear
         </span>
       </a>
@@ -25,7 +24,7 @@
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Content Type(s)
-        <span class="clear" *ngIf="checkboxesActive(types)" (click)="clear($event, 'types')">
+        <span class="clear" *ngIf="checkboxesActive(types)" (click)="clearTypes($event)">
           Clear
         </span>
       </a>
@@ -43,20 +42,20 @@
   <fieldset>
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
-        Subject <span class="clear" *ngIf="subjectsActive(filterSubjects)" (click)="clear($event, 'subjects')">Clear</span></a>
+        Subject <span class="clear" *ngIf="subjectsActive(filterSubjects)" (click)="clearSubject($event)">Clear</span></a>
     </legend>
     <select (change)="setSubject($event, value)" formControlName="subject" class="custom-select form-control">
       <option selected="selected">
         All
       </option>
-      <option *ngFor="let subject of subjects" [value]="subject.label">{{subject.label}}</option>
+      <option *ngFor="let subject of subjects" [value]="subject.slug">{{subject.label}}</option>
     </select>
   </fieldset>
   <fieldset class="filter-fieldset filter-keystage flex-none">
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Key Stage(s)
-        <span class="clear"  *ngIf="checkboxesActive(keystages)" (click)="clear($event, 'keystages')">
+        <span class="clear"  *ngIf="checkboxesActive(keystages)" (click)="clearKeystages($event)">
           Clear
         </span>
       </a>
@@ -76,7 +75,7 @@
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Categories
-        <span class="clear" *ngIf="category" (click)="clear($event, 'categories')">
+        <span class="clear" *ngIf="category" (click)="clearCategories($event)">
           Clear
         </span>
       </a>
@@ -98,7 +97,7 @@
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Topics
-        <span class="clear" *ngIf="isActive(topics)" (click)="clear($event, 'topics')">
+        <span class="clear" *ngIf="isActive(topics)" (click)="clearTopics($event)">
           Clear
         </span>
       </a>

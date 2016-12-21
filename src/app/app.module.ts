@@ -16,18 +16,21 @@ import { CallToActionComponent } from './components/messaging/call-to-action.com
 import { ListFilter } from './components/content/listing/filter.component';
 import { SortComponent } from './components/content/listing/sort.component';
 import { PaginationPipe } from './pipes/pagination.pipe';
+import { DataService } from './services/data.service';
+import { ListService } from './services/list.service';
 
 // import { Auth } from './services/auth.service';
 import _ from 'lodash';
 import Cookies from 'js-cookie';
+import { QueryStringPipe } from './pipes/query-string.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: ListComponent},
   { path: 'list', component: ListComponent},
-  // { path: 'videos', component: ListComponent, data: [{filter: 'typeVideo', type: 'types'}] },
-  // { path: 'lesson-plans', component: ListComponent, data: [{filter: 'typeLesson', type: 'types'}]},
-  // { path: 'assembly-scripts', component: ListComponent, data: [{filter: 'typeAssembly', type: 'types'}]},
-  // { path: 'interactive', component: ListComponent, data: [{filter: 'typeInteractive', type: 'types'}]},
+  { path: 'videos', component: ListComponent, data: [{filter: 'typeVideo', type: 'content types'}] },
+  { path: 'lesson plans', component: ListComponent, data: [{filter: 'typeLesson', type: 'content types'}]},
+  { path: 'assembly scripts', component: ListComponent, data: [{filter: 'typeAssembly', type: 'content types'}]},
+  { path: 'interactive', component: ListComponent, data: [{filter: 'typeInteractive', type: 'content types'}]},
 ];
 
 
@@ -42,8 +45,9 @@ const appRoutes: Routes = [
     CallToActionComponent,
     ListFilter,
     SortComponent,
-    PaginationPipe
-],
+    PaginationPipe,
+    QueryStringPipe
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -51,10 +55,14 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  // providers: [
-  //   AUTH_PROVIDERS,
-  //   Auth
-  // ],
+  providers: [
+    // AUTH_PROVIDERS,
+    // Auth,
+    ListFilter,
+    ListComponent,
+    DataService,
+    ListService
+  ],
   bootstrap: [
     AppComponent
   ]

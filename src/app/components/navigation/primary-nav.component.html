@@ -1,5 +1,5 @@
 <div class="primary-nav__wrapper">
-  <div *ngFor="let item of items" class="primary-nav__item"><a [routerLink]="['/list']" [queryParams]="item.query" class="primary-nav__link">{{ item.label }}</a></div>
+  <div *ngFor="let item of items | QueryStringPipe:'content types'" class="primary-nav__item"><a [routerLink]="['/list']" [queryParams]="item.query" (click)="resetRootPath($event, item.query)" class="primary-nav__link">{{ item.label }}</a></div>
 </div>
 <!-- <div class="primary-nav__item primary-nav__account" (click)="auth.logout()" *ngIf="auth.authenticated()"><a href="/patterns/03-pages-04-register/03-pages-04-register.html" class="primary-nav__link">Logout</a></div> -->
 <!-- <div class="primary-nav__item primary-nav__account" (click)="auth.login()" *ngIf="!auth.authenticated()"><a href="" class="primary-nav__link" data-toggle="modal" data-target="#modalLogin">Login</a></div> -->

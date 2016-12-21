@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PaginationPipe } from './../../../pipes/pagination.pipe';
 import { Observable } from 'rxjs/Rx';
 import { DataService } from './../../../services/data.service';
+import { ListService } from './../../../services/list.service';
 
 import _ from 'lodash';
 
@@ -10,7 +11,7 @@ import _ from 'lodash';
   templateUrl: './list.component.html',
   providers: [
     PaginationPipe,
-    DataService
+    ListService
   ]
 })
 export class ListComponent {
@@ -34,7 +35,7 @@ export class ListComponent {
     itemsPerPageCurrent: any
   };
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private listService: ListService) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,

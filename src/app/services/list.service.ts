@@ -1,10 +1,19 @@
 import { Injectable, Output } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 import _ from 'lodash';
+
 @Injectable()
 export class ListService {
 
-  currentTotal:number;
+  private resetCurrentPathSource = new Subject();
+
+  pathToReset$ = this.resetCurrentPathSource.asObservable();
+
+  resetCurrentPath(query:any) {
+    console.log(this.resetCurrentPathSource);
+    this.resetCurrentPathSource.next(query);
+  }
 
   stringifyTitleArray(array) {
     array = _.filter(array, {active: true});
@@ -14,9 +23,6 @@ export class ListService {
   }
 
   pageTitle(subject, keystages, types, term, categories, topics) {
-    this.currentTotal = (_.isUndefined(this.currentTotal)) ? total : this.currentTotal;
-    this.currentTotal = total;
-    total = (_.isUndefined(total)) ? ' (0 Items)' : ' (' + total + ' Items)';
     categories = (_.isUndefined(categories) || categories === '') ? '' : categories;
     topics = (_.findIndex(types, { 'active': true}) === -1 || (_.findLastIndex(types, { 'active': true}) === types.length)) ? this.stringifyTitleArray(topics) : '';
     if (topics !== '') categories = '';
@@ -24,7 +30,7 @@ export class ListService {
     keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages);
     types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types);
     term = (term === null || term === '') ? '' : term;
-    if(categories === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content' + total;
-    return categories + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types + total;
+    if(categories === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content';
+    return categories + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types;
   }
 }

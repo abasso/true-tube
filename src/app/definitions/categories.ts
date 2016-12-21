@@ -381,5 +381,115 @@ export const Categories = [
         slug: "moral decisions"
       }
     ]
-  }
+  },
+  {
+    label: "Jobs & Money",
+    name: "categoryJobsAndMoney",
+    count: 0,
+    slug: "jobs and money",
+    active: false,
+    topics: [
+      {
+        label: "Debt",
+        name: "topicDebt",
+        active: false,
+        count: 0,
+        slug: "debt"
+      },
+      {
+        label: "Economy & Business",
+        name: "topicEconomyAndBusiness",
+        active: false,
+        count: 0,
+        slug: "economy and business"
+      },
+      {
+        label: "Education",
+        name: "topicEducation",
+        active: false,
+        count: 0,
+        slug: "education"
+      },
+      {
+        label: "Poverty",
+        name: "topicPoverty",
+        active: false,
+        count: 0,
+        slug: "poverty"
+      },
+      {
+        label: "Holy Buildings",
+        name: "topicHolyBuildings",
+        active: false,
+        count: 0,
+        slug: "holy buildings"
+      },
+      {
+        label: "Managing Money",
+        name: "topicManagingMoney",
+        active: false,
+        count: 0,
+        slug: "managing money"
+      },
+      {
+        label: "Jobs",
+        name: "topicJobs",
+        active: false,
+        count: 0,
+        slug: "jobs"
+      }
+    ]
+  },
+  {
+    label: "Crime",
+    name: "categoryCrime",
+    count: 0,
+    slug: "crime",
+    active: false,
+    topics: [
+      {
+        label: "Street Crime",
+        name: "topicStreetCrime",
+        active: false,
+        count: 0,
+        slug: "street crime"
+      },
+      {
+        label: "Sex Crime",
+        name: "topicSexCrime",
+        active: false,
+        count: 0,
+        slug: "sex crime"
+      },
+      {
+        label: "Punishment",
+        name: "topicPunishment",
+        active: false,
+        count: 0,
+        slug: "punishment"
+      },
+      {
+        label: "Police",
+        name: "topicPolice",
+        active: false,
+        count: 0,
+        slug: "police"
+      },
+      {
+        label: "Violence",
+        name: "topicViolence",
+        active: false,
+        count: 0,
+        slug: "violence"
+      },
+      {
+        label: "Global Crime",
+        name: "topicGlobalCrime",
+        active: false,
+        count: 0,
+        slug: "global crime"
+      }
+    ]
+  },
+
 ]

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { SearchComponent } from './../navigation/search.component';
+import { SearchComponent } from './search.component';
+import { ListFilter } from './../content/listing/filter.component';
 import { ContentTypes } from './../../definitions/content-types';
+import { ListService } from './../../services/list.service';
 
 // import { Auth } from './../../services/auth.service';
 
@@ -9,8 +11,14 @@ import { ContentTypes } from './../../definitions/content-types';
   templateUrl: './primary-nav.component.html'
 })
 export class PrimaryNavComponent {
-
   private items = ContentTypes;
-  // constructor(private auth: Auth) {}
-  // loggedIn = false;
+
+  constructor(private filter: ListFilter, private listService: ListService) {
+  }
+
+  resetRootPath(event, query) {
+    event.preventDefault();
+    this.listService.resetCurrentPath(query);
+  }
+
 }

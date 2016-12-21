@@ -2,8 +2,7 @@ export const ContentTypes = [
   {
     label: 'Videos',
     slug: 'videos',
-    type: 'types',
-    query: {types: 'videos'},
+    type: 'content types',
     name: 'typeVideo',
     term: 'film',
     class: 'btn-video',
@@ -12,8 +11,7 @@ export const ContentTypes = [
   {
     label: 'Lesson Plans',
     slug: 'lesson plans',
-    type: 'types',
-    query: {types: 'lesson plans'},
+    type: 'content types',
     name: 'typeLesson',
     term: 'lesson_plan',
     class: 'btn-lesson-plans',
@@ -22,8 +20,7 @@ export const ContentTypes = [
   {
     label: 'Assembly Scripts',
     slug: 'assembly scripts',
-    type: 'types',
-    query: {types: 'assembly scripts'},
+    type: 'content types',
     name: 'typeAssembly',
     term: 'assembly_plan',
     class: 'btn-assembly-scripts',
@@ -32,8 +29,7 @@ export const ContentTypes = [
   {
     label: 'Interactive',
     slug: 'interactive',
-    type: 'types',
-    query: {types: 'interactive'},
+    type: 'content types',
     name: 'typeInteractive',
     term: 'interactive',
     class: 'btn-interactive',
