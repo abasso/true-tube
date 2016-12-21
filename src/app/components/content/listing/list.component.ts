@@ -1,18 +1,9 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { FormControl } from '@angular/forms';
-
-import 'rxjs/add/operator/switchMap';
-import { Location } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { PaginationPipe } from './../../../pipes/pagination.pipe';
 import { Observable } from 'rxjs/Rx';
-
 import { DataService } from './../../../services/data.service';
 
-import { Items } from './mock-listing';
-import Cookies from 'js-cookie';
 import _ from 'lodash';
-import CountUp from 'countup.js';
 
 @Component({
   selector: 'app-list',
@@ -43,7 +34,7 @@ export class ListComponent {
     itemsPerPageCurrent: any
   };
 
-  constructor(private route: ActivatedRoute, private location: Location, private dataService: DataService) {
+  constructor(private dataService: DataService) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,
@@ -61,8 +52,7 @@ export class ListComponent {
       this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent);
       for(let i=0;i<this.paginationData.totalPages;i++) this.paginationData.pages.push(i+1);
       this.paginationData.currentPage = 0;
-  }, 1);
-
+    }, 1);
   }
 
   stringifyTitleArray(array) {
@@ -82,7 +72,7 @@ export class ListComponent {
     subject = (subject === 'All') ? '' : subject;
     keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages);
     types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types);
-    term = (term === null || term === '') ? '' : term;
+    term = (term === null || term === '') ? '' : _.upperFirst(term);
     if(category === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content';
     return category + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types;
   }

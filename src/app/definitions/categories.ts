@@ -3,7 +3,7 @@ export const Categories = [
     label: "Global",
     name: "categoryGlobal",
     count: 0,
-    slug: "",
+    slug: "global",
     active: false,
     topics: [
       {
@@ -11,35 +11,35 @@ export const Categories = [
         name: "topicEurope",
         active: false,
         count: 0,
-        slug: ""
+        slug: "europe"
       },
       {
         label: "Customs and Traditions",
         name: "topicCustomsAndTraditions",
         active: false,
         count: 0,
-        slug: ""
+        slug: "customs and traditions"
       },
       {
         label: "Human Rights",
         name: "topicHumanRights",
         active: false,
         count: 0,
-        slug: ""
+        slug: "human rights"
       },
       {
         label: "The Developing World",
         name: "topicTheDevelopingWorld",
         active: false,
         count: 0,
-        slug: ""
+        slug: "the developing world"
       },
       {
         label: "Travel",
         name: "topicTravel",
         active: false,
         count: 0,
-        slug: ""
+        slug: "travel"
       }
     ]
   },
@@ -47,7 +47,7 @@ export const Categories = [
     label: "The Earth",
     name: "categoryTheEarth",
     count: 0,
-    slug: "",
+    slug: "the earth",
     active: false,
     topics: [
       {
@@ -55,35 +55,35 @@ export const Categories = [
         name: "topicTourism",
         active: false,
         count: 0,
-        slug: ""
+        slug: "tourism"
       },
       {
         label: "Recycling",
         name: "topicRecycling",
         active: false,
         count: 0,
-        slug: ""
+        slug: "recycling"
       },
       {
         label: "Pollution",
         name: "topicPollution",
         active: false,
         count: 0,
-        slug: ""
+        slug: "pollution"
       },
       {
         label: "Global Warming",
         name: "topicGlobalWarming",
         active: false,
         count: 0,
-        slug: ""
+        slug: "global warming"
       },
       {
         label: "Food Production",
         name: "topicFoodProduction",
         active: false,
         count: 0,
-        slug: ""
+        slug: "food production"
       }
     ]
   },
@@ -91,7 +91,7 @@ export const Categories = [
     label: "Relationships",
     name: "categoryRelationships",
     count: 0,
-    slug: "",
+    slug: "relationships",
     active: false,
     topics: [
       {
@@ -99,49 +99,49 @@ export const Categories = [
         name: "topicLoveAndSex",
         active: false,
         count: 0,
-        slug: ""
+        slug: "love and sex"
       },
       {
         label: "Loss",
         name: "topicLoss",
         active: false,
         count: 0,
-        slug: ""
+        slug: "loss"
       },
       {
         label: "Gang Culture",
         name: "topicGangCulture",
         active: false,
         count: 0,
-        slug: ""
+        slug: "gang culture"
       },
       {
         label: "Sexual Equality",
         name: "topicSexualEquality",
         active: false,
         count: 0,
-        slug: ""
+        slug: "sexual equality"
       },
       {
         label: "Sexuality",
         name: "topicSexuality",
         active: false,
         count: 0,
-        slug: ""
+        slug: "sexuality"
       },
       {
         label: "Friends & Family",
         name: "topicFriendsAndFamily",
         active: false,
         count: 0,
-        slug: ""
+        slug: "friends and family"
       },
       {
         label: "Bullying",
         name: "topicBullying",
         active: false,
         count: 0,
-        slug: ""
+        slug: "bullying"
       }
     ]
   },
@@ -149,7 +149,7 @@ export const Categories = [
     label: "Culture",
     name: "categoryCulture",
     count: 0,
-    slug: "",
+    slug: "culture",
     active: false,
     topics: [
       {
@@ -157,42 +157,42 @@ export const Categories = [
         name: "topicFilm",
         active: false,
         count: 0,
-        slug: ""
+        slug: "film"
       },
       {
         label: "Celebrities",
         name: "topicCelebrities",
         active: false,
         count: 0,
-        slug: ""
+        slug: "Celebrities"
       },
       {
         label: "Art",
         name: "topicArt",
         active: false,
         count: 0,
-        slug: ""
+        slug: "art"
       },
       {
         label: "Media",
         name: "topicMedia",
         active: false,
         count: 0,
-        slug: ""
+        slug: "media"
       },
       {
         label: "Music",
         name: "topicMusic",
         active: false,
         count: 0,
-        slug: ""
+        slug: "music"
       },
       {
         label: "Poetry",
         name: "topicPoetry",
         active: false,
         count: 0,
-        slug: ""
+        slug: "poetry"
       }
     ]
   },
@@ -200,7 +200,7 @@ export const Categories = [
     label: "Society",
     name: "categorySoceity",
     count: 0,
-    slug: "",
+    slug: "society",
     active: false,
     topics: [
       {
@@ -208,63 +208,63 @@ export const Categories = [
         name: "topicCommunity",
         active: false,
         count: 0,
-        slug: ""
+        slug: "community"
       },
       {
         label: "Censorship",
         name: "topicCensorship",
         active: false,
         count: 0,
-        slug: ""
+        slug: "censorship"
       },
       {
         label: "Justice & Equality",
         name: "topicJusticeAndEquality",
         active: false,
         count: 0,
-        slug: ""
+        slug: "justice and equality"
       },
       {
         label: "Sex Industry",
         name: "topicSexIndustry",
         active: false,
         count: 0,
-        slug: ""
+        slug: "sex industry"
       },
       {
         label: "Race & Diversity",
         name: "topicRaceAndDiversity",
         active: false,
         count: 0,
-        slug: ""
+        slug: "race and diversity"
       },
       {
         label: "Prejudice",
         name: "topicPrejudice",
         active: false,
         count: 0,
-        slug: ""
+        slug: "prejudice"
       },
       {
         label: "Politics & Government",
         name: "topicPoliticsAndGovernment",
         active: false,
         count: 0,
-        slug: ""
+        slug: "politics and government"
       },
       {
         label: "Technology",
         name: "topicTechnology",
         active: false,
         count: 0,
-        slug: ""
+        slug: "technology"
       },
       {
         label: "War & Peace",
         name: "topicWarAndPeace",
         active: false,
         count: 0,
-        slug: ""
+        slug: "war and peace"
       }
     ]
   },
@@ -272,7 +272,7 @@ export const Categories = [
     label: "Ethics & Religion",
     name: "categoryEthicsAndReligion",
     count: 0,
-    slug: "",
+    slug: "ethics and religion",
     active: false,
     topics: [
       {
@@ -280,105 +280,105 @@ export const Categories = [
         name: "topicTheNatureOfGod",
         active: false,
         count: 0,
-        slug: ""
+        slug: "the nature of god"
       },
       {
         label: "Festivals",
         name: "topicFestivals",
         active: false,
         count: 0,
-        slug: ""
+        slug: "festivals"
       },
       {
         label: "Founders",
         name: "topicFounders",
         active: false,
         count: 0,
-        slug: ""
+        slug: "founders"
       },
       {
         label: "Holy Books",
         name: "topicHolyBooks",
         active: false,
         count: 0,
-        slug: ""
+        slug: "holy books"
       },
       {
         label: "Holy Buildings",
         name: "topicHolyBuildings",
         active: false,
         count: 0,
-        slug: ""
+        slug: "holy buildings"
       },
       {
         label: "Rites of Passage",
         name: "topicRitesOfPassage",
         active: false,
         count: 0,
-        slug: ""
+        slug: "rites of passage"
       },
       {
         label: "Worship",
         name: "topicWorship",
         active: false,
         count: 0,
-        slug: ""
+        slug: "worship"
       },
       {
         label: "Conflict",
         name: "topicConflict",
         active: false,
         count: 0,
-        slug: ""
+        slug: "conflict"
       },
       {
-        label: "Central Beliefts",
-        name: "topicCentralBeliefts",
+        label: "Central Beliefs",
+        name: "topicCentralBeliefs",
         active: false,
         count: 0,
-        slug: ""
+        slug: "central beliefs"
       },
       {
         label: "My Faith",
         name: "topicMyFaith",
         active: false,
         count: 0,
-        slug: ""
+        slug: "my faith"
       },
       {
         label: "Philosophy",
         name: "topicPhilosophy",
         active: false,
         count: 0,
-        slug: ""
+        slug: "philosophy"
       },
       {
         label: "Science",
         name: "topicScience",
         active: false,
         count: 0,
-        slug: ""
+        slug: "science"
       },
       {
         label: "Multiculturalism",
         name: "topicMulticulturalism",
         active: false,
         count: 0,
-        slug: ""
+        slug: "multiculturalism"
       },
       {
         label: "Religeon & Culture",
         name: "topicReligeonAndCulture",
         active: false,
         count: 0,
-        slug: ""
+        slug: "religeon and culture"
       },
       {
         label: "Moral Decisions",
         name: "topicMoralDecisions",
         active: false,
         count: 0,
-        slug: ""
+        slug: "moral decisions"
       }
     ]
   }

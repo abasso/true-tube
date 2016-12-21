@@ -51,7 +51,7 @@ export class SortComponent {
   }
 
   hideDescriptions(event) {
-    this.listComponent.showDescriptions = (this.listComponent.showDescriptions == true) ? false : true;
+    this.listComponent.showDescriptions = (this.listComponent.showDescriptions === true) ? false : true;
   }
 
   setListDisplay(type) {
@@ -67,7 +67,6 @@ export class SortComponent {
 
   loadMore(event) {
     event.preventDefault();
-    console.log("Loading more");
     this.loadMoreCount = this.loadMoreCount + 12;
     this.listComponent.paginationData.itemsPerPageCurrent = this.loadMoreCount;
   }

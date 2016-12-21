@@ -19,8 +19,7 @@
         </span>
       </a>
     </legend>
-    <!-- <input id="filterSearch" [formControl]="term" class="form-control filter-search-term" type="text" [(ngModel)]="filterSearch" (keyup)="search(filterSearch)" placeholder="e.g. Social studies" /> -->
-    <input id="filterSearch" formControlName="term" class="form-control filter-search-term" type="text" placeholder="e.g. Social studies" (keyup)="search()"/>
+    <input id="filterSearch" formControlName="term" class="form-control filter-search-term" type="text" placeholder="e.g. Social studies" (keyup)="search($event)"/>
   </fieldset>
   <fieldset class="filter-fieldset flex-none">
     <legend>
@@ -73,7 +72,7 @@
 
 
   </fieldset>
-  <fieldset class="filter-fieldset">
+  <fieldset class="filter-fieldset flex-none">
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Categories
@@ -86,7 +85,7 @@
       <div class="form-check">
         <label class="form-check-label">
           <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" [(checked)]="category.active" name="{{category.name}}" formControlName="{{category.name}}" [value]="category.label" id="{{category.name}}" (change)="displayTopics($event)">
+            <input type="radio" class="custom-control-input" [checked]="category.active" name="{{category.name}}" formControlName="{{category.name}}" [value]="category.label" id="{{category.name}}" (change)="displayTopics($event)">
             <div class="custom-control-indicator"></div>
           </div>
           <!-- {{category.label}} ({{category.count}}) -->
@@ -95,7 +94,7 @@
       </div>
     </div>
   </fieldset>
-  <fieldset class="filter-fieldset" *ngIf="category">
+  <fieldset class="filter-fieldset flex-none" *ngIf="category" >
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Topics

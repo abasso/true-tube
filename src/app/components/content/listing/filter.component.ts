@@ -1,45 +1,48 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Injectable, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+// import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ListComponent } from './list.component';
 import { SortComponent } from './sort.component';
 import { DataService } from './../../../services/data.service'
-import { Categories } from './mock-categories';
+import { Categories } from './../../../definitions/categories';
+import { Subjects } from './../../../definitions/subjects';
+import { ContentTypes } from './../../../definitions/content-types';
+import { KeyStages } from './../../../definitions/key-stages';
 import { Observable } from 'rxjs/Rx';
-// import {CountUpDirective} from 'countup.js/dist/countUp.directive';
-import 'rxjs/add/operator/switchMap';
 
-import Sortable from 'sortablejs';
+// import Sortable from 'sortablejs';
 import _ from 'lodash';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/finally';
+
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html'
 })
 
 export class ListFilter implements OnInit {
-  @Output() listChange = new EventEmitter();
   private filterSearch: string;
   private contentLoading: boolean = true;
   private topics: any[] = [];
   private filterSubjects: string;
-  private categories: any[];
-  private category;
+  private categories: any[] = Categories;
+  private types: any[] = ContentTypes;
+  private subjects: any[] = Subjects;
+  private keystages: any[] = KeyStages;
+  private category = null;
   private currentItemCount: number;
   private items;
   private itemsTotal: number = 0;
-  private itemsTotalLabel: string = "Items";
-
+  private itemsTotalLabel: string = 'Items';
   private filter: FormGroup;
-
+  private activeFilters: number = 0;
+  private currentParams: any;
   constructor(private route: ActivatedRoute,  private listComponent: ListComponent, private dataService: DataService, private location: Location, private formBuilder: FormBuilder) {
-    this.categories = Categories;
-    this.category = null;
+    // Construct the filter form
     let formElements = {
       term: '',
       subject: '',
@@ -67,9 +70,9 @@ export class ListFilter implements OnInit {
 
   ngOnInit() {
     this.filterSubjects = 'All';
-    var el = document.getElementById('GridFilter');
-    var sortable = Sortable.create(el);
     this.filter.patchValue({subject: 'All'});
+    //var el = document.getElementById('GridFilter');
+    // var sortable = Sortable.create(el);
     this.listComponent.data = this.filter.valueChanges
     .debounceTime(400)
     .distinctUntilChanged()
@@ -81,7 +84,6 @@ export class ListFilter implements OnInit {
         this.listComponent.paginationData.totalItems = data.hits.hits.length;
         this.listComponent.resetPagination();
         _.forEach(data.hits.hits, (item) => {
-          let embedTypes = {}
           item.typesCount = _.countBy(item._source.embedded, 'type');
           item.contenttypes = [];
           _.forEach(item.typesCount, (type, key) => {
@@ -122,108 +124,92 @@ export class ListFilter implements OnInit {
         this.listComponent.resetPagination();
       }
     )
-    let pageData = this.route.snapshot.data[0];
 
-    if(!_.isUndefined(pageData)) {
-      this.filter.patchValue({pageData: true});
-      pageData = _.find(this.types, {name: pageData});
-      pageData.active = true;
-    }
+    this.route.queryParams
+    .subscribe((params) => {
+      this.currentParams = _.assign({}, params);
+    });
 
-    // this.route.queryParams
-    // .map(params => params['type'])
-    // .subscribe((type) => {
-    //   if(!_.isUndefined(type)) {
-    //     this.filter.patchValue({type: true});
-    //     let pathType = _.find(this.types, { slug: type});
-    //     pathType.active = true;
-    //   }
-    // });
+    // let pageData = this.route.snapshot.data[0];
+    // let pageDataType = pageData.type;
+    // let pageDataFilter = pageData.filter;
+    // let firstLoad = true;
+    // if(!_.isUndefined(pageData)) {
+    //   this.clear(null, pageDataType, pageData);
+    //   let pageTypes = _.find(this.types, {name: pageDataFilter});
+    //   pageTypes.active = true;
+    //   this.filterCount = 1;
+    //   firstLoad === false;
+    // }
 
+    this.route.queryParams
+    .map(params => params['types'])
+    .subscribe((types) => {
+      if(!_.isUndefined(types)) {
+        this.resetFilterState(this.types);
+          let typeArray = types.split(',');
+          _.forEach(typeArray, (type) => {
+            let pathType = _.find(this.types, { slug: type});
+            pathType.active = true;
+            let patch = {}
+            patch[pathType.name] = true;
+            this.filter.patchValue(patch);
+          })
+      }
+    });
+
+    this.route.queryParams
+    .map(params => params['keystages'])
+    .subscribe((keystages) => {
+      if(!_.isUndefined(keystages)) {
+        this.resetFilterState(this.keystages);
+          let keyArray = keystages.split(' ');
+          _.forEach(keyArray, (key) => {
+            let pathKeys = _.find(this.keystages, { slug: key});
+            pathKeys.active = true;
+            let patch = {}
+            patch[pathKeys.name] = true;
+            this.filter.patchValue(patch);
+          })
+      }
+    });
+
+    this.route.queryParams
+    .map(params => params['search'])
+    .subscribe((search) => {
+      if(!_.isUndefined(search)) {
+        this.filter.patchValue({term: search});
+      }
+    });
+
+    this.route.queryParams
+    .map(params => params['category'])
+    .subscribe((category) => {
+      if(!_.isUndefined(category)) {
+        this.category = _.filter(this.categories, {slug: category});
+        this.displayTopics(this.category[0].name);
+      }
+    });
+
+    this.route.queryParams
+    .map(params => params['topics'])
+    .subscribe((topics) => {
+      if(!_.isUndefined(topics)) {
+        this.setTopics(topics);
+      }
+    });
+
+    this.route.queryParams
+    .map(params => params['subject'])
+    .subscribe((subject) => {
+      if(!_.isUndefined(subject)) {
+        let sub = _.find(this.subjects, {slug: subject});
+        this.currentParams['subject'] = sub.label;
+        this.filterSubjects = subject;
+        this.filter.patchValue({'subject': sub.label});
+      }
+    });
   }
-
-  types = [
-    {
-      label: 'Videos',
-      slug: 'videos',
-      name: 'typeVideo',
-      term: 'film',
-      class: 'btn-video',
-      active: false
-    },
-    {
-      label: 'Lesson Plans',
-      slug: 'lesson-plans',
-      name: 'typeLesson',
-      term: 'lesson_plan',
-      class: 'btn-lesson-plans',
-      active: false
-    },
-    {
-      label: 'Assembly Scripts',
-      slug: 'assembly-scripts',
-      name: 'typeAssembly',
-      term: 'assembly_plan',
-      class: 'btn-assembly-scripts',
-      active: false
-    },
-    {
-      label: 'Interactive',
-      slug: 'interactive',
-      name: 'typeInteractive',
-      term: 'interactive',
-      class: 'btn-interactive',
-      active: false
-    }
-  ];
-
-  keystages = [
-    {
-      label: '1',
-      name: 'keyStage1',
-      slug: 'key-stage-1',
-      term: 'Key stage 1',
-      active: false
-    },
-    {
-      label: '2',
-      name: 'keyStage2',
-      slug: 'key-stage-2',
-      term: 'Key stage 2',
-      active: false
-    },
-    {
-      label: '3',
-      name: 'keyStage3',
-      slug: 'key-stage-3',
-      term: 'Key stage 3',
-      active: false
-    },
-    {
-      label: '4',
-      name: 'keyStage4',
-      slug: 'key-stage-4',
-      term: 'Key stage 4',
-      active: false
-    },
-    {
-      label: '5',
-      name: 'keyStage5',
-      slug: 'key-stage-5',
-      term: 'Key stage 5',
-      active: false
-    }
-  ];
-
-  subjects = [
-    {
-      label: 'Citizenship',
-    }, {
-      label: 'PHSE'
-    }, {
-      label: 'RE'
-    }
-  ]
 
   resetFilterState(filter) {
     _.forEach(filter, (item) => {
@@ -236,57 +222,63 @@ export class ListFilter implements OnInit {
   updateTotal(currentCount, newCount) {
 
     let countSpeed = 3;
+    let difference = currentCount - newCount;
 
     if(this.itemsTotal > newCount) {
-      countSpeed = Math.ceil(newCount / currentCount);
-      if(countSpeed <= 1 && currentCount - newCount > 200) countSpeed = 10;
-      if(countSpeed === 0) countSpeed = 1;
-      if(currentCount === newCount) countSpeed = currentCount;
+      countSpeed = (difference > 400) ? 41 : (difference > 200) ? 21 : 11;
     } else {
-      countSpeed = Math.ceil(currentCount / newCount)
-      if(countSpeed <= 1 && newCount - currentCount > 200) countSpeed = 10;
-      if(countSpeed === 0) countSpeed = 1;
-      if(currentCount === newCount) countSpeed = currentCount;
+      countSpeed = (difference < 400) ? 11 : (difference < 200) ? 21 : 41;
     }
-
-    let totalLoop = setInterval( () => {
+    if(countSpeed === 0) countSpeed = 1;
+    if(currentCount === newCount) countSpeed = currentCount;
+    let loop = () => {
       if(this.itemsTotal > newCount) {
-        this.itemsTotal -= countSpeed
+        this.itemsTotal -= countSpeed;
         if(this.itemsTotal <= newCount) {
-          clearInterval(totalLoop);
+          //clearInterval(totalLoop);
           this.itemsTotal = this.listComponent.itemCount;
           this.currentItemCount = this.listComponent.itemCount;
-          this.itemsTotalLabel = (newCount > 1) ? "Items" : "Item";
+          this.itemsTotalLabel = (newCount > 1) ? 'Items' : 'Item';
+        } else {
+          requestAnimationFrame( loop );
         }
       } else {
         this.itemsTotal += countSpeed
         if(this.itemsTotal >= newCount) {
-          clearInterval(totalLoop);
+          //clearInterval(totalLoop);
           this.itemsTotal = this.listComponent.itemCount;
           this.currentItemCount = this.listComponent.itemCount;
-          this.itemsTotalLabel = (newCount > 1) ? "Items" : "Item";
+          this.itemsTotalLabel = (newCount > 1) ? 'Items' : 'Item';
+        } else {
+          requestAnimationFrame( loop );
         }
       }
-
-    }, 1);
+    }
+    loop();
   }
 
-  search(value) {
+  search(event) {
     this.contentLoading = true;
+    this.currentParams['search'] = event.target.value;
+    this.setQueryString();
     this.listComponent.resetPagination();
   }
 
   clear(event, toClear) {
     this.contentLoading = true;
-    event.preventDefault();
+    if(event !== null) event.preventDefault();
     if(toClear === 'term') {
       this.filter.patchValue({term: ''});
+      delete this.currentParams['search'];
+      this.setQueryString();
     }
-    if(toClear === 'subjects' || toClear === 'all') {
+    if(toClear === 'subjects') {
       this.filter.patchValue({subject: 'All'});
       this.filterSubjects = 'All';
+      delete this.currentParams['subject'];
+      this.setQueryString();
     }
-    if(toClear === 'categories' || toClear === 'all') {
+    if(toClear === 'categories') {
       this.category = null;
       _.forEach(this.topics, (topic) => {
         let toClear = {}
@@ -300,70 +292,145 @@ export class ListFilter implements OnInit {
         this.filter.patchValue(toClear);
         category.active = false;
       })
+      delete this.currentParams['category'];
+      this.setQueryString();
     }
-    if(toClear === 'topics' || toClear === 'all') {
+    if(toClear === 'topics') {
       _.forEach(this.topics, (topic) => {
         let toClear = {}
         toClear[topic.name] = '';
         this.filter.patchValue(toClear);
         topic.active = false;
       });
+      this.currentParams['category'] = this.category[0].slug;
+      delete this.currentParams['topics'];
+      this.setQueryString();
     }
-    if(toClear === 'types' || toClear === 'all') {
-      this.resetFilterState(this.types)
+    if(toClear === 'types') {
+      delete this.currentParams['types'];
+      this.setQueryString();
+      this.resetFilterState(this.types);
     }
-    if(toClear === 'keystages' || toClear === 'all') {
-      this.resetFilterState(this.keystages)
+    if(toClear === 'keystages') {
+      delete this.currentParams['keystages'];
+      this.setQueryString();
+      this.resetFilterState(this.keystages);
     }
-    if(toClear === "all") {
+    if(toClear === 'all') {
+      this.category = null;
+      _.forEach(this.topics, (topic) => {
+        let toClear = {}
+        toClear[topic.name] = '';
+        this.filter.patchValue(toClear);
+        topic.active = false;
+      })
+      _.forEach(this.categories, (category) => {
+        let toClear = {}
+        toClear[category.name] = '';
+        this.filter.patchValue(toClear);
+        category.active = false;
+      })
       this.filter.reset();
-      this.resetFilterState(this.types)
+      this.currentParams = {};
+      this.resetFilterState(this.types);
+      this.resetFilterState(this.keystages);
       this.filter.patchValue({subject: 'All'});
       this.filterSubjects = 'All';
+      this.setQueryString();
     }
   }
 
   setFilter(event, value) {
     event.preventDefault();
     this.contentLoading = true;
+    let filterQuery = (_.isUndefined(this.currentParams[value.type])) ? [] : this.currentParams[value.type].split(',');
     if(value.active) {
+      filterQuery.splice(_.indexOf(filterQuery, value.slug), 1);
       value.active = false;
       this.filter.patchValue({value: false});
     } else {
-      this.location.replaceState(value.slug);
+      filterQuery.push(value.slug);
       value.active = true;
       this.filter.patchValue({value: true});
     }
+    this.currentParams[value.type] = filterQuery.join();
+    this.setQueryString();
+  }
+
+  setQueryString() {
+    let appendedQuery = '';
+    _.forEach(this.currentParams, (value, key) => {
+      if(value.length) appendedQuery += key + '=' + value.trim() + '&';
+    });
+    appendedQuery = appendedQuery.slice(0, -1);
+    this.location.replaceState('/list', appendedQuery);
   }
 
   setSubject(event: Event) {
     this.contentLoading = true;
     this.filterSubjects = (<HTMLSelectElement>event.srcElement).value;
+    this.currentParams['subject'] = this.filterSubjects;
+    this.setQueryString();
     return this.filterSubjects;
   }
 
   setTopics(event) {
-    event.preventDefault();
     this.contentLoading = true;
-    _.forEach(this.topics, (topic) => {
-      if(topic.label === event.target.value) topic.active = (event.target.checked) ? true : false;
-    })
+    let topicArray = [];
+    if(!_.isUndefined(event.preventDefault)) {
+      event.preventDefault();
+      _.forEach(this.topics, (topic) => {
+        if(topic.label === event.target.value) {
+          if(event.target.checked) {
+            topic.active = true;
+          } else {
+            topic.active = false;
+          }
+        }
+        if(topic.active === true) topicArray.push(topic.slug);
+      })
+      this.currentParams['topics'] = topicArray.join();
+    } else {
+      let paramTopics = event.split(',');
+      _.forEach(this.categories, (category) => {
+        _.forEach(category.topics, (topic) => {
+          _.forEach(paramTopics, (paramTopic) => {
+            if(topic.slug === paramTopic) {
+              topic.active = true;
+              this.topics = category.topics;
+              category.active = true;
+              this.category = [category];
+              let patch = {};
+              patch[topic.name] = true;
+              this.filter.patchValue(patch);
+            }
+          })
+        })
+      })
+      this.currentParams['topics'] = event;
+    }
+
+
+    // All of the topics are false so do a search by category (all the topics)
     if(_.findIndex(this.topics, { 'active': true}) === -1) {
       _.forEach(this.topics, (topic) => {
         topic.active = false;
       })
     }
+
+    delete this.currentParams['category'];
+    this.setQueryString();
   }
 
   displayTopics(event) {
-    event.preventDefault();
+    let value = event;
+    if(!_.isUndefined(event.preventDefault)) {
+      event.preventDefault();
+      value = event.target.id;
+    }
     this.topics.length = 0;
-    this.category = _.filter(this.categories, {name: event.target.id})
+    this.category = _.filter(this.categories, {name: value})
     this.topics = _.sortBy(this.category[0].topics, 'label');
-    // Remove the blank topics
-    // this.topics = _.remove(this.topics, (topic) => {
-    //   return topic.count !== 0;
-    // })
     _.forEach(this.categories, (category) => {
       let toClear = {}
       toClear[category.name] = '';
@@ -376,9 +443,13 @@ export class ListFilter implements OnInit {
       this.filter.patchValue(toClear);
       topic.active = false;
     })
+    this.currentParams['category'] = this.category[0].slug;
+    delete this.currentParams['topics'];
+    this.setQueryString();
+
     this.category[0].active = true;
     let toSet = {}
-    toSet[event.target.id] = true;
+    toSet[value] = true;
     this.filter.patchValue(toSet);
     _.forEach(this.topics, (topic) => {
       topic.active = false;
@@ -419,7 +490,7 @@ export class ListFilter implements OnInit {
       }
       else {
         classes.push('collapsed');
-        parent.className = classes.join(' ');
+        parent.className = classes.join();
       }
     }
   }

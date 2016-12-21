@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core'
-import { Http, Response, Headers, RequestOptions, URLSearchParams, Jsonp } from '@angular/http'
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http'
 import { Observable } from 'rxjs/Rx'
 import _ from 'lodash'
 import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/catch'
 
 @Injectable()
 export class DataService {
 
-  constructor(private http: Http, private jsonp: Jsonp) {
+  constructor(private http: Http) {
   }
 
-  private baseUrl = 'http://api.truetube.co.uk/resource/_search?size=1000'
+  private baseUrl = 'http://api.truetube.co.uk/resource/_search'
 
   search(data, types, keys, subject, topics, category) {
 
@@ -74,7 +73,7 @@ export class DataService {
     if(termString !== '') search.set('q', termString)
     search.set('size', '1000')
     return this.http
-    .get('http://api.truetube.co.uk/resource/_search', { search })
+    .get(this.baseUrl, { search })
     .map((response) => ( response.json() )
   )
 }
