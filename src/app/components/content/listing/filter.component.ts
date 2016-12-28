@@ -43,10 +43,6 @@ export class ListFilter implements OnInit {
 
     listService.pathToReset$.subscribe(
       query => {
-        console.log(query);
-        console.log(this.currentParams);
-        console.log(this.filter.value);
-        console.log(this.router);
         this.route.queryParams
         .subscribe((params) => {
           this.currentParams = _.assign({}, params)
@@ -82,7 +78,6 @@ export class ListFilter implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.router);
     this.filterSubjects = 'All'
     this.filter.patchValue({subject: 'All'})
     //var el = document.getElementById('GridFilter')
@@ -186,22 +181,25 @@ export class ListFilter implements OnInit {
     })
 
     this.route.queryParams
+    .map(params => params['topics'])
+    .subscribe((topics) => {
+      if(!_.isUndefined(topics)) {
+        this.setTopics(topics)
+      } else {
+        this.clearTopics(null)
+      }
+    })
+
+    this.route.queryParams
     .map(params => params['category'])
     .subscribe((category) => {
       if(!_.isUndefined(category)) {
         this.category = _.filter(this.categories, {slug: category})
         this.displayTopics(this.category[0].name)
-      }
-    })
-
-    this.route.queryParams
-    .map(params => params['topics'])
-    .subscribe((topics) => {
-      if(!_.isUndefined(topics)) {
-        console.log(topics);
-        this.setTopics(topics)
       } else {
-        this.clearTopics(null)
+        if(_.findIndex(this.topics, {active:true}) === -1) {
+          this.clearCategory();
+        }
       }
     })
 
@@ -296,7 +294,19 @@ export class ListFilter implements OnInit {
     this.setQueryString()
   }
 
-  clearCategories(event) {
+  clearCategory() {
+    this.category = null
+    _.forEach(this.categories, (category) => {
+      let toClear = {}
+      toClear[category.name] = ''
+      this.filter.patchValue(toClear)
+      category.active = false
+    })
+    delete this.currentParams.category
+    this.setQueryString()
+  }
+
+  clearCategoryAndTopics(event) {
     if(event !== null) event.preventDefault()
     this.contentLoading = true
     this.category = null
@@ -318,7 +328,7 @@ export class ListFilter implements OnInit {
 
   clearTopics(event) {
     if(event !== null) event.preventDefault()
-    if(_.isUndefined(this.currentParams.category)) return
+    // if(_.isUndefined(this.currentParams.category)) return
     this.contentLoading = true
     _.forEach(this.topics, (topic) => {
       let toClear = {}
@@ -326,8 +336,8 @@ export class ListFilter implements OnInit {
       this.filter.patchValue(toClear)
       topic.active = false
     })
-      this.currentParams.category = this.category[0].slug
-      delete this.currentParams.topics
+    if(this.category !== null) this.currentParams.category = this.category[0].slug
+    delete this.currentParams.topics
     this.setQueryString()
   }
 
@@ -343,7 +353,6 @@ export class ListFilter implements OnInit {
     delete this.currentParams['content types']
     this.setQueryString()
     this.resetFilterState(this.types)
-    console.log(this.currentParams)
   }
 
   clearKeystages(event) {
@@ -358,22 +367,11 @@ export class ListFilter implements OnInit {
     if(event !== null) event.preventDefault()
     this.contentLoading = true
     this.clearSubject(event)
-    this.clearCategories(event)
+    this.clearCategoryAndTopics(event)
     this.clearTopics(event)
     this.clearTypes(event)
     this.clearKeystages(event)
     this.clearTerm(event)
-
-  }
-
-  checkQuery(query) {
-    let hashBreak = Math.floor( Math.random() * 7 )
-    let appendedQuery = '/list;' + hashBreak + '?'
-    _.forEach(query, (value, key) => {
-      if(value.length) appendedQuery += key + '=' + value.trim() + '&'
-    })
-    appendedQuery = appendedQuery.slice(0, -1)
-    this.router.navigateByUrl(appendedQuery)
   }
 
   setFilter(event, value) {
@@ -394,13 +392,6 @@ export class ListFilter implements OnInit {
   }
 
   setQueryString() {
-    // let appendedQuery = ''
-    // _.forEach(this.currentParams, (value, key) => {
-    //   if(value.length) appendedQuery += key + '=' + value.trim() + '&'
-    // })
-    // appendedQuery = appendedQuery.slice(0, -1)
-    // this.location.replaceState('/list', appendedQuery)
-
     let appendedQuery = ''
     _.forEach(this.currentParams, (value, key) => {
       if(value.length) appendedQuery += key + '=' + value.trim() + '&'
@@ -426,84 +417,51 @@ export class ListFilter implements OnInit {
 
   setTopics(event) {
     this.contentLoading = true
-    let topicArray = []
-    let paramTopics = []
+    let paramTopics = (_.isUndefined(this.currentParams.topics)) ? [] : this.currentParams.topics.split(',');
     if(!_.isUndefined(event.preventDefault)) {
       event.preventDefault()
-      paramTopics.push(event.target.value);
-      console.log("THE PARAM TOPICS", paramTopics);
+      if(event.target.checked) {
+        if(_.indexOf(paramTopics, event.target.value) === -1) {
+          paramTopics.push(event.target.value)
+        }
+      }
+      else {
+        paramTopics.splice(_.indexOf(paramTopics, event.target.value), 1);
+      }
     } else {
       paramTopics = event.split(',')
     }
-    // if(!_.isUndefined(event.preventDefault)) {
-    //   event.preventDefault()
-    //   _.forEach(this.topics, (topic) => {
-    //     if(topic.label === event.target.value) {
-    //       if(event.target.checked) {
-    //         topic.active = true
-    //       } else {
-    //         topic.active = false
-    //       }
-    //     }
-    //     _.forEach(this.categories, (category) => {
-    //       category.active = false
-    //       _.forEach(category.topics, (categoryTopics) => {
-    //         if(topic.slug === categoryTopics.slug) {
-    //           console.log(category);
-    //           category.active = true
-    //           this.category = [category]
-    //           let patch = {};
-    //           patch[category.name] = true
-    //           this.filter.patchValue(patch)
-    //           console.log('CATEGORY', this.category);
-    //         }
-    //       });
-    //     });
-    //     if(topic.active === true) topicArray.push(topic.slug)
-    //   })
-    //   this.currentParams['topics'] = topicArray.join()
-    // } else {
-      console.log('setting via page load')
+    this.category = [];
       _.forEach(this.categories, (category) => {
+        //category.active = false;
         _.forEach(category.topics, (topic) => {
           _.forEach(paramTopics, (paramTopic) => {
             if(topic.slug === paramTopic) {
+              console.log("THE TOPIC IS ACTIVE");
               topic.active = true
               this.topics = category.topics
-              this.topics = _.sortBy(this.topics, 'label')
+              this.topics = _.sortBy(category.topics, 'label')
               category.active = true
-              this.category = [category]
+              this.category.push(category);
               let patch = {}
               patch[topic.name] = true
-              patch[category.name] = true
-              this.filter.patchValue(patch)
+              //patch[category.name] = true
+              this.filter.patchValue(patch);
             }
           })
         })
       })
       _.forEach(this.topics, (topic) => {
+        topic.active = false;
         _.forEach(paramTopics, (paramTopic) => {
           if(topic.slug === paramTopic) {
-            console.log("it matches");
             topic.active = true;
-            topicArray.push(topic.slug)
-          } else {
-            topic.active = false;
           }
         })
       })
-      this.currentParams['topics'] = topicArray.join();
-
-      console.log(this.category);
-      this.category[0].active = true;
-      console.log(this.categories);
+      this.currentParams['topics'] = paramTopics.join();
       delete this.currentParams.category
 
-      this.currentParams['topics'] = event
-    //}
-
-
-    // All of the topics are false so do a search by category (all the topics)
     if(_.findIndex(this.topics, { 'active': true}) === -1) {
       _.forEach(this.topics, (topic) => {
         topic.active = false
@@ -513,7 +471,7 @@ export class ListFilter implements OnInit {
   }
 
   displayTopics(event) {
-    console.log('DISPLAYING TOPICS')
+    console.log("DISPLAYING TOPICS");
     let value = event
     if(!_.isUndefined(event.preventDefault)) {
       event.preventDefault()

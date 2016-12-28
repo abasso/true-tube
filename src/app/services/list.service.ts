@@ -11,7 +11,6 @@ export class ListService {
   pathToReset$ = this.resetCurrentPathSource.asObservable();
 
   resetCurrentPath(query:any) {
-    console.log(this.resetCurrentPathSource);
     this.resetCurrentPathSource.next(query);
   }
 

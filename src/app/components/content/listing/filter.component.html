@@ -75,7 +75,7 @@
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Categories
-        <span class="clear" *ngIf="category" (click)="clearCategories($event)">
+        <span class="clear" *ngIf="category" (click)="clearCategoryAndTopics($event)">
           Clear
         </span>
       </a>
@@ -104,7 +104,7 @@
     </legend>
     <div class="form-group" *ngFor="let topic of topics">
       <label class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" formControlName="{{topic.name}}" value="{{topic.label}}" (change)="setTopics($event)">
+        <input type="checkbox" class="custom-control-input" formControlName="{{topic.name}}" value="{{topic.slug}}" (change)="setTopics($event)">
         <div class="custom-control-indicator"></div>
         <span class="custom-control-description">{{topic.label}}</span>
         <!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->

@@ -418,13 +418,6 @@ export const Categories = [
         slug: "poverty"
       },
       {
-        label: "Holy Buildings",
-        name: "topicHolyBuildings",
-        active: false,
-        count: 0,
-        slug: "holy buildings"
-      },
-      {
         label: "Managing Money",
         name: "topicManagingMoney",
         active: false,
