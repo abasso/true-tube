@@ -96,7 +96,7 @@
   <fieldset class="filter-fieldset flex-none" *ngIf="category" >
     <legend>
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
-        Topics
+        {{currentCategoryString}} Topics
         <span class="clear" *ngIf="isActive(topics)" (click)="clearTopics($event)">
           Clear
         </span>

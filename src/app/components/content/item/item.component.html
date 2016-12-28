@@ -1,0 +1,70 @@
+	<main role="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right content-main">
+					<div class="content-header">
+						<h1 class="page-title">
+							<!-- {{pageTitle}} -->
+						</h1>
+            <nav id="nav" class="content-nav">
+              <!-- {{# contentNav }}
+                {{>atoms-button}}
+              {{/ contentNav }} -->
+            </nav>
+
+            <!-- <div class="input-group content-nav-mobile">
+              {{# contentMobileNav }}
+              <select id="select" class="custom-select form-control" >
+                <optgroup label="Select">
+                  {{# selectOptions}}
+                    <option {{selected}}>{{option}}</option>
+                  {{/selectOptions}}
+                </optgroup>
+              </select>
+              {{/ contentMobileNav }}
+            </div> -->
+
+					</div>
+					<!-- {{> organisms-video }}
+					{{> organisms-lesson-plans }} -->
+				</div>
+			<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
+        <div class="content-info">
+          <div class="add-to-toolbox">
+            <!-- {{#buttonAddToToolbox}}
+              {{>atoms-text-button}}
+            {{/buttonAddToToolbox}} -->
+          </div>
+          <p>
+            <!-- {{infoDescription}} -->
+          </p>
+          <div class="content-info-attributes">
+            <!-- {{# infoAttributes }}
+              {{> molecules-info }}
+            {{/ infoAttributes}} -->
+          </div>
+        </div>
+			</div>
+			<div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right">
+				<!-- {{# relatedContent }}
+					{{> organisms-section-grid-load-more }}
+				{{/ relatedContent }} -->
+			</div>
+		<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
+			<!-- {{> organisms-section-events-block }} -->
+		</div>
+		</div>
+		</div>
+	</main>
+<!-- {{> organisms-footer }} -->
+
+<h3 class="popover-title invisible video-download-title">Download</h3>
+<div class="invisible video-download-content">
+	<ul class="nav">
+	  <li class="nav-item"><a href="#">320x240 - MP4 - 2mb</a></li>
+	  <li class="nav-item"><a href="#">640x480 - MP4 - 5mb</a></li>
+	  <li class="nav-item"><a href="#">1024x768 - MP4 - 10mb</a></li>
+	</ul>
+</div>
+
+<h3 class="popover-title invisible video-embed-title">Embed</h3>

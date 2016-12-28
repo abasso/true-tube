@@ -23,10 +23,12 @@ import { ListService } from './services/list.service';
 import _ from 'lodash';
 import Cookies from 'js-cookie';
 import { QueryStringPipe } from './pipes/query-string.pipe';
+import { ItemComponent } from './components/content/item/item.component';
 
 const appRoutes: Routes = [
   { path: '', component: ListComponent},
   { path: 'list', component: ListComponent},
+  { path: 'item', component: ItemComponent},
   { path: 'videos', component: ListComponent, data: [{filter: 'typeVideo', type: 'content types'}] },
   { path: 'lesson plans', component: ListComponent, data: [{filter: 'typeLesson', type: 'content types'}]},
   { path: 'assembly scripts', component: ListComponent, data: [{filter: 'typeAssembly', type: 'content types'}]},
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     ListFilter,
     SortComponent,
     PaginationPipe,
-    QueryStringPipe
+    QueryStringPipe,
+    ItemComponent
   ],
   imports: [
     BrowserModule,

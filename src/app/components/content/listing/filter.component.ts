@@ -37,7 +37,8 @@ export class ListFilter implements OnInit {
   private filter: FormGroup
   private activeFilters: number = 0
   private currentParams: any
-
+  private currentCategory: string
+  private currentCategoryString: string
   constructor(private listService: ListService, private route: ActivatedRoute, private router: Router,  private listComponent: ListComponent, private dataService: DataService, private location: Location, private formBuilder: FormBuilder) {
     // Construct the filter form
 
@@ -193,6 +194,7 @@ export class ListFilter implements OnInit {
     this.route.queryParams
     .map(params => params['category'])
     .subscribe((category) => {
+      if(this.currentCategory === category) return;
       if(!_.isUndefined(category)) {
         this.category = _.filter(this.categories, {slug: category})
         this.displayTopics(this.category[0].name)
@@ -335,7 +337,8 @@ export class ListFilter implements OnInit {
       toClear[topic.name] = ''
       this.filter.patchValue(toClear)
       topic.active = false
-    })
+    });
+
     if(this.category !== null) this.currentParams.category = this.category[0].slug
     delete this.currentParams.topics
     this.setQueryString()
@@ -433,11 +436,9 @@ export class ListFilter implements OnInit {
     }
     this.category = [];
       _.forEach(this.categories, (category) => {
-        //category.active = false;
         _.forEach(category.topics, (topic) => {
           _.forEach(paramTopics, (paramTopic) => {
             if(topic.slug === paramTopic) {
-              console.log("THE TOPIC IS ACTIVE");
               topic.active = true
               this.topics = category.topics
               this.topics = _.sortBy(category.topics, 'label')
@@ -445,7 +446,6 @@ export class ListFilter implements OnInit {
               this.category.push(category);
               let patch = {}
               patch[topic.name] = true
-              //patch[category.name] = true
               this.filter.patchValue(patch);
             }
           })
@@ -471,7 +471,6 @@ export class ListFilter implements OnInit {
   }
 
   displayTopics(event) {
-    console.log("DISPLAYING TOPICS");
     let value = event
     if(!_.isUndefined(event.preventDefault)) {
       event.preventDefault()
@@ -479,6 +478,8 @@ export class ListFilter implements OnInit {
     }
     this.topics.length = 0
     this.category = _.filter(this.categories, {name: value})
+    this.currentCategory = this.category[0].slug;
+    this.currentCategoryString = this.category[0].label;
     this.topics = _.sortBy(this.category[0].topics, 'label')
     _.forEach(this.categories, (category) => {
       let toClear = {}
