@@ -6,3 +6,4 @@ declare module 'js-cookie';
 declare module 'lodash';
 declare module 'sortablejs';
 declare module 'countup.js';
+declare module 'moment';

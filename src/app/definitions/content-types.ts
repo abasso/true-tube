@@ -5,7 +5,7 @@ export const ContentTypes = [
     type: 'content types',
     name: 'typeVideo',
     term: 'film',
-    class: 'btn-video',
+    class: 'videos',
     active: false
   },
   {
@@ -14,7 +14,7 @@ export const ContentTypes = [
     type: 'content types',
     name: 'typeLesson',
     term: 'lesson_plan',
-    class: 'btn-lesson-plans',
+    class: 'lesson-plans',
     active: false
   },
   {
@@ -23,7 +23,7 @@ export const ContentTypes = [
     type: 'content types',
     name: 'typeAssembly',
     term: 'assembly_plan',
-    class: 'btn-assembly-scripts',
+    class: 'assembly-scripts',
     active: false
   },
   {
@@ -32,7 +32,7 @@ export const ContentTypes = [
     type: 'content types',
     name: 'typeInteractive',
     term: 'interactive',
-    class: 'btn-interactive',
+    class: 'interactive',
     active: false
   }
 ]

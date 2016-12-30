@@ -11,6 +11,7 @@ export class DataService {
   }
 
   private baseUrl = 'http://api.truetube.co.uk/resource/_search'
+  private tempUrl = 'http://api.truetube.co.uk/resource2/resource'
 
   search(data, types, keys, subject, topics, category) {
 
@@ -76,6 +77,13 @@ export class DataService {
     .get(this.baseUrl, { search })
     .map((response) => ( response.json() )
   )
+}
+
+item(uri) {
+  let itemUrl = this.tempUrl + '/' + uri
+  return this.http
+  .get(itemUrl)
+  .map((response) => ( response.json() ))
 }
 
 

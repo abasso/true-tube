@@ -1,4 +1,4 @@
-.video-js {
+.video-js-wrapper {
   width:100%;
   padding-bottom:56.25%;
   height:0;
@@ -7,6 +7,13 @@
   align-items:center;
   justify-content: center;
   flex: 0 0 75%;
+  .video-js {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+  }
   .vjs-poster {
     display:inherit;
     align-items:inherit;
@@ -25,9 +32,16 @@
     border-radius:130px;
     background:$brand-red no-repeat 57% 50% url("/assets/images/play.svg");
     transition: all 0.4s ease;
-    &:hover {
-      background-color:$brand-grey;
+    position:inherit;
+    top:auto;
+    left:auto;
+    border:none;
+    &:before {
+      display:none;
     }
+    // &:hover {
+    //   background-color:$brand-grey;
+    // }
     @media(max-width: $breakpoint-sm) {
       background-size: 40px 40px;
       height:80px;

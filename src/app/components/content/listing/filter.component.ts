@@ -29,6 +29,7 @@ export class ListFilter implements OnInit {
   private types: any[] = ContentTypes
   private subjects: any[] = Subjects
   private keystages: any[] = KeyStages
+  private keywords: any[] = []
   private category = null
   private currentItemCount: number
   private items
@@ -110,6 +111,7 @@ export class ListFilter implements OnInit {
         //   })
         // })
         _.forEach(this.listComponent.items, (item) => {
+          item.slug = '/item/' + item._id;
           _.forEach(this.categories, (category) => {
             _.forEach(category.topics, (subCategory) => {
               _.forEach(item._source.topic, (topic) => {
@@ -217,6 +219,7 @@ export class ListFilter implements OnInit {
         this.clearSubject(null)
       }
     })
+
   }
 
   querySubscription() {
@@ -280,20 +283,24 @@ export class ListFilter implements OnInit {
   }
 
   clearTerm(event) {
-    if(event !== null) event.preventDefault()
     this.contentLoading = true
     this.filter.patchValue({term: ''})
     delete this.currentParams.search
-    this.setQueryString()
+    if(event !== null) {
+      event.preventDefault()
+      this.setQueryString()
+    }
   }
 
   clearSubject(event) {
-    if(event !== null) event.preventDefault()
     this.contentLoading = true
     this.filter.patchValue({subject: 'All'})
     this.filterSubjects = 'All'
     delete this.currentParams.subject
-    this.setQueryString()
+    if(event !== null) {
+      event.preventDefault()
+      this.setQueryString()
+    }
   }
 
   clearCategory() {
@@ -309,7 +316,6 @@ export class ListFilter implements OnInit {
   }
 
   clearCategoryAndTopics(event) {
-    if(event !== null) event.preventDefault()
     this.contentLoading = true
     this.category = null
     _.forEach(this.topics, (topic) => {
@@ -325,11 +331,13 @@ export class ListFilter implements OnInit {
       category.active = false
     })
     delete this.currentParams.category
-    this.setQueryString()
+    if(event !== null) {
+      event.preventDefault()
+      this.setQueryString()
+    }
   }
 
   clearTopics(event) {
-    if(event !== null) event.preventDefault()
     // if(_.isUndefined(this.currentParams.category)) return
     this.contentLoading = true
     _.forEach(this.topics, (topic) => {
@@ -341,11 +349,13 @@ export class ListFilter implements OnInit {
 
     if(this.category !== null) this.currentParams.category = this.category[0].slug
     delete this.currentParams.topics
-    this.setQueryString()
+    if(event !== null) {
+      event.preventDefault()
+      this.setQueryString()
+    }
   }
 
   clearTypes(event) {
-    if(event !== null) event.preventDefault()
     this.contentLoading = true
     _.forEach(this.types, (type) => {
       let toClear = {}
@@ -354,16 +364,21 @@ export class ListFilter implements OnInit {
       type.active = false
     })
     delete this.currentParams['content types']
-    this.setQueryString()
     this.resetFilterState(this.types)
+    if(event !== null) {
+      event.preventDefault()
+      this.setQueryString()
+    }
   }
 
   clearKeystages(event) {
-    if(event !== null) event.preventDefault()
     this.contentLoading = true
     delete this.currentParams.keystages
-    this.setQueryString()
     this.resetFilterState(this.keystages)
+    if(event !== null) {
+      event.preventDefault()
+      this.setQueryString()
+    }
   }
 
   clearAll(event) {
@@ -399,15 +414,7 @@ export class ListFilter implements OnInit {
     _.forEach(this.currentParams, (value, key) => {
       if(value.length) appendedQuery += key + '=' + value.trim() + '&'
     })
-    this.router.navigateByUrl('/list?' + appendedQuery, {replaceUrl: true})
-  }
-
-  navigate(query) {
-    let appendedQuery = ''
-    _.forEach(query, (value, key) => {
-      if(value.length) appendedQuery += key + '=' + value.trim() + '&'
-    })
-    this.router.navigateByUrl('/list?' + appendedQuery, {replaceUrl: true})
+    this.router.navigateByUrl('/list?' + appendedQuery)
   }
 
   setSubject(event: Event) {
