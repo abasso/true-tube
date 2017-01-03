@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { RouterModule, Routes } from '@angular/router'
 // import { Location } from '@angular/common'
-// import { AUTH_PROVIDERS } from 'angular2-jwt'
+import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AppComponent } from './app.component'
 import { ListComponent } from './components/content/listing/list.component'
 import { HeaderComponent } from './components/global/header.component'
@@ -23,10 +23,12 @@ import { AttributePipe } from './pipes/attribute.pipe'
 import { PaginationPipe } from './pipes/pagination.pipe'
 import { EmbedMenuPipe } from './pipes/embed-menu.pipe'
 
-// import { Auth } from './services/auth.service'
+import { Auth } from './services/auth.service'
+import { ClipboardModule } from 'ngx-clipboard'
 import Moment from 'moment'
 import _ from 'lodash'
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import { FooterComponent } from './components/global/footer.component'
 
 const appRoutes: Routes = [
   { path: '', component: ListComponent},
@@ -54,18 +56,20 @@ const appRoutes: Routes = [
     PaginationPipe,
     QueryStringPipe,
     AttributePipe,
-    EmbedMenuPipe
+    EmbedMenuPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    ClipboardModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    // AUTH_PROVIDERS,
-    // Auth,
+    AUTH_PROVIDERS,
+    Auth,
     ListFilter,
     ListComponent,
     DataService,

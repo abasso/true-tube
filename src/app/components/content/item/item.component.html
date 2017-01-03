@@ -5,102 +5,130 @@
 				{{item.title}}
 			</h1>
 			<nav id="nav" class="content-nav">
-				<button class="btn {{embed.class}}" [ngClass]="{active: i === 0}" *ngFor="let embed of item.resource_types | EmbedMenuPipe; let i = index"><span>{{embed.label}}</span></button>
+				<button class="btn {{embed.class}}" (click)="setActiveTab(embed.term)" [ngClass]="{active: activeTab === embed.term}" *ngFor="let embed of item.resource_types | EmbedMenuPipe"><span>{{embed.tabLabel}}</span></button>
 			</nav>
 
-			<!-- <div class="input-group content-nav-mobile">
-			{{# contentMobileNav }}
-			<select id="select" class="custom-select form-control" >
-			<optgroup label="Select">
-			{{# selectOptions}}
-			<option {{selected}}>{{option}}</option>
-			{{/selectOptions}}
-		</optgroup>
-	</select>
-	{{/ contentMobileNav }}
-</div> -->
-
-</div>
-<!-- {{> organisms-video }}
-{{> organisms-lesson-plans }} -->
-<template ngFor let-embed [ngForOf]="item.embedded" let-i="index" [ngForTrackBy]="trackByFn">
-
-<div class="tab tab-videos visible" *ngIf="embed.type === 'film'">
-	<div class="video-header">
-		<span class="info icon-clock icon-small icon-left" *ngIf="embed.duration !== 0">{{duration(embed.duration)}}</span>
-
-		<span class="info icon-cc icon-large" *ngIf="embed.subtitles !== null"></span>
-
-		<div class="rating">
-			<div class="rating-stars">
-				<span class="rating-star filled"></span>
-				<span class="rating-star filled"></span>
-				<span class="rating-star filled"></span>
-				<span class="rating-star filled"></span>
-				<span class="rating-star "></span>
+			<div class="input-group content-nav-mobile">
+				<select id="select" class="custom-select form-control" (change)="setActiveTab($event.target.value)">
+					<optgroup label="Select">
+						<option *ngFor="let embed of item.resource_types | EmbedMenuPipe" [value]="embed.term">{{embed.label}}</option>
+					</optgroup>
+				</select>
 			</div>
-			<div class="rating-label hidden-sm-down">2 Votes</div>
+
+		</div>
+		<!-- {{> organisms-video }}
+		{{> organisms-lesson-plans }} -->
+		<!-- <template ngFor let-embed [ngForOf]="item.embedded" let-i="index" [ngForTrackBy]="trackByFn"> -->
+
+		<div class="tab tab-videos" [ngClass]="{visible: activeTab === 'film'}" *ngFor="let embed of embeddedContent.film">
+			<div class="video-header">
+				<span class="info icon-clock icon-small icon-left" *ngIf="embed.duration !== 0">{{duration(embed.duration)}}</span>
+
+				<span class="info icon-cc icon-large" *ngIf="embed.subtitles !== null"></span>
+
+				<div class="rating" *ngIf="embed.rating">
+					<div class="rating-stars">
+						<span class="rating-star filled"></span>
+						<span class="rating-star filled"></span>
+						<span class="rating-star filled"></span>
+						<span class="rating-star filled"></span>
+						<span class="rating-star "></span>
+					</div>
+					<div class="rating-label hidden-sm-down">2 Votes</div>
+				</div>
+
+
+				<div class="video-actions hidden-sm-down">
+					<a href="" class="icon-download icon-small icon-left video-download" *ngIf="embed.allow_download !== '0'">Download</a>
+
+					<a href="" class="icon-embed icon-small icon-left video-embed" (click)="toggleEmbed($event)">Embed</a>
+
+				</div>
+
+			</div>
+			<div class="video-embed-container p-t-1 m-b-1" [ngClass]="{show: showEmbed}">
+				<div class="video-embed-form p-a-1">
+					<label>Use the following code to embed this video on your site or blog</label>
+					<!-- <a href="" class="hide-embed" (click)="toggleEmbed($event)">Hide</a> -->
+
+					<div class="input-group">
+						<input type="text" class="form-control" #inputTarget value="<iframe src='https://www.truetube.co.uk/embed/1970/700/395' width='700' height='395' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>">
+						<span class="input-group-btn">
+							<button class="btn {{embedButtonClass}}" [ngxClipboard]="inputTarget" (cbOnSuccess)="embedCopySuccess()" type="button" [innerHTML]="embedButtonLabel"></button>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="video-js-wrapper">
+				<!-- <div class="vjs-poster" style="background-image:url(/images/sample/video.jpg)">
+				<div class="vjs-big-play-button"></div>
+			</div> -->
+			<video #player id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+			poster="{{embed.thumbnail}}">
+			<source src="{{embed.source}}" type="video/mp4">
+				<track kind="captions" *ngIf="item.subtitles !== null" src="{{embed.subtitles}}" srclang="en" label="English" />
+				<p class="vjs-no-js">
+					To view this video please enable JavaScript, and consider upgrading to a web browser that
+					<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+				</p>
+			</video>
 		</div>
 
 
-		<div class="video-actions hidden-sm-down">
-			<a href="" class="icon-download icon-small icon-left video-download" *ngIf="embed.allow_download !== '0'">Download</a>
 
-			<a href="" class="icon-embed icon-small icon-left video-embed">Embed</a>
+		<div class="video-footer">
+			<span class="info icon-views icon-small icon-left" *ngIf="embed.view_count">415 Views</span>
 
+			<span class="info ">Posted {{age(item.created)}}</span>
+
+
+			<div class="video-share">
+				<span class="share-title">Share</span>
+				<a href="https://www.facebook.com/sharer/sharer.php?u=/item/{{item.id}}" class="icon-facebook hidden-xs-down icon-social"></a>
+				<a href="https://twitter.com/intent/tweet?text={{item.title}}&amp;url=/item/{{item.id}}&amp;via=True Tube" class="icon-twitter hidden-xs-down icon-social"></a>
+				<a href="'https://plus.google.com/share?url=/item/{{item.id}}" class="icon-google-plus hidden-xs-down icon-social"></a>
+				<!-- <a href="" class="icon-share icon-social"></a> -->
+
+			</div>
 		</div>
 
 	</div>
-	<div class="video-embed-container">
-		<div class="video-embed-form">
-			<label>Use the following code to embed this video on your site or blog:</label>
-			<div class="input-group">
-				<input type="text" class="form-control" value="<iframe src='https://www.truetube.co.uk/embed/1970/700/395' width='700' height='395' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>">
-				<span class="input-group-btn">
-					<button class="btn" type="button">Copy</button>
-				</span>
+
+	<div class="tab tab-lesson-plans visible" [ngClass]="{visible: activeTab === 'lesson_plan'}" *ngIf="embeddedContent.lesson_plan">
+		<div class="row list-row content-grid">
+			<div class="list-item" *ngFor="let lesson of embeddedContent.lesson_plan">
+				<div class="block-media__media">
+					<img src="{{lesson.thumbnail}}" alt="{{lesson.alt}}" />
+				</div>
+				<div class="block-media__body">
+					<h6 class="block-media__headline">{{lesson.title}}</h6>
+					<p class="block-media__description">{{lesson.description}}</p>
+					<a href="{{lesson.file}}" class="icon-download icon-small icon-left">Download</a>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="video-js-wrapper">
-		<!-- <div class="vjs-poster" style="background-image:url(/images/sample/video.jpg)">
-			<div class="vjs-big-play-button"></div>
-		</div> -->
-		<video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
-	       poster="https://www.truetube.co.uk/sites/www.truetube.co.uk/files/film-thumbs/luke_800x450.png">
-	  <source src="{{embed.source}}" type="video/mp4">
-	  <track kind="captions" *ngIf="item.subtitles !== null" src="{{embed.subtitles}}" srclang="en" label="English" />
-	  <p class="vjs-no-js">
-	    To view this video please enable JavaScript, and consider upgrading to a web browser that
-	    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-	  </p>
-	</video>
-	</div>
-
-
-
-	<div class="video-footer">
-		<span class="info icon-views icon-small icon-left ">415 Views</span>
-
-		<span class="info ">{{age(item.created)}}</span>
-
-
-		<div class="video-share">
-			<span class="share-title">Share</span>
-			<a href="https://www.facebook.com/sharer/sharer.php?u=/item/{{item._id}}" class="icon-facebook hidden-xs-down icon-social"></a>
-
-			<a href="https://twitter.com/intent/tweet?text={{item.title}}&amp;url=/item/{{item._id}}&amp;via=True Tube" class="icon-twitter hidden-xs-down icon-social"></a>
-
-			<a href="'https://plus.google.com/share?url=/item/{{item._id}}" class="icon-google-plus hidden-xs-down icon-social"></a>
-
-			<a href="" class="icon-share icon-social"></a>
-
+	<div class="tab tab-assembly-scripts" [ngClass]="{visible: activeTab === 'assembly_plan'}" *ngIf="embeddedContent.assembly_plan">
+		<div class="row list-row content-grid">
+			<div class="list-item" *ngFor="let assembly of embeddedContent.assembly_plan">
+				<div class="block-media__media">
+					<img src="{{assembly.thumbnail}}" alt="{{assembly.alt}}" />
+				</div>
+				<div class="block-media__body">
+					<h6 class="block-media__headline">{{assembly.title}}</h6>
+					<p class="block-media__description">{{assembly.description}}</p>
+					<a href="{{assembly.file}}" class="icon-download icon-small icon-left">Download</a>
+				</div>
+			</div>
 		</div>
 	</div>
+	<!-- </template> -->
 
-</div>
-</template>
+
+
 </div>
 <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
 	<div class="content-info">

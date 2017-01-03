@@ -441,6 +441,7 @@ export class ListFilter implements OnInit {
     } else {
       paramTopics = event.split(',')
     }
+    if(paramTopics.length === 0) return this.clearTopics(null)
     this.category = [];
       _.forEach(this.categories, (category) => {
         _.forEach(category.topics, (topic) => {

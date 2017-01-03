@@ -18,7 +18,7 @@
         </span>
       </a>
     </legend>
-    <input id="filterSearch" formControlName="term" class="form-control filter-search-term" type="text" placeholder="e.g. Social studies" (keyup)="search($event)"/>
+    <input id="filterSearch" formControlName="term" class="form-control filter-search-term" type="text" placeholder="e.g. Social studies" (keydown)="search($event)"/>
   </fieldset>
   <fieldset class="filter-fieldset flex-none">
     <legend>
@@ -29,7 +29,7 @@
         </span>
       </a>
     </legend>
-    <button class="btn btn-sm" *ngFor="let type of types" (click)="setFilter($event, type)" [ngClass]="{active: type.active, 'type.class': type.active}" ngDefaultControl>{{type.label}}</button>
+    <button class="btn btn-sm {{type.class}}" *ngFor="let type of types" (click)="setFilter($event, type)" [ngClass]="{active: type.active}" ngDefaultControl>{{type.label}}</button>
 
     <div class="form-group hidden-xs-up" *ngFor="let type of types">
       <label class="custom-control custom-checkbox">

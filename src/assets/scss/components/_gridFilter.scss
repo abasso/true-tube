@@ -61,8 +61,21 @@
     }
     &.active {
       color:white;
-      background: $brand-red;
-      border-color:$brand-red;
+      background: $color-videos;
+      border-color:$color-videos;
+      &.lesson-plans {
+        background: $color-lesson-plans;
+        border-color:$color-lesson-plans;
+        color:$brand-grey;
+      }
+      &.assembly-scripts {
+        background: $color-assembly-plans;
+        border-color:$color-assembly-plans;
+      }
+      &.interactive {
+        background: $color-interactive;
+        border-color:$color-interactive;
+      }
     }
   }
 

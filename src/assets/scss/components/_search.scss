@@ -43,7 +43,7 @@
       color: $gray-light;
     }
   }
-  a {
+  button {
     cursor:pointer;
     transition: all 0.4s ease;
     background: $brand-grey no-repeat center center url("/assets/images/search.svg");
@@ -54,6 +54,7 @@
     z-index:2;
     position:absolute;
     right:0px;
+    top:0px;
     margin:0;
     border:solid 4px $gray-lightest;
 
@@ -67,7 +68,7 @@
   }
     height:40px;
     border-radius:40px;
-    a {
+    button {
       background-image: url("/assets/images/search.svg");
       background-color:$brand-red;
       border:solid 4px white;
@@ -88,7 +89,7 @@
       height:40px;
       border-radius:40px;
       background:white;
-      a {
+      button {
         background-color:$gray;
         &:hover {
           background-color:none !important;

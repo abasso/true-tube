@@ -484,5 +484,70 @@ export const Categories = [
       }
     ]
   },
+  {
+    label: "Body & Health",
+    name: "bodyAndHealthCategory",
+    count: 0,
+    slug: "body and health",
+    active: false,
+    topics: [
+      {
+        label: "Disability",
+        name: "topicDisability",
+        active: false,
+        count: 0,
+        slug: "disability"
+      },
+      {
+        label: "Body Image",
+        name: "topicBodyImage",
+        active: false,
+        count: 0,
+        slug: "body image"
+      },
+      {
+        label: "Addiction",
+        name: "topicAddiction",
+        active: false,
+        count: 0,
+        slug: "addiction"
+      },
+      {
+        label: "Illness",
+        name: "topicIllness",
+        active: false,
+        count: 0,
+        slug: "illness"
+      },
+      {
+        label: "Life & Death",
+        name: "topicLifeAndDeath",
+        active: false,
+        count: 0,
+        slug: "life and death"
+      },
+      {
+        label: "Well Being",
+        name: "topicWellBeing",
+        active: false,
+        count: 0,
+        slug: "well being"
+      },
+      {
+        label: "Sexual Health",
+        name: "topicSexualHealth",
+        active: false,
+        count: 0,
+        slug: "sexual health"
+      },
+      {
+        label: "Mental Health",
+        name: "topicMentalHealth",
+        active: false,
+        count: 0,
+        slug: "mental health"
+      }
+    ]
+  },
 
 ]

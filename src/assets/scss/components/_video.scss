@@ -32,9 +32,7 @@
     border-radius:130px;
     background:$brand-red no-repeat 57% 50% url("/assets/images/play.svg");
     transition: all 0.4s ease;
-    position:inherit;
-    top:auto;
-    left:auto;
+    margin:-65px 0 0 -65px;
     border:none;
     &:before {
       display:none;
@@ -47,6 +45,7 @@
       height:80px;
       width:80px;
       border-radius:80px;
+      margin:-40px 0 0 -40px;
     }
   }
 }
@@ -69,8 +68,16 @@
   border-top:solid 1px $gray-lighter;
   display:none;
   position:relative;
+  .btn {
+    border-radius:$border-radius-sm;
+  }
+  label {
+    margin-bottom: 1rem;
+    font-weight:200;
+  }
   .video-embed-form {
-    padding:1rem 0;
+    border-radius:$border-radius-sm;
+    background:$gray-lightest;
     .btn {
       margin:0;
     }

@@ -18,7 +18,6 @@ export class AttributePipe implements PipeTransform {
       }
       attributes.push(attributeObject)
     })
-    console.log(attributes);
     return attributes
 
   }

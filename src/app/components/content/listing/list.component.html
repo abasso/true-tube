@@ -23,8 +23,8 @@
         <div class="block-media__media" *ngIf="item._source.thumbnail">
           <a [routerLink]="[item.slug]" class="block-media__link">
             <img [src]="item._source.thumbnail" />
-            <div class="listing-time" *ngIf="item.time">
-              {{ item.time }}
+            <div class="listing-time" *ngIf="item.duration">
+              {{ item.duration }}
             </div>
           </a>
         </div>

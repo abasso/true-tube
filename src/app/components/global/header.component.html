@@ -5,11 +5,11 @@
 				<img src="/assets/images/true-tube-logo_black.svg" class="logo c-logo-link__img" alt="True Tube">
 			</a>
     </div>
-    <div class="mobile-nav__search"><a class="mobile-nav__burger_search"></a></div>
-    <div class="mobile-nav__burger"><a class="mobile-nav__burger_link"></a></div>
+    <div class="mobile-nav__search"><a class="mobile-nav__burger_search" (click)="mobileSearch($event)"></a></div>
+    <div class="mobile-nav__burger"><a class="mobile-nav__burger_link" (click)="toggleMenu()"></a></div>
 
   </div>
-  <div class="menu-mobile">
+  <div class="menu-mobile" [ngClass]="{show: menuVisible}">
     <div class="container">
       <div class="mobile-logo">
         <a href="/" class="c-logo-link">
