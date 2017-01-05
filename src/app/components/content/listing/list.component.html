@@ -22,14 +22,14 @@
         <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
         <div class="block-media__media" *ngIf="item._source.thumbnail">
           <a [routerLink]="[item.slug]" class="block-media__link">
-            <img [src]="item._source.thumbnail" />
-            <div class="listing-time" *ngIf="item.duration">
-              {{ item.duration }}
+            <img [src]="item._source.thumbnail[0].url" alt="item._source.thumbnail[0].alt" />
+            <div class="listing-time" *ngIf="item._source.duration">
+              {{ dataService.duration(item._source.duration) }}
             </div>
           </a>
         </div>
         <div class="block-media__body">
-          <a href="{{ item.url }}" class="block-media__link">
+          <a [routerLink]="[item.slug]" class="block-media__link">
             <h6 class="block-media__headline" *ngIf="item._source.title">
               {{ item._source.title }}
             </h6>
@@ -37,7 +37,7 @@
           <p class="block-media__description small" *ngIf="showDescriptions" [innerHTML]="item._source.description">
           </p>
           <div class="block-media__types" *ngIf="item.contenttypes">
-            <a href="{{ type.url }}" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
+            <a [routerLink]="[item.slug]" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
               <span>
                 {{ type.label }}
               </span>

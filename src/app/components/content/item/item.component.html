@@ -23,7 +23,7 @@
 
 		<div class="tab tab-videos" [ngClass]="{visible: activeTab === 'film'}" *ngFor="let embed of embeddedContent.film">
 			<div class="video-header">
-				<span class="info icon-clock icon-small icon-left" *ngIf="embed.duration !== 0">{{duration(embed.duration)}}</span>
+				<span class="info icon-clock icon-small icon-left" *ngIf="embed.duration !== 0">{{dataService.duration(embed.duration)}}</span>
 
 				<span class="info icon-cc icon-large" *ngIf="embed.subtitles !== null"></span>
 
@@ -40,7 +40,10 @@
 
 
 				<div class="video-actions hidden-sm-down">
-					<a href="" class="icon-download icon-small icon-left video-download" *ngIf="embed.allow_download !== '0'">Download</a>
+					<span  *ngIf="embed.allow_download !== '0'">
+						<a href="" class="icon-download icon-small icon-left video-download" *ngIf="auth.authenticated()">Download</a>
+						<a href="#" class="icon-download icon-small icon-left" *ngIf="!auth.authenticated()">Download</a>
+					</span>
 
 					<a href="" class="icon-embed icon-small icon-left video-embed" (click)="toggleEmbed($event)">Embed</a>
 
@@ -62,131 +65,174 @@
 			</div>
 
 			<div class="video-js-wrapper">
-				<!-- <div class="vjs-poster" style="background-image:url(/images/sample/video.jpg)">
-				<div class="vjs-big-play-button"></div>
+				<video #player id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+				poster="{{embed.thumbnail[0].url}}">
+				<source src="{{embed.source}}" type="video/mp4">
+					<track kind="captions" *ngIf="item.subtitles !== null" src="{{embed.subtitles}}" srclang="en" label="English" />
+					<p class="vjs-no-js">
+						To view this video please enable JavaScript, and consider upgrading to a web browser that
+						<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+					</p>
+				</video>
+			</div>
+
+
+
+			<div class="video-footer">
+				<span class="info icon-views icon-small icon-left" *ngIf="embed.view_count">415 Views</span>
+
+				<span class="info ">Posted {{age(item.created)}}</span>
+
+
+				<div class="video-share">
+					<span class="share-title">Share</span>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=/item/{{item.id}}" class="icon-facebook hidden-xs-down icon-social"></a>
+					<a href="https://twitter.com/intent/tweet?text={{item.title}}&amp;url=/item/{{item.id}}&amp;via=True Tube" class="icon-twitter hidden-xs-down icon-social"></a>
+					<a href="'https://plus.google.com/share?url=/item/{{item.id}}" class="icon-google-plus hidden-xs-down icon-social"></a>
+					<!-- <a href="" class="icon-share icon-social"></a> -->
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="tab tab-lesson-plans visible" [ngClass]="{visible: activeTab === 'lesson_plan'}" *ngIf="embeddedContent.lesson_plan">
+			<!-- <h2 class="section-title">
+				Lesson Plans
+			</h2>
+			<div class="grid-nav">
 			</div> -->
-			<video #player id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
-			poster="{{embed.thumbnail}}">
-			<source src="{{embed.source}}" type="video/mp4">
-				<track kind="captions" *ngIf="item.subtitles !== null" src="{{embed.subtitles}}" srclang="en" label="English" />
-				<p class="vjs-no-js">
-					To view this video please enable JavaScript, and consider upgrading to a web browser that
-					<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-				</p>
-			</video>
+			<div class="row list-row content-grid">
+				<div class="list-item" *ngFor="let lesson of embeddedContent.lesson_plan">
+					<div class="block-media__media">
+						<img src="{{lesson.thumbnail[0].url}}" alt="{{lesson.thumbnail[0].alt}}" />
+					</div>
+					<div class="block-media__body">
+						<h6 class="block-media__headline">{{lesson.title}}</h6>
+						<p class="block-media__description">{{lesson.description}}</p>
+						<a href="{{lesson.file}}" class="icon-download icon-small icon-left" *ngIf="auth.authenticated()">Download</a>
+						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black ">Login</a> to download this lesson plan</p>
+					</div>
+				</div>
+			</div>
 		</div>
 
+		<div class="tab tab-assembly-scripts" [ngClass]="{visible: activeTab === 'assembly_plan'}" *ngIf="embeddedContent.assembly_plan">
+			<!-- <h2 class="section-title">
+				Assembly Scripts
+			</h2>
+			<div class="grid-nav">
+			</div> -->
+			<div class="row list-row content-grid">
+				<div class="list-item" *ngFor="let assembly of embeddedContent.assembly_plan">
+					<div class="block-media__media">
+						<img src="{{assembly.thumbnail[0].url}}" alt="{{assembly.thumbnail[0].alt}}" />
+					</div>
+					<div class="block-media__body">
+						<h6 class="block-media__headline">{{assembly.title}}</h6>
+						<p class="block-media__description">{{assembly.description}}</p>
+						<a href="{{assembly.file}}" class="icon-download icon-small icon-left" *ngIf="auth.authenticated()">Download</a>
+						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black ">Login</a> to download this assembly plan</p>
+					</div>
+				</div>
+			</div>
+		</div>
 
-
-		<div class="video-footer">
-			<span class="info icon-views icon-small icon-left" *ngIf="embed.view_count">415 Views</span>
-
-			<span class="info ">Posted {{age(item.created)}}</span>
-
-
-			<div class="video-share">
-				<span class="share-title">Share</span>
-				<a href="https://www.facebook.com/sharer/sharer.php?u=/item/{{item.id}}" class="icon-facebook hidden-xs-down icon-social"></a>
-				<a href="https://twitter.com/intent/tweet?text={{item.title}}&amp;url=/item/{{item.id}}&amp;via=True Tube" class="icon-twitter hidden-xs-down icon-social"></a>
-				<a href="'https://plus.google.com/share?url=/item/{{item.id}}" class="icon-google-plus hidden-xs-down icon-social"></a>
-				<!-- <a href="" class="icon-share icon-social"></a> -->
-
+		<div class="tab tab-teachers-notes" [ngClass]="{visible: activeTab === 'teachers_notes'}" *ngIf="embeddedContent.teachers_notes">
+			<!-- <h2 class="section-title">
+				Teachers Notes
+			</h2>
+			<div class="grid-nav">
+			</div> -->
+			<div class="row list-row content-grid">
+				<div class="list-item" *ngFor="let notes of embeddedContent.teachers_notes">
+					<div class="block-media__media">
+						<img src="{{notes.thumbnail[0].url}}" alt="{{notes.thumbnail[0].alt}}" />
+					</div>
+					<div class="block-media__body">
+						<h6 class="block-media__headline">{{notes.title}}</h6>
+						<p class="block-media__description">{{notes.description}}</p>
+						<a href="{{notes.file}}" class="icon-download icon-small icon-left" *ngIf="auth.authenticated()">Download</a>
+						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black ">Login</a> to download these teachers notes</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
 	</div>
-
-	<div class="tab tab-lesson-plans visible" [ngClass]="{visible: activeTab === 'lesson_plan'}" *ngIf="embeddedContent.lesson_plan">
-		<div class="row list-row content-grid">
-			<div class="list-item" *ngFor="let lesson of embeddedContent.lesson_plan">
-				<div class="block-media__media">
-					<img src="{{lesson.thumbnail}}" alt="{{lesson.alt}}" />
+	<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
+		<div class="content-info">
+			<div class="add-to-toolbox">
+				<a href="#" class="icon-add icon-small icon-left icon-border">Add to my toolbox</a>
+			</div>
+			<p [innerHTML]="item.description">
+			</p>
+			<div class="content-info-attributes">
+				<div *ngIf="hasAttributes(item.topic)">
+					<h5>Main Topic</h5>
+					<a href="#" (click)="navigateAttribute($event, 'topics', topic.slug)" *ngFor="let topic of item.topic | AttributePipe" [innerHTML]=[topic.label]></a>
 				</div>
-				<div class="block-media__body">
-					<h6 class="block-media__headline">{{lesson.title}}</h6>
-					<p class="block-media__description">{{lesson.description}}</p>
-					<a href="{{lesson.file}}" class="icon-download icon-small icon-left">Download</a>
+				<div *ngIf="hasAttributes(item.related_topics)">
+					<h5>Related Topic(s)</h5>
+					<a href="#" (click)="navigateAttribute($event, 'topics', topic.slug)" *ngFor="let topic of item.related_topics | AttributePipe" [innerHTML]=[topic.label]></a>
+				</div>
+				<div *ngIf="hasAttributes(item.keystage)">
+					<h5>Keystage(s)</h5>
+					<a href="#" (click)="navigateAttribute($event, 'keystages', keystage.slug)" ngTrim="false" *ngFor="let keystage of item.keystage | AttributePipe" [innerHTML]=[keystage.label]></a>
+				</div>
+				<div *ngIf="hasAttributes(item.subjects)">
+					<h5>Subject(s)</h5>
+					<a href="#" (click)="navigateAttribute($event, 'subject', subject.slug)" *ngFor="let subject of item.subjects | AttributePipe" [innerHTML]=[subject.label]></a>
+				</div>
+				<div *ngIf="hasAttributes(item.keywords)">
+					<h5>Keyword(s)</h5>
+					<a href="#" (click)="navigateAttribute($event, 'search', keyword.slug)" *ngFor="let keyword of item.keywords | AttributePipe" [innerHTML]=[keyword.label]></a>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="tab tab-assembly-scripts" [ngClass]="{visible: activeTab === 'assembly_plan'}" *ngIf="embeddedContent.assembly_plan">
-		<div class="row list-row content-grid">
-			<div class="list-item" *ngFor="let assembly of embeddedContent.assembly_plan">
-				<div class="block-media__media">
-					<img src="{{assembly.thumbnail}}" alt="{{assembly.alt}}" />
-				</div>
-				<div class="block-media__body">
-					<h6 class="block-media__headline">{{assembly.title}}</h6>
-					<p class="block-media__description">{{assembly.description}}</p>
-					<a href="{{assembly.file}}" class="icon-download icon-small icon-left">Download</a>
-				</div>
-			</div>
+	<div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right" *ngIf="hasAttributes(item.related)">
+		<h2 class="section-title">
+			Related
+		</h2>
+		<div class="grid-nav">
 		</div>
+		<div class="row grid-row">
+        <div class="list-item" *ngFor="let related of item.related">
+        <div class="block-media__media" *ngIf="related.thumbnail[0]">
+          <a [routerLink]="[related.slug]" class="block-media__link">
+            <img [src]="related.thumbnail[0].url" alt="related.thumbnail[0].alt" />
+            <div class="listing-time" *ngIf="related.duration">
+              {{ dataService.duration(related._source.duration) }}
+            </div>
+          </a>
+        </div>
+        <div class="block-media__body">
+          <a [routerLink]="[related.slug]" class="block-media__link">
+            <h6 class="block-media__headline" *ngIf="related.title">
+              {{ item.title }}
+            </h6>
+          </a>
+          <p class="block-media__description " [innerHTML]="related.description">
+          </p>
+        </div>
+      </div>
+    </div>
 	</div>
-	<!-- </template> -->
-
-
-
-</div>
-<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
-	<div class="content-info">
-		<div class="add-to-toolbox">
-			<!-- {{#buttonAddToToolbox}}
-			{{>atoms-text-button}}
-			{{/buttonAddToToolbox}} -->
-		</div>
-		<p [innerHTML]="item.description">
-		</p>
-		<div class="content-info-attributes">
-			<!-- {{# infoAttributes }}
-			{{> molecules-info }}
-			{{/ infoAttributes}} -->
-
-
-			<div *ngIf="hasAttributes(item.topic)">
-				<h5>Main Topic</h5>
-				<a href="/list?topics={{topic.slug}}" *ngFor="let topic of item.topic | AttributePipe" [innerHTML]=[topic.label]></a>
-			</div>
-			<div *ngIf="hasAttributes(item.related_topics)">
-				<h5>Related Topic(s)</h5>
-				<a href="/list?keystages={{topic.slug}}" *ngFor="let topic of item.related_topics | AttributePipe" [innerHTML]=[topic.label]></a>
-			</div>
-			<div *ngIf="hasAttributes(item.keystage)">
-				<h5>Keystage(s)</h5>
-				<a href="/list?keystages={{keystage.slug}}" ngTrim="false" *ngFor="let keystage of item.keystage | AttributePipe" [innerHTML]=[keystage.label]></a>
-			</div>
-			<div *ngIf="hasAttributes(item.subjects)">
-				<h5>Subject(s)</h5>
-				<a href="/list?subject={{subject.slug}}" *ngFor="let subject of item.subjects | AttributePipe" [innerHTML]=[subject.label]></a>
-			</div>
-			<div *ngIf="hasAttributes(item.keywords)">
-				<h5>Keyword(s)</h5>
-				<a href="/list?search={{keyword.slug}}" *ngFor="let keyword of item.keywords | AttributePipe" [innerHTML]=[keyword.label]></a>
-			</div>
-		</div>
+	<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
+		<!-- {{> organisms-section-events-block }} -->
 	</div>
-</div>
-<div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right">
-	<!-- {{# relatedContent }}
-	{{> organisms-section-grid-load-more }}
-	{{/ relatedContent }} -->
-</div>
-<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
-	<!-- {{> organisms-section-events-block }} -->
-</div>
 
-<!-- {{> organisms-footer }} -->
+	<!-- {{> organisms-footer }} -->
 
-<h3 class="popover-title invisible video-download-title">Download</h3>
-<div class="invisible video-download-content">
-	<ul class="nav">
-		<li class="nav-item"><a href="#">320x240 - MP4 - 2mb</a></li>
-		<li class="nav-item"><a href="#">640x480 - MP4 - 5mb</a></li>
-		<li class="nav-item"><a href="#">1024x768 - MP4 - 10mb</a></li>
-	</ul>
-</div>
+	<h3 class="popover-title invisible video-download-title">Download</h3>
+	<div class="invisible video-download-content">
+		<ul class="nav">
+			<li class="nav-item"><a href="#">320x240 - MP4 - 2mb</a></li>
+			<li class="nav-item"><a href="#">640x480 - MP4 - 5mb</a></li>
+			<li class="nav-item"><a href="#">1024x768 - MP4 - 10mb</a></li>
+		</ul>
+	</div>
 
-<h3 class="popover-title invisible video-embed-title">Embed</h3>
+	<h3 class="popover-title invisible video-embed-title">Embed</h3>
 </div>

@@ -81,6 +81,13 @@
             border-top: 20px solid $color-lesson-plans;
           }
         }
+        &.teachers-notes {
+          background:$color-teachers-notes;
+          border-color:$color-teachers-notes;
+          &:after {
+            border-top: 20px solid $color-teachers-notes;
+          }
+        }
         &.assembly-scripts {
           background:$color-assembly-plans;
           border-color:$color-assembly-plans;

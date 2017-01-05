@@ -56,8 +56,7 @@
     right:0px;
     top:0px;
     margin:0;
-    border:solid 4px $gray-lightest;
-
+    border:solid 4px $gray-lighter;
   }
   &:hover, &.active {
     @media(min-width: $breakpoint-lg) {
@@ -102,3 +101,20 @@
       }
   }
 }
+
+// .alt {
+//   .primary-nav__search {
+//     button {
+//       background-color: $brand-red;
+//     }
+//     &:hover, &.active {
+//       button {
+//         background-image: url("/assets/images/search.svg");
+//         background-color:$brand-grey;
+//         &:hover {
+//           background-color:$brand-grey;
+//         }
+//       }
+//     }
+//   }
+// }

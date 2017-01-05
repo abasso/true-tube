@@ -1,11 +1,12 @@
 export const ContentTypes = [
   {
-    label: 'Videos',
-    slug: 'videos',
+    label: 'Films',
+    slug: 'films',
     type: 'content types',
-    name: 'typeVideo',
+    name: 'typeFilm',
     term: 'film',
     class: 'videos',
+    inMenu: true,
     active: false
   },
   {
@@ -15,6 +16,7 @@ export const ContentTypes = [
     name: 'typeLesson',
     term: 'lesson_plan',
     class: 'lesson-plans',
+    inMenu: true,
     active: false
   },
   {
@@ -24,6 +26,7 @@ export const ContentTypes = [
     name: 'typeAssembly',
     term: 'assembly_plan',
     class: 'assembly-scripts',
+    inMenu: true,
     active: false
   },
   {
@@ -33,6 +36,17 @@ export const ContentTypes = [
     name: 'typeInteractive',
     term: 'interactive',
     class: 'interactive',
+    inMenu: true,
+    active: false
+  },
+  {
+    label: 'Teachers Notes',
+    slug: 'teachers notes',
+    type: 'content types',
+    name: 'teachersNotes',
+    term: 'teachers_notes',
+    class: 'teachers-notes',
+    inMenu: false,
     active: false
   }
 ]

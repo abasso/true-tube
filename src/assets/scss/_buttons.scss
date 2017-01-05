@@ -46,7 +46,6 @@
     opacity: .65;
     @include box-shadow(none);
   }
-
 }
 
 // Future-proof disabling of clicks on `<a>` elements
@@ -91,7 +90,7 @@ fieldset[disabled] a.btn {
 // Content Type buttons
 //
 
-.btn-video {
+.btn-film {
   text-transform:capitalize;
   @include button-variant($btn-video-color, $btn-video-bg, $btn-video-border);
 }
@@ -102,6 +101,10 @@ fieldset[disabled] a.btn {
 .btn-assembly-plan {
   text-transform:capitalize;
   @include button-variant($btn-assembly-plan-color, $btn-assembly-plan-bg, $btn-assembly-plan-border);
+}
+.btn-teachers-note {
+  text-transform:capitalize;
+  @include button-variant($btn-interactive-color, $btn-interactive-bg, $btn-interactive-border);
 }
 .btn-interactive {
   text-transform:capitalize;

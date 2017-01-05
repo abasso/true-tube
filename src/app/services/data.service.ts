@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http'
 import { Observable } from 'rxjs/Rx'
 import _ from 'lodash'
+import moment from 'moment'
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -10,8 +11,9 @@ export class DataService {
   constructor(private http: Http) {
   }
 
-  private baseUrl = 'http://api.truetube.co.uk/resource/_search'
+  private baseUrl = 'http://api.truetube.co.uk/resource2/_search'
   private tempUrl = 'http://api.truetube.co.uk/resource2/resource'
+  private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search'
 
   search(data, types, keys, subject, topics, category) {
 
@@ -86,6 +88,20 @@ item(uri) {
   .map((response) => ( response.json() ))
 }
 
+carousel() {
+  return this.http
+  .get(this.carouselUrl)
+  .map((response) => ( response.json() ))
+}
 
+duration(seconds) {
+  return moment("2017-01-01").startOf('day').seconds(seconds).format('mm:ss')
+}
+
+trimDescription(description) {
+  let descriptionArray = description.split(' ')
+  if(descriptionArray.length > 38) descriptionArray.length = 38
+  return (descriptionArray.length < 38) ? description : descriptionArray.join(' ') + '...'
+}
 
 }

@@ -16,6 +16,7 @@ import { CallToActionComponent } from './components/messaging/call-to-action.com
 import { ItemComponent } from './components/content/item/item.component'
 import { ListFilter } from './components/content/listing/filter.component'
 import { SortComponent } from './components/content/listing/sort.component'
+// import { EmbedComponent } from './components/content/embed/embed.component'
 import { DataService } from './services/data.service'
 import { ListService } from './services/list.service'
 import { QueryStringPipe } from './pipes/query-string.pipe'
@@ -28,13 +29,17 @@ import { ClipboardModule } from 'ngx-clipboard'
 import Moment from 'moment'
 import _ from 'lodash'
 import Cookies from 'js-cookie';
-import { FooterComponent } from './components/global/footer.component'
+import { FooterComponent } from './components/global/footer.component';
+import { HomeComponent } from './components/content/home/home.component';
+import { CarouselComponent } from './components/content/home/carousel.component';
+import { KSSwiperModule } from 'angular2-swiper';
 
 const appRoutes: Routes = [
-  { path: '', component: ListComponent},
+  { path: '', component: CarouselComponent},
   { path: 'list', component: ListComponent},
+  // { path: 'embed/:id', component: EmbedComponent},
   { path: 'item/:id', component: ItemComponent},
-  { path: 'videos', component: ListComponent, data: [{filter: 'typeVideo', type: 'content types'}] },
+  { path: 'films', component: ListComponent, data: [{filter: 'typeFilm', type: 'content types'}] },
   { path: 'lesson plans', component: ListComponent, data: [{filter: 'typeLesson', type: 'content types'}]},
   { path: 'assembly scripts', component: ListComponent, data: [{filter: 'typeAssembly', type: 'content types'}]},
   { path: 'interactive', component: ListComponent, data: [{filter: 'typeInteractive', type: 'content types'}]},
@@ -57,7 +62,10 @@ const appRoutes: Routes = [
     QueryStringPipe,
     AttributePipe,
     EmbedMenuPipe,
-    FooterComponent
+    FooterComponent,
+    // EmbedComponent,
+    HomeComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +73,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     ClipboardModule,
+    KSSwiperModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
@@ -76,7 +85,8 @@ const appRoutes: Routes = [
     ListService
   ],
   bootstrap: [
-    AppComponent
+    AppComponent,
+    // EmbedComponent
   ]
 })
 export class AppModule { }

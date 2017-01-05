@@ -61,8 +61,9 @@ $brand-inverse:             $gray-dark !default;
 
 $color-videos:              $brand-red !default;
 $color-lesson-plans:        $brand-yellow !default;
-$color-assembly-plans:    #262625 !default;
+$color-assembly-plans:      #262625 !default;
 $color-interactive:         #4A90E2 !default;
+$color-teachers-notes:      #692A8B !default;
 
 
 // Options
@@ -333,6 +334,10 @@ $btn-assembly-plan-border:       $color-assembly-plans !default;
 $btn-interactive-color:          #fff !default;
 $btn-interactive-bg:             $color-interactive !default;
 $btn-interactive-border:         $color-interactive !default;
+
+$btn-teachers-notes-color:       #fff !default;
+$btn-teachers-notes-bg:          $color-teachers-notes !default;
+$btn-teachers-notes-border:      $color-teachers-notes !default;
 
 $btn-login-color:               $brand-grey !default;
 $btn-login-bg:                  $brand-yellow !default;

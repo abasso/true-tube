@@ -15,7 +15,6 @@
     height:100%;
   }
   .vjs-poster {
-    display:inherit;
     align-items:inherit;
     justify-content: inherit;
     width:100%;
@@ -121,5 +120,25 @@
       }
     }
 
+  }
+}
+
+.vjs-control-bar {
+  font-size:.75rem;
+}
+
+.vjs-menu, .vjs-play-progress, .vjs-mouse-display {
+  font-family:$font-family-base !important;
+  font-weight:200;
+  &:before {
+    font-family:VideoJS;
+  }
+}
+
+.video-js {
+  .vjs-progress-control {
+      .vjs-progress-holder {
+        font-size:1.66666666em;
+      }
   }
 }

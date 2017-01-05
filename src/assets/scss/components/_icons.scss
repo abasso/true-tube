@@ -79,6 +79,13 @@
   }
 }
 
+.icon-login {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/enter.svg");
+  }
+}
+
 
 
 .icon-small {
@@ -128,6 +135,15 @@
       height:32px;
       margin-top:-15px;
 
+    }
+  }
+  &.icon-inline {
+    margin-left:25px;
+    &:before {
+      margin-top:-6px;
+      margin-left:-25px;
+      position:absolute;
+      left:0px;
     }
   }
 }

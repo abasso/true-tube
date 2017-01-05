@@ -4,6 +4,7 @@ import { DataService } from './../../../services/data.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
 import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
 import { ActivatedRoute, Router, Params } from '@angular/router'
+import { Auth } from './../../../services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
 import moment from 'moment'
 import _ from 'lodash'
@@ -31,7 +32,8 @@ export class ItemComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private auth: Auth
   ) {}
 
   ngOnInit() {
@@ -41,26 +43,41 @@ export class ItemComponent implements OnInit {
       (data) => {
         this.item = data._source
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
+        _.each(this.item.embedded, (embed) => {
+          if(embed.thumbnail === null) embed.thumbnail = this.item.thumbnail
+        })
+        _.each(this.item.related, (item) => {
+          item.slug = '/item/' + item.uuid
+        })
       }
     )
+    setTimeout(
+      ()=>{
+      this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
+      })
+    },100)
   }
 
   ngAfterViewInit() {
 
-    setTimeout(
-      ()=>{
-      console.log('cats', this.player)
-      this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
-          // This is functionally the same as the previous example.
-      });
-    },100)
-
-
   }
 
+  pausePlayer() {
+    this.videoJSplayer.pause()
+  }
+
+  ngOnDestroy() {
+    this.videoJSplayer.dispose();
+    //alert('DESTROYING THE VIEWWWWW');
+  }
 
   hasAttributes(attribute) {
     return (_.isUndefined(attribute) || attribute === null || attribute === false || attribute.length === 0) ? false : true
+  }
+
+  navigateAttribute(event, type, attribute) {
+    event.preventDefault()
+    this.router.navigateByUrl('/list?' + type + '=' + attribute)
   }
 
   duration(seconds) {
@@ -77,8 +94,8 @@ export class ItemComponent implements OnInit {
   }
 
   setActiveTab(event) {
-    console.log(event);
     this.activeTab = event
+    if(event !== 'film') this.videoJSplayer.pause()
   }
 
   embedCopySuccess(event) {
@@ -89,5 +106,6 @@ export class ItemComponent implements OnInit {
       this.embedButtonClass = 'btn-video'
     }, 1000)
   }
+
 
 }

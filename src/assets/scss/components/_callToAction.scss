@@ -62,3 +62,36 @@
     }
   }
 }
+
+.alt {
+  .call-to-action {
+    background:$brand-grey;
+    .call-to-action-copy {
+      color:white;
+    }
+    .call-to-action-nav {
+      display:flex;
+      align-items: center;
+      //margin-left:auto;
+      .btn {
+        margin:.25rem 0;
+      }
+    }
+    .call-to-action-link {
+      color:white;
+      border-bottom:dotted 1px $gray-lighter;
+    }
+    .btn {
+      border-color:$gray;
+      color:white;
+      border-radius:$border-radius-sm;
+      background:$brand-grey;
+      font-weight:400;
+      &:hover {
+        border-color:white;
+        background:white;
+        color:$brand-grey;
+      }
+    }
+  }
+}

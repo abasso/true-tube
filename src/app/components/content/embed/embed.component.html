@@ -1,0 +1,11 @@
+<div class="video-js-wrapper">
+  <video #player id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+  poster="{{item.thumbnail[0].url}}">
+  <source src="{{item.source}}" type="video/mp4">
+    <track kind="captions" *ngIf="item.subtitles !== null" src="{{item.subtitles}}" srclang="en" label="English" />
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+</div>
