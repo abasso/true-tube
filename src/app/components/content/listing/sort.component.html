@@ -4,23 +4,23 @@
       <div class="form-inline">
         <div class="form-group">
           <label for="" class="c-field__label ">Items per page</label>
-          <select id="select" class="custom-select form-control" [ngModel]="listComponent.paginationData.itemsPerPageCurrent" (change)="setItemsPerPage($event, value)">
+          <select id="select" class="custom-select form-control" [ngModel]="ListingComponent.paginationData.itemsPerPageCurrent" (change)="setItemsPerPage($event, value)">
             <optgroup label="Select">
               <option *ngFor="let page of itemsPerPage" [value]="page">{{page}}</option>
             </optgroup>
           </select>
         </div>
-        <div class="form-group" *ngIf="listComponent.paginationData.pages.length > 1">
+        <div class="form-group" *ngIf="ListingComponent.paginationData.pages.length > 1">
           <label class="c-field__label ">Page</label>
-          <select id="cats" class="custom-select form-control" [ngModel]="listComponent.paginationData.currentPage" (change)="setPage($event, value)">
+          <select id="cats" class="custom-select form-control" [ngModel]="ListingComponent.paginationData.currentPage" (change)="setPage($event, value)">
             <optgroup label="Select">
-              <option *ngFor="let page of listComponent.paginationData.pages" [value]="page-1">{{page}}</option>
+              <option *ngFor="let page of ListingComponent.paginationData.pages" [value]="page-1">{{page}}</option>
             </optgroup>
           </select>
         </div>
 
-          <!-- <ol *ngIf="listComponent.paginationData.pages.length > 1" class="pagination">
-            <li *ngFor="let page of pages" [ngModel]="listComponent.paginationData.pages" [ngClass]="{'page-item': true, 'grid-nav-item': true, active: page.active}">
+          <!-- <ol *ngIf="ListingComponent.paginationData.pages.length > 1" class="pagination">
+            <li *ngFor="let page of pages" [ngModel]="ListingComponent.paginationData.pages" [ngClass]="{'page-item': true, 'grid-nav-item': true, active: page.active}">
               <a href="#" class="" (click)="setPage($event, page.number)">{{page.number}}</a>
             </li>
           </ol> -->
@@ -38,10 +38,10 @@
           </label>
         </div>
         <ol class="list-mode" id="contentGrid">
-          <li [ngClass]="{'page-item':true, 'grid-nav-item':true, 'display-grid':true, 'active': listComponent.displayGrid}">
+          <li [ngClass]="{'page-item':true, 'grid-nav-item':true, 'display-grid':true, 'active': ListingComponent.displayGrid}">
             <a href="#" (click)="listDisplayClick($event, 'grid')">Grid</a>
           </li>
-          <li [ngClass]="{'page-item':true, 'grid-nav-item':true, 'display-list':true, 'active': listComponent.displayList}">
+          <li [ngClass]="{'page-item':true, 'grid-nav-item':true, 'display-list':true, 'active': ListingComponent.displayList}">
             <a href="#" (click)="listDisplayClick($event, 'list')">List</a>
           </li>
         </ol>

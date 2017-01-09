@@ -1,8 +1,5 @@
-<!-- <div class="swiper-container homepage-carousel"> -->
   <ks-swiper-container [options]="example1SwipeOptions" class="homepage-carousel">
-  <!-- <div class="swiper-wrapper"> -->
     <ks-swiper-slide class="swiper-slide" *ngFor="let item of slides">
-      <!-- <div class="swiper-slide" *ngFor="let item of slides"> -->
         <a href="#" [routerLink]="[item._source.link]">
           <picture>
             <source srcset="{{item._source.image[0].url}}" media="(min-width: 1024px)">
@@ -16,10 +13,6 @@
             </a>
           </h2>
       </a>
-      <!-- </div> -->
     </ks-swiper-slide>
-
-  <!-- </div> -->
-  <div class="swiper-pagination" *ngFor="let item of slides"></div>
-<!-- </div> -->
+  <!-- <div class="swiper-pagination" *ngFor="let item of slides"></div> -->
 </ks-swiper-container>

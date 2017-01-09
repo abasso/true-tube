@@ -14,9 +14,13 @@ export class CarouselComponent implements OnInit {
     private dataService: DataService
   ) {
     this.example1SwipeOptions = {
-          slidesPerView: 4,
-          loop: false,
-          spaceBetween: 5
+          pagination: '.swiper-pagination',
+          // nextButton: '.swiper-button-next',
+          // prevButton: '.swiper-button-prev',
+          slidesPerView: 1,
+          paginationClickable: true,
+          spaceBetween: 0,
+          loop: false
         };
   }
   ngOnInit() {

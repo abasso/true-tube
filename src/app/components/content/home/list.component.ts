@@ -7,14 +7,14 @@ import { ListService } from './../../../services/list.service';
 import _ from 'lodash';
 
 @Component({
-  selector: 'app-list',
+  selector: 'home-list',
   templateUrl: './list.component.html',
   providers: [
     PaginationPipe,
     ListService
   ]
 })
-export class ListingComponent {
+export class HomeListingComponent {
 
   public itemCount: number;
   public currentItemCount: number;

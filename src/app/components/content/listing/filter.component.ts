@@ -3,8 +3,8 @@ import { Location } from '@angular/common'
 import { FormBuilder, FormGroup } from '@angular/forms'
 // import { ActivatedRoute, Params } from '@angular/router'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ListComponent } from './list.component'
-import { SortComponent } from './sort.component'
+import { ListingComponent } from './list.component'
+import { ListingSortComponent } from './sort.component'
 import { DataService } from './../../../services/data.service'
 import { Categories } from './../../../definitions/categories'
 import { Subjects } from './../../../definitions/subjects'
@@ -44,7 +44,7 @@ export class ListFilter implements OnInit {
     private listService: ListService,
     private route: ActivatedRoute,
     private router: Router,
-    private listComponent: ListComponent,
+    private ListingComponent: ListingComponent,
     private dataService: DataService,
     private location: Location,
     private formBuilder: FormBuilder
@@ -90,16 +90,16 @@ export class ListFilter implements OnInit {
     this.filter.patchValue({subject: 'All'})
     //var el = document.getElementById('GridFilter')
     // var sortable = Sortable.create(el)
-    this.listComponent.data = this.filter.valueChanges
+    this.ListingComponent.data = this.filter.valueChanges
     .debounceTime(400)
     .distinctUntilChanged()
     .switchMap(data => this.dataService.search(data, this.types, this.keystages, this.filterSubjects, this.topics, this.category))
 
-    this.items = this.listComponent.data.subscribe(
+    this.items = this.ListingComponent.data.subscribe(
       (data) => {
         this.contentLoading = false
-        this.listComponent.paginationData.totalItems = data.hits.hits.length
-        this.listComponent.resetPagination()
+        this.ListingComponent.paginationData.totalItems = data.hits.hits.length
+        this.ListingComponent.resetPagination()
         _.forEach(data.hits.hits, (item) => {
           item.typesCount = _.countBy(item._source.embedded, 'type')
           item.contenttypes = []
@@ -108,14 +108,14 @@ export class ListFilter implements OnInit {
             item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')})
           })
         })
-        this.listComponent.itemCount = data.hits.total
-        this.listComponent.items = data.hits.hits
+        this.ListingComponent.itemCount = data.hits.total
+        this.ListingComponent.items = data.hits.hits
         // _.forEach(this.categories, (category) => {
         //   _.forEach(category.topics, (topic) => {
         //     topic.count = 0
         //   })
         // })
-        _.forEach(this.listComponent.items, (item) => {
+        _.forEach(this.ListingComponent.items, (item) => {
           item.slug = '/item/' + item._id
           item._source.description = this.dataService.trimDescription(item._source.description)
           if(_.endsWith(item._source.description, '...')) item.readMore = true
@@ -137,10 +137,10 @@ export class ListFilter implements OnInit {
         //   })
         // })
         if(_.isUndefined(this.currentItemCount)) {
-          this.currentItemCount = this.listComponent.itemCount
+          this.currentItemCount = this.ListingComponent.itemCount
         }
-        this.updateTotal(this.currentItemCount, this.listComponent.itemCount)
-        this.listComponent.resetPagination()
+        this.updateTotal(this.currentItemCount, this.ListingComponent.itemCount)
+        this.ListingComponent.resetPagination()
       }
     )
 
@@ -261,8 +261,8 @@ export class ListFilter implements OnInit {
       if(this.itemsTotal > newCount) {
         this.itemsTotal -= countSpeed
         if(this.itemsTotal <= newCount) {
-          this.itemsTotal = this.listComponent.itemCount
-          this.currentItemCount = this.listComponent.itemCount
+          this.itemsTotal = this.ListingComponent.itemCount
+          this.currentItemCount = this.ListingComponent.itemCount
           this.itemsTotalLabel = (newCount > 1) ? 'Items' : 'Item'
         } else {
           requestAnimationFrame( loop )
@@ -270,8 +270,8 @@ export class ListFilter implements OnInit {
       } else {
         this.itemsTotal += countSpeed
         if(this.itemsTotal >= newCount) {
-          this.itemsTotal = this.listComponent.itemCount
-          this.currentItemCount = this.listComponent.itemCount
+          this.itemsTotal = this.ListingComponent.itemCount
+          this.currentItemCount = this.ListingComponent.itemCount
           this.itemsTotalLabel = (newCount > 1) ? 'Items' : 'Item'
         } else {
           requestAnimationFrame( loop )
@@ -287,7 +287,7 @@ export class ListFilter implements OnInit {
     this.contentLoading = true
     this.currentParams['search'] = event.target.value
     this.setQueryString()
-    this.listComponent.resetPagination()
+    this.ListingComponent.resetPagination()
 
   }
 

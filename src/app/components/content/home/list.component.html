@@ -1,24 +1,9 @@
 <div class="row">
-  <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right">
-      <app-filter #filter>
-    </app-filter>
-  </div>
   <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
-    <h1 class="page-title" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
-      {{pageTitle(filter.filterSubjects, filter.keystages, filter.types, filter.filter.value.term, filter.category, filter.topics)}}
-      <span *ngIf="filter.itemsTotal !== 0">({{filter.itemsTotal}} {{filter.itemsTotalLabel}})</span>
-    </h1>
-    <listing-sort class="hidden-lg-down" *ngIf="itemCount !== 0"></listing-sort>
-    <div class="row grid-row content-grid" *ngIf="itemCount === 0">
-      <div class="list-item">
-        No results.
-      </div>
-    </div>
-
-    <div class="row grid-row content-grid loading-grid" *ngIf="filter.contentLoading === true">
+    <!-- <div class="row grid-row content-grid loading-grid" *ngIf="filter.contentLoading === true">
       <img src="/assets/images/loading.svg"/>
-    </div>
-    <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}" *ngIf="filter.contentLoading === false">
+    </div> -->
+    <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}">
         <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
         <div class="block-media__media" *ngIf="item._source.thumbnail">
           <a [routerLink]="[item.slug]" class="block-media__link">
