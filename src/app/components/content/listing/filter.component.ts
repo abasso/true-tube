@@ -62,17 +62,17 @@ export class ListFilter implements OnInit {
       subject: '',
       category: ''
     }
-    _.forEach(this.types, (type) => {
+    _.each(this.types, (type) => {
       formElements[type.name] = ''
     })
 
-    _.forEach(this.keystages, (keystage) => {
+    _.each(this.keystages, (keystage) => {
       formElements[keystage.name] = ''
     })
 
-    _.forEach(this.categories, (category) => {
+    _.each(this.categories, (category) => {
       formElements[category.name] = ''
-      _.forEach(category.topics, (topic) => {
+      _.each(category.topics, (topic) => {
         formElements[topic.name] = ''
       })
     })
@@ -100,28 +100,28 @@ export class ListFilter implements OnInit {
         this.contentLoading = false
         this.ListingComponent.paginationData.totalItems = data.hits.hits.length
         this.ListingComponent.resetPagination()
-        _.forEach(data.hits.hits, (item) => {
+        _.each(data.hits.hits, (item) => {
           item.typesCount = _.countBy(item._source.embedded, 'type')
           item.contenttypes = []
-          _.forEach(item.typesCount, (type, key) => {
+          _.each(item.typesCount, (type, key) => {
             let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
             item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')})
           })
         })
         this.ListingComponent.itemCount = data.hits.total
         this.ListingComponent.items = data.hits.hits
-        // _.forEach(this.categories, (category) => {
-        //   _.forEach(category.topics, (topic) => {
+        // _.each(this.categories, (category) => {
+        //   _.each(category.topics, (topic) => {
         //     topic.count = 0
         //   })
         // })
-        _.forEach(this.ListingComponent.items, (item) => {
+        _.each(this.ListingComponent.items, (item) => {
           item.slug = '/item/' + item._id
           item._source.description = this.dataService.trimDescription(item._source.description)
           if(_.endsWith(item._source.description, '...')) item.readMore = true
-          _.forEach(this.categories, (category) => {
-            _.forEach(category.topics, (subCategory) => {
-              _.forEach(item._source.topic, (topic) => {
+          _.each(this.categories, (category) => {
+            _.each(category.topics, (subCategory) => {
+              _.each(item._source.topic, (topic) => {
                 if(topic === subCategory.label) {
                   //subCategory.count++
                   item._source.category = category
@@ -130,9 +130,9 @@ export class ListFilter implements OnInit {
             })
           })
         })
-        // _.forEach(this.categories, (category) => {
+        // _.each(this.categories, (category) => {
         //   category.count = 0
-        //   _.forEach(category.topics, (subCategory) => {
+        //   _.each(category.topics, (subCategory) => {
         //     category.count += subCategory.count
         //   })
         // })
@@ -150,7 +150,7 @@ export class ListFilter implements OnInit {
       if(!_.isUndefined(types)) {
         this.resetFilterState(this.types)
           let typeArray = types.split(',')
-          _.forEach(typeArray, (type) => {
+          _.each(typeArray, (type) => {
             let pathType = _.find(this.types, { slug: type})
             pathType.active = true
             let patch = {}
@@ -168,7 +168,7 @@ export class ListFilter implements OnInit {
       if(!_.isUndefined(keystages)) {
         this.resetFilterState(this.keystages)
           let keyArray = keystages.split(',')
-          _.forEach(keyArray, (key) => {
+          _.each(keyArray, (key) => {
             let pathKeys = _.find(this.keystages, { slug: key})
             pathKeys.active = true
             let patch = {}
@@ -237,7 +237,7 @@ export class ListFilter implements OnInit {
   }
 
   resetFilterState(filter) {
-    _.forEach(filter, (item) => {
+    _.each(filter, (item) => {
       item.active = false
       let name = filter.name
       this.filter.patchValue({name: null})
@@ -314,7 +314,7 @@ export class ListFilter implements OnInit {
 
   clearCategory() {
     this.category = null
-    _.forEach(this.categories, (category) => {
+    _.each(this.categories, (category) => {
       let toClear = {}
       toClear[category.name] = ''
       this.filter.patchValue(toClear)
@@ -327,13 +327,13 @@ export class ListFilter implements OnInit {
   clearCategoryAndTopics(event) {
     this.contentLoading = true
     this.category = null
-    _.forEach(this.topics, (topic) => {
+    _.each(this.topics, (topic) => {
       let toClear = {}
       toClear[topic.name] = ''
       this.filter.patchValue(toClear)
       topic.active = false
     })
-    _.forEach(this.categories, (category) => {
+    _.each(this.categories, (category) => {
       let toClear = {}
       toClear[category.name] = ''
       this.filter.patchValue(toClear)
@@ -349,7 +349,7 @@ export class ListFilter implements OnInit {
   clearTopics(event) {
     // if(_.isUndefined(this.currentParams.category)) return
     this.contentLoading = true
-    _.forEach(this.topics, (topic) => {
+    _.each(this.topics, (topic) => {
       let toClear = {}
       toClear[topic.name] = ''
       this.filter.patchValue(toClear)
@@ -366,7 +366,7 @@ export class ListFilter implements OnInit {
 
   clearTypes(event) {
     this.contentLoading = true
-    _.forEach(this.types, (type) => {
+    _.each(this.types, (type) => {
       let toClear = {}
       toClear[type.name] = ''
       this.filter.patchValue(toClear)
@@ -420,7 +420,7 @@ export class ListFilter implements OnInit {
 
   setQueryString() {
     let appendedQuery = ''
-    _.forEach(this.currentParams, (value, key) => {
+    _.each(this.currentParams, (value, key) => {
       if(value.length) appendedQuery += key + '=' + value.trim() + '&'
     })
     this.router.navigateByUrl('/list?' + appendedQuery)
@@ -452,9 +452,9 @@ export class ListFilter implements OnInit {
     }
     if(paramTopics.length === 0) return this.clearTopics(null)
     this.category = []
-      _.forEach(this.categories, (category) => {
-        _.forEach(category.topics, (topic) => {
-          _.forEach(paramTopics, (paramTopic) => {
+      _.each(this.categories, (category) => {
+        _.each(category.topics, (topic) => {
+          _.each(paramTopics, (paramTopic) => {
             if(topic.slug === paramTopic) {
               topic.active = true
               this.topics = category.topics
@@ -468,9 +468,9 @@ export class ListFilter implements OnInit {
           })
         })
       })
-      _.forEach(this.topics, (topic) => {
+      _.each(this.topics, (topic) => {
         topic.active = false
-        _.forEach(paramTopics, (paramTopic) => {
+        _.each(paramTopics, (paramTopic) => {
           if(topic.slug === paramTopic) {
             topic.active = true
           }
@@ -480,7 +480,7 @@ export class ListFilter implements OnInit {
       delete this.currentParams.category
 
     if(_.findIndex(this.topics, { 'active': true}) === -1) {
-      _.forEach(this.topics, (topic) => {
+      _.each(this.topics, (topic) => {
         topic.active = false
       })
     }
@@ -498,13 +498,13 @@ export class ListFilter implements OnInit {
     this.currentCategory = this.category[0].slug
     this.currentCategoryString = this.category[0].label
     this.topics = _.sortBy(this.category[0].topics, 'label')
-    _.forEach(this.categories, (category) => {
+    _.each(this.categories, (category) => {
       let toClear = {}
       toClear[category.name] = ''
       this.filter.patchValue(toClear)
       category.active = false
     })
-    _.forEach(this.topics, (topic) => {
+    _.each(this.topics, (topic) => {
       let toClear = {}
       toClear[topic.name] = ''
       this.filter.patchValue(toClear)
@@ -518,7 +518,7 @@ export class ListFilter implements OnInit {
     let toSet = {}
     toSet[value] = true
     this.filter.patchValue(toSet)
-    _.forEach(this.topics, (topic) => {
+    _.each(this.topics, (topic) => {
       topic.active = false
     })
   }
@@ -537,7 +537,7 @@ export class ListFilter implements OnInit {
 
   isActive(collection) {
     let isActive = false
-    _.forEach(collection, (item) => {
+    _.each(collection, (item) => {
       if(item.active === true) isActive = true
     })
     return isActive

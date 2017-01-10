@@ -1,10 +1,12 @@
-import { Component, Input } from '@angular/core';
-import { PaginationPipe } from './../../../pipes/pagination.pipe';
-import { Observable } from 'rxjs/Rx';
-import { DataService } from './../../../services/data.service';
-import { ListService } from './../../../services/list.service';
+import { Component, Input, OnInit } from '@angular/core'
+import { PaginationPipe } from './../../../pipes/pagination.pipe'
+import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx'
+import { DataService } from './../../../services/data.service'
+import { ListService } from './../../../services/list.service'
+import { Categories } from './../../../definitions/categories'
+import { ContentTypes } from './../../../definitions/content-types'
 
-import _ from 'lodash';
+import _ from 'lodash'
 
 @Component({
   selector: 'home-list',
@@ -14,18 +16,16 @@ import _ from 'lodash';
     ListService
   ]
 })
-export class HomeListingComponent {
+export class HomeListingComponent implements OnInit {
 
-  public itemCount: number;
-  public currentItemCount: number;
-  public data: Observable<any>;
-  public items: Observable<any>;
-  public showDescriptions:boolean;
-  public displayGrid:boolean = true;
-  public displayList:boolean = false;
-  public count;
-  public startVal: number;
-  public endVal: number;
+  public data: any
+  public items: Observable<any>
+  public showDescriptions:boolean
+  public displayGrid:boolean = true
+  public displayList:boolean = false
+  public startVal: number
+  public endVal: number
+  public loadMoreCount: number = 12
   public paginationData: {
     currentPage: number,
     itemsPerPage: number,
@@ -34,8 +34,11 @@ export class HomeListingComponent {
     pages: any[],
     itemsPerPageCurrent: any
   };
+  public categories: any[] = Categories
+  public sortBy: any = new BehaviorSubject('created')
+  public contentLoading:boolean = true
 
-  constructor(private dataService: DataService, private listService: ListService) {
+  constructor(public dataService: DataService, public listService: ListService) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,
@@ -44,38 +47,69 @@ export class HomeListingComponent {
       pages: [],
       itemsPerPageCurrent: 9
     }
-    this.showDescriptions = true;
+    this.showDescriptions = true
+  }
+
+  ngOnInit() {
+    this.sortBy
+    .subscribe(
+      (data) => {
+        this.data = this.dataService.list(data)
+        let result = this.data.subscribe(
+          (data) => {
+            _.each(data.hits.hits, (item) => {
+              item.typesCount = _.countBy(item._source.embedded, 'type')
+              item.contenttypes = []
+              _.each(item.typesCount, (type, key) => {
+                _.each(ContentTypes, (contentType) => {
+                  if(contentType.term === key && contentType.inMenu === true) {
+                    let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
+                    item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')})
+                  }
+                })
+              })
+            })
+            this.items = data.hits.hits
+            _.each(this.items, (item) => {
+              item.slug = '/item/' + item._id
+              item._source.description = this.dataService.trimDescription(item._source.description)
+              if(_.endsWith(item._source.description, '...')) item.readMore = true
+              _.each(this.categories, (category) => {
+                _.each(category.topics, (subCategory) => {
+                  _.each(item._source.topic, (topic) => {
+                    if(topic === subCategory.label) {
+                      item._source.category = category
+                    }
+                  })
+                })
+              })
+            })
+            this.contentLoading = false
+          }
+        )
+      }
+    )
+  }
+
+  sort(event, sortBy) {
+    event.preventDefault()
+    this.sortBy.next(sortBy);
+    this.paginationData.itemsPerPageCurrent = 12
+  }
+
+  loadMore(event) {
+    event.preventDefault();
+    this.loadMoreCount = this.loadMoreCount + 12
+    this.paginationData.itemsPerPageCurrent = this.loadMoreCount
   }
 
   resetPagination() {
     setTimeout(() => {
-      this.paginationData.pages = [];
-      this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent);
-      for(let i=0;i<this.paginationData.totalPages;i++) this.paginationData.pages.push(i+1);
-      this.paginationData.currentPage = 0;
-    }, 1);
-  }
-
-  stringifyTitleArray(array) {
-    array = _.filter(array, {active: true});
-    array = _.map(array, 'label');
-    let arrayString = array.join(', ');
-    return arrayString.replace(/,([^,]*)$/, ' & $1');
-  }
-
-  pageTitle(subject, keystages, types, term, category, topics) {
-    let showTopics = false;
-    if(!_.isUndefined(category) && category !== null) {
-      if(_.findIndex(category[0].topics, { 'active': false}) !== -1 && _.findIndex(category[0].topics, { 'active': true}) !== -1) showTopics = true;
-    }
-    topics = (showTopics) ? this.stringifyTitleArray(topics) : '';
-    category = (_.isUndefined(category) || category === null || category === '') ? '' : category[0].label;
-    subject = (subject === 'All') ? '' : subject;
-    keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages);
-    types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types);
-    term = (term === null || term === '') ? '' : _.upperFirst(term);
-    if(category === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content';
-    return category + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types;
+      this.paginationData.pages = []
+      this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent)
+      for(let i=0;i<this.paginationData.totalPages;i++) this.paginationData.pages.push(i+1)
+      this.paginationData.currentPage = 0
+    }, 1)
   }
 
 }

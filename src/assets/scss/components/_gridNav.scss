@@ -1,6 +1,7 @@
 .grid-nav {
   @media(min-width: $breakpoint-lg) {
     display:flex;
+    width:100%;
   }
   flex-direction:row;
   align-items: center;

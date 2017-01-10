@@ -1,36 +1,35 @@
-<div class="row">
-  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
-    <!-- <div class="row grid-row content-grid loading-grid" *ngIf="filter.contentLoading === true">
-      <img src="/assets/images/loading.svg"/>
-    </div> -->
-    <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}">
-        <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
-        <div class="block-media__media" *ngIf="item._source.thumbnail">
-          <a [routerLink]="[item.slug]" class="block-media__link">
-            <img [src]="item._source.thumbnail[0].url" alt="item._source.thumbnail[0].alt" />
-            <div class="listing-time" *ngIf="item._source.duration">
-              {{ dataService.duration(item._source.duration) }}
-            </div>
-          </a>
+<home-sort #sort *ngIf="contentLoading !== true"></home-sort>
+<div class="row grid-row content-grid loading-grid" *ngIf="contentLoading === true">
+  <img src="/assets/images/loading.svg"/>
+</div>
+<div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}" *ngIf="contentLoading !== true">
+  <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
+    <div class="block-media__media" *ngIf="item._source.thumbnail">
+      <a [routerLink]="[item.slug]" class="block-media__link">
+        <img [src]="item._source.thumbnail[0].url" alt="item._source.thumbnail[0].alt" />
+        <div class="listing-time" *ngIf="item._source.duration">
+          {{ dataService.duration(item._source.duration) }}
         </div>
-        <div class="block-media__body">
-          <a [routerLink]="[item.slug]" class="block-media__link">
-            <h6 class="block-media__headline" *ngIf="item._source.title">
-              {{ item._source.title }}
-            </h6>
-          </a>
-          <p class="block-media__description small" *ngIf="showDescriptions" [innerHTML]="item._source.description">
-          </p>
-          <div class="block-media__types" *ngIf="item.contenttypes">
-            <a [routerLink]="[item.slug]" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
-              <span>
-                {{ type.label }}
-              </span>
-            </a>
-          </div>
-        </div>
+      </a>
+    </div>
+    <div class="block-media__body">
+      <a [routerLink]="[item.slug]" class="block-media__link">
+        <h6 class="block-media__headline" *ngIf="item._source.title">
+          {{ item._source.title }}
+        </h6>
+      </a>
+      <p class="block-media__description small" *ngIf="showDescriptions" [innerHTML]="item._source.description">
+      </p>
+      <div class="block-media__types" *ngIf="item.contenttypes">
+        <a [routerLink]="[item.slug]" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
+          <span>
+            {{ type.label }}
+          </span>
+        </a>
       </div>
     </div>
-    <listing-sort class="last-sort" *ngIf="itemCount !== 0"></listing-sort>
   </div>
+</div>
+<div class="load-more">
+  <a href="" class="btn-load-more" (click)="loadMore($event)">Load More</a>
 </div>

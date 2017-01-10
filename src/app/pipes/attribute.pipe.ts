@@ -11,7 +11,7 @@ export class AttributePipe implements PipeTransform {
     let parsedValue = _.map(value, (item, index) => {
       return
     })
-    _.forEach(value, (attribute, index) => {
+    _.each(value, (attribute, index) => {
       let attributeObject = {
         label: (index !== value.length -1) ? attribute + ',&nbsp;' : attribute,
         slug: _.lowerCase(attribute)

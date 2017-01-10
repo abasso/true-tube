@@ -32,8 +32,11 @@ import Cookies from 'js-cookie';
 import { FooterComponent } from './components/global/footer.component';
 import { HomeComponent } from './components/content/home/home.component';
 import { HomeListingComponent } from './components/content/home/list.component';
+import { HomeSortComponent } from './components/content/home/sort.component'
 import { CarouselComponent } from './components/content/home/carousel.component';
 import { KSSwiperModule } from 'angular2-swiper';
+import { EventsBlockComponent } from './components/shared/events.component';
+import { TopicsComponent } from './components/shared/topics.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -67,7 +70,10 @@ const appRoutes: Routes = [
     // EmbedComponent,
     HomeComponent,
     HomeListingComponent,
-    CarouselComponent
+    HomeSortComponent,
+    CarouselComponent,
+    EventsBlockComponent,
+    TopicsComponent
   ],
   imports: [
     BrowserModule,

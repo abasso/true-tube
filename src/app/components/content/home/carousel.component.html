@@ -7,7 +7,7 @@
             <source srcset="{{item._source.image[0].url}}" media="(min-width: 0px)">
           <img srcset="{{item._source.image[0].url}}" alt="{{item._source.image[0].alt}}">
         </picture>
-          <h2 class="display-4">
+          <h2 class="display-4" *ngIf="item._source.hide_text !== '1'">
             <a href="#" [routerLink]="[item._source.link]">
               <span>{{item._source.sub_title}}</span> {{item._source.title}}
             </a>

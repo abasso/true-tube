@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http'
 import { Observable } from 'rxjs/Rx'
+import { Events } from './../definitions/mock-events'
 import _ from 'lodash'
 import moment from 'moment'
 import 'rxjs/add/operator/map'
@@ -13,7 +14,7 @@ export class DataService {
 
   private baseUrl = 'http://api.truetube.co.uk/resource2/_search'
   private tempUrl = 'http://api.truetube.co.uk/resource2/resource'
-  private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search'
+  private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search?sort=updated:desc'
 
   search(data, types, keys, subject, topics, category) {
 
@@ -23,7 +24,7 @@ export class DataService {
 
     if(_.findLastIndex(types, {'active': true}) !== -1) {
       let typeString = '(embedded.type:"'
-      _.forEach(types, (type, index) => {
+      _.each(types, (type, index) => {
         if(type.active === true) {
           typeString += type.term
           if(types.length > 1 && index !== _.findLastIndex(types, {'active': true})) typeString += '" AND "'
@@ -35,7 +36,7 @@ export class DataService {
 
     if(_.findLastIndex(keys, {'active': true}) !== -1) {
       let keyString = '(keystage:"'
-      _.forEach(keys, (key, index) => {
+      _.each(keys, (key, index) => {
         if(key.active === true) {
           keyString += key.term
           if(keys.length > 1 && index !== _.findLastIndex(keys, {'active': true})) keyString += '" AND "'
@@ -49,19 +50,19 @@ export class DataService {
 
     if(topics.length && category) {
       let topicString = '(topic:"'
-      _.forEach(topics, (topic, index) => {
+      _.each(topics, (topic, index) => {
         if(topic.active === true) {
           topicArray.push(topic.label);
         }
       })
       let count = _.countBy(topics, 'active');
       if(count.false === topics.length) {
-        _.forEach(topics, (topic, index) => {
+        _.each(topics, (topic, index) => {
           topicArray.push(topic.label);
         })
       }
 
-      _.forEach(topicArray, (topic, index) => {
+      _.each(topicArray, (topic, index) => {
         topicString += topic;
         if(topicArray.length > 1 && index !== topicArray.length - 1) topicString += '" OR "'
         if(index === topicArray.length - 1) topicString += '")'
@@ -77,31 +78,49 @@ export class DataService {
     search.set('size', '1000')
     return this.http
     .get(this.baseUrl, { search })
-    .map((response) => ( response.json() )
-  )
-}
+    .map((response) => ( response.json()))
+  }
 
-item(uri) {
-  let itemUrl = this.tempUrl + '/' + uri
-  return this.http
-  .get(itemUrl)
-  .map((response) => ( response.json() ))
-}
+  list(sort) {
+    let search = new URLSearchParams()
+    if(sort) search.set('sort', sort + ':desc')
+    search.set('size', '1000')
+    return this.http
+    .get(this.baseUrl, { search })
+    .map((response) => (
+      response.json()
+    ))
+  }
 
-carousel() {
-  return this.http
-  .get(this.carouselUrl)
-  .map((response) => ( response.json() ))
-}
+  item(uri) {
+    let itemUrl = this.tempUrl + '/' + uri
+    return this.http
+    .get(itemUrl)
+    .map((response) => ( response.json() ))
+  }
 
-duration(seconds) {
-  return moment("2017-01-01").startOf('day').seconds(seconds).format('mm:ss')
-}
+  carousel() {
+    return this.http
+    .get(this.carouselUrl)
+    .map((response) => ( response.json()))
+  }
 
-trimDescription(description) {
-  let descriptionArray = description.split(' ')
-  if(descriptionArray.length > 38) descriptionArray.length = 38
-  return (descriptionArray.length < 38) ? description : descriptionArray.join(' ') + '...'
-}
+  events(month) {
+    let items = []
+    _.each(Events, (event) => {
+      if(moment.unix(event.start).month() === month) items.push(event)
+    })
+    return _.sortBy(items, "start")
+  }
+
+  duration(seconds) {
+    return moment("2017-01-01").startOf('day').seconds(seconds).format('mm:ss')
+  }
+
+  trimDescription(description) {
+    let descriptionArray = description.split(' ')
+    if(descriptionArray.length > 38) descriptionArray.length = 38
+    return (descriptionArray.length < 38) ? description : descriptionArray.join(' ') + '...'
+  }
 
 }

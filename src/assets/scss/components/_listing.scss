@@ -42,7 +42,7 @@
   color:#fff;
   padding:.2rem .5rem;
   margin:.25rem;
-  border-radius:$border-radius-sm;
+  border-radius:$border-radius-xs;
 
 }
 
@@ -145,4 +145,5 @@
   height:100%;
   align-items: center;
   justify-content: center;
+  min-width:100%;
 }
