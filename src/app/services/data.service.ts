@@ -15,6 +15,8 @@ export class DataService {
   private baseUrl = 'http://api.truetube.co.uk/resource2/_search'
   private tempUrl = 'http://api.truetube.co.uk/resource2/resource'
   private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search?sort=updated:desc'
+  private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date:desc'
+  private pagesUrl = 'http://api.truetube.co.uk/pages/_search'
 
   search(data, types, keys, subject, topics, category) {
 
@@ -105,12 +107,27 @@ export class DataService {
     .map((response) => ( response.json()))
   }
 
-  events(month) {
-    let items = []
-    _.each(Events, (event) => {
-      if(moment.unix(event.start).month() === month) items.push(event)
-    })
-    return _.sortBy(items, "start")
+  events(month:number = null) {
+    let search = new URLSearchParams()
+    if(month !== null) {
+      let monthStart = moment({M:month}).format('YYYY-MM-DD')
+      let monthEnd = moment({M:month,D:moment({M:month}).daysInMonth()}).format('YYYY-MM-DD')
+      search.set('q', 'date:[' + monthStart + ' TO ' +  monthEnd + ']' )
+    }
+    return this.http
+    .get(this.eventsUrl, { search })
+    .map((response) => ( response.json()))
+  }
+
+  pages(page:string = null) {
+    console.log(page)
+    let search = new URLSearchParams()
+    if(page !== null) {
+      search.set('q', 'id:' + page)
+    }
+    return this.http
+    .get(this.pagesUrl, { search })
+    .map((response) => ( response.json()))
   }
 
   duration(seconds) {

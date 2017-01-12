@@ -37,12 +37,16 @@ import { CarouselComponent } from './components/content/home/carousel.component'
 import { KSSwiperModule } from 'angular2-swiper';
 import { EventsBlockComponent } from './components/shared/events.component';
 import { TopicsComponent } from './components/shared/topics.component';
+import { PageComponent } from './components/content/pages/page.component';
+import { FooterNavComponent } from './components/navigation/footer-nav.component';
+import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'list', component: ListingComponent},
   // { path: 'embed/:id', component: EmbedComponent},
   { path: 'item/:id', component: ItemComponent},
+  { path: 'page/:id', component: PageComponent},
   { path: 'films', component: ListingComponent, data: [{filter: 'typeFilm', type: 'content types'}] },
   { path: 'lesson plans', component: ListingComponent, data: [{filter: 'typeLesson', type: 'content types'}]},
   { path: 'assembly scripts', component: ListingComponent, data: [{filter: 'typeAssembly', type: 'content types'}]},
@@ -73,7 +77,10 @@ const appRoutes: Routes = [
     HomeSortComponent,
     CarouselComponent,
     EventsBlockComponent,
-    TopicsComponent
+    TopicsComponent,
+    PageComponent,
+    FooterNavComponent,
+    AccessibilityNavComponent
   ],
   imports: [
     BrowserModule,

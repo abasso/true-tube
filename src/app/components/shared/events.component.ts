@@ -12,28 +12,32 @@ export class EventsBlockComponent implements OnInit {
   private currentTime = moment()
   public selectedMonth: any = new BehaviorSubject(moment().month())
   private selectedMonthString: string
-  private eventData
+  private month
+  private data
+  private subscriber
+  private noEvents: boolean = true
   public items: any[] = []
   constructor(public dataService: DataService) {
+    this.month = this.selectedMonth.subscribe(
+      (month) => {
+        this.selectedMonthString = (this.currentTime.month() === month) ? "this month" : "in " + moment().month(month).format("MMMM")
+        this.data = this.dataService.events(month)
+        this.subscriber = this.data.subscribe(
+          (data) => {
+            this.items = data.hits.hits
+            this.noEvents = (this.items.length) ? false : true
+            if(this.items.length) {
+              _.each(this.items, (item) => {
+                item.date = moment(item._source.date).format("Do")
+              })
+            }
+          }
+        )
+      }
+    )
   }
 
   ngOnInit() {
-    //this.selectedMonthString = "this month"
-    this.eventData = this.selectedMonth.subscribe(
-      (data) => {
-        this.selectedMonthString = (this.currentTime.month() === data) ? "this month" : "in " + moment().month(data).format("MMMM")
-        this.items = this.dataService.events(data)
-        _.each(this.items, (item) => {
-          item.date = moment.unix(item.end).format("Do")
-        })
-      }
-    )
-    // this.selectedMonth.next(this.currentTime.month())
-    // .subscribe(
-    //   (data) => {
-    //
-    //   })
-    // this.selectedMonth = this.currentTime.format('MMMM')
   }
 
   prevMonth(event) {

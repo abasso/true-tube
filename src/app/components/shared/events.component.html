@@ -2,14 +2,18 @@
       <h3 class="section-title">
         Events {{selectedMonthString}}
       </h3>
-
-    <div class="list-item" *ngFor="let item of items">
-      <span class="block_event__date">
-    {{item.date}}
-    </span>
-    <a href="{{item.url}}" class="block-event__link">
-    	{{item.title}}
-    </a>
+    <div *ngIf="noEvents === true" class="m-l-2 no-results">
+      No events this month.
+    </div>
+    <div *ngIf="noEvents === false">
+      <div class="list-item" *ngFor="let item of items">
+        <span class="block_event__date">
+      {{item.date}}
+      </span>
+      <a href="{{item.url}}" class="block-event__link">
+      	{{item._source.title}}
+      </a>
+      </div>
     </div>
 
         <div class="month-selector">

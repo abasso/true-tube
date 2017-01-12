@@ -92,7 +92,7 @@ export class HomeListingComponent implements OnInit {
   }
 
   sort(event, sortBy) {
-    event.preventDefault()
+    event.preventDefault();
     this.sortBy.next(sortBy);
     this.paginationData.itemsPerPageCurrent = 12
   }

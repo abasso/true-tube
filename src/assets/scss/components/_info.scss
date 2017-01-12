@@ -8,3 +8,15 @@
   padding-right:.75rem;
   line-height:auto;
 }
+
+.info-page {
+  h1 {
+    border-bottom:solid 2px $gray-lighter;
+    padding-bottom:1rem;
+  }
+  h3 {
+    border-bottom:solid 1px $gray-lighter;
+    padding-bottom:.5rem;
+    margin-bottom:.5rem;
+  }
+}
