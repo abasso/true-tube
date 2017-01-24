@@ -25,7 +25,7 @@
      li {
        background:$gray-lighter;
        a {
-         font-weight:200;
+         font-weight: $font-weight-normal;
       }
       &.auth0-lock-tabs-current {
         background:white;
@@ -42,7 +42,7 @@
   .auth0-lock-name {
     display:none;
     background:$brand-grey;
-    font-weight:200;
+    font-weight: $font-weight-normal;
     padding:.5rem 0;
     font-size:$font-size-base;
   }

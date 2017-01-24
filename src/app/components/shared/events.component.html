@@ -22,6 +22,6 @@
             <a href="#" (click)="nextMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 11}" class="btn-sm btn-month-fwd"></a>
 
         </div>
-        <a href="" class="event-block__calendar">Full Calendar</a>
+        <a href="#" [routerLink]="'/calendar'" class="event-block__calendar">Full Calendar</a>
 
   </div>

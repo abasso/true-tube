@@ -40,10 +40,12 @@ import { TopicsComponent } from './components/shared/topics.component';
 import { PageComponent } from './components/content/pages/page.component';
 import { FooterNavComponent } from './components/navigation/footer-nav.component';
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component';
+import { CalendarComponent } from './components/content/calendar/calendar.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'list', component: ListingComponent},
+  { path: 'calendar', component: CalendarComponent},
   // { path: 'embed/:id', component: EmbedComponent},
   { path: 'item/:id', component: ItemComponent},
   { path: 'page/:id', component: PageComponent},
@@ -80,7 +82,8 @@ const appRoutes: Routes = [
     TopicsComponent,
     PageComponent,
     FooterNavComponent,
-    AccessibilityNavComponent
+    AccessibilityNavComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

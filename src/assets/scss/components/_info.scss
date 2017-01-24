@@ -3,7 +3,7 @@
   display:flex;
   align-self: center;
   position:relative;
-  font-weight:200;
+  font-weight: $font-weight-normal;
   border-right:solid 1px $gray-lighter;
   padding-right:.75rem;
   line-height:auto;
@@ -18,5 +18,11 @@
     border-bottom:solid 1px $gray-lighter;
     padding-bottom:.5rem;
     margin-bottom:.5rem;
+  }
+  .menu-item {
+    margin:1rem 0 0;
+    padding-bottom:1rem;
+    border-bottom:solid 1px $gray-lighter;
+    width:100%;
   }
 }

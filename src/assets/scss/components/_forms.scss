@@ -1,6 +1,6 @@
 fieldset {
   display:flex;
-  font-weight:200;
+  font-weight: $font-weight-normal;
   overflow:hidden;
   max-height:20rem;
   transition: all 0.8s;
@@ -43,7 +43,7 @@ fieldset {
   margin-left:0.75rem;
   color:$gray-light;
   border-bottom:dotted 1px $gray-lighter;
-  font-weight:200;
+  font-weight: $font-weight-normal;
   font-size:$font-size-xs;
   cursor:pointer;
   &:hover {

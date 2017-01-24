@@ -1,0 +1,29 @@
+<div id="calendar-wrap">
+          <h1>Events {{selectedMonthString}}</h1>
+            <div id="calendar">
+                <ul class="weekdays">
+                    <li>Sunday</li>
+                    <li>Monday</li>
+                    <li>Tuesday</li>
+                    <li>Wednesday</li>
+                    <li>Thursday</li>
+                    <li>Friday</li>
+                    <li>Saturday</li>
+                </ul>
+
+
+                <ul class="days" *ngFor="let week of weeks">
+                    <li class="day {{day.css}}" *ngFor="let day of week">
+                        <div class="date">{{day.date}}</div>
+                        <div class="event {{event.css}} event-order-{{event.index}}" *ngFor="let event of day.events">
+              						<div class="event-desc">
+              							{{event._source.title}}
+              						</div>
+              						<!-- <div class="event-time">
+              							1:00pm to 3:00pm
+              						</div> -->
+              					</div>
+                    </li>
+                </ul>
+            </div>
+        </div>

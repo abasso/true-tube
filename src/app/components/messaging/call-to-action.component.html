@@ -1,10 +1,20 @@
 <div class="container">
 <div class="call-to-action-copy">
 Online resources and materials for RE, PSHE &amp; Citizenship
-</div>
-<div class="call-to-action-nav">
 <button href="#" class="btn btn-login" data-toggle="modal" data-target="#modalLogin">Register for Free</button>
-<a href="#" id="call-to-action-hide-link" class="call-to-action-link">Hide</a>
+ </div>
+<div class="call-to-action-nav">
+<nav id="nav" class="accessibility-nav">
+  <a href="#" class="btn-dyslexia" [ngClass]="{dyslexia: dyslexiaEnabled === false, standard: dyslexiaEnabled === true}" (click)="toggleDyslexiaFont($event)" [innerHTML]="dyslexiaLabel"></a>
+  <!-- Font Size
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <a href="#" class="btn btn-font-smaller" (click)="reduceFont($event)">-</a>
+    <a href="#" class="btn btn-font-bigger" (click)="enlargeFont($event)">+</a>
+
+  </div> -->
+  <!-- <a href="#" class="btn-font-smaller" (click)="reduceFont($event)">Smaller</a>
+  <a href="#" class="btn-font-bigger" (click)="enlargeFont($event)">Bigger Font</a> -->
+</nav>
 
 </div>
 </div>

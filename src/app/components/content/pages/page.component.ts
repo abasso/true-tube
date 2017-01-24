@@ -9,7 +9,10 @@ import _ from 'lodash'
 })
 export class PageComponent implements OnInit {
   private data
-  private content
+  private content: string[]
+  private menu: string[]
+  private param
+  private currentId: string
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute
@@ -19,12 +22,26 @@ export class PageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.data = this.route.params
-    .switchMap((params: Params) => this.dataService.pages())
-    .subscribe(
-      (data) => {
-        this.content = data.hits.hits
+
+    this.param = this.route.params.subscribe(
+      (params) => {
+          this.currentId = params['id']
       }
     )
+
+    this.data = this.route.params
+    .switchMap(() =>
+      this.dataService.pages()
+    )
+    .subscribe(
+      (data) => {
+        this.menu = _.pull(data.hits.hits, {_id: this.currentId})
+        _.each(this.menu, (item) => {
+          item.path = '/page/' + item._id
+        })
+        this.content = _.filter(data.hits.hits, {_id: this.currentId})
+      }
+    )
+
   }
 }

@@ -9,7 +9,7 @@
     align-self: center;
     color:white;
     margin-left:auto;
-    font-weight:200;
+    font-weight: $font-weight-normal;
     border-bottom: dotted 1px $gray;
   }
   background:$brand-grey;
@@ -22,7 +22,7 @@
     font-weight:400;
   }
   .no-results {
-    font-weight:200;
+    font-weight: $font-weight-normal;
   }
   .month-selector {
     height:32px;

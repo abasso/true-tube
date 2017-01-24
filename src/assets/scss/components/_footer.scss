@@ -54,7 +54,7 @@ footer {
   padding:1rem 0;
   background:$brand-grey;
   color:$gray;
-  font-weight:200;
+  font-weight: $font-weight-normal;
 
   .footer-nav-container {
     display:flex;
@@ -66,16 +66,20 @@ footer {
       min-width:200px;
       display:flex;
       flex-direction:column;
+
       a {
+        float:left;
+        clear:both;
         color:white;
+        // display:flex;
         border-bottom:dotted 1px $gray;
         margin:.25rem 0;
         &:hover {
           color:$brand-yellow;
         }
-        @media(min-width: $breakpoint-xl) {
-          flex-direction:row;
-        }
+        // @media(min-width: $breakpoint-xl) {
+        //   flex-direction:row;
+        // }
       }
     }
   }

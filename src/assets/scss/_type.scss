@@ -160,7 +160,7 @@ mark,
   }
 }
 
-p {
-  font-weight:200;
+p, ol, li {
+  font-weight: $font-weight-normal;
   font-size:$font-size-sm;
 }

@@ -6,12 +6,9 @@
   }
   background:$brand-yellow;
   width:100%;
-  padding:.75rem 0rem;
-  @media(min-width: $breakpoint-lg) {
-    padding:.5rem 0;
-  }
+
   .call-to-action-copy {
-    font-weight:200;
+    font-weight: $font-weight-normal;
     flex-grow:2;
     font-size:1.25rem;
     border-bottom:solid 1px rgba(0,0,0,0.1);
@@ -38,7 +35,7 @@
   }
   .call-to-action-link {
     border-bottom:dotted 1px $brand-grey;
-    font-weight:200;
+    font-weight: $font-weight-normal;
     margin-left:auto;
     font-size:1rem;
     @media(min-width: $breakpoint-md) {
@@ -48,6 +45,7 @@
   .btn {
     border-radius:$border-radius-sm;
     font-weight:400;
+    margin:0 0 0 1rem;
     &:hover {
       background:black;
       color:$brand-yellow;

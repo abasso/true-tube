@@ -1,7 +1,8 @@
-<div class="row info-page" *ngFor="let item of content">
+<div class="row info-page">
   <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right">
+    <a href="#" [routerLink]="menuItem.path" *ngFor="let menuItem of menu" class="menu-item">{{menuItem._source.title}}</a>
   </div>
-  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left">
+  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left" *ngFor="let item of content">
     <h1 class="page-title">
       {{item._source.title}}
     </h1>

@@ -1,7 +1,7 @@
 .content-info {
   display:flex;
   flex-direction: column;
-  font-weight:200;
+  font-weight: $font-weight-normal;
   margin:0;
   font-size:$font-size-sm;
   @media(min-width: $breakpoint-xl) {
@@ -40,7 +40,7 @@
     }
     padding:.5rem 0 1rem;
     font-size:$font-size-lg;
-    font-weight:200;
+    font-weight: $font-weight-normal;
     a {
       color:$brand-grey;
       border-bottom:dotted 1px $gray-lighter;

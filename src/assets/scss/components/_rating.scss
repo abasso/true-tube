@@ -1,7 +1,7 @@
 .rating {
   display:flex;
   align-self: center;
-  font-weight:200;
+  font-weight: $font-weight-normal;
   font-size:$font-size-sm;
   .rating-stars {
     display:flex;
