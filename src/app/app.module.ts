@@ -41,12 +41,14 @@ import { PageComponent } from './components/content/pages/page.component';
 import { FooterNavComponent } from './components/navigation/footer-nav.component';
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component';
 import { CalendarComponent } from './components/content/calendar/calendar.component';
+import { EventComponent } from './components/content/event/event.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'list', component: ListingComponent},
   { path: 'calendar', component: CalendarComponent},
   // { path: 'embed/:id', component: EmbedComponent},
+  { path: 'event/:id', component: EventComponent},
   { path: 'item/:id', component: ItemComponent},
   { path: 'page/:id', component: PageComponent},
   { path: 'films', component: ListingComponent, data: [{filter: 'typeFilm', type: 'content types'}] },
@@ -83,7 +85,8 @@ const appRoutes: Routes = [
     PageComponent,
     FooterNavComponent,
     AccessibilityNavComponent,
-    CalendarComponent
+    CalendarComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
