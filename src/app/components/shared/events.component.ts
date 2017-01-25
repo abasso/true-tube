@@ -24,7 +24,7 @@ export class EventsBlockComponent implements OnInit {
         this.data = this.dataService.events(month)
         this.subscriber = this.data.subscribe(
           (data) => {
-            this.items = data.hits.hits
+            this.items = _.sortBy(data.hits.hits, "date").reverse()
             this.noEvents = (this.items.length) ? false : true
             if(this.items.length) {
               _.each(this.items, (item) => {
@@ -45,8 +45,6 @@ export class EventsBlockComponent implements OnInit {
     let currentMonth = this.selectedMonth.getValue()
     if(currentMonth !== 0) {
       this.selectedMonth.next(currentMonth - 1)
-    } else {
-
     }
 
   }
@@ -56,9 +54,6 @@ export class EventsBlockComponent implements OnInit {
     let currentMonth = this.selectedMonth.getValue()
     if(currentMonth !== 11) {
       this.selectedMonth.next(currentMonth + 1)
-    } else {
-
     }
-
   }
 }
