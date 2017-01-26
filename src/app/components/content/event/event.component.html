@@ -1,12 +1,21 @@
 <div class="row page-event" *ngFor="let item of items">
-  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right content-main">
+  <div class="col-xs-12 col-ml-12 col-xl-12">
     <div class="content-header">
-      <h1 class="page-title">
+      <div class="page-title">
+        <h1>
         {{item._source.title}}
       </h1>
-      <h2 class="page-sub-title">{{item.date}}</h2>
+      <a href="#" class="icon-posted icon-small icon-left" [routerLink]="'/calendar'">Full Calendar</a>
     </div>
-  <div class="row grid-row">
+      <h3 class="page-sub-title">{{item.date}}</h3>
+    </div>
+  </div>
+  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right content-main" [ngClass]="{'col-xl-9': item._source.description !== ''}">
+      <div class="content-info hidden-xl-up m-t-1">
+        <p [innerHTML]="item._source.description">
+        </p>
+      </div>
+  <div class="row" [ngClass]="{'grid-row': item._source.description !== '', 'grid-row-four': item._source.description === ''}">
     <div class="list-item" *ngFor="let related of item._source.related">
       <div class="block-media__media" *ngIf="related.thumbnail[0]">
         <a [routerLink]="[related.slug]" class="block-media__link">
@@ -28,7 +37,7 @@
     </div>
   </div>
 </div>
-<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
+<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left flex-order-lg-0 hidden-lg-down">
   <div class="content-info">
     <p [innerHTML]="item._source.description">
     </p>

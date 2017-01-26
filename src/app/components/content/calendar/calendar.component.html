@@ -1,10 +1,11 @@
 <div id="calendar-wrap">
   <div class="calendar-header">
-    <div class="month-selector">
-      <a href="#" (click)="prevMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 0}" class=" btn-sm btn-month-back"></a>
-      <a href="#" (click)="nextMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 11}" class="btn-sm btn-month-fwd"></a>
-    </div>
+
     <h1>Events {{selectedMonthString}}</h1>
+    <div class="month-selector">
+      <a href="#" (click)="prevMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 0}">Previous Month</a>
+      <a href="#" (click)="nextMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 11}">Next Month</a>
+    </div>
   </div>
   <div id="calendar">
     <ul class="weekdays">

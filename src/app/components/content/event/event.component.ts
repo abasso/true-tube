@@ -25,7 +25,8 @@ export class EventComponent implements OnInit {
         .subscribe(
           (route) => {
             this.items = _.filter(data.hits.hits, {_id: route['id'] })
-            this.items[0].date = moment(this.items[0]._source.date).format("dddd Do MMMM YYYY")
+            console.log(this.items)
+            this.items[0].date = moment(this.items[0]._source.date).format("Do MMMM YYYY")
             _.each(this.items[0]._source.related, (item) => {
               item.slug = '/item/' + item.uuid
             })

@@ -10,7 +10,7 @@
         <span class="block_event__date">
       {{item.date}}
       </span>
-      <a href="{{item.url}}" class="block-event__link">
+      <a href="#" [routerLink]="item.url" class="block-event__link">
       	{{item._source.title}}
       </a>
       </div>

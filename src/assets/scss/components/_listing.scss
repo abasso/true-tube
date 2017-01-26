@@ -80,6 +80,24 @@
   }
 }
 
+.grid-row-four {
+  margin:0;
+  @media(min-width: 544px) {
+    margin:0 -40px;
+  }
+  .list-item {
+    transition: all 0.8s;
+    @media(min-width: $breakpoint-sm) {
+      margin:20px 20px 20px 20px;
+      width: calc(100% * (1/2) - 40px - 1px);
+    }
+    @media(min-width: $breakpoint-lg) {
+      width: calc(100% * (1/4) - 40px - 1px);
+    }
+    //flex-grow:1;
+  }
+}
+
 .list-row {
   transition: all 0.8s;
   @media(min-width: $breakpoint-sm) {

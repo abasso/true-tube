@@ -23,6 +23,7 @@ export class CalendarComponent implements OnInit {
   public items: any[] = []
   private weeks: any[] = []
   private toHighlight = ''
+  private eventCount: number = 0
   constructor(public dataService: DataService) {
     this.weeks.length = 42
     this.month = this.selectedMonth.subscribe(

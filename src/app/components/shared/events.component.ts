@@ -28,6 +28,7 @@ export class EventsBlockComponent implements OnInit {
             this.noEvents = (this.items.length) ? false : true
             if(this.items.length) {
               _.each(this.items, (item) => {
+                item.url = "/event/" + item._id
                 item.date = moment(item._source.date).format("Do")
               })
             }
