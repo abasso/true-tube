@@ -25,4 +25,10 @@
     border-bottom:solid 1px $gray-lighter;
     width:100%;
   }
+  .content {
+    p, ol, li {
+      font-weight: $font-weight-normal;
+      font-size:$font-size-sm;
+    }
+  }
 }

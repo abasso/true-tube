@@ -9,7 +9,6 @@ import { Auth } from './../../services/auth.service'
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  showCallToAction: boolean
   menuVisible: boolean = false
   constructor(private auth: Auth) {
 
@@ -19,6 +18,7 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleMenu(event) {
+    console.log("toggling menu")
     event.preventDefault()
     this.menuVisible = (this.menuVisible === false) ? true : false
   }

@@ -2,34 +2,34 @@
 
 .primary-nav__search {
   //background:$brand-grey;
-  margin-left:.4rem;
-  cursor:pointer;
-  display:flex;
-  transition: all 0.4s ease;
-  background-size:14px;
-  width:40px;
-  height:40px;
-  border-radius:40px;
-  overflow:hidden;
-  position:relative;
-  min-width:40px;
-  order:3;
-  right:-4px;
+  margin-left: .4rem;
+  cursor: pointer;
+  display: flex;
+  transition: all .4s ease;
+  background-size: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  min-width: 40px;
+  order: 3;
+  right: -4px;
   form {
     align-self: center;
-    width:100%;
+    width: 100%;
   }
   input {
-    display:none;
-    background:none;
-    border:none;
-    outline:none;
-    color:black;
-    margin-left:1rem;
+    display: none;
+    background: none;
+    border: none;
+    outline: none;
+    color: black;
+    margin-left: 1rem;
     font-weight: $font-weight-normal;
-    z-index:1;
-    opacity:0;
-    width:100%;
+    z-index: 1;
+    opacity: 0;
+    width: 100%;
     &::-webkit-input-placeholder {
       color: $gray-light;
     }
@@ -44,61 +44,61 @@
     }
   }
   button {
-    cursor:pointer;
-    transition: all 0.4s ease;
-    background: $brand-grey no-repeat center center url("/assets/images/search.svg");
-    background-size:14px;
-    width:40px;
-    height:40px;
-    border-radius:40px;
-    z-index:2;
-    position:absolute;
-    right:0px;
-    top:0px;
-    margin:0;
-    border:solid 4px $gray-lighter;
+    cursor: pointer;
+    transition: all .4s ease;
+    background: $brand-grey no-repeat center center url('/assets/images/search.svg');
+    background-size: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    z-index: 2;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    border: solid 4px $gray-lightest;
   }
   &:hover, &.active {
     @media(min-width: $breakpoint-lg) {
-    width:240px;
-    margin-left:1rem;
-    background:white;
-    color:black;
-  }
-    height:40px;
-    border-radius:40px;
+      width: 240px;
+      margin-left: 1rem;
+      background: white;
+      color: black;
+    }
+    height: 40px;
+    border-radius: 40px;
     button {
-      background-image: url("/assets/images/search.svg");
-      background-color:$brand-red;
-      border:solid 4px white;
+      background-image: url('/assets/images/search.svg');
+      background-color: $brand-red;
+      border: solid 4px white;
       &:hover {
-        background-color:$brand-red;
+        background-color: $brand-red;
       }
     }
     input {
-      display:block;
-      opacity:1;
-      font-size:$font-size-base;
+      display: block;
+      opacity: 1;
+      font-size: $font-size-base;
     }
   }
   @media(max-width: $breakpoint-lg) {
-      order:1;
-      width:100%;
-      margin:0;
-      height:40px;
-      border-radius:40px;
-      background:white;
-      button {
-        background-color:$gray;
-        &:hover {
-          background-color:none !important;
-        }
+    order: 1;
+    width: 100%;
+    margin: 0;
+    height: 40px;
+    border-radius: 40px;
+    background: white;
+    button {
+      background-color: $gray;
+      &:hover {
+        background-color: none !important;
       }
-      input {
-        display:block;
-        opacity:1 !important;
-        position:relative;
-      }
+    }
+    input {
+      display: block;
+      opacity: 1 !important;
+      position: relative;
+    }
   }
 }
 

@@ -5,8 +5,8 @@
 				<img src="/assets/images/true-tube-logo_black.svg" class="logo c-logo-link__img" alt="True Tube">
 			</a>
     </div>
-    <div class="mobile-nav__search"><a class="mobile-nav__burger_search" (click)="mobileSearch($event)"></a></div>
-    <div class="mobile-nav__burger"><a class="mobile-nav__burger_link" (click)="toggleMenu()"></a></div>
+    <div class="mobile-nav__search"><a href="" class="mobile-nav__burger_search" (click)="mobileSearch($event)"></a></div>
+    <div class="mobile-nav__burger" (click)="toggleMenu($event)"><a href="" class="mobile-nav__burger_link" (click)="toggleMenu($event)"></a></div>
 
   </div>
   <div class="menu-mobile" [ngClass]="{show: menuVisible}">
@@ -20,7 +20,7 @@
     </div>
     <!-- <app-secondary-nav id="secondary-nav" class="secondary-nav"></app-secondary-nav> -->
 
-    <div class="mobile-nav__close"><a></a></div>
+    <div (click)="toggleMenu($event)" class="mobile-nav__close"><a></a></div>
 
   </div>
 

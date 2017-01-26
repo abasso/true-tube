@@ -28,7 +28,7 @@ export class CalendarComponent implements OnInit {
     this.weeks.length = 42
     this.month = this.selectedMonth.subscribe(
       (month) => {
-        this.selectedMonthString = (this.currentMonth.format("M")-1 === month) ? 'this month' : 'in ' + moment().month(month).format('MMMM YYYY')
+        this.selectedMonthString = (this.currentMonth.format("M")-1 === month) ? 'this month' : 'in ' + moment().month(month).format('MMMM')
         this.data = this.dataService.events()
         this.subscriber = this.data.subscribe(
           (data) => {

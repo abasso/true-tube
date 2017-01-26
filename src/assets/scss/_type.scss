@@ -152,15 +152,10 @@ mark,
   font-size:1.5rem;
   @media(min-width: $breakpoint-xl) {
     font-size:1.75rem;
-    margin:1.5rem 0;
+    //margin:1.5rem 0;
   }
   &.page-title-underline {
     padding-bottom:1rem;
     border-bottom:solid 1px $gray-lighter;
   }
-}
-
-p, ol, li {
-  font-weight: $font-weight-normal;
-  font-size:$font-size-sm;
 }

@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right content-main">
+	<div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right content-main m-t-1">
 		<div class="content-header">
 			<h1 class="page-title">
 				{{item.title}}
@@ -41,11 +41,11 @@
 
 				<div class="video-actions hidden-sm-down">
 					<span  *ngIf="embed.allow_download !== '0'">
-						<a href="" class="icon-download icon-small icon-left video-download" *ngIf="auth.authenticated()">Download</a>
-						<a href="#" class="icon-download icon-small icon-left" *ngIf="!auth.authenticated()">Download</a>
+						<a href="" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
+						<a href="#" class="icon-download icon-small icon-left text-link" *ngIf="!auth.authenticated()">Download</a>
 					</span>
 
-					<a href="" class="icon-embed icon-small icon-left video-embed" (click)="toggleEmbed($event)">Embed</a>
+					<a href="" class="icon-embed icon-small icon-left video-embed text-link" (click)="toggleEmbed($event)">Embed</a>
 
 				</div>
 
@@ -110,8 +110,8 @@
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{lesson.title}}</h6>
 						<p class="block-media__description">{{lesson.description}}</p>
-						<a href="{{lesson.file}}" class="icon-download icon-small icon-left" *ngIf="auth.authenticated()">Download</a>
-						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black ">Login</a> to download this lesson plan</p>
+						<a href="{{lesson.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()">Download</a>
+						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link">Login</a> to download this lesson plan</p>
 					</div>
 				</div>
 			</div>
@@ -131,8 +131,8 @@
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{assembly.title}}</h6>
 						<p class="block-media__description">{{assembly.description}}</p>
-						<a href="{{assembly.file}}" class="icon-download icon-small icon-left" *ngIf="auth.authenticated()">Download</a>
-						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black ">Login</a> to download this assembly plan</p>
+						<a href="{{assembly.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()">Download</a>
+						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link">Login</a> to download this assembly plan</p>
 					</div>
 				</div>
 			</div>
@@ -152,8 +152,8 @@
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{notes.title}}</h6>
 						<p class="block-media__description">{{notes.description}}</p>
-						<a href="{{notes.file}}" class="icon-download icon-small icon-left" *ngIf="auth.authenticated()">Download</a>
-						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black ">Login</a> to download these teachers notes</p>
+						<a href="{{notes.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()">Download</a>
+						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link">Login</a> to download these teachers notes</p>
 					</div>
 				</div>
 			</div>
@@ -163,7 +163,7 @@
 	<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
 		<div class="content-info">
 			<div class="add-to-toolbox">
-				<a href="#" class="icon-add icon-small icon-left icon-border">Add to my toolbox</a>
+				<a href="#" class="icon-add icon-small icon-left icon-border text-link">Add to my toolbox</a>
 			</div>
 			<p [innerHTML]="item.description">
 			</p>

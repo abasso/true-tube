@@ -9,8 +9,8 @@
     align-self: center;
     color:white;
     margin-left:auto;
-    font-weight: $font-weight-normal;
-    border-bottom: dotted 1px $gray;
+    border-bottom: solid 1px $gray;
+    display:inline;
   }
   background:$brand-grey;
   display:flex;
@@ -28,17 +28,22 @@
     height:32px;
   }
   .list-item {
+    display:flex;
     margin:.5rem 1.5rem;
-    span {
+    align-items:center;
+    .block_event__date {
       color:$brand-red;
       font-size:$font-size-lg;
       font-weight:400;
       min-width:2.5rem;
       display:inline-block;
+      margin-right:1rem;
     }
-    a {
-      margin:0 0 0 .75rem;
+    .block_event__link {
+      display:flex;
+      margin-left:1rem;
     }
+
   }
     .month-selector {
       margin:1rem auto 0 1.5rem;

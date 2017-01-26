@@ -10,9 +10,11 @@
         <span class="block_event__date">
       {{item.date}}
       </span>
+      <span>
       <a href="#" [routerLink]="item.url" class="block-event__link">
       	{{item._source.title}}
       </a>
+    </span>
       </div>
     </div>
 
@@ -22,6 +24,6 @@
             <a href="#" (click)="nextMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 11}" class="btn-sm btn-month-fwd"></a>
 
         </div>
-        <a href="#" [routerLink]="'/calendar'" class="event-block__calendar">Full Calendar</a>
+        <a href="#" [routerLink]="'/calendar'" class="event-block__calendar text-link">Full Calendar</a>
 
   </div>

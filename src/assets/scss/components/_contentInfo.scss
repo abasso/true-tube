@@ -43,7 +43,6 @@
     font-weight: $font-weight-normal;
     a {
       color:$brand-grey;
-      border-bottom:dotted 1px $gray-lighter;
       &:hover {
         &:before {
           background-color:$brand-yellow;
