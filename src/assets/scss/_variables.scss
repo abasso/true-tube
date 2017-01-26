@@ -50,7 +50,7 @@ $gray-lightest:             #f7f7f9 !default;
 
 $brand-red:                 #E84524 !default;
 $brand-yellow:              #FBE407 !default;
-$brand-grey:                #262625 !default;
+$brand-gray:                #262625 !default;
 
 $brand-primary:             $brand-red !default;
 $brand-success:             #5cb85c !default;
@@ -122,7 +122,7 @@ $body-color: $gray-dark !default;
 //
 // Style anchor elements.
 
-$link-color:            $brand-grey !default;
+$link-color:            $brand-gray !default;
 $link-decoration:       none !default;
 $link-hover-color:      darken($link-color, 5%) !default;
 $link-hover-decoration: none !default;
@@ -326,7 +326,7 @@ $btn-video-color:                #fff !default;
 $btn-video-bg:                   $color-videos !default;
 $btn-video-border:               $color-videos !default;
 
-$btn-lesson-plan-color:          $brand-grey !default;
+$btn-lesson-plan-color:          $brand-gray !default;
 $btn-lesson-plan-bg:             $color-lesson-plans !default;
 $btn-lesson-plan-border:         $color-lesson-plans !default;
 
@@ -342,7 +342,7 @@ $btn-teachers-notes-color:       #fff !default;
 $btn-teachers-notes-bg:          $color-teachers-notes !default;
 $btn-teachers-notes-border:      $color-teachers-notes !default;
 
-$btn-login-color:               $brand-grey !default;
+$btn-login-color:               $brand-gray !default;
 $btn-login-bg:                  $brand-yellow !default;
 $btn-login-border:              rgba(0,0,0,0.1) !default;
 
@@ -374,7 +374,7 @@ $input-border-focus:             #66afe9 !default;
 $input-box-shadow-focus:         rgba(102,175,233,.6) !default;
 $input-color-focus:              $input-color;
 
-$input-color-placeholder:        $brand-grey !default;
+$input-color-placeholder:        $brand-gray !default;
 
 $input-padding-x-sm:             .5rem !default;
 $input-padding-y-sm:             .25rem !default;

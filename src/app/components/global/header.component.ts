@@ -18,9 +18,17 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleMenu(event) {
-    console.log("toggling menu")
     event.preventDefault()
     this.menuVisible = (this.menuVisible === false) ? true : false
+  }
+  mobileSearch(event) {
+    event.preventDefault()
+    this.menuVisible = true
+    document.getElementById("search").focus()
+  }
+
+  searchDone() {
+    this.menuVisible = false
   }
 
 }

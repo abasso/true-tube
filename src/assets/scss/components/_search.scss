@@ -1,7 +1,7 @@
 
 
 .primary-nav__search {
-  //background:$brand-grey;
+  //background:$brand-gray;
   margin-left: .4rem;
   cursor: pointer;
   display: flex;
@@ -46,7 +46,7 @@
   button {
     cursor: pointer;
     transition: all .4s ease;
-    background: $brand-grey no-repeat center center url('/assets/images/search.svg');
+    background: $brand-gray no-repeat center center url('/assets/images/search.svg');
     background-size: 14px;
     width: 40px;
     height: 40px;
@@ -57,6 +57,7 @@
     top: 0;
     margin: 0;
     border: solid 4px $gray-lightest;
+    outline:none;
   }
   &:hover, &.active {
     @media(min-width: $breakpoint-lg) {
@@ -110,9 +111,9 @@
 //     &:hover, &.active {
 //       button {
 //         background-image: url("/assets/images/search.svg");
-//         background-color:$brand-grey;
+//         background-color:$brand-gray;
 //         &:hover {
-//           background-color:$brand-grey;
+//           background-color:$brand-gray;
 //         }
 //       }
 //     }

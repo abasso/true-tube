@@ -12,13 +12,13 @@
     border-bottom: solid 1px $gray;
     display:inline;
   }
-  background:$brand-grey;
+  background:$brand-gray;
   display:flex;
   flex-direction:column;
   margin-top:1rem;
   .section-title {
     color:white;
-    margin:1.5rem;
+    margin:2.25rem 1.5rem 1.5rem;
     font-weight:400;
   }
   .no-results {

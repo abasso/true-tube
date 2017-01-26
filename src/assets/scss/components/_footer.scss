@@ -39,7 +39,7 @@ footer {
     flex-direction:column;
     margin:2rem;
     @media(max-width: $breakpoint-lg) {
-      margin:1rem;
+      margin:0;
     }
     @media(min-width: $breakpoint-xl) {
       margin:2rem auto;
@@ -52,7 +52,7 @@ footer {
     }
   }
   padding:1rem 0;
-  background:$brand-grey;
+  background:$brand-gray;
   color:$gray;
   font-weight: $font-weight-normal;
 

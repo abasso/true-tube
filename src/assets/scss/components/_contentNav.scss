@@ -42,7 +42,7 @@
       }
       background:$gray-lightest;
       //border:solid 1px $gray-lighter;
-      color:$brand-grey;
+      color:$brand-gray;
       margin: 0 0 0.4rem 0.4rem;
       // span {
       //   font-weight: $font-weight-normal;
@@ -82,7 +82,7 @@
         &.lesson-plans {
           background:$color-lesson-plans;
           border-color:$color-lesson-plans;
-          color:$brand-grey;
+          color:$brand-gray;
           &:after {
             border-top: 20px solid $color-lesson-plans;
           }
@@ -126,7 +126,7 @@
         display:flex;
         background-color:$gray-lightest;
         border:solid 1px $gray-lighter;
-        color:$brand-grey;
+        color:$brand-gray;
       }
     }
 }

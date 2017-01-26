@@ -16,7 +16,7 @@
   border: $input-btn-border-width solid transparent;
   @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, 0);
   @include transition(all .2s ease-in-out);
-  background:$brand-grey;
+  background:$brand-gray;
   color:#fff;
   margin:0 0.1rem 0.4rem;
   &,

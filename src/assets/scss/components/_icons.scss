@@ -227,7 +227,7 @@
 }
 
 .icon-share {
-  background-color:$brand-grey;
+  background-color:$brand-gray;
   &:before {
     content:"";
     background-image: url("/assets/images/share.svg");
@@ -236,7 +236,7 @@
     background-color:$gray-lightest;
     border:solid 1px $gray-lighter;
     border-radius:$border-radius-sm;
-    color:$brand-grey;
+    color:$brand-gray;
     &:before {
       background-image: url("/assets/images/share_black.svg");
       background-position:8px;

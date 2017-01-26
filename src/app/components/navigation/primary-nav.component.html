@@ -4,4 +4,4 @@
 <div class="primary-nav__item primary-nav__account" (click)="auth.logout()" *ngIf="auth.authenticated()"><a href="/patterns/03-pages-04-register/03-pages-04-register.html" class="primary-nav__link">Logout</a></div>
 <div class="primary-nav__item primary-nav__account" (click)="login()" *ngIf="!auth.authenticated()"><a href="" class="primary-nav__link" data-toggle="modal" data-target="#modalLogin">Login</a></div>
 <div class="primary-nav__item primary-nav__account" *ngIf="!auth.authenticated()"><a href="/patterns/03-pages-04-register/03-pages-04-register.html" class="primary-nav__link">Register</a></div>
-<app-search #search class="primary-nav__search" [ngClass]="{'active': search.focussed}"></app-search>
+<app-search #search (searchSubmitted)="searchDone($event)" class="primary-nav__search" [ngClass]="{'active': search.focussed}" ></app-search>

@@ -55,7 +55,7 @@ export class ItemComponent implements OnInit {
       ()=>{
       this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
       })
-    },100)
+    },200)
   }
 
   ngAfterViewInit() {

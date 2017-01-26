@@ -22,7 +22,7 @@
   a {
     color:$brand-red;
     &:hover {
-      color:$brand-grey;
+      color:$brand-gray;
     }
   }
   .content-info-attributes {
@@ -42,7 +42,7 @@
     font-size:$font-size-lg;
     font-weight: $font-weight-normal;
     a {
-      color:$brand-grey;
+      color:$brand-gray;
       &:hover {
         &:before {
           background-color:$brand-yellow;

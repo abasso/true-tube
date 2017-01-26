@@ -1,7 +1,7 @@
 <div id="calendar-wrap">
   <div class="content-header wrap-title m-t-1 m-b-2 p-b-1">
 
-    <h1 class="page-title">Events {{selectedMonthString}}</h1>
+    <h1 class="page-title"> {{selectedMonthString}} <span>({{eventCount}} Events)</span> </h1>
     <div class="month-selector">
       <a href="#" (click)="prevMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 0}" class="icon-circle-left icon-large icon-left text-link"><span>Previous month</span></a>
       <a href="#" (click)="nextMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 11}" class="icon-circle-right icon-large icon-right text-link"><span>Next month</span></a>

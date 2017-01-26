@@ -11,24 +11,16 @@ export class AccessibilityNavComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.setDyslexiaFont()
+    if(Cookies.get("dyslexia-font")) {
+      this.setDyslexiaFont()
+    }
   }
 
   toggleDyslexiaFont(event) {
+    console.log("TOGGLING")
     event.preventDefault()
-    let body = document.getElementsByTagName('body')[0]
-    let className = 'dyslexia'
-    if (body.classList) {
-      body.classList.toggle(className)
-    } else {
-      var classes = body.className.split(' ')
-      var existingIndex = classes.indexOf(className)
-      if (existingIndex >= 0)
-        classes.splice(existingIndex, 1)
-      else
-        classes.push(className)
-      body.className = classes.join(' ')
-    }
+    this.setDyslexiaFont()
+    this.setDyslexiaCookie()
   }
 
   enlargeFont(event) {
@@ -45,12 +37,30 @@ export class AccessibilityNavComponent implements OnInit {
     body.setAttribute('style', 'font-size:' + fontSize + 'px')
   }
 
-  // setDyslexiaFont() {
-  //   let body = document.getElementsByTagName('body')[0]
-  //   if(_.isUndefined(Cookies.get("dyslexia-font"))) {
-  //     body.classList.classList.add('dyslexia')
-  //   }
-  // }
+  setDyslexiaCookie() {
+    console.log("SETTING DYSLEXIA FONT")
+    if(Cookies.get("dyslexia-font")) {
+      Cookies.remove("dyslexia-font")
+    } else {
+      Cookies.set("dyslexia-font")
+    }
+  }
+
+  setDyslexiaFont() {
+    let body = document.getElementsByTagName('body')[0]
+    let className = 'dyslexia'
+    if (body.classList) {
+      body.classList.toggle(className)
+    } else {
+      var classes = body.className.split(' ')
+      var existingIndex = classes.indexOf(className)
+      if (existingIndex >= 0)
+        classes.splice(existingIndex, 1)
+      else
+        classes.push(className)
+      body.className = classes.join(' ')
+    }
+  }
 
 
 }

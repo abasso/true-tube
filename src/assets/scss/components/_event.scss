@@ -8,6 +8,11 @@
       align-items: center;
       border-bottom: solid 1px $gray-lighter;
     }
+    @media(max-width:$breakpoint-sm) {
+      .page-title {
+        padding-right:2.5rem;
+      }
+    }
     a {
       margin-left: auto;
       display: flex;

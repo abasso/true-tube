@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { SearchComponent } from './search.component'
 import { ListFilter } from './../content/listing/filter.component'
 import { ContentTypes } from './../../definitions/content-types'
@@ -12,7 +12,9 @@ import _ from 'lodash'
   templateUrl: './primary-nav.component.html'
 })
 export class PrimaryNavComponent implements OnInit {
+  @Output() searchSubmitted = new EventEmitter()
   private items: any[]
+  public aSearchValue
   private item = ItemComponent
   constructor(private filter: ListFilter, private listService: ListService, private auth: Auth) {
     this.items = _.filter(ContentTypes, {inMenu: true})
@@ -26,6 +28,10 @@ export class PrimaryNavComponent implements OnInit {
   resetRootPath(event, query) {
     event.preventDefault()
     this.listService.resetCurrentPath(query)
+  }
+
+  searchDone(event) {
+    this.searchSubmitted.emit(event)
   }
 
   login() {

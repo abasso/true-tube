@@ -37,7 +37,7 @@
     }
   }
   .call-to-action-link {
-    border-bottom: dotted 1px $brand-grey;
+    border-bottom: dotted 1px $brand-gray;
     font-weight: $font-weight-normal;
     margin-left: auto;
     font-size: 1rem;
@@ -73,7 +73,7 @@
 
 .alt {
   .call-to-action {
-    background: $brand-grey;
+    background: $brand-gray;
     .call-to-action-copy {
       color: white;
     }
@@ -93,12 +93,12 @@
       border-color: $gray;
       color: white;
       border-radius: $border-radius-sm;
-      background: $brand-grey;
+      background: $brand-gray;
       font-weight: 400;
       &:hover {
         border-color: white;
         background: white;
-        color: $brand-grey;
+        color: $brand-gray;
       }
     }
   }

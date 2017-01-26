@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
@@ -6,18 +6,33 @@ import { ActivatedRoute, Router } from '@angular/router'
   templateUrl: './search.component.html'
 })
 export class SearchComponent {
-  private focussed = false
-  constructor(private router: Router) {
-  }
+  @Output() searchSubmitted = new EventEmitter()
+  @ViewChild('input') input:ElementRef
+  private searchText:string = ''
+  private focussed:boolean = false
+  constructor(private router: Router) {}
+
   focus() {
     this.focussed = true
   }
 
   blur() {
-    this.focussed = false
+    if(this.searchText === '') this.focussed = false
+  }
+
+  populateText(event) {
+    this.searchText = event.srcElement.value
+  }
+
+  emptyCheck(event) {
+    if(this.searchText === '') {
+      event.preventDefault()
+      this.input.nativeElement.focus()
+    }
   }
 
   search(event) {
+    this.searchSubmitted.emit(event)
     this.router.navigateByUrl('/list?search=' + event.target.elements[0].value)
 
   }

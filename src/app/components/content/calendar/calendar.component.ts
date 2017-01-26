@@ -10,10 +10,8 @@ import _ from 'lodash'
   styles: []
 })
 export class CalendarComponent implements OnInit {
-  private currentTime = moment()
-  private currentMonth = moment().month(moment().month()).date(1)
-  private currentYear = moment().month(moment().month()).year(1)
-  private currentMonthString = this.currentMonth.format('MMMM YYYY')
+  private currentDate = moment()
+  private currentMonth = this.currentDate.month()
   public selectedMonth: any = new BehaviorSubject(moment().month())
   private selectedMonthString: string
   private month
@@ -23,84 +21,85 @@ export class CalendarComponent implements OnInit {
   public items: any[] = []
   private weeks: any[] = []
   private toHighlight = ''
-  private eventCount: number = 0
+  private eventCount: number
   constructor(public dataService: DataService) {
     this.weeks.length = 42
     this.month = this.selectedMonth.subscribe(
       (month) => {
-        this.selectedMonthString = (this.currentMonth.format("M")-1 === month) ? 'this month' : 'in ' + moment().month(month).format('MMMM')
+        this.selectedMonthString = (this.currentMonth === month) ? 'This Month' : moment().month(month).format('MMMM')
         this.data = this.dataService.events()
         this.subscriber = this.data.subscribe(
           (data) => {
+            this.eventCount = 0
             let days = []
-            let selectedMonth = moment().month(month).date(1)
-            let currentMonthStartDay = selectedMonth.format('d')
+            let selectedMonth = moment({'M': month})
+            let currentMonthStartDay = selectedMonth.startOf("month").day()
             let previousMonthEndDate = moment().month(month-1).daysInMonth()
             let startDateOffset = previousMonthEndDate - currentMonthStartDay + 1
             let monthStart = 1
             let nextMonthStart = 1
+            console.log(selectedMonth)
+            console.log(currentMonthStartDay)
             for(let i = 0; i<=41; i++) {
-              if(currentMonthStartDay === '0') {
+              if(currentMonthStartDay === 1) {
                 if(monthStart <= selectedMonth.daysInMonth()) {
                   days.splice(i, 0, {
-                    date: monthStart++,
-                    month: parseInt(selectedMonth.format('M'))
+                    day: monthStart++,
+                    month: selectedMonth.month()
                   })
                 } else {
                   days.splice(i, 0, {
-                    date: nextMonthStart++,
-                    month: parseInt(selectedMonth.format('M'))+1,
+                    day: nextMonthStart++,
+                    month: selectedMonth.month() + 1,
                     css: 'other-month next-month'
                   })
                 }
               } else {
                 if(startDateOffset < previousMonthEndDate) {
                   days.splice(i, 0, {
-                    date: ++startDateOffset,
-                    month: parseInt(selectedMonth.format('M'))-1,
+                    day: ++startDateOffset,
+                    month: selectedMonth.month() - 1,
                     css: 'other-month previous-month'
                   })
                 } else if(monthStart <= selectedMonth.daysInMonth()) {
                   days.splice(i, 0, {
-                    date: monthStart++,
-                    month: parseInt(selectedMonth.format('M')),
+                    day: monthStart++,
+                    month: selectedMonth.month(),
                   })
                 } else {
                   days.splice(i, 0, {
-                    date: nextMonthStart++,
-                    month: parseInt(selectedMonth.format('M'))+1,
+                    day: nextMonthStart++,
+                    month: selectedMonth.month() + 1,
                     css: 'other-month next-month'
                   })
                 }
               }
             }
             this.items = _.sortBy(data.hits.hits, 'date').reverse()
+            _.each(this.items, (item) => {
+              if (moment(item._source.date).month() === selectedMonth.month()) this.eventCount++
+            })
             let multiLineEvents = []
             _.each(days, (day) => {
               day.events = []
               _.each(this.items, (event, index) => {
-                event.startDate = event._source.date
-                event.endDate = event.startDate
+                event.startDate = moment(event._source.date)
+                event.endDate = moment(event.startDate)
+                console.log(event.startDate)
                 // event.endDate = '2017-01-29'
                 if(event._source.title === "Hanukkah") {
-                  event.endDate = '2017-01-01'
+                  event.endDate = moment('2017-01-01')
                 }
                 if(event._source.title === "LGBT History Month") {
-                  event.endDate = '2017-02-28'
+                  event.endDate = moment('2017-02-28')
                 }
-                event.startDateArray = event.startDate.split('-')
-                event.startDay = parseInt(event.startDateArray[2])
-                event.startMonth = parseInt(event.startDateArray[1])
-                event.startYear = parseInt(event.startDateArray[0])
-                event.endDateArray = event.endDate.split('-')
-                event.endDay = parseInt(event.endDateArray[2])
-                event.endMonth = parseInt(event.endDateArray[1])
-                event.endYear = parseInt(event.endDateArray[0])
                 event.title = event._source.title
                 event.link = "/event/" + event._id
                 let eventClone = _.clone(event, true)
                   // If the day is the same as the start date and the month is the same as the start month
-                  if(day.date === event.startDay && day.month === event.startMonth) {
+                  if(day.day === event.startDate.date() && day.month === event.startDate.month()) {
+                    console.log("ITS A START DATE THIS MONTH AND THE EVENT IS", event.title)
+                    console.log("ON THIS DAY", day.day)
                     if(_.isUndefined(event.index)) {
                       // If there is already an event array
                       if(day.events.length) {
@@ -121,28 +120,32 @@ export class CalendarComponent implements OnInit {
                     }
                     eventClone.css = ''
                     event.css = ''
-                    if(event.startDate !== event.endDate) eventClone.css += ' event-start'
+                    if(!event.startDate.isSame(event.endDate)) eventClone.css += ' event-start'
                     let characterCount = event._source.title.length
-                    if(characterCount > 20 && day.date % 7 == 0) {
+                    if(characterCount > 20 && day.day % 7 == 0) {
                       eventClone.css += ' event-two-lines'
                       event.css += ' event-two-lines'
                       event.multiLine = eventClone.multiLine = true
                       multiLineEvents.push(event.index)
                     }
-                    if(characterCount > 40 && day.date % 7 == 0) {
+                    if(characterCount > 40 && day.day % 7 == 0) {
                       eventClone.css = event.css += ' event-three-lines'
                       event.multiLine = eventClone.multiLine = true
                     }
                     // Else if the day date is equal to the end date and the day month is the same as the event end month
-                  } else if (day.date === event.endDay && day.month === event.endMonth) {
+                  } else if (day.day === event.endDate.date() && day.month === event.endDate.month()) {
+                    console.log("ITS AN END DATE THIS MONTH AND THE EVENT IS", event.title)
+                    console.log("ON THIS DAY", day.day)
                     if(day.events.length === 0) event.index = eventClone.index = 0
                     eventClone.css += ' event-end'
-                  } else if(moment({M: day.month -1, d: day.date}).isBetween(event.startDate, event.endDate, 'day', '[]')) {
+                  } else if(moment({M: day.month, d: day.day}).isBetween(event.startDate, event.endDate, 'day', '[]')) {
+                    console.log("ITS A BRIDGE DATE THIS MONTH AND THE EVENT IS", event.title)
+                    console.log("ON THIS DAY", day.day)
                     if(day.events.length === 0) event.index = eventClone.index = 0
                     //if(day.events.length === 0) event.index = eventClone.index = 0
                     eventClone.css += ' event-multi'
                   }
-                if(moment({M: day.month -1, d: day.date}).isBetween(event.startDate, event.endDate, 'day', '[]')) day.events[event.index] = eventClone
+                if(moment({M: day.month, d: day.day}).isBetween(event.startDate, event.endDate, 'day', '[]')) day.events[event.index] = eventClone
               })
 
               _.each(day.events, (event, index, collection) => {
