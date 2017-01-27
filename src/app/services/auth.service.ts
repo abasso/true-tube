@@ -12,7 +12,7 @@ export class Auth {
 
   constructor() {
     // Add callback for lock `authenticated` event
-    this.lock.on('authenticated', (authResult) => {
+    this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem('id_token', authResult.idToken);
     });
   }

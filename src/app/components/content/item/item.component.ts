@@ -6,8 +6,8 @@ import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
 import { ActivatedRoute, Router, Params } from '@angular/router'
 import { Auth } from './../../../services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
-import moment from 'moment'
-import _ from 'lodash'
+import * as moment from 'moment'
+import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
 
 declare var videojs: any
@@ -25,9 +25,9 @@ export class ItemComponent implements OnInit {
   private showEmbed: boolean = false
   private embedButtonLabel: string = 'Copy'
   private embedButtonClass: string = 'btn-video'
-  private embeddedContent: any[] = []
+  private embeddedContent: any = []
   private activeTab: string = 'film'
-  private videoJSplayer
+  private videoJSplayer: any
   @ViewChild('player') player:ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -71,34 +71,34 @@ export class ItemComponent implements OnInit {
     //alert('DESTROYING THE VIEWWWWW');
   }
 
-  hasAttributes(attribute) {
+  hasAttributes(attribute: any) {
     return (_.isUndefined(attribute) || attribute === null || attribute === false || attribute.length === 0) ? false : true
   }
 
-  navigateAttribute(event, type, attribute) {
+  navigateAttribute(event: any, type: string, attribute: string) {
     event.preventDefault()
     this.router.navigateByUrl('/list?' + type + '=' + attribute)
   }
 
-  duration(seconds) {
-    return moment("2017-01-01").startOf('day').seconds(seconds).format('mm:ss')
+  duration(seconds: number) {
+    return moment('2017-01-01').startOf('day').seconds(seconds).format('mm:ss')
   }
 
-  age(seconds) {
+  age(seconds: number) {
     return moment.unix(seconds).fromNow()
   }
 
-  toggleEmbed(event) {
+  toggleEmbed(event: any) {
     event.preventDefault()
     return this.showEmbed = (this.showEmbed) ? false : true
   }
 
-  setActiveTab(event) {
+  setActiveTab(event: any) {
     this.activeTab = event
     if(event !== 'film') this.videoJSplayer.pause()
   }
 
-  embedCopySuccess(event) {
+  embedCopySuccess(event: any) {
     this.embedButtonLabel = 'Copied'
     this.embedButtonClass = 'btn-success'
     setTimeout(() => {

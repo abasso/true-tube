@@ -1,29 +1,31 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../services/data.service'
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx'
-import moment from 'moment'
-import _ from 'lodash'
+import * as moment from 'moment'
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-events-block',
   templateUrl: './events.component.html'
 })
 export class EventsBlockComponent implements OnInit {
-  private currentTime = moment()
+  private currentTime: any = moment()
   public selectedMonth: any = new BehaviorSubject(moment().month())
   private selectedMonthString: string
-  private month
-  private data
-  private subscriber
+  private month: any
+  private data: any
+  private subscriber: any
   private noEvents: boolean = true
   public items: any[] = []
-  constructor(public dataService: DataService) {
+  constructor(
+    public dataService: DataService
+  ) {
     this.month = this.selectedMonth.subscribe(
-      (month) => {
+      (month: any) => {
         this.selectedMonthString = (this.currentTime.month() === month) ? "this month" : "in " + moment().month(month).format("MMMM")
         this.data = this.dataService.events(month)
         this.subscriber = this.data.subscribe(
-          (data) => {
+          (data: any) => {
             this.items = _.sortBy(data.hits.hits, "date").reverse()
             this.noEvents = (this.items.length) ? false : true
             if(this.items.length) {
@@ -41,18 +43,18 @@ export class EventsBlockComponent implements OnInit {
   ngOnInit() {
   }
 
-  prevMonth(event) {
+  prevMonth(event: any) {
     event.preventDefault()
-    let currentMonth = this.selectedMonth.getValue()
+    let currentMonth: any = this.selectedMonth.getValue()
     if(currentMonth !== 0) {
       this.selectedMonth.next(currentMonth - 1)
     }
 
   }
 
-  nextMonth(event) {
+  nextMonth(event: any) {
     event.preventDefault()
-    let currentMonth = this.selectedMonth.getValue()
+    let currentMonth: any = this.selectedMonth.getValue()
     if(currentMonth !== 11) {
       this.selectedMonth.next(currentMonth + 1)
     }

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import _ from 'lodash'
+import * as _ from 'lodash'
 
 @Pipe({
   name: 'AttributePipe'
@@ -13,7 +13,7 @@ export class AttributePipe implements PipeTransform {
     })
     _.each(value, (attribute, index) => {
       let attributeObject = {
-        label: (index !== value.length -1) ? attribute + ',&nbsp;' : attribute,
+        label: (parseInt(index) !== value.length -1) ? attribute + ',&nbsp;' : attribute,
         slug: _.lowerCase(attribute)
       }
       attributes.push(attributeObject)

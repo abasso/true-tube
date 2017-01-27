@@ -5,8 +5,7 @@ import { DataService } from './../../../services/data.service'
 import { ListService } from './../../../services/list.service'
 import { Categories } from './../../../definitions/categories'
 import { ContentTypes } from './../../../definitions/content-types'
-
-import _ from 'lodash'
+import * as _ from 'lodash'
 
 @Component({
   selector: 'home-list',
@@ -53,17 +52,17 @@ export class HomeListingComponent implements OnInit {
   ngOnInit() {
     this.sortBy
     .subscribe(
-      (data) => {
+      (data: any) => {
         this.data = this.dataService.list(data)
-        let result = this.data.subscribe(
-          (data) => {
+        let result: any = this.data.subscribe(
+          (data: any) => {
             _.each(data.hits.hits, (item) => {
               item.typesCount = _.countBy(item._source.embedded, 'type')
               item.contenttypes = []
               _.each(item.typesCount, (type, key) => {
                 _.each(ContentTypes, (contentType) => {
                   if(contentType.term === key && contentType.inMenu === true) {
-                    let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
+                    let typestring: any = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
                     item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')})
                   }
                 })
@@ -91,13 +90,13 @@ export class HomeListingComponent implements OnInit {
     )
   }
 
-  sort(event, sortBy) {
+  sort(event: any, sortBy: any) {
     event.preventDefault();
     this.sortBy.next(sortBy);
     this.paginationData.itemsPerPageCurrent = 12
   }
 
-  loadMore(event) {
+  loadMore(event: any) {
     event.preventDefault();
     this.loadMoreCount = this.loadMoreCount + 12
     this.paginationData.itemsPerPageCurrent = this.loadMoreCount

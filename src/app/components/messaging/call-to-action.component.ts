@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import Cookies from 'js-cookie'
-import _ from 'lodash'
+import * as Cookies from 'js-cookie'
+import * as _ from 'lodash'
 @Component({
   selector: 'app-call-to-action',
   templateUrl: './call-to-action.component.html'
@@ -19,26 +19,7 @@ export class CallToActionComponent implements OnInit {
     }
   }
 
-  // toggleDyslexiaFont(event) {
-  //   event.preventDefault()
-  //   this.dyslexiaEnabled = (this.dyslexiaEnabled) ? false : true
-  //   this.dyslexiaLabel = (this.dyslexiaEnabled) ? 'Standard Font' : 'Dyslexia Font'
-  //   let body = document.getElementsByTagName('body')[0]
-  //   let className = 'dyslexia'
-  //   if (body.classList) {
-  //     body.classList.toggle(className)
-  //   } else {
-  //     var classes = body.className.split(' ')
-  //     var existingIndex = classes.indexOf(className)
-  //     if (existingIndex >= 0)
-  //       classes.splice(existingIndex, 1)
-  //     else
-  //       classes.push(className)
-  //     body.className = classes.join(' ')
-  //   }
-  // }
-
-  toggleDyslexiaFont(event) {
+  toggleDyslexiaFont(event: any) {
     this.dyslexiaEnabled = (this.dyslexiaEnabled) ? false : true
     this.dyslexiaLabel = (this.dyslexiaEnabled) ? 'Standard Font' : 'Dyslexia Font'
     event.preventDefault()
@@ -46,17 +27,17 @@ export class CallToActionComponent implements OnInit {
     this.setDyslexiaCookie()
   }
 
-  enlargeFont(event) {
+  enlargeFont(event: any) {
     event.preventDefault()
-    let body = document.getElementsByTagName('body')[0]
-    let fontSize = this.fontSize++
+    let body: any = document.getElementsByTagName('body')[0]
+    let fontSize: any = this.fontSize++
     body.setAttribute('style', 'font-size:' + fontSize + 'px')
   }
 
-  reduceFont(event) {
+  reduceFont(event: any) {
     event.preventDefault()
-    let body = document.getElementsByTagName('body')[0]
-    let fontSize = this.fontSize--
+    let body: any = document.getElementsByTagName('body')[0]
+    let fontSize: any = this.fontSize--
     body.setAttribute('style', 'font-size:' + fontSize + 'px')
   }
 
@@ -69,13 +50,13 @@ export class CallToActionComponent implements OnInit {
   }
 
   setDyslexiaFont() {
-    let body = document.getElementsByTagName('body')[0]
-    let className = 'dyslexia'
+    let body: any = document.getElementsByTagName('body')[0]
+    let className: string = 'dyslexia'
     if (body.classList) {
       body.classList.toggle(className)
     } else {
-      var classes = body.className.split(' ')
-      var existingIndex = classes.indexOf(className)
+      let classes: any = body.className.split(' ')
+      let existingIndex: any = classes.indexOf(className)
       if (existingIndex >= 0)
         classes.splice(existingIndex, 1)
       else

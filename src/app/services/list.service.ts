@@ -1,35 +1,35 @@
-import { Injectable, Output } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Injectable, Output } from '@angular/core'
+import { Subject } from 'rxjs/Subject'
 
-import _ from 'lodash';
+import * as _ from 'lodash'
 
 @Injectable()
 export class ListService {
 
-  private resetCurrentPathSource = new Subject();
+  private resetCurrentPathSource = new Subject()
 
-  pathToReset$ = this.resetCurrentPathSource.asObservable();
+  pathToReset$ = this.resetCurrentPathSource.asObservable()
 
-  resetCurrentPath(query:any) {
-    this.resetCurrentPathSource.next(query);
+  resetCurrentPath(query: any) {
+    this.resetCurrentPathSource.next(query)
   }
 
-  stringifyTitleArray(array) {
-    array = _.filter(array, {active: true});
-    array = _.map(array, 'label');
-    let arrayString = array.join(', ');
-    return arrayString.replace(/,([^,]*)$/, ' & $1');
+  stringifyTitleArray(array: any[]) {
+    array = _.filter(array, {active: true})
+    array = _.map(array, 'label')
+    let arrayString: string = array.join(', ')
+    return arrayString.replace(/,([^,]*)$/, ' & $1')
   }
 
-  pageTitle(subject, keystages, types, term, categories, topics) {
-    categories = (_.isUndefined(categories) || categories === '') ? '' : categories;
-    topics = (_.findIndex(types, { 'active': true}) === -1 || (_.findLastIndex(types, { 'active': true}) === types.length)) ? this.stringifyTitleArray(topics) : '';
-    if (topics !== '') categories = '';
-    subject = (subject === 'All') ? '' : subject;
-    keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages);
-    types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types);
-    term = (term === null || term === '') ? '' : term;
-    if(categories === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content';
-    return categories + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types;
+  pageTitle(subject: string, keystages: any[], types: any[], term: string, categories: string, topics: any[]) {
+    let categoriesString: string = (_.isUndefined(categories) || categories === '') ? '' : categories
+    let topicsString: string = (_.findIndex(types, { 'active': true}) === -1 || (_.findLastIndex(types, { 'active': true}) === types.length)) ? this.stringifyTitleArray(topics) : ''
+    let subjectString: string = (subject === 'All') ? '' : subject
+    let keystagesString: string = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages)
+    let typesString: string = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types)
+    let termString: string = (term === null || term === '') ? '' : term
+    if (topicsString !== '') categoriesString = ''
+    if(categoriesString === '' && topicsString === '' && subjectString === '' && keystagesString === '' && typesString === '' && termString === '') return 'All Content'
+    return categoriesString + ' ' + topicsString + ' ' + subjectString + ' ' + keystagesString + ' ' + termString + ' ' + typesString
   }
 }

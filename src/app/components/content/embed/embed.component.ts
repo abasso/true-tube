@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { ActivatedRoute, Router, Params } from '@angular/router'
 import { DataService } from './../../../services/data.service'
-import _ from 'lodash'
+import * as _ from 'lodash'
 
 declare var videojs: any
 
@@ -11,7 +11,7 @@ declare var videojs: any
 })
 export class EmbedComponent implements OnInit {
 
-  private videoJSplayer
+  private videoJSplayer: any
   private data: any
   private item: any
   @ViewChild('player') player:ElementRef
@@ -28,7 +28,6 @@ export class EmbedComponent implements OnInit {
       (data) => {
         this.item = _.find(data._source.embedded, {type: 'film'})
         if(this.item.thumbnail === null) this.item.thumbnail = this.item.thumbnail
-        console.log(this.item);
       }
     )
     setTimeout(

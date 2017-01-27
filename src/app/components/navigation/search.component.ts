@@ -10,7 +10,9 @@ export class SearchComponent {
   @ViewChild('input') input:ElementRef
   private searchText:string = ''
   private focussed:boolean = false
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router
+  ) {}
 
   focus() {
     this.focussed = true
@@ -20,18 +22,18 @@ export class SearchComponent {
     if(this.searchText === '') this.focussed = false
   }
 
-  populateText(event) {
+  populateText(event: any) {
     this.searchText = event.srcElement.value
   }
 
-  emptyCheck(event) {
+  emptyCheck(event: any) {
     if(this.searchText === '') {
       event.preventDefault()
       this.input.nativeElement.focus()
     }
   }
 
-  search(event) {
+  search(event: any) {
     this.searchSubmitted.emit(event)
     this.router.navigateByUrl('/list?search=' + event.target.elements[0].value)
 

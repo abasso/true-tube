@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Categories } from './../../definitions/categories';
-import { QueryStringPipe } from './../../pipes/query-string.pipe';
+import { Component } from '@angular/core'
+import { Categories } from './../../definitions/categories'
+import { QueryStringPipe } from './../../pipes/query-string.pipe'
 
 @Component({
   selector: 'app-secondary-nav',
@@ -10,5 +10,5 @@ import { QueryStringPipe } from './../../pipes/query-string.pipe';
   ]
 })
 export class SecondaryNavComponent {
-  private categories: any[] = Categories;
+  private categories: any[] = Categories
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx'
-import { HomeListingComponent } from "./list.component"
+import { HomeListingComponent } from './list.component'
 import { DataService } from './../../../services/data.service'
 import { Categories } from './../../../definitions/categories'
-import _ from "lodash"
-import Cookies from 'js-cookie'
+import * as Cookies from 'js-cookie'
+import * as _ from 'lodash'
 
 @Component({
   selector: 'home-sort',
@@ -21,13 +21,13 @@ export class HomeSortComponent {
 
   constructor(private ListingComponent: HomeListingComponent, public dataService: DataService) {
     this.itemsPerPage = [
-      "12",
-      "24",
-      "48",
-      "All"
+      '12',
+      '24',
+      '48',
+      'All'
     ]
 
-    this.setListDisplay((_.isUndefined(Cookies.get("list-display"))) ? "grid" : Cookies.get("list-display"))
+    this.setListDisplay((_.isUndefined(Cookies.get('list-display'))) ? 'grid' : Cookies.get('list-display'))
     this.currentPage = 0
     this.ListingComponent.paginationData.itemsPerPageCurrent = 12
     this.ListingComponent.paginationData.pages = []
@@ -38,14 +38,14 @@ export class HomeSortComponent {
     this.ListingComponent.paginationData.currentPage = this.currentPage
   }
 
-  setPage(event) {
+  setPage(event: any) {
     event.preventDefault()
     this.ListingComponent.paginationData.currentPage = event.target.value
   }
 
-  setItemsPerPage(event) {
+  setItemsPerPage(event: any) {
     event.preventDefault()
-    Cookies.set("items-per-page", event.target.value)
+    Cookies.set('items-per-page', event.target.value)
     this.ListingComponent.paginationData.itemsPerPageCurrent = event.target.value
     this.ListingComponent.paginationData.totalPages = Math.ceil(this.ListingComponent.paginationData.totalItems / this.ListingComponent.paginationData.itemsPerPageCurrent)
     this.ListingComponent.paginationData.pages = []
@@ -54,22 +54,22 @@ export class HomeSortComponent {
     this.ListingComponent.paginationData.currentPage = 0
   }
 
-  hideDescriptions(event) {
+  hideDescriptions(event: any) {
     this.ListingComponent.showDescriptions = (this.ListingComponent.showDescriptions === true) ? false : true
   }
 
-  setListDisplay(type) {
-    Cookies.set("list-display", type)
-    this.ListingComponent.displayGrid = (type === "grid") ? true : false
-    this.ListingComponent.displayList = (type === "list") ? true : false
+  setListDisplay(type: string) {
+    Cookies.set('list-display', type)
+    this.ListingComponent.displayGrid = (type === 'grid') ? true : false
+    this.ListingComponent.displayList = (type === 'list') ? true : false
   }
 
-  listDisplayClick(event, type) {
+  listDisplayClick(event: any, type: string) {
     event.preventDefault()
     this.setListDisplay(type)
   }
 
-  loadMore(event) {
+  loadMore(event: any) {
     event.preventDefault()
     this.loadMoreCount = this.loadMoreCount + 12
     this.ListingComponent.paginationData.itemsPerPageCurrent = this.loadMoreCount

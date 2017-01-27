@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './../../../services/data.service'
 import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx'
-import moment from 'moment'
-import _ from 'lodash'
+import * as moment from 'moment'
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-calendar',
@@ -10,36 +10,34 @@ import _ from 'lodash'
   styles: []
 })
 export class CalendarComponent implements OnInit {
-  private currentDate = moment()
-  private currentMonth = this.currentDate.month()
+  private currentDate: any = moment()
+  private currentMonth: any = this.currentDate.month()
   public selectedMonth: any = new BehaviorSubject(moment().month())
   private selectedMonthString: string
-  private month
-  private data
-  private subscriber
+  private month: any
+  private data: any
+  private subscriber: any
   private noEvents: boolean = true
   public items: any[] = []
   private weeks: any[] = []
-  private toHighlight = ''
+  private toHighlight: string = ''
   private eventCount: number
   constructor(public dataService: DataService) {
     this.weeks.length = 42
     this.month = this.selectedMonth.subscribe(
-      (month) => {
+      (month: any) => {
         this.selectedMonthString = (this.currentMonth === month) ? 'This Month' : moment().month(month).format('MMMM')
         this.data = this.dataService.events()
         this.subscriber = this.data.subscribe(
-          (data) => {
+          (data: any) => {
             this.eventCount = 0
-            let days = []
-            let selectedMonth = moment({'M': month})
-            let currentMonthStartDay = selectedMonth.startOf("month").day()
-            let previousMonthEndDate = moment().month(month-1).daysInMonth()
-            let startDateOffset = previousMonthEndDate - currentMonthStartDay + 1
-            let monthStart = 1
-            let nextMonthStart = 1
-            console.log(selectedMonth)
-            console.log(currentMonthStartDay)
+            let days: any[] = []
+            let selectedMonth: any = moment({'M': month})
+            let currentMonthStartDay: any = selectedMonth.startOf("month").day()
+            let previousMonthEndDate: any = moment().month(month-1).daysInMonth()
+            let startDateOffset: number = previousMonthEndDate - currentMonthStartDay + 1
+            let monthStart: number = 1
+            let nextMonthStart: number = 1
             for(let i = 0; i<=41; i++) {
               if(currentMonthStartDay === 1) {
                 if(monthStart <= selectedMonth.daysInMonth()) {
@@ -79,14 +77,12 @@ export class CalendarComponent implements OnInit {
             _.each(this.items, (item) => {
               if (moment(item._source.date).month() === selectedMonth.month()) this.eventCount++
             })
-            let multiLineEvents = []
+            let multiLineEvents: any[] = []
             _.each(days, (day) => {
               day.events = []
               _.each(this.items, (event, index) => {
                 event.startDate = moment(event._source.date)
                 event.endDate = moment(event.startDate)
-                console.log(event.startDate)
-                // event.endDate = '2017-01-29'
                 if(event._source.title === "Hanukkah") {
                   event.endDate = moment('2017-01-01')
                 }
@@ -95,13 +91,9 @@ export class CalendarComponent implements OnInit {
                 }
                 event.title = event._source.title
                 event.link = "/event/" + event._id
-                let eventClone = _.clone(event, true)
-                  // If the day is the same as the start date and the month is the same as the start month
+                let eventClone: any = _.clone(event)
                   if(day.day === event.startDate.date() && day.month === event.startDate.month()) {
-                    console.log("ITS A START DATE THIS MONTH AND THE EVENT IS", event.title)
-                    console.log("ON THIS DAY", day.day)
                     if(_.isUndefined(event.index)) {
-                      // If there is already an event array
                       if(day.events.length) {
                         // Itterate over the existing events
                         _.each(day.events, (dayEvent) => {
@@ -121,7 +113,7 @@ export class CalendarComponent implements OnInit {
                     eventClone.css = ''
                     event.css = ''
                     if(!event.startDate.isSame(event.endDate)) eventClone.css += ' event-start'
-                    let characterCount = event._source.title.length
+                    let characterCount: number = event._source.title.length
                     if(characterCount > 20 && day.day % 7 == 0) {
                       eventClone.css += ' event-two-lines'
                       event.css += ' event-two-lines'
@@ -134,13 +126,9 @@ export class CalendarComponent implements OnInit {
                     }
                     // Else if the day date is equal to the end date and the day month is the same as the event end month
                   } else if (day.day === event.endDate.date() && day.month === event.endDate.month()) {
-                    console.log("ITS AN END DATE THIS MONTH AND THE EVENT IS", event.title)
-                    console.log("ON THIS DAY", day.day)
                     if(day.events.length === 0) event.index = eventClone.index = 0
                     eventClone.css += ' event-end'
                   } else if(moment({M: day.month, d: day.day}).isBetween(event.startDate, event.endDate, 'day', '[]')) {
-                    console.log("ITS A BRIDGE DATE THIS MONTH AND THE EVENT IS", event.title)
-                    console.log("ON THIS DAY", day.day)
                     if(day.events.length === 0) event.index = eventClone.index = 0
                     //if(day.events.length === 0) event.index = eventClone.index = 0
                     eventClone.css += ' event-multi'
@@ -148,7 +136,7 @@ export class CalendarComponent implements OnInit {
                 if(moment({M: day.month, d: day.day}).isBetween(event.startDate, event.endDate, 'day', '[]')) day.events[event.index] = eventClone
               })
 
-              _.each(day.events, (event, index, collection) => {
+              _.each(day.events, (event: any, index: any, collection: any) => {
                 if(_.isUndefined(event)) {
                   collection[index] = {
                     css: ' event-placeholder',
@@ -177,25 +165,25 @@ export class CalendarComponent implements OnInit {
     )
   }
 
-  highlightEvent(event, index) {
+  highlightEvent(event: any, index: any) {
     this.toHighlight = index
   }
 
   ngOnInit() {
   }
 
-  prevMonth(event) {
+  prevMonth(event: any) {
     event.preventDefault()
-    let currentMonth = this.selectedMonth.getValue()
+    let currentMonth: any = this.selectedMonth.getValue()
     if(currentMonth !== 0) {
       this.selectedMonth.next(currentMonth - 1)
     }
 
   }
 
-  nextMonth(event) {
+  nextMonth(event: any) {
     event.preventDefault()
-    let currentMonth = this.selectedMonth.getValue()
+    let currentMonth: any = this.selectedMonth.getValue()
     if(currentMonth !== 11) {
       this.selectedMonth.next(currentMonth + 1)
     }

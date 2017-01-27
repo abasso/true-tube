@@ -14,7 +14,7 @@ export class TopicsComponent implements OnInit {
   ngOnInit() {
   }
 
-  navigate(event, topic) {
+  navigate(event: any, topic: any) {
     event.preventDefault()
     this.router.navigateByUrl('/list?topics=' + topic)
   }

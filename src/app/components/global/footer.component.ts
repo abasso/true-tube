@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import moment from 'moment'
+import { Component, OnInit } from '@angular/core'
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +7,7 @@ import moment from 'moment'
 })
 export class FooterComponent implements OnInit {
 
-  private currentYear: string = moment().year()
+  private currentYear: number = moment().year()
 
   constructor() { }
 

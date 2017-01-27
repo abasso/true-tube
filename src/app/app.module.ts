@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { RouterModule, Routes } from '@angular/router'
 // import { Location } from '@angular/common'
-import { AUTH_PROVIDERS } from 'angular2-jwt'
+// import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AppComponent } from './app.component'
 import { ListingComponent } from './components/content/listing/list.component'
 import { HeaderComponent } from './components/global/header.component'
@@ -26,22 +26,22 @@ import { EmbedMenuPipe } from './pipes/embed-menu.pipe'
 
 import { Auth } from './services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
-import Moment from 'moment'
-import _ from 'lodash'
-import Cookies from 'js-cookie';
-import { FooterComponent } from './components/global/footer.component';
-import { HomeComponent } from './components/content/home/home.component';
-import { HomeListingComponent } from './components/content/home/list.component';
+import * as moment from 'moment'
+import * as _ from 'lodash'
+import * as Cookies from 'js-cookie'
+import { FooterComponent } from './components/global/footer.component'
+import { HomeComponent } from './components/content/home/home.component'
+import { HomeListingComponent } from './components/content/home/list.component'
 import { HomeSortComponent } from './components/content/home/sort.component'
-import { CarouselComponent } from './components/content/home/carousel.component';
-import { KSSwiperModule } from 'angular2-swiper';
-import { EventsBlockComponent } from './components/shared/events.component';
-import { TopicsComponent } from './components/shared/topics.component';
-import { PageComponent } from './components/content/pages/page.component';
-import { FooterNavComponent } from './components/navigation/footer-nav.component';
-import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component';
-import { CalendarComponent } from './components/content/calendar/calendar.component';
-import { EventComponent } from './components/content/event/event.component';
+import { CarouselComponent } from './components/content/home/carousel.component'
+// import { KSSwiperModule } from 'angular2-swiper'
+import { EventsBlockComponent } from './components/shared/events.component'
+import { TopicsComponent } from './components/shared/topics.component'
+import { PageComponent } from './components/content/pages/page.component'
+import { FooterNavComponent } from './components/navigation/footer-nav.component'
+import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
+import { CalendarComponent } from './components/content/calendar/calendar.component'
+import { EventComponent } from './components/content/event/event.component'
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -94,11 +94,11 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     ClipboardModule,
-    KSSwiperModule,
+    // KSSwiperModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    AUTH_PROVIDERS,
+    // AUTH_PROVIDERS,
     Auth,
     ListFilter,
     ListingComponent,

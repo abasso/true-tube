@@ -1,4 +1,4 @@
-export const Item = [
+export const Item: any = [
   {
   "_index": "resource2",
   "_type": "resource",

@@ -11,7 +11,7 @@ import { Subjects } from './../../../definitions/subjects'
 import { ContentTypes } from './../../../definitions/content-types'
 import { KeyStages } from './../../../definitions/key-stages'
 import { ListService } from './../../../services/list.service'
-import _ from 'lodash'
+import * as _ from 'lodash'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/debounceTime'
 import 'rxjs/add/operator/distinctUntilChanged'
@@ -30,9 +30,9 @@ export class ListFilter implements OnInit {
   private subjects: any[] = Subjects
   private keystages: any[] = KeyStages
   private keywords: any[] = []
-  private category = null
+  private category: any = null
   private currentItemCount: number
-  private items
+  private items: any
   private itemsTotal: number = 0
   private itemsTotalLabel: string = 'Items'
   private filter: FormGroup
@@ -57,7 +57,7 @@ export class ListFilter implements OnInit {
         })
       })
 
-    let formElements = {
+    let formElements: any = {
       term: '',
       subject: '',
       category: ''
@@ -149,11 +149,11 @@ export class ListFilter implements OnInit {
     .subscribe((types) => {
       if(!_.isUndefined(types)) {
         this.resetFilterState(this.types)
-          let typeArray = types.split(',')
+          let typeArray: any[] = types.split(',')
           _.each(typeArray, (type) => {
-            let pathType = _.find(this.types, { slug: type})
+            let pathType: any = _.find(this.types, { slug: type})
             pathType.active = true
-            let patch = {}
+            let patch: any = {}
             patch[pathType.name] = true
             this.filter.patchValue(patch)
           })
@@ -167,11 +167,11 @@ export class ListFilter implements OnInit {
     .subscribe((keystages) => {
       if(!_.isUndefined(keystages)) {
         this.resetFilterState(this.keystages)
-          let keyArray = keystages.split(',')
+          let keyArray: any = keystages.split(',')
           _.each(keyArray, (key) => {
-            let pathKeys = _.find(this.keystages, { slug: key})
+            let pathKeys: any = _.find(this.keystages, { slug: key})
             pathKeys.active = true
-            let patch = {}
+            let patch: any = {}
             patch[pathKeys.name] = true
             this.filter.patchValue(patch)
           })
@@ -218,7 +218,7 @@ export class ListFilter implements OnInit {
     .map(params => params['subject'])
     .subscribe((subject) => {
       if(!_.isUndefined(subject)) {
-        let sub = _.find(this.subjects, {slug: subject})
+        let sub: any = _.find(this.subjects, {slug: subject})
         this.currentParams['subject'] = sub.slug
         this.filterSubjects = sub.label
         this.filter.patchValue({subject: sub.slug})
@@ -236,18 +236,18 @@ export class ListFilter implements OnInit {
     })
   }
 
-  resetFilterState(filter) {
+  resetFilterState(filter: any) {
     _.each(filter, (item) => {
       item.active = false
-      let name = filter.name
+      let name: any = filter.name
       this.filter.patchValue({name: null})
     })
   }
 
-  updateTotal(currentCount, newCount) {
+  updateTotal(currentCount: number, newCount: number) {
 
-    let countSpeed = 3
-    let difference = currentCount - newCount
+    let countSpeed: number = 3
+    let difference: number = currentCount - newCount
 
     if(this.itemsTotal > newCount) {
       countSpeed = (difference > 400) ? 81 : (difference > 200) ? 21 : 11
@@ -281,8 +281,7 @@ export class ListFilter implements OnInit {
     loop()
   }
 
-  search(event) {
-    console.log(event)
+  search(event: any) {
     if(event.key === 'Enter') return
     this.contentLoading = true
     this.currentParams['search'] = event.target.value
@@ -291,7 +290,7 @@ export class ListFilter implements OnInit {
 
   }
 
-  clearTerm(event) {
+  clearTerm(event: any) {
     this.contentLoading = true
     this.filter.patchValue({term: ''})
     delete this.currentParams.search
@@ -301,7 +300,7 @@ export class ListFilter implements OnInit {
     }
   }
 
-  clearSubject(event) {
+  clearSubject(event: any) {
     this.contentLoading = true
     this.filter.patchValue({subject: 'All'})
     this.filterSubjects = 'All'
@@ -315,7 +314,7 @@ export class ListFilter implements OnInit {
   clearCategory() {
     this.category = null
     _.each(this.categories, (category) => {
-      let toClear = {}
+      let toClear: any = {}
       toClear[category.name] = ''
       this.filter.patchValue(toClear)
       category.active = false
@@ -324,17 +323,17 @@ export class ListFilter implements OnInit {
     this.setQueryString()
   }
 
-  clearCategoryAndTopics(event) {
+  clearCategoryAndTopics(event: any) {
     this.contentLoading = true
     this.category = null
     _.each(this.topics, (topic) => {
-      let toClear = {}
+      let toClear: any = {}
       toClear[topic.name] = ''
       this.filter.patchValue(toClear)
       topic.active = false
     })
     _.each(this.categories, (category) => {
-      let toClear = {}
+      let toClear: any = {}
       toClear[category.name] = ''
       this.filter.patchValue(toClear)
       category.active = false
@@ -346,11 +345,11 @@ export class ListFilter implements OnInit {
     }
   }
 
-  clearTopics(event) {
+  clearTopics(event: any) {
     // if(_.isUndefined(this.currentParams.category)) return
     this.contentLoading = true
     _.each(this.topics, (topic) => {
-      let toClear = {}
+      let toClear: any = {}
       toClear[topic.name] = ''
       this.filter.patchValue(toClear)
       topic.active = false
@@ -364,10 +363,10 @@ export class ListFilter implements OnInit {
     }
   }
 
-  clearTypes(event) {
+  clearTypes(event: any) {
     this.contentLoading = true
     _.each(this.types, (type) => {
-      let toClear = {}
+      let toClear: any = {}
       toClear[type.name] = ''
       this.filter.patchValue(toClear)
       type.active = false
@@ -380,7 +379,7 @@ export class ListFilter implements OnInit {
     }
   }
 
-  clearKeystages(event) {
+  clearKeystages(event: any) {
     this.contentLoading = true
     delete this.currentParams.keystages
     this.resetFilterState(this.keystages)
@@ -390,7 +389,7 @@ export class ListFilter implements OnInit {
     }
   }
 
-  clearAll(event) {
+  clearAll(event: any) {
     if(event !== null) event.preventDefault()
     this.contentLoading = true
     this.clearSubject(event)
@@ -401,10 +400,10 @@ export class ListFilter implements OnInit {
     this.clearTerm(event)
   }
 
-  setFilter(event, value) {
+  setFilter(event: any, value: any) {
     if(!_.isUndefined(event)) event.preventDefault()
     this.contentLoading = true
-    let filterQuery = (_.isUndefined(this.currentParams[value.type])) ? [] : this.currentParams[value.type].split(',')
+    let filterQuery: any = (_.isUndefined(this.currentParams[value.type])) ? [] : this.currentParams[value.type].split(',')
     if(value.active) {
       filterQuery.splice(_.indexOf(filterQuery, value.slug), 1)
       value.active = false
@@ -419,14 +418,14 @@ export class ListFilter implements OnInit {
   }
 
   setQueryString() {
-    let appendedQuery = ''
+    let appendedQuery: string = ''
     _.each(this.currentParams, (value, key) => {
       if(value.length) appendedQuery += key + '=' + value.trim() + '&'
     })
     this.router.navigateByUrl('/list?' + appendedQuery)
   }
 
-  setSubject(event: Event) {
+  setSubject(event: any) {
     this.contentLoading = true
     this.filterSubjects = (<HTMLSelectElement>event.srcElement).value
     this.currentParams['subject'] = this.filterSubjects
@@ -434,9 +433,9 @@ export class ListFilter implements OnInit {
     return this.filterSubjects
   }
 
-  setTopics(event) {
+  setTopics(event: any) {
     this.contentLoading = true
-    let paramTopics = (_.isUndefined(this.currentParams.topics)) ? [] : this.currentParams.topics.split(',')
+    let paramTopics: any = (_.isUndefined(this.currentParams.topics)) ? [] : this.currentParams.topics.split(',')
     if(!_.isUndefined(event.preventDefault)) {
       event.preventDefault()
       if(event.target.checked) {
@@ -461,7 +460,7 @@ export class ListFilter implements OnInit {
               this.topics = _.sortBy(category.topics, 'label')
               category.active = true
               this.category.push(category)
-              let patch = {}
+              let patch: any = {}
               patch[topic.name] = true
               this.filter.patchValue(patch)
             }
@@ -487,8 +486,8 @@ export class ListFilter implements OnInit {
     this.setQueryString()
   }
 
-  displayTopics(event) {
-    let value = event
+  displayTopics(event: any) {
+    let value: any = event
     if(!_.isUndefined(event.preventDefault)) {
       event.preventDefault()
       value = event.target.id
@@ -499,13 +498,13 @@ export class ListFilter implements OnInit {
     this.currentCategoryString = this.category[0].label
     this.topics = _.sortBy(this.category[0].topics, 'label')
     _.each(this.categories, (category) => {
-      let toClear = {}
+      let toClear: any = {}
       toClear[category.name] = ''
       this.filter.patchValue(toClear)
       category.active = false
     })
     _.each(this.topics, (topic) => {
-      let toClear = {}
+      let toClear: any = {}
       toClear[topic.name] = ''
       this.filter.patchValue(toClear)
       topic.active = false
@@ -515,7 +514,7 @@ export class ListFilter implements OnInit {
     this.setQueryString()
 
     this.category[0].active = true
-    let toSet = {}
+    let toSet: any = {}
     toSet[value] = true
     this.filter.patchValue(toSet)
     _.each(this.topics, (topic) => {
@@ -523,7 +522,7 @@ export class ListFilter implements OnInit {
     })
   }
 
-  checkboxesActive(data) {
+  checkboxesActive(data: any) {
     return (_.findIndex(data, { 'active': true}) !== -1) ? true : false
   }
 
@@ -531,27 +530,27 @@ export class ListFilter implements OnInit {
     return (this.filter.value.term || this.filterSubjects !== 'All' || _.findIndex(this.types, { 'active': true}) != -1 || _.findIndex(this.keystages, { 'active': true}) != -1 || this.category !== null ) ? true : false
   }
 
-  subjectsActive(subject) {
+  subjectsActive(subject: any) {
     return (subject !== 'All') ? true : false
   }
 
-  isActive(collection) {
-    let isActive = false
+  isActive(collection: any) {
+    let isActive: boolean = false
     _.each(collection, (item) => {
       if(item.active === true) isActive = true
     })
     return isActive
   }
 
-  toggleFilter(event) {
+  toggleFilter(event: any) {
     event.preventDefault()
     if(event.target.tagName === 'SPAN') return
-    let parent = event.target.parentElement.parentElement
+    let parent: any = event.target.parentElement.parentElement
     if (parent.classList) {
       parent.classList.toggle('collapsed')
     } else {
-      let classes = parent.className.split(' ')
-      let i = classes.indexOf('collapsed')
+      let classes: any = parent.className.split(' ')
+      let i: any = classes.indexOf('collapsed')
       if (i >= 0) {
         classes.splice(i, 1)
       }
@@ -562,16 +561,16 @@ export class ListFilter implements OnInit {
     }
   }
 
-  showFilter(event) {
+  showFilter(event: any) {
     event.preventDefault()
-    let parent = event.target.parentElement.parentElement
+    let parent: any = event.target.parentElement.parentElement
     event.target.innerHTML = (event.target.innerHTML === 'Show') ? 'Hide' : 'Show'
 
     if (parent.classList) {
       parent.classList.toggle('show')
     } else {
-      let classes = parent.className.split(' ')
-      let i = classes.indexOf('show')
+      let classes: any = parent.className.split(' ')
+      let i: any = classes.indexOf('show')
       if (i >= 0) {
         classes.splice(i, 1)
       }

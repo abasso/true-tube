@@ -1,22 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute, Router, Params } from '@angular/router'
-import _ from 'lodash'
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html'
 })
 export class PageComponent implements OnInit {
-  private data
-  private content: string[]
-  private menu: string[]
-  private param
+  private data: any
+  private content: any
+  private menu: any
+  private param: any
   private currentId: string
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute
-
   ) {
 
   }

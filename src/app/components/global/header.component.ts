@@ -1,7 +1,5 @@
 import { Component, OnInit  } from '@angular/core'
-import Cookies from 'js-cookie'
-import _ from 'lodash'
-
+import * as _ from 'lodash'
 import { Auth } from './../../services/auth.service'
 
 @Component({
@@ -10,21 +8,22 @@ import { Auth } from './../../services/auth.service'
 })
 export class HeaderComponent implements OnInit {
   menuVisible: boolean = false
-  constructor(private auth: Auth) {
-
+  constructor(
+    private auth: Auth
+  ) {
   }
 
   ngOnInit() {
   }
 
-  toggleMenu(event) {
+  toggleMenu(event: any) {
     event.preventDefault()
     this.menuVisible = (this.menuVisible === false) ? true : false
   }
-  mobileSearch(event) {
+  mobileSearch(event: any) {
     event.preventDefault()
     this.menuVisible = true
-    document.getElementById("search").focus()
+    document.getElementById('search').focus()
   }
 
   searchDone() {
