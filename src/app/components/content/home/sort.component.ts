@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core'
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx'
+import { Component } from '@angular/core'
 import { HomeListingComponent } from './list.component'
 import { DataService } from './../../../services/data.service'
 import { Categories } from './../../../definitions/categories'
@@ -19,7 +18,7 @@ export class HomeSortComponent {
   public loadMoreCount: number
   public categories: any[] = Categories
 
-  constructor(private ListingComponent: HomeListingComponent, public dataService: DataService) {
+  constructor(public ListingComponent: HomeListingComponent, public dataService: DataService) {
     this.itemsPerPage = [
       '12',
       '24',
@@ -32,15 +31,12 @@ export class HomeSortComponent {
     this.ListingComponent.paginationData.itemsPerPageCurrent = 12
     this.ListingComponent.paginationData.pages = []
     this.ListingComponent.paginationData.totalPages = Math.ceil(this.ListingComponent.paginationData.totalItems / this.ListingComponent.paginationData.itemsPerPageCurrent)
-    for(let i=0; i<this.ListingComponent.paginationData.totalPages; i++) this.ListingComponent.paginationData.pages.push(i+1)
+    for ( let i = 0; i < this.ListingComponent.paginationData.totalPages; i++ ) {
+      this.ListingComponent.paginationData.pages.push(i + 1)
+    }
     this.pages = this.ListingComponent.paginationData.pages
     this.loadMoreCount = 12
     this.ListingComponent.paginationData.currentPage = this.currentPage
-  }
-
-  setPage(event: any) {
-    event.preventDefault()
-    this.ListingComponent.paginationData.currentPage = event.target.value
   }
 
   setItemsPerPage(event: any) {
@@ -49,13 +45,11 @@ export class HomeSortComponent {
     this.ListingComponent.paginationData.itemsPerPageCurrent = event.target.value
     this.ListingComponent.paginationData.totalPages = Math.ceil(this.ListingComponent.paginationData.totalItems / this.ListingComponent.paginationData.itemsPerPageCurrent)
     this.ListingComponent.paginationData.pages = []
-    for(let i=0; i<this.ListingComponent.paginationData.totalPages; i++) this.ListingComponent.paginationData.pages.push(i+1)
+    for (let i = 0; i < this.ListingComponent.paginationData.totalPages; i++ ) {
+      this.ListingComponent.paginationData.pages.push(i + 1)
+    }
     this.pages = this.ListingComponent.paginationData.pages
     this.ListingComponent.paginationData.currentPage = 0
-  }
-
-  hideDescriptions(event: any) {
-    this.ListingComponent.showDescriptions = (this.ListingComponent.showDescriptions === true) ? false : true
   }
 
   setListDisplay(type: string) {

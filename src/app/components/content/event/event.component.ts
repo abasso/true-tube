@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './../../../services/data.service'
-import { ActivatedRoute, Router, Params } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import * as _ from 'lodash'
 import * as moment from 'moment'
 
@@ -25,7 +25,7 @@ export class EventComponent implements OnInit {
         .subscribe(
           (route) => {
             this.items = _.filter(data.hits.hits, {_id: route['id'] })
-            this.items[0].date = moment(this.items[0]._source.date.value).format("Do MMMM YYYY")
+            this.items[0].date = moment(this.items[0]._source.date.value).format('Do MMMM YYYY')
             _.each(this.items[0]._source.related, (item) => {
               item.slug = '/item/' + item.uuid
             })

@@ -19,12 +19,11 @@ export class HomeListingComponent implements OnInit {
 
   public data: any
   public items: Observable<any>
-  public showDescriptions:boolean
-  public displayGrid:boolean = true
-  public displayList:boolean = false
+  public displayGrid = true
+  public displayList = false
   public startVal: number
   public endVal: number
-  public loadMoreCount: number = 12
+  public loadMoreCount = 12
   public paginationData: {
     currentPage: number,
     itemsPerPage: number,
@@ -35,7 +34,7 @@ export class HomeListingComponent implements OnInit {
   };
   public categories: any[] = Categories
   public sortBy: any = new BehaviorSubject('created')
-  public contentLoading:boolean = true
+  public contentLoading = true
 
   constructor(public dataService: DataService, public listService: ListService) {
     this.paginationData = {
@@ -46,22 +45,21 @@ export class HomeListingComponent implements OnInit {
       pages: [],
       itemsPerPageCurrent: 9
     }
-    this.showDescriptions = true
   }
 
   ngOnInit() {
     this.sortBy
     .subscribe(
-      (data: any) => {
-        this.data = this.dataService.list(data)
-        let result: any = this.data.subscribe(
+      (sortData: any) => {
+        this.data = this.dataService.list(sortData)
+        this.data.subscribe(
           (data: any) => {
             _.each(data.hits.hits, (item) => {
               item.typesCount = _.countBy(item._source.embedded, 'type')
               item.contenttypes = []
               _.each(item.typesCount, (type, key) => {
                 _.each(ContentTypes, (contentType) => {
-                  if(contentType.term === key && contentType.inMenu === true) {
+                  if (contentType.term === key && contentType.inMenu === true) {
                     let typestring: any = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
                     item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-'), 'query': { 'tab': key}})
                   }
@@ -72,11 +70,13 @@ export class HomeListingComponent implements OnInit {
             _.each(this.items, (item) => {
               item.slug = '/item/' + item._id
               item._source.description = this.dataService.trimDescription(item._source.description)
-              if(_.endsWith(item._source.description, '...')) item.readMore = true
+              if (_.endsWith(item._source.description, '...')) {
+                item.readMore = true
+              }
               _.each(this.categories, (category) => {
                 _.each(category.topics, (subCategory) => {
                   _.each(item._source.topic, (topic) => {
-                    if(topic === subCategory.label) {
+                    if (topic === subCategory.label) {
                       item._source.category = category
                     }
                   })
@@ -106,7 +106,9 @@ export class HomeListingComponent implements OnInit {
     setTimeout(() => {
       this.paginationData.pages = []
       this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent)
-      for(let i=0;i<this.paginationData.totalPages;i++) this.paginationData.pages.push(i+1)
+      for (let i = 0; i < this.paginationData.totalPages; i++) {
+        this.paginationData.pages.push(i + 1)
+      }
       this.paginationData.currentPage = 0
     }, 1)
   }

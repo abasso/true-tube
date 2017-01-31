@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http'
-import { Observable } from 'rxjs/Rx'
-import { Events } from './../definitions/mock-events'
+import { Http, URLSearchParams } from '@angular/http'
 import * as _ from 'lodash'
 import * as moment from 'moment'
 import 'rxjs/add/operator/map'
@@ -22,27 +20,37 @@ export class DataService {
 
     let termArray: string[] = []
 
-    if(data.term) termArray.push(data.term)
+    if (data.term) {
+      termArray.push(data.term)
+    }
 
-    if(_.findLastIndex(types, {'active': true}) !== -1) {
+    if (_.findLastIndex(types, {'active': true}) !== -1) {
       let typeString = '(embedded.type:"'
       _.each(types, (type, index) => {
-        if(type.active === true) {
+        if (type.active === true) {
           typeString += type.term
-          if(types.length > 1 && parseInt(index) !== _.findLastIndex(types, {'active': true})) typeString += '" AND "'
-          if(parseInt(index) === _.findLastIndex(types, {'active': true})) typeString += '")'
+          if (types.length > 1 && parseInt(index) !== _.findLastIndex(types, {'active': true})) {
+            typeString += '" AND "'
+          }
+          if (parseInt(index) === _.findLastIndex(types, {'active': true})) {
+            typeString += '")'
+          }
         }
       })
       termArray.push(typeString)
     }
 
-    if(_.findLastIndex(keys, {'active': true}) !== -1) {
-      let keyString: string = '(keystage:"'
+    if (_.findLastIndex(keys, {'active': true}) !== -1) {
+      let keyString = '(keystage:"'
       _.each(keys, (key, index) => {
-        if(key.active === true) {
+        if (key.active === true) {
           keyString += key.term
-          if(keys.length > 1 && parseInt(index) !== _.findLastIndex(keys, {'active': true})) keyString += '" AND "'
-          if(parseInt(index) === _.findLastIndex(keys, {'active': true})) keyString += '")'
+          if (keys.length > 1 && parseInt(index) !== _.findLastIndex(keys, {'active': true})) {
+            keyString += '" AND "'
+          }
+          if (parseInt(index) === _.findLastIndex(keys, {'active': true})) {
+            keyString += '")'
+          }
         }
       })
       termArray.push(keyString)
@@ -50,15 +58,15 @@ export class DataService {
 
     let topicArray: any = []
 
-    if(topics.length && category) {
-      let topicString: string = '(topic:"'
+    if (topics.length && category) {
+      let topicString = '(topic:"'
       _.each(topics, (topic, index) => {
-        if(topic.active === true) {
+        if (topic.active === true) {
           topicArray.push(topic.label);
         }
       })
       let count: any = _.countBy(topics, 'active');
-      if(count.false === topics.length) {
+      if (count.false === topics.length) {
         _.each(topics, (topic, index) => {
           topicArray.push(topic.label);
         })
@@ -68,17 +76,25 @@ export class DataService {
         topicString += topic
         // let count: number = topicArray.length
         // let numberIndex: number = parseInt(index)
-        if(topicArray.length > 1 && index !== topicArray.length) topicString += '" OR "'
-        if(index === topicArray.length) topicString += '")'
+        if (topicArray.length > 1 && index !== topicArray.length) {
+          topicString += '" OR "'
+        }
+        if (index === topicArray.length) {
+          topicString += '")'
+        }
       })
       termArray.push(topicString)
     }
 
-    if(_.isString(subject) && subject !== 'All') termArray.push('(subjects:"' + subject + '")')
+    if (_.isString(subject) && subject !== 'All') {
+      termArray.push('(subjects:"' + subject + '")')
+    }
 
     let termString: string = (termArray.length) ? termArray.join(' AND ') : ''
     let search: any = new URLSearchParams()
-    if(termString != '') search.set('q', termString)
+    if (termString != '') {
+      search.set('q', termString)
+    }
     search.set('size', '1000')
     return this.http
     .get(this.baseUrl, { search })
@@ -87,7 +103,9 @@ export class DataService {
 
   list(sort: string = null) {
     let search: any = new URLSearchParams()
-    if(sort) search.set('sort', sort + ':desc')
+    if (sort) {
+      search.set('sort', sort + ':desc')
+    }
     search.set('size', '1000')
     return this.http
     .get(this.baseUrl, { search })
@@ -111,9 +129,9 @@ export class DataService {
 
   events(month: number = null) {
     let search: any = new URLSearchParams()
-    if(month !== null) {
-      let monthStart: any = moment({M:month}).format('YYYY-MM-DD')
-      let monthEnd: any = moment({M:month,D:moment({M:month}).daysInMonth()}).format('YYYY-MM-DD')
+    if (month !== null) {
+      let monthStart: any = moment({ M: month }).format('YYYY-MM-DD')
+      let monthEnd: any = moment({ M: month, D: moment({M: month} ).daysInMonth()}).format('YYYY-MM-DD')
       search.set('q', 'date.value:[' + monthStart + ' TO ' +  monthEnd + ']' )
     }
     return this.http
@@ -123,7 +141,7 @@ export class DataService {
 
   pages(page: string = null) {
     let search: any = new URLSearchParams()
-    if(page !== null) {
+    if (page !== null) {
       search.set('q', 'id:' + page)
     }
     return this.http
@@ -132,12 +150,14 @@ export class DataService {
   }
 
   duration(seconds: number) {
-    return moment("2017-01-01").startOf('day').seconds(seconds).format('mm:ss')
+    return moment('2017-01-01').startOf('day').seconds(seconds).format('mm:ss')
   }
 
   trimDescription(description: string) {
     let descriptionArray: string[] = description.split(' ')
-    if(descriptionArray.length > 38) descriptionArray.length = 38
+    if (descriptionArray.length > 38) {
+      descriptionArray.length = 38
+    }
     return (descriptionArray.length < 38) ? description : descriptionArray.join(' ') + '...'
   }
 

@@ -9,9 +9,9 @@ export const myConfig: AuthConfiguration = {
     domain: 'tompain.eu.auth0.com',
     options: {
       languageDictionary: {
-        emailInputPlaceholder: "something@youremail.com",
-        title: "",
-        signUpLabel: "Register"
+        emailInputPlaceholder: 'something@youremail.com',
+        title: '',
+        signUpLabel: 'Register'
       },
       popupOptions: { width: 500 },
 

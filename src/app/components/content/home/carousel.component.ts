@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
-// import { KSSwiperContainer, KSSwiperSlide } from 'angular2-swiper'
-import { SwiperModule, SwiperConfigInterface } from 'angular2-swiper-wrapper'
 
 @Component({
   selector: 'app-carousel',
@@ -10,7 +8,6 @@ import { SwiperModule, SwiperConfigInterface } from 'angular2-swiper-wrapper'
 export class CarouselComponent implements OnInit {
   private data: any
   private slides: any
-  private example1SwipeOptions: any
   constructor(
     private dataService: DataService
   ) {

@@ -16,13 +16,6 @@
   <div class="display-group hidden-lg-down">
     <div class="input-group">
       <div class="form-inline">
-       <!-- <div class="form-group">
-          <label class="custom-control custom-checkbox">
-            <input type="checkbox" checked class="custom-control-input toggle-descriptions" />
-            <div class="custom-control-indicator"></div>
-            <span class="custom-control-description" (click)="hideDescriptions($event)">Show Descriptions</span>
-          </label>
-        </div> -->
         <ol class="list-mode" id="contentGrid">
           <li [ngClass]="{'page-item':true, 'grid-nav-item':true, 'display-grid':true, 'active': ListingComponent.displayGrid}">
             <a href="#" (click)="listDisplayClick($event, 'grid')">Grid</a>

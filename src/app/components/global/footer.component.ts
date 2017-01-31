@@ -7,7 +7,7 @@ import * as moment from 'moment'
 })
 export class FooterComponent implements OnInit {
 
-  private currentYear: number = moment().year()
+  public currentYear: number = moment().year()
 
   constructor() { }
 

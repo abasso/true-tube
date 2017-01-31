@@ -34,7 +34,7 @@
               {{ item._source.title }}
             </h6>
           </a>
-          <p class="block-media__description" *ngIf="showDescriptions" [innerHTML]="item._source.description">
+          <p class="block-media__description" [innerHTML]="item._source.description">
           </p>
           <div class="block-media__types" *ngIf="item.contenttypes">
             <a [routerLink]="[item.slug]" [queryParams]="type.query" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">

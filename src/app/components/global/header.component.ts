@@ -1,5 +1,4 @@
 import { Component, OnInit  } from '@angular/core'
-import * as _ from 'lodash'
 import { Auth } from './../../services/auth.service'
 
 @Component({
@@ -7,7 +6,7 @@ import { Auth } from './../../services/auth.service'
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  menuVisible: boolean = false
+  menuVisible = false
   constructor(
     private auth: Auth
   ) {

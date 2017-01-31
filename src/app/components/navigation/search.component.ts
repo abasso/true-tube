@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-search',
@@ -7,9 +7,9 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class SearchComponent {
   @Output() searchSubmitted = new EventEmitter()
-  @ViewChild('input') input:ElementRef
-  private searchText:string = ''
-  private focussed:boolean = false
+  @ViewChild('input') input: ElementRef
+  private searchText = ''
+  private focussed = false
   constructor(
     private router: Router
   ) {}
@@ -19,7 +19,9 @@ export class SearchComponent {
   }
 
   blur() {
-    if(this.searchText === '') this.focussed = false
+    if (this.searchText === '') {
+      this.focussed = false
+    }
   }
 
   populateText(event: any) {
@@ -27,7 +29,7 @@ export class SearchComponent {
   }
 
   emptyCheck(event: any) {
-    if(this.searchText === '') {
+    if (this.searchText === '') {
       event.preventDefault()
       this.input.nativeElement.focus()
     }
@@ -36,7 +38,6 @@ export class SearchComponent {
   search(event: any) {
     this.searchSubmitted.emit(event)
     this.router.navigateByUrl('/list?search=' + event.target.elements[0].value)
-
   }
 
 }

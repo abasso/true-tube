@@ -48,6 +48,11 @@
               }
             }
           }
+          &.disabled {
+            cursor: default;
+            opacity: .5;
+            // background:no-repeat center center url("/assets/images/chevron-left_black.svg");
+          }
         }
       }
     }

@@ -1,4 +1,4 @@
-import { Injectable, Output } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs/Subject'
 
 import * as _ from 'lodash'
@@ -28,8 +28,12 @@ export class ListService {
     let keystagesString: string = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages)
     let typesString: string = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types)
     let termString: string = (term === null || term === '') ? '' : term
-    if (topicsString !== '') categoriesString = ''
-    if(categoriesString === '' && topicsString === '' && subjectString === '' && keystagesString === '' && typesString === '' && termString === '') return 'All Content'
+    if (topicsString !== '') {
+      categoriesString = ''
+    }
+    if (categoriesString === '' && topicsString === '' && subjectString === '' && keystagesString === '' && typesString === '' && termString === '') {
+      return 'All Content'
+    }
     return categoriesString + ' ' + topicsString + ' ' + subjectString + ' ' + keystagesString + ' ' + termString + ' ' + typesString
   }
 }

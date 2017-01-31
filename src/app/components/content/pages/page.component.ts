@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
-import { ActivatedRoute, Router, Params } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import * as _ from 'lodash'
 
 @Component({
@@ -21,13 +21,11 @@ export class PageComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.param = this.route.params.subscribe(
       (params) => {
           this.currentId = params['id']
       }
     )
-
     this.data = this.route.params
     .switchMap(() =>
       this.dataService.pages()

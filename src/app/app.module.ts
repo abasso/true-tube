@@ -5,16 +5,15 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { RouterModule, Routes } from '@angular/router'
 // import { Location } from '@angular/common'
-import { AUTH_PROVIDERS } from 'angular2-jwt'
+// import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AppComponent } from './app.component'
 import { ListingComponent } from './components/content/listing/list.component'
 import { HeaderComponent } from './components/global/header.component'
 import { PrimaryNavComponent } from './components/navigation/primary-nav.component'
-import { SecondaryNavComponent } from './components/navigation/secondary-nav.component'
 import { SearchComponent } from './components/navigation/search.component'
 import { CallToActionComponent } from './components/messaging/call-to-action.component'
 import { ItemComponent } from './components/content/item/item.component'
-import { ListFilter } from './components/content/listing/filter.component'
+import { ListFilterComponent } from './components/content/listing/filter.component'
 import { ListingSortComponent } from './components/content/listing/sort.component'
 // import { EmbedComponent } from './components/content/embed/embed.component'
 import { DataService } from './services/data.service'
@@ -27,9 +26,9 @@ import { SanitiseUrlPipe } from './pipes/sanitise-url.pipe'
 
 import { Auth } from './services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
-import * as moment from 'moment'
-import * as _ from 'lodash'
-import * as Cookies from 'js-cookie'
+// import * as moment from 'moment'
+// import * as _ from 'lodash'
+// import * as Cookies from 'js-cookie'
 import { FooterComponent } from './components/global/footer.component'
 import { HomeComponent } from './components/content/home/home.component'
 import { HomeListingComponent } from './components/content/home/list.component'
@@ -44,7 +43,7 @@ import { FooterNavComponent } from './components/navigation/footer-nav.component
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
 import { EventComponent } from './components/content/event/event.component'
-import { MetaModule } from 'ng2-meta'
+// import { MetaModule } from 'ng2-meta'
 
 const appRoutes: Routes = [
   {
@@ -84,11 +83,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     ListingComponent,
     HeaderComponent,
     PrimaryNavComponent,
-    SecondaryNavComponent,
     SearchComponent,
     CallToActionComponent,
     ItemComponent,
-    ListFilter,
+    ListFilterComponent,
     ListingSortComponent,
     PaginationPipe,
     QueryStringPipe,
@@ -121,7 +119,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
   providers: [
     // AUTH_PROVIDERS,
     Auth,
-    ListFilter,
+    ListFilterComponent,
     ListingComponent,
     DataService,
     ListService

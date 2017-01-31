@@ -1,10 +1,8 @@
-import { Component, OnInit, Injectable, Input, EventEmitter } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Location } from '@angular/common'
 import { FormBuilder, FormGroup } from '@angular/forms'
-// import { ActivatedRoute, Params } from '@angular/router'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ListingComponent } from './list.component'
-import { ListingSortComponent } from './sort.component'
 import { DataService } from './../../../services/data.service'
 import { Categories } from './../../../definitions/categories'
 import { Subjects } from './../../../definitions/subjects'
@@ -21,25 +19,23 @@ import 'rxjs/add/operator/switchMap'
   selector: 'app-filter',
   templateUrl: './filter.component.html'
 })
-export class ListFilter implements OnInit {
-  private contentLoading: boolean = true
+export class ListFilterComponent implements OnInit {
+  private contentLoading = true
   private topics: any[] = []
   private filterSubjects: string
   private categories: any[] = Categories
   private types: any[] = ContentTypes
   private subjects: any[] = Subjects
   private keystages: any[] = KeyStages
-  private keywords: any[] = []
-  private category: any = null
+  public category: any = null
   private currentItemCount: number
   private items: any
-  private itemsTotal: number = 0
-  private itemsTotalLabel: string = 'Items'
-  private filter: FormGroup
-  private activeFilters: number = 0
+  private itemsTotal = 0
+  private itemsTotalLabel = 'Items'
+  public filter: FormGroup
   private currentParams: any
   private currentCategory: string
-  private currentCategoryString: string
+  public currentCategoryString: string
   private currentType: any
   constructor(
     private listService: ListService,
@@ -89,8 +85,6 @@ export class ListFilter implements OnInit {
   ngOnInit() {
     this.filterSubjects = 'All'
     this.filter.patchValue({subject: 'All'})
-    //var el = document.getElementById('GridFilter')
-    // var sortable = Sortable.create(el)
     this.ListingComponent.data = this.filter.valueChanges
     .debounceTime(400)
     .distinctUntilChanged()
@@ -100,23 +94,18 @@ export class ListFilter implements OnInit {
       (data) => {
         this.contentLoading = false
         this.ListingComponent.paginationData.totalItems = data.hits.hits.length
-        this.ListingComponent.resetPagination()
         this.ListingComponent.itemCount = data.hits.total
         this.ListingComponent.items = data.hits.hits
-        // _.each(this.categories, (category) => {
-        //   _.each(category.topics, (topic) => {
-        //     topic.count = 0
-        //   })
-        // })
         _.each(this.ListingComponent.items, (item) => {
           item.slug = '/item/' + item._id
           item._source.description = this.dataService.trimDescription(item._source.description)
-          if(_.endsWith(item._source.description, '...')) item.readMore = true
+          if (_.endsWith(item._source.description, '...')) {
+            item.readMore = true
+          }
           _.each(this.categories, (category) => {
             _.each(category.topics, (subCategory) => {
               _.each(item._source.topic, (topic) => {
-                if(topic === subCategory.label) {
-                  //subCategory.count++
+                if (topic === subCategory.label) {
                   item._source.category = category
                 }
               })
@@ -131,13 +120,7 @@ export class ListFilter implements OnInit {
             item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-'), 'query': { 'tab': key}})
           })
         })
-        // _.each(this.categories, (category) => {
-        //   category.count = 0
-        //   _.each(category.topics, (subCategory) => {
-        //     category.count += subCategory.count
-        //   })
-        // })
-        if(_.isUndefined(this.currentItemCount)) {
+        if (_.isUndefined(this.currentItemCount)) {
           this.currentItemCount = this.ListingComponent.itemCount
         }
         this.updateTotal(this.currentItemCount, this.ListingComponent.itemCount)
@@ -148,11 +131,11 @@ export class ListFilter implements OnInit {
     this.route.queryParams
     .map(params => params['content types'])
     .subscribe((types) => {
-      if(!_.isUndefined(types)) {
+      if (!_.isUndefined(types)) {
         this.resetFilterState(this.types)
           let typeArray: any[] = types.split(',')
           _.each(typeArray, (type) => {
-            if(typeArray.length === 1) {
+            if (typeArray.length === 1) {
               this.currentType = {
                 'tab': _.trim(type, 's')
               }
@@ -173,7 +156,7 @@ export class ListFilter implements OnInit {
     this.route.queryParams
     .map(params => params['keystages'])
     .subscribe((keystages) => {
-      if(!_.isUndefined(keystages)) {
+      if (!_.isUndefined(keystages)) {
         this.resetFilterState(this.keystages)
           let keyArray: any = keystages.split(',')
           _.each(keyArray, (key) => {
@@ -191,7 +174,7 @@ export class ListFilter implements OnInit {
     this.route.queryParams
     .map(params => params['search'])
     .subscribe((search) => {
-      if(!_.isUndefined(search)) {
+      if (!_.isUndefined(search)) {
         this.filter.patchValue({term: search})
       } else {
         this.clearTerm(null)
@@ -201,7 +184,7 @@ export class ListFilter implements OnInit {
     this.route.queryParams
     .map(params => params['topics'])
     .subscribe((topics) => {
-      if(!_.isUndefined(topics)) {
+      if (!_.isUndefined(topics)) {
         this.setTopics(topics)
       } else {
         this.clearTopics(null)
@@ -211,12 +194,14 @@ export class ListFilter implements OnInit {
     this.route.queryParams
     .map(params => params['category'])
     .subscribe((category) => {
-      if(this.currentCategory === category) return
-      if(!_.isUndefined(category)) {
+      if (this.currentCategory === category) {
+        return
+      }
+      if (!_.isUndefined(category)) {
         this.category = _.filter(this.categories, {slug: category})
         this.displayTopics(this.category[0].name)
       } else {
-        if(_.findIndex(this.topics, {active:true}) === -1) {
+        if (_.findIndex(this.topics, {active: true}) === -1) {
           this.clearCategory()
         }
       }
@@ -225,7 +210,7 @@ export class ListFilter implements OnInit {
     this.route.queryParams
     .map(params => params['subject'])
     .subscribe((subject) => {
-      if(!_.isUndefined(subject)) {
+      if (!_.isUndefined(subject)) {
         let sub: any = _.find(this.subjects, {slug: subject})
         this.currentParams['subject'] = sub.slug
         this.filterSubjects = sub.label
@@ -247,28 +232,31 @@ export class ListFilter implements OnInit {
   resetFilterState(filter: any) {
     _.each(filter, (item) => {
       item.active = false
-      let name: any = filter.name
       this.filter.patchValue({name: null})
     })
   }
 
   updateTotal(currentCount: number, newCount: number) {
 
-    let countSpeed: number = 3
+    let countSpeed = 3
     let difference: number = currentCount - newCount
 
-    if(this.itemsTotal > newCount) {
+    if (this.itemsTotal > newCount) {
       countSpeed = (difference > 400) ? 81 : (difference > 200) ? 21 : 11
     } else {
       countSpeed = (difference < 400) ? 81 : (difference < 200) ? 21 : 11
     }
 
-    if(countSpeed === 0) countSpeed = 1
-    if(currentCount === newCount) countSpeed = currentCount
+    if (countSpeed === 0) {
+      countSpeed = 1
+    }
+    if (currentCount === newCount) {
+      countSpeed = currentCount
+    }
     let loop = () => {
-      if(this.itemsTotal > newCount) {
+      if (this.itemsTotal > newCount) {
         this.itemsTotal -= countSpeed
-        if(this.itemsTotal <= newCount) {
+        if (this.itemsTotal <= newCount) {
           this.itemsTotal = this.ListingComponent.itemCount
           this.currentItemCount = this.ListingComponent.itemCount
           this.itemsTotalLabel = (newCount > 1) ? 'Items' : 'Item'
@@ -277,7 +265,7 @@ export class ListFilter implements OnInit {
         }
       } else {
         this.itemsTotal += countSpeed
-        if(this.itemsTotal >= newCount) {
+        if (this.itemsTotal >= newCount) {
           this.itemsTotal = this.ListingComponent.itemCount
           this.currentItemCount = this.ListingComponent.itemCount
           this.itemsTotalLabel = (newCount > 1) ? 'Items' : 'Item'
@@ -290,19 +278,20 @@ export class ListFilter implements OnInit {
   }
 
   search(event: any) {
-    if(event.key === 'Enter') return
+    if (event.key === 'Enter') {
+      return
+    }
     this.contentLoading = true
     this.currentParams['search'] = event.target.value
     this.setQueryString()
     this.ListingComponent.resetPagination()
-
   }
 
   clearTerm(event: any) {
     this.contentLoading = true
     this.filter.patchValue({term: ''})
     delete this.currentParams.search
-    if(event !== null) {
+    if (event !== null) {
       event.preventDefault()
       this.setQueryString()
     }
@@ -313,7 +302,7 @@ export class ListFilter implements OnInit {
     this.filter.patchValue({subject: 'All'})
     this.filterSubjects = 'All'
     delete this.currentParams.subject
-    if(event !== null) {
+    if (event !== null) {
       event.preventDefault()
       this.setQueryString()
     }
@@ -347,14 +336,14 @@ export class ListFilter implements OnInit {
       category.active = false
     })
     delete this.currentParams.category
-    if(event !== null) {
+    if (event !== null) {
       event.preventDefault()
       this.setQueryString()
     }
   }
 
   clearTopics(event: any) {
-    // if(_.isUndefined(this.currentParams.category)) return
+    // if (_.isUndefined(this.currentParams.category)) return
     this.contentLoading = true
     _.each(this.topics, (topic) => {
       let toClear: any = {}
@@ -363,9 +352,11 @@ export class ListFilter implements OnInit {
       topic.active = false
     })
 
-    if(this.category !== null) this.currentParams.category = this.category[0].slug
+    if (this.category !== null) {
+      this.currentParams.category = this.category[0].slug
+    }
     delete this.currentParams.topics
-    if(event !== null) {
+    if (event !== null) {
       event.preventDefault()
       this.setQueryString()
     }
@@ -382,7 +373,7 @@ export class ListFilter implements OnInit {
     })
     delete this.currentParams['content types']
     this.resetFilterState(this.types)
-    if(event !== null) {
+    if (event !== null) {
       event.preventDefault()
       this.setQueryString()
     }
@@ -392,14 +383,16 @@ export class ListFilter implements OnInit {
     this.contentLoading = true
     delete this.currentParams.keystages
     this.resetFilterState(this.keystages)
-    if(event !== null) {
+    if (event !== null) {
       event.preventDefault()
       this.setQueryString()
     }
   }
 
   clearAll(event: any) {
-    if(event !== null) event.preventDefault()
+    if (event !== null) {
+      event.preventDefault()
+    }
     this.contentLoading = true
     this.clearSubject(event)
     this.clearCategoryAndTopics(event)
@@ -410,10 +403,12 @@ export class ListFilter implements OnInit {
   }
 
   setFilter(event: any, value: any) {
-    if(!_.isUndefined(event)) event.preventDefault()
+    if (!_.isUndefined(event)) {
+      event.preventDefault()
+    }
     this.contentLoading = true
     let filterQuery: any = (_.isUndefined(this.currentParams[value.type])) ? [] : this.currentParams[value.type].split(',')
-    if(value.active) {
+    if (value.active) {
       filterQuery.splice(_.indexOf(filterQuery, value.slug), 1)
       value.active = false
       this.filter.patchValue({value: false})
@@ -427,10 +422,23 @@ export class ListFilter implements OnInit {
   }
 
   setQueryString() {
-    let appendedQuery: string = ''
+    let appendedQuery = ''
+    let hasPage = false
+    console.log("THE CURRENT PARAMS", this.currentParams)
     _.each(this.currentParams, (value, key) => {
-      if(value.length) appendedQuery += key + '=' + value.trim() + '&'
+      if (key === 'page') {
+        hasPage = true
+        appendedQuery += 'page=1&'
+      } else if (value.length) {
+        appendedQuery += key + '=' + value.trim() + '&'
+      }
+
     })
+    if (!hasPage) {
+      appendedQuery += '&page=1'
+    }
+    console.log(appendedQuery)
+
     this.router.navigateByUrl('/list?' + appendedQuery)
   }
 
@@ -445,25 +453,26 @@ export class ListFilter implements OnInit {
   setTopics(event: any) {
     this.contentLoading = true
     let paramTopics: any = (_.isUndefined(this.currentParams.topics)) ? [] : this.currentParams.topics.split(',')
-    if(!_.isUndefined(event.preventDefault)) {
+    if (!_.isUndefined(event.preventDefault)) {
       event.preventDefault()
-      if(event.target.checked) {
-        if(_.indexOf(paramTopics, event.target.value) === -1) {
+      if (event.target.checked) {
+        if (_.indexOf(paramTopics, event.target.value) === -1) {
           paramTopics.push(event.target.value)
         }
-      }
-      else {
+      } else {
         paramTopics.splice(_.indexOf(paramTopics, event.target.value), 1)
       }
     } else {
       paramTopics = event.split(',')
     }
-    if(paramTopics.length === 0) return this.clearTopics(null)
+    if (paramTopics.length === 0) {
+      return this.clearTopics(null)
+    }
     this.category = []
       _.each(this.categories, (category) => {
         _.each(category.topics, (topic) => {
           _.each(paramTopics, (paramTopic) => {
-            if(topic.slug === paramTopic) {
+            if (topic.slug === paramTopic) {
               topic.active = true
               this.topics = category.topics
               this.topics = _.sortBy(category.topics, 'label')
@@ -479,7 +488,7 @@ export class ListFilter implements OnInit {
       _.each(this.topics, (topic) => {
         topic.active = false
         _.each(paramTopics, (paramTopic) => {
-          if(topic.slug === paramTopic) {
+          if (topic.slug === paramTopic) {
             topic.active = true
           }
         })
@@ -487,7 +496,7 @@ export class ListFilter implements OnInit {
       this.currentParams['topics'] = paramTopics.join()
       delete this.currentParams.category
 
-    if(_.findIndex(this.topics, { 'active': true}) === -1) {
+    if (_.findIndex(this.topics, { 'active': true}) === -1) {
       _.each(this.topics, (topic) => {
         topic.active = false
       })
@@ -497,7 +506,7 @@ export class ListFilter implements OnInit {
 
   displayTopics(event: any) {
     let value: any = event
-    if(!_.isUndefined(event.preventDefault)) {
+    if (!_.isUndefined(event.preventDefault)) {
       event.preventDefault()
       value = event.target.id
     }
@@ -536,7 +545,7 @@ export class ListFilter implements OnInit {
   }
 
   filterActive() {
-    return (this.filter.value.term || this.filterSubjects !== 'All' || _.findIndex(this.types, { 'active': true}) != -1 || _.findIndex(this.keystages, { 'active': true}) != -1 || this.category !== null ) ? true : false
+    return (this.filter.value.term || this.filterSubjects !== 'All' || _.findIndex(this.types, { 'active': true}) !== -1 || _.findIndex(this.keystages, { 'active': true}) !== -1 || this.category !== null ) ? true : false
   }
 
   subjectsActive(subject: any) {
@@ -544,16 +553,20 @@ export class ListFilter implements OnInit {
   }
 
   isActive(collection: any) {
-    let isActive: boolean = false
+    let isActive = false
     _.each(collection, (item) => {
-      if(item.active === true) isActive = true
+      if (item.active === true) {
+        isActive = true
+      }
     })
     return isActive
   }
 
   toggleFilter(event: any) {
     event.preventDefault()
-    if(event.target.tagName === 'SPAN') return
+    if (event.target.tagName === 'SPAN') {
+      return
+    }
     let parent: any = event.target.parentElement.parentElement
     if (parent.classList) {
       parent.classList.toggle('collapsed')
@@ -562,8 +575,7 @@ export class ListFilter implements OnInit {
       let i: any = classes.indexOf('collapsed')
       if (i >= 0) {
         classes.splice(i, 1)
-      }
-      else {
+      } else {
         classes.push('collapsed')
         parent.className = classes.join()
       }
@@ -582,8 +594,7 @@ export class ListFilter implements OnInit {
       let i: any = classes.indexOf('show')
       if (i >= 0) {
         classes.splice(i, 1)
-      }
-      else {
+      } else {
         classes.push('show')
         parent.className = classes.join(' ')
       }

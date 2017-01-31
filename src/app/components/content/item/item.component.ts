@@ -1,13 +1,11 @@
-import { Component, NgModule, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { Location } from '@angular/common'
-import { Item } from './../../../definitions/mock-item'
 import { DataService } from './../../../services/data.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
-import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
+// import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './../../../pipes/sanitise-url.pipe'
 import { ActivatedRoute, Router, Params } from '@angular/router'
 import { Auth } from './../../../services/auth.service'
-import { ClipboardModule } from 'ngx-clipboard'
 import * as moment from 'moment'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
@@ -26,13 +24,13 @@ export class ItemComponent implements OnInit {
   private item: any = {}
   private data: any
   private id: string
-  private showEmbed: boolean = false
-  private embedButtonLabel: string = 'Copy'
-  private embedButtonClass: string = 'btn-video'
+  private showEmbed = false
+  private embedButtonLabel = 'Copy'
+  private embedButtonClass = 'btn-video'
   private embeddedContent: any = []
-  private activeTab: string = 'film'
+  private activeTab = 'film'
   private videoJSplayer: any
-  @ViewChild('player') player:ElementRef
+  @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -49,7 +47,9 @@ export class ItemComponent implements OnInit {
         this.item = data._source
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
         _.each(this.item.embedded, (embed) => {
-          if(embed.thumbnail === null) embed.thumbnail = this.item.thumbnail
+          if (embed.thumbnail === null) {
+            embed.thumbnail = this.item.thumbnail
+          }
         })
         _.each(this.item.related, (item) => {
           item.slug = '/item/' + item.uuid
@@ -65,30 +65,25 @@ export class ItemComponent implements OnInit {
     this.route.queryParams
     .map(params => params['tab'])
     .subscribe((type) => {
-      if(!_.isUndefined(type)) {
+      if (!_.isUndefined(type)) {
         this.setActiveTab(type)
       }
     })
 
     setTimeout(
-      ()=>{
+      () => {
       this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
       })
-    },200)
-  }
-
-  ngAfterViewInit() {
-
+    }, 200)
   }
 
   pausePlayer() {
     this.videoJSplayer.pause()
   }
 
-  ngOnDestroy() {
-    this.videoJSplayer.dispose();
-    //alert('DESTROYING THE VIEWWWWW');
-  }
+  // ngOnDestroy() {
+  //   this.videoJSplayer.dispose();
+  // }
 
   hasAttributes(attribute: any) {
     return (_.isUndefined(attribute) || attribute === null || attribute === false || attribute.length === 0) ? false : true

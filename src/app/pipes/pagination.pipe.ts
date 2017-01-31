@@ -3,12 +3,12 @@ import * as _ from 'lodash'
 
 @Pipe({
   name: 'PaginationPipe',
-  pure:false
+  pure: false
 
 })
 export class PaginationPipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    let perPage: any = (args.itemsPerPageCurrent === "All") ? 100000 : args.itemsPerPageCurrent
+    let perPage: any = (args.itemsPerPageCurrent === 'All') ? 100000 : args.itemsPerPageCurrent
     let chunkedValue: any = _.chunk(value, perPage)
     return chunkedValue[args.currentPage]
   }

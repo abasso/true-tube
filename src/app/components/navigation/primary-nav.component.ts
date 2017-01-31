@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core'
-import { SearchComponent } from './search.component'
-import { ListFilter } from './../content/listing/filter.component'
+import { ListFilterComponent } from './../content/listing/filter.component'
 import { ContentTypes } from './../../definitions/content-types'
 import { ListService } from './../../services/list.service'
 import { ItemComponent } from './../content/item/item.component'
@@ -16,7 +15,7 @@ export class PrimaryNavComponent implements OnInit {
   private items: any[]
   private item: any = ItemComponent
   constructor(
-    private filter: ListFilter,
+    private filter: ListFilterComponent,
     private listService: ListService,
     private auth: Auth
   ) {

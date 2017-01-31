@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core'
+import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
 import { Observable } from 'rxjs/Rx'
 import { DataService } from './../../../services/data.service'
@@ -19,9 +20,8 @@ export class ListingComponent {
   public currentItemCount: number
   public data: Observable<any>
   public items: Observable<any>
-  public showDescriptions:boolean
-  public displayGrid:boolean = true
-  public displayList:boolean = false
+  public displayGrid = true
+  public displayList = false
   public count: number
   public startVal: number
   public endVal: number
@@ -34,7 +34,12 @@ export class ListingComponent {
     itemsPerPageCurrent: any
   }
 
-  constructor(private dataService: DataService, private listService: ListService) {
+  constructor(
+    private dataService: DataService,
+    private listService: ListService,
+    private route: ActivatedRoute
+
+  ) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,
@@ -43,15 +48,27 @@ export class ListingComponent {
       pages: [],
       itemsPerPageCurrent: 9
     }
-    this.showDescriptions = true
+
+    this.route.queryParams
+    .map(params => params['page'])
+    .subscribe((page) => {
+      if (!_.isUndefined(page)) {
+        console.log('the page is', page)
+        this.paginationData.currentPage = page - 1
+      } else {
+        console.log('no page sir')
+      }
+    })
   }
 
   resetPagination() {
     setTimeout(() => {
       this.paginationData.pages = []
       this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent)
-      for(let i=0; i<this.paginationData.totalPages; i++) this.paginationData.pages.push(i+1)
-      this.paginationData.currentPage = 0
+      for (let i = 0; i < this.paginationData.totalPages; i++) {
+        this.paginationData.pages.push(i + 1)
+      }
+      this.paginationData.currentPage = this.paginationData.currentPage
     }, 1)
   }
 
@@ -63,9 +80,11 @@ export class ListingComponent {
   }
 
   pageTitle(subject: any, keystages: any, types: any, term: any, category: any, topics: any) {
-    let showTopics: boolean = false
-    if(!_.isUndefined(category) && category !== null) {
-      if(_.findIndex(category[0].topics, { 'active': false}) !== -1 && _.findIndex(category[0].topics, { 'active': true}) !== -1) showTopics = true
+    let showTopics = false
+    if (!_.isUndefined(category) && category !== null) {
+      if (_.findIndex(category[0].topics, { 'active': false}) !== -1 && _.findIndex(category[0].topics, { 'active': true}) !== -1) {
+        showTopics = true
+      }
     }
     topics = (showTopics) ? this.stringifyTitleArray(topics) : ''
     category = (_.isUndefined(category) || category === null || category === '') ? '' : category[0].label
@@ -73,8 +92,9 @@ export class ListingComponent {
     keystages = (_.findIndex(keystages, { 'active': true}) === -1) ? '' : 'Key Stage ' + this.stringifyTitleArray(keystages)
     types = (_.findIndex(types, { 'active': true}) === -1) ? '' : this.stringifyTitleArray(types)
     term = (term === null || term === '') ? '' : _.upperFirst(term)
-    if(category === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') return 'All Content'
+    if (category === '' && topics === '' && subject === '' && keystages === '' && types === '' && term === '') {
+      return 'All Content'
+    }
     return category + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types
   }
-
 }
