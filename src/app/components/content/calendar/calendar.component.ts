@@ -13,15 +13,16 @@ export class CalendarComponent implements OnInit {
   private currentDate: any = moment()
   private currentMonth: any = this.currentDate.month()
   public selectedMonth: any = new BehaviorSubject(moment().month())
-  private selectedMonthString: string
+  public selectedMonthString: string
   private month: any
   private data: any
   private subscriber: any
   private noEvents = true
   public items: any[] = []
   private weeks: any[] = []
-  private toHighlight = ''
-  private eventCount: number
+  public toHighlight = ''
+  public eventCount: number
+  public eventCountString: string
   constructor(public dataService: DataService) {
     this.weeks.length = 42
     this.month = this.selectedMonth.subscribe(
@@ -89,6 +90,7 @@ export class CalendarComponent implements OnInit {
                 this.eventCount++
               }
             })
+            this.eventCountString = (this.eventCount > 1) ? this.eventCount + ' Events' : this.eventCount + ' Event'
             _.each(days, (day) => {
               day.events = []
               _.each(this.items, (event, index) => {

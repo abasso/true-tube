@@ -10,7 +10,7 @@
       <h3 class="page-sub-title p-t-1">{{item.date}}</h3>
     </div>
   </div>
-  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-right content-main" [ngClass]="{'col-xl-9': item._source.description !== ''}">
+  <div class="col-xs-12 col-ml-12 col-xl-9 content-main" [ngClass]="{'col-xl-9': item._source.description !== '', 'col-xl-p-right': item._source.description !== ''}">
       <div class="content-info hidden-xl-up m-t-1">
         <p [innerHTML]="item._source.description">
         </p>
