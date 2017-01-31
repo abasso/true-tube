@@ -40,6 +40,7 @@ export class ListFilter implements OnInit {
   private currentParams: any
   private currentCategory: string
   private currentCategoryString: string
+  private currentType: any
   constructor(
     private listService: ListService,
     private route: ActivatedRoute,
@@ -100,14 +101,6 @@ export class ListFilter implements OnInit {
         this.contentLoading = false
         this.ListingComponent.paginationData.totalItems = data.hits.hits.length
         this.ListingComponent.resetPagination()
-        _.each(data.hits.hits, (item) => {
-          item.typesCount = _.countBy(item._source.embedded, 'type')
-          item.contenttypes = []
-          _.each(item.typesCount, (type, key) => {
-            let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
-            item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-')})
-          })
-        })
         this.ListingComponent.itemCount = data.hits.total
         this.ListingComponent.items = data.hits.hits
         // _.each(this.categories, (category) => {
@@ -128,6 +121,14 @@ export class ListFilter implements OnInit {
                 }
               })
             })
+          })
+        })
+        _.each(data.hits.hits, (item) => {
+          item.typesCount = _.countBy(item._source.embedded, 'type')
+          item.contenttypes = []
+          _.each(item.typesCount, (type, key) => {
+            let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
+            item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-'), 'query': { 'tab': key}})
           })
         })
         // _.each(this.categories, (category) => {
@@ -151,6 +152,13 @@ export class ListFilter implements OnInit {
         this.resetFilterState(this.types)
           let typeArray: any[] = types.split(',')
           _.each(typeArray, (type) => {
+            if(typeArray.length === 1) {
+              this.currentType = {
+                'tab': _.trim(type, 's')
+              }
+            } else {
+              this.currentType = {}
+            }
             let pathType: any = _.find(this.types, { slug: type})
             pathType.active = true
             let patch: any = {}
@@ -365,6 +373,7 @@ export class ListFilter implements OnInit {
 
   clearTypes(event: any) {
     this.contentLoading = true
+    this.currentType = {}
     _.each(this.types, (type) => {
       let toClear: any = {}
       toClear[type.name] = ''

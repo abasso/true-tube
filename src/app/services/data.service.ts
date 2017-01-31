@@ -15,7 +15,7 @@ export class DataService {
   private baseUrl = 'http://api.truetube.co.uk/resource2/_search'
   private tempUrl = 'http://api.truetube.co.uk/resource2/resource'
   private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search?sort=updated:desc'
-  private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date:desc'
+  private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date.value:desc'
   private pagesUrl = 'http://api.truetube.co.uk/pages/_search'
 
   search(data: any, types: any, keys: any, subject: any, topics: any, category: any) {
@@ -114,7 +114,7 @@ export class DataService {
     if(month !== null) {
       let monthStart: any = moment({M:month}).format('YYYY-MM-DD')
       let monthEnd: any = moment({M:month,D:moment({M:month}).daysInMonth()}).format('YYYY-MM-DD')
-      search.set('q', 'date:[' + monthStart + ' TO ' +  monthEnd + ']' )
+      search.set('q', 'date.value:[' + monthStart + ' TO ' +  monthEnd + ']' )
     }
     return this.http
     .get(this.eventsUrl, { search })

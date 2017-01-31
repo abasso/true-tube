@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
 // import { KSSwiperContainer, KSSwiperSlide } from 'angular2-swiper'
+import { SwiperModule, SwiperConfigInterface } from 'angular2-swiper-wrapper'
 
 @Component({
   selector: 'app-carousel',
@@ -13,13 +14,7 @@ export class CarouselComponent implements OnInit {
   constructor(
     private dataService: DataService
   ) {
-    this.example1SwipeOptions = {
-          pagination: '.swiper-pagination',
-          slidesPerView: 1,
-          paginationClickable: true,
-          spaceBetween: 0,
-          loop: false
-        }
+
   }
   ngOnInit() {
     this.data = this.dataService.carousel()

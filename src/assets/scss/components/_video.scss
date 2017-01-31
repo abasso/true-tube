@@ -8,6 +8,7 @@
   justify-content: center;
   flex: 0 0 75%;
   .video-js {
+    transition: all 0.4s ease;
     position:absolute;
     top:0px;
     left:0px;
@@ -35,7 +36,6 @@
     height:130px;
     border-radius:130px;
     background:$brand-red no-repeat 57% 50% url("/assets/images/play.svg");
-    transition: all 0.4s ease;
     margin:-65px 0 0 -65px;
     border:none;
     &:before {

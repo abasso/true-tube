@@ -21,7 +21,7 @@
     <div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}" *ngIf="filter.contentLoading === false">
       <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
         <div class="block-media__media" *ngIf="item._source.thumbnail">
-          <a [routerLink]="[item.slug]" class="block-media__link">
+          <a [routerLink]="[item.slug]" [queryParams]="filter.currentType" class="block-media__link">
             <img [src]="item._source.thumbnail[0].url" alt="item._source.thumbnail[0].alt" />
             <div class="listing-time" *ngIf="item._source.duration">
               {{ dataService.duration(item._source.duration) }}
@@ -37,7 +37,7 @@
           <p class="block-media__description" *ngIf="showDescriptions" [innerHTML]="item._source.description">
           </p>
           <div class="block-media__types" *ngIf="item.contenttypes">
-            <a [routerLink]="[item.slug]" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
+            <a [routerLink]="[item.slug]" [queryParams]="type.query" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
               <span>
                 {{ type.label }}
               </span>

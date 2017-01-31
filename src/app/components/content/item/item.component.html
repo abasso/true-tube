@@ -5,7 +5,7 @@
 				{{item.title}}
 			</h1>
 			<nav id="nav" class="content-nav">
-				<button class="btn {{embed.class}}" (click)="setActiveTab(embed.term)" [ngClass]="{active: activeTab === embed.term}" *ngFor="let embed of item.resource_types | EmbedMenuPipe"><span>{{embed.tabLabel}}</span></button>
+				<button class="btn {{embed.class}}" (click)="tab(embed.term)" [ngClass]="{active: activeTab === embed.term}" *ngFor="let embed of item.resource_types | EmbedMenuPipe"><span>{{embed.tabLabel}}</span></button>
 			</nav>
 
 			<div class="input-group content-nav-mobile">
@@ -156,6 +156,12 @@
 						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link">Login</a> to download these teachers notes</p>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div class="tab tab-interactive" [ngClass]="{visible: activeTab === 'interactive'}" *ngFor="let embed of embeddedContent.interactive">
+			<div class="interactive-wrapper">
+				<iframe [src]="embed.link | SanitiseUrlPipe" frameborder="0"></iframe>
 			</div>
 		</div>
 

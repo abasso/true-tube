@@ -26,12 +26,13 @@ export class EventsBlockComponent implements OnInit {
         this.data = this.dataService.events(month)
         this.subscriber = this.data.subscribe(
           (data: any) => {
+            console.log("EVENT DATA", data)
             this.items = _.sortBy(data.hits.hits, "date").reverse()
             this.noEvents = (this.items.length) ? false : true
             if(this.items.length) {
               _.each(this.items, (item) => {
                 item.url = "/event/" + item._id
-                item.date = moment(item._source.date).format("Do")
+                item.date = moment(item._source.date[0].value).format("Do")
               })
             }
           }

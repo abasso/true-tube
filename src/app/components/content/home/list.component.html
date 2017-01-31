@@ -21,7 +21,7 @@
       <p class="block-media__description small" *ngIf="showDescriptions" [innerHTML]="item._source.description">
       </p>
       <div class="block-media__types" *ngIf="item.contenttypes">
-        <a [routerLink]="[item.slug]" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
+        <a [routerLink]="[item.slug]" [queryParams]="type.query" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
           <span>
             {{ type.label }}
           </span>

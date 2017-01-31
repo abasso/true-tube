@@ -30,6 +30,8 @@ export class CalendarComponent implements OnInit {
         this.data = this.dataService.events()
         this.subscriber = this.data.subscribe(
           (data: any) => {
+
+            // Build the calendar days
             this.eventCount = 0
             let days: any[] = []
             let selectedMonth: any = moment({'M': month})
@@ -39,12 +41,15 @@ export class CalendarComponent implements OnInit {
             let monthStart: number = 1
             let nextMonthStart: number = 1
             for(let i = 0; i<=41; i++) {
+              // The month starts on Sunday - the first day on the calendar
               if(currentMonthStartDay === 1) {
+                // Add this months days
                 if(monthStart <= selectedMonth.daysInMonth()) {
                   days.splice(i, 0, {
                     day: monthStart++,
                     month: selectedMonth.month()
                   })
+                // Add next months days
                 } else {
                   days.splice(i, 0, {
                     day: nextMonthStart++,
@@ -53,17 +58,20 @@ export class CalendarComponent implements OnInit {
                   })
                 }
               } else {
+                // Add last months days
                 if(startDateOffset < previousMonthEndDate) {
                   days.splice(i, 0, {
                     day: ++startDateOffset,
                     month: selectedMonth.month() - 1,
                     css: 'other-month previous-month'
                   })
+                  // Add this months days
                 } else if(monthStart <= selectedMonth.daysInMonth()) {
                   days.splice(i, 0, {
                     day: monthStart++,
                     month: selectedMonth.month(),
                   })
+                  // Add next months days
                 } else {
                   days.splice(i, 0, {
                     day: nextMonthStart++,
@@ -73,22 +81,18 @@ export class CalendarComponent implements OnInit {
                 }
               }
             }
+            // Iterate over the events
             this.items = _.sortBy(data.hits.hits, 'date').reverse()
+            // Increment the events count for the title
             _.each(this.items, (item) => {
-              if (moment(item._source.date).month() === selectedMonth.month()) this.eventCount++
+              if (moment(item._source.date[0].value).month() === selectedMonth.month()) this.eventCount++
             })
-            let multiLineEvents: any[] = []
             _.each(days, (day) => {
               day.events = []
               _.each(this.items, (event, index) => {
-                event.startDate = moment(event._source.date)
-                event.endDate = moment(event.startDate)
-                if(event._source.title === "Hanukkah") {
-                  event.endDate = moment('2017-01-01')
-                }
-                if(event._source.title === "LGBT History Month") {
-                  event.endDate = moment('2017-02-28')
-                }
+                event.startDate = moment(event._source.date[0].value)
+                event.endDate = moment(event._source.date[0].end_value)
+                console.log(event)
                 event.title = event._source.title
                 event.link = "/event/" + event._id
                 let eventClone: any = _.clone(event)
@@ -118,7 +122,6 @@ export class CalendarComponent implements OnInit {
                       eventClone.css += ' event-two-lines'
                       event.css += ' event-two-lines'
                       event.multiLine = eventClone.multiLine = true
-                      multiLineEvents.push(event.index)
                     }
                     if(characterCount > 40 && day.day % 7 == 0) {
                       eventClone.css = event.css += ' event-three-lines'

@@ -1,8 +1,10 @@
 import { Component, NgModule, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { Location } from '@angular/common'
 import { Item } from './../../../definitions/mock-item'
 import { DataService } from './../../../services/data.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
 import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
+import { SanitiseUrlPipe } from './../../../pipes/sanitise-url.pipe'
 import { ActivatedRoute, Router, Params } from '@angular/router'
 import { Auth } from './../../../services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
@@ -16,12 +18,14 @@ declare var videojs: any
   selector: 'app-item',
   templateUrl: './item.component.html',
   providers: [
-    AttributePipe
+    AttributePipe,
+    SanitiseUrlPipe
   ]
 })
 export class ItemComponent implements OnInit {
   private item: any = {}
   private data: any
+  private id: string
   private showEmbed: boolean = false
   private embedButtonLabel: string = 'Copy'
   private embedButtonClass: string = 'btn-video'
@@ -33,6 +37,7 @@ export class ItemComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
+    private location: Location,
     private auth: Auth
   ) {}
 
@@ -51,6 +56,20 @@ export class ItemComponent implements OnInit {
         })
       }
     )
+    this.route.params
+    .map(params => params['id'])
+    .subscribe((id) => {
+      this.id = id
+    })
+
+    this.route.queryParams
+    .map(params => params['tab'])
+    .subscribe((type) => {
+      if(!_.isUndefined(type)) {
+        this.setActiveTab(type)
+      }
+    })
+
     setTimeout(
       ()=>{
       this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
@@ -94,8 +113,12 @@ export class ItemComponent implements OnInit {
   }
 
   setActiveTab(event: any) {
+    event = event.replace(' ', '_')
     this.activeTab = event
-    if(event !== 'film') this.videoJSplayer.pause()
+  }
+
+  tab(event: any) {
+    this.router.navigateByUrl('/item/' + this.id + '?tab=' + event)
   }
 
   embedCopySuccess(event: any) {

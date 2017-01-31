@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { RouterModule, Routes } from '@angular/router'
 // import { Location } from '@angular/common'
-// import { AUTH_PROVIDERS } from 'angular2-jwt'
+import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AppComponent } from './app.component'
 import { ListingComponent } from './components/content/listing/list.component'
 import { HeaderComponent } from './components/global/header.component'
@@ -23,6 +23,7 @@ import { QueryStringPipe } from './pipes/query-string.pipe'
 import { AttributePipe } from './pipes/attribute.pipe'
 import { PaginationPipe } from './pipes/pagination.pipe'
 import { EmbedMenuPipe } from './pipes/embed-menu.pipe'
+import { SanitiseUrlPipe } from './pipes/sanitise-url.pipe'
 
 import { Auth } from './services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
@@ -34,7 +35,8 @@ import { HomeComponent } from './components/content/home/home.component'
 import { HomeListingComponent } from './components/content/home/list.component'
 import { HomeSortComponent } from './components/content/home/sort.component'
 import { CarouselComponent } from './components/content/home/carousel.component'
-// import { KSSwiperModule } from 'angular2-swiper'
+import { SwiperModule } from 'angular2-swiper-wrapper'
+import { SwiperConfigInterface } from 'angular2-swiper-wrapper'
 import { EventsBlockComponent } from './components/shared/events.component'
 import { TopicsComponent } from './components/shared/topics.component'
 import { PageComponent } from './components/content/pages/page.component'
@@ -42,9 +44,19 @@ import { FooterNavComponent } from './components/navigation/footer-nav.component
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
 import { EventComponent } from './components/content/event/event.component'
+import { MetaModule } from 'ng2-meta'
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent},
+  {
+    path: '',
+    component: HomeComponent,
+    data: {
+      meta: {
+        title: 'FUCK CHOPS',
+        description: 'Description of the home page'
+      }
+    }
+  },
   { path: 'list', component: ListingComponent},
   { path: 'calendar', component: CalendarComponent},
   // { path: 'embed/:id', component: EmbedComponent},
@@ -56,6 +68,14 @@ const appRoutes: Routes = [
   { path: 'assembly scripts', component: ListingComponent, data: [{filter: 'typeAssembly', type: 'content types'}]},
   { path: 'interactive', component: ListingComponent, data: [{filter: 'typeInteractive', type: 'content types'}]},
 ]
+
+const SWIPER_CONFIG: SwiperConfigInterface = {
+      pagination: '.swiper-pagination',
+      slidesPerView: 1,
+      paginationClickable: true,
+      spaceBetween: 0,
+      loop: false
+    }
 
 
 @NgModule({
@@ -74,6 +94,7 @@ const appRoutes: Routes = [
     QueryStringPipe,
     AttributePipe,
     EmbedMenuPipe,
+    SanitiseUrlPipe,
     FooterComponent,
     // EmbedComponent,
     HomeComponent,
@@ -94,7 +115,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     ClipboardModule,
-    // KSSwiperModule,
+    SwiperModule.forRoot(SWIPER_CONFIG),
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
