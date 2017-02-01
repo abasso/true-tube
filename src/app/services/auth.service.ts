@@ -1,6 +1,9 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
+import {AuthHttp, AuthConfig} from "angular2-jwt";
+import {Http, RequestOptions} from '@angular/http'
 import { myConfig }        from './auth.config';
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -33,3 +36,29 @@ export class Auth {
     localStorage.removeItem('id_token');
   };
 }
+
+@Injectable()
+export class LoggedInGuard implements CanActivate
+{
+  constructor(private auth: Auth) {}
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
+  {
+    return this.auth.authenticated();
+  }
+}
+
+export function authFactory(
+    http: Http,
+    options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    // Config options if you want
+  }), http, options);
+}
+
+// Include this in your ngModule providers
+export const AUTH_PROVIDERS = {
+  provide: AuthHttp,
+  deps: [Http, RequestOptions],
+  useFactory: authFactory
+};

@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 
-import { HttpModule } from '@angular/http'
+import {HttpModule, Http, RequestOptions} from '@angular/http'
 import { RouterModule, Routes } from '@angular/router'
 // import { Location } from '@angular/common'
-// import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { AppComponent } from './app.component'
 import { ListingComponent } from './components/content/listing/list.component'
 import { HeaderComponent } from './components/global/header.component'
@@ -24,7 +23,7 @@ import { PaginationPipe } from './pipes/pagination.pipe'
 import { EmbedMenuPipe } from './pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './pipes/sanitise-url.pipe'
 
-import { Auth } from './services/auth.service'
+import {Auth, AUTH_PROVIDERS, LoggedInGuard} from './services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
 // import * as moment from 'moment'
 // import * as _ from 'lodash'
@@ -43,6 +42,9 @@ import { FooterNavComponent } from './components/navigation/footer-nav.component
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
 import { EventComponent } from './components/content/event/event.component'
+import {ProfileComponent} from "./components/profile/profile.component";
+import {ProfileResolver} from "./components/profile/profile.resolver";
+
 // import { MetaModule } from 'ng2-meta'
 
 const appRoutes: Routes = [
@@ -66,7 +68,15 @@ const appRoutes: Routes = [
   { path: 'lesson plans', component: ListingComponent, data: [{filter: 'typeLesson', type: 'content types'}]},
   { path: 'assembly scripts', component: ListingComponent, data: [{filter: 'typeAssembly', type: 'content types'}]},
   { path: 'interactive', component: ListingComponent, data: [{filter: 'typeInteractive', type: 'content types'}]},
-]
+  {
+    path: 'me',
+    component: ProfileComponent,
+    canActivate: [LoggedInGuard],
+    resolve: {
+      profile: ProfileResolver
+    }
+  }
+];
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
       pagination: '.swiper-pagination',
@@ -105,7 +115,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     FooterNavComponent,
     AccessibilityNavComponent,
     CalendarComponent,
-    EventComponent
+    EventComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -117,8 +128,10 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    // AUTH_PROVIDERS,
+    AUTH_PROVIDERS,
     Auth,
+    LoggedInGuard,
+    ProfileResolver,
     ListFilterComponent,
     ListingComponent,
     DataService,
