@@ -5,8 +5,8 @@ interface AuthConfiguration {
 }
 
 export const myConfig: AuthConfiguration = {
-    clientID: 'us1FlyqkdVWk0eDtbT5AcTMJRgDWf7CK',
-    domain: 'tompain.eu.auth0.com',
+    clientID: 'c1OIvYBFmOpdrUgXuHGD5j3KE7rjFSJT',
+    domain: 'truetube.eu.auth0.com',
     options: {
       languageDictionary: {
         emailInputPlaceholder: 'something@youremail.com',
