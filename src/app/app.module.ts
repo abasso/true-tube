@@ -22,6 +22,7 @@ import { AttributePipe } from './pipes/attribute.pipe'
 import { PaginationPipe } from './pipes/pagination.pipe'
 import { EmbedMenuPipe } from './pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './pipes/sanitise-url.pipe'
+import {StickyModule} from 'ng2-sticky-kit/ng2-sticky-kit'
 
 import {Auth, AUTH_PROVIDERS, LoggedInGuard} from './services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
@@ -124,6 +125,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     ReactiveFormsModule,
     HttpModule,
     ClipboardModule,
+    StickyModule,
     SwiperModule.forRoot(SWIPER_CONFIG),
     RouterModule.forRoot(appRoutes)
   ],

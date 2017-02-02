@@ -424,7 +424,6 @@ export class ListFilterComponent implements OnInit {
   setQueryString() {
     let appendedQuery = ''
     let hasPage = false
-    console.log("THE CURRENT PARAMS", this.currentParams)
     _.each(this.currentParams, (value, key) => {
       if (key === 'page') {
         hasPage = true
@@ -432,13 +431,10 @@ export class ListFilterComponent implements OnInit {
       } else if (value.length) {
         appendedQuery += key + '=' + value.trim() + '&'
       }
-
     })
     if (!hasPage) {
       appendedQuery += '&page=1'
     }
-    console.log(appendedQuery)
-
     this.router.navigateByUrl('/list?' + appendedQuery)
   }
 

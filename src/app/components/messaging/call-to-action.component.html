@@ -1,5 +1,5 @@
 <div class="container">
-<div class="call-to-action-copy">
+<div class="call-to-action-copy" *ngIf="!auth.authenticated()">
 Online resources and materials for RE, PSHE &amp; Citizenship
 <button href="#" class="btn btn-login" data-toggle="modal" data-target="#modalLogin">Register for Free</button>
  </div>

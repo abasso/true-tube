@@ -1,4 +1,4 @@
-<header class="c-header" role="banner">
+  <header class="c-header" role="banner">
   <div class="container">
     <div class="mobile-logo hidden-lg-up">
 			<a [routerLink]="['/']" class="c-logo-link">
@@ -24,6 +24,5 @@
     <div (click)="toggleMenu($event)" class="mobile-nav__close"><a></a></div>
 
   </div>
-
+  <app-call-to-action [ngClass]="{'logged-in': auth.authenticated()}" class="call-to-action"></app-call-to-action>
 </header>
-<app-call-to-action class="call-to-action"></app-call-to-action>

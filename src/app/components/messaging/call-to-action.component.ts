@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core'
 import * as Cookies from 'js-cookie'
 import * as _ from 'lodash'
+import { Auth } from './../../services/auth.service'
+
 @Component({
   selector: 'app-call-to-action',
   templateUrl: './call-to-action.component.html'
 })
 export class CallToActionComponent implements OnInit {
-  private fontSize: number = 16
-  private dyslexiaEnabled: boolean = false
-  private dyslexiaLabel: string = 'Dyslexia Font'
-  constructor() { }
+  private fontSize = 16
+  private dyslexiaEnabled = false
+  private dyslexiaLabel = 'Dyslexia Font'
+  constructor(
+    private auth: Auth
+  ) { }
 
   ngOnInit() {
-    if(Cookies.get('dyslexia-font')) {
+    if (Cookies.get('dyslexia-font')) {
       this.setDyslexiaFont()
       this.dyslexiaEnabled = true
       this.dyslexiaLabel = 'Standard Font'
@@ -42,7 +46,7 @@ export class CallToActionComponent implements OnInit {
   }
 
   setDyslexiaCookie() {
-    if(_.isUndefined(Cookies.get('dyslexia-font'))) {
+    if (_.isUndefined(Cookies.get('dyslexia-font'))) {
       Cookies.set('dyslexia-font', 'true')
     } else {
       Cookies.remove('dyslexia-font')
@@ -51,19 +55,18 @@ export class CallToActionComponent implements OnInit {
 
   setDyslexiaFont() {
     let body: any = document.getElementsByTagName('body')[0]
-    let className: string = 'dyslexia'
+    let className = 'dyslexia'
     if (body.classList) {
       body.classList.toggle(className)
     } else {
       let classes: any = body.className.split(' ')
       let existingIndex: any = classes.indexOf(className)
-      if (existingIndex >= 0)
+      if (existingIndex >= 0) {
         classes.splice(existingIndex, 1)
-      else
+      } else {
         classes.push(className)
       body.className = classes.join(' ')
+      }
     }
   }
-
-
 }

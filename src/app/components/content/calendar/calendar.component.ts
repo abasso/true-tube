@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './../../../services/data.service'
+import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs/Rx'
 import * as moment from 'moment'
 import * as _ from 'lodash'
@@ -23,7 +24,11 @@ export class CalendarComponent implements OnInit {
   public toHighlight = ''
   public eventCount: number
   public eventCountString: string
-  constructor(public dataService: DataService) {
+  constructor(
+    public dataService: DataService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.weeks.length = 42
     this.month = this.selectedMonth.subscribe(
       (month: any) => {
@@ -171,6 +176,13 @@ export class CalendarComponent implements OnInit {
                 item.date = moment(item._source.date).format('Do')
               })
             }
+            this.route.queryParams
+            .map(params => params['month'])
+            .subscribe((month) => {
+              if (!_.isUndefined(month)) {
+                this.setMonth(month)
+              }
+            })
           }
         )
       }
@@ -182,6 +194,11 @@ export class CalendarComponent implements OnInit {
 
   highlightEvent(event: any, index: any) {
     this.toHighlight = index
+  }
+
+  setMonth(month: string) {
+    moment({'M': month})
+    this.selectedMonth.next(month)
   }
 
   prevMonth(event: any) {

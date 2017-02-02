@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx'
+import { Observable, BehaviorSubject } from 'rxjs/Rx'
 import { DataService } from './../../../services/data.service'
 import { ListService } from './../../../services/list.service'
 import { Categories } from './../../../definitions/categories'

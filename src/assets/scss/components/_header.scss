@@ -6,9 +6,10 @@ body {
 
 .logo {
   margin:1rem 0;
-  height:55px;
+  height:3.5rem;
+  transition: all 0.4s ease;
   @media(max-width: $breakpoint-sm) {
-    height:50px;
+    height:3rem;
   }
 }
 
@@ -100,9 +101,9 @@ header {
           font-size:$font-size-lg;
         }
         font-weight: $font-weight-normal;
-        border-bottom:solid 1px rgba(255,255,255,0.1);
+        border-bottom:solid 2px rgba(0,0,0,0);
         &:hover {
-          border-bottom-color:$gray;
+          border-bottom-color:rgba(0,0,0,0.1);
         }
       }
     }
@@ -152,6 +153,28 @@ header {
     width:100%;
     flex-direction:row;
 
+  }
+}
+
+app-header {
+  &.sticky {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:9999;
+    margin-top:-9rem;
+    &.show {
+      margin-top:0rem;
+    }
+    &.animate {
+      transition: all .2s ease;
+    }
+    header {
+      .logo {
+        height:3rem;
+      }
+    }
   }
 }
 

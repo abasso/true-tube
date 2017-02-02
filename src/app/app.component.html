@@ -1,10 +1,10 @@
-<app-header>
+<app-header  [ngClass]="{sticky: stickyHeader === true, show: showHeader === false, animate: animateHeader === true}" >
 </app-header>
-<main role="main">
+<main role="main"  [ngClass]="{sticky: stickyHeader === true}" >
 	<div class="container">
   	<!-- <app-list></app-list> -->
 		<router-outlet></router-outlet>
 	</div>
 </main>
-<app-footer>
+<app-footer [ngClass]="{sticky: stickyHeader === true}" >
 </app-footer>

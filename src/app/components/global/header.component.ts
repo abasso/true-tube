@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Auth } from './../../services/auth.service'
 
 @Component({
@@ -6,15 +6,14 @@ import { Auth } from './../../services/auth.service'
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  menuVisible = false
+  public menuVisible = false
   constructor(
-    private auth: Auth
+    public auth: Auth
   ) {
   }
-
   ngOnInit() {
-  }
 
+  }
   toggleMenu(event: any) {
     event.preventDefault()
     this.menuVisible = (this.menuVisible === false) ? true : false

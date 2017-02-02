@@ -1,4 +1,9 @@
 .call-to-action {
+  &.logged-in {
+    .call-to-action-nav {
+      margin-left:auto;
+    }
+  }
   font-size: $font-size-xs;
   display: flex;
   align-items: center;
