@@ -157,25 +157,28 @@ header {
 }
 
 app-header {
-  &.sticky {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:9999;
-    margin-top:-9rem;
-    &.show {
-      margin-top:0rem;
-    }
-    &.animate {
-      transition: all .2s ease;
-    }
-    header {
-      .logo {
-        height:3rem;
-      }
-    }
-  }
+  // &.sticky {
+  //   position:fixed;
+  //   top:0;
+  //   left:0;
+  //   width:100%;
+  //   z-index:9999;
+  //   margin-top:-13rem;
+  //   @media(min-width: $breakpoint-lg) {
+  //     margin-top:-9rem;
+  //   }
+  //   &.show {
+  //     margin-top:0rem;
+  //   }
+  //   &.animate {
+  //     transition: all .2s ease;
+  //   }
+  //   header {
+  //     .logo {
+  //       height:3rem;
+  //     }
+  //   }
+  // }
 }
 
 .alt {

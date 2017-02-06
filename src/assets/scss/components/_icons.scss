@@ -100,6 +100,34 @@
   }
 }
 
+.icon-favourite {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/heart.svg");
+  }
+}
+
+.icon-favourite_red {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/heart_red.svg");
+  }
+}
+
+.icon-toolbox {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/briefcase.svg");
+  }
+}
+
+.icon-toolbox_yellow {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/briefcase_yellow.svg");
+  }
+}
+
 
 
 .icon-small {
@@ -262,5 +290,18 @@
   &.icon-left {
     padding-left: 30px;
     display:block;
+  }
+}
+
+.icon-button {
+  position:relative;
+  padding-left:2.5rem;
+  &:before {
+    position:absolute;
+    left:.875rem;
+    top:.5rem;
+    width:16px;
+    height:16px;
+    background-size:contain;
   }
 }

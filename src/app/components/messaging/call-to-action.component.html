@@ -1,8 +1,12 @@
 <div class="container">
 <div class="call-to-action-copy" *ngIf="!auth.authenticated()">
-Online resources and materials for RE, PSHE &amp; Citizenship
-<button href="#" class="btn btn-login" data-toggle="modal" data-target="#modalLogin">Register for Free</button>
- </div>
+  Online resources and materials for RE, PSHE &amp; Citizenship
+  <button href="#" class="btn btn-login" data-toggle="modal" data-target="#modalLogin">Register for Free</button>
+</div>
+<div class="call-to-action-copy call-to-action-tools" *ngIf="auth.authenticated()">
+  <button href="#" class="btn btn-toolbox icon-toolbox icon-button icon-left" data-toggle="modal" data-target="#modalLogin">Toolbox</button>
+  <button href="#" class="btn btn-favourites icon-favourite_red icon-button icon-left" data-toggle="modal" data-target="#modalLogin">Favourites</button>
+</div>
 <div class="call-to-action-nav">
 <nav id="nav" class="accessibility-nav hidden-md-down">
   <a href="#" class="btn-dyslexia" [ngClass]="{dyslexia: dyslexiaEnabled === false, standard: dyslexiaEnabled === true}" (click)="toggleDyslexiaFont($event)" [innerHTML]="dyslexiaLabel"></a>

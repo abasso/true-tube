@@ -1,3 +1,18 @@
+app-list {
+  .sticky {
+    padding-top:4rem;
+    .page-title {
+      position:fixed;
+      top:0;
+      background:white;
+      z-index:9999;
+      margin:0;
+      padding:2rem 0;
+      // border-bottom:solid 1px $gray-lighter;
+    }
+  }
+}
+
 .block-media__media {
   position:relative;
   img {

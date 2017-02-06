@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, HostListener } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
 import { Observable } from 'rxjs/Rx'
@@ -25,6 +25,8 @@ export class ListingComponent {
   public count: number
   public startVal: number
   public endVal: number
+  public lastScrollPos: number
+  public stickyTitle = false
   public paginationData: {
     currentPage: number,
     itemsPerPage: number,
@@ -97,4 +99,30 @@ export class ListingComponent {
     }
     return category + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types
   }
+
+  @HostListener('window:scroll', ['$event'])
+  scroll(event) {
+    let main = document.querySelector('main').getBoundingClientRect()
+    let header = document.querySelector('header').getBoundingClientRect()
+    console.log(document.body.scrollTop + main.top)
+    console.log(header.top)
+    console.log(main.top)
+
+      // if (window.pageYOffset > this.lastScrollPos) {
+        console.log('scrolling down')
+          if (main.top <= 0) {
+            this.stickyTitle = true
+          }
+          else {
+            this.stickyTitle = false            
+          }
+      //   } else {
+      //     console.log('scroll up')
+      //     this.stickyTitle = false
+      // }
+
+      // this.lastScrollPos = window.pageYOffset
+  }
+
+
 }

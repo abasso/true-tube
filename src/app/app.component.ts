@@ -6,34 +6,27 @@ import { Component, HostListener } from '@angular/core';
 })
 export class AppComponent {
   public stickyHeader
-  public showHeader = false
+  public hideHeader = false
   public lastScrollPos = 0
   public animateHeader = false
+  public sticky = false
   @HostListener('window:scroll', ['$event'])
   scroll(event) {
-    let scrolledPastHeader = false
+    let main = document.querySelector('main').getBoundingClientRect()
+    let header = document.querySelector('header').getBoundingClientRect()
+    console.log(document.body.scrollTop + main.top)
+    console.log(header.top)
+    console.log(main.top)
+
       if (window.pageYOffset > this.lastScrollPos) {
-          this.showHeader = true
-          if (window.pageYOffset > 300) {
-            this.stickyHeader = true
+        console.log('scrolling down')
+          if (main.top - 100 <= 0) {
             this.animateHeader = true
-            scrolledPastHeader = true
-          } else if (window.pageYOffset > 144) {
-            scrolledPastHeader = true
-            this.stickyHeader = true
-            this.animateHeader = false
-          } else {
-            this.stickyHeader = false
-            this.animateHeader = false
+            this.hideHeader = true
           }
         } else {
-        this.showHeader = false
-        if (window.pageYOffset === 0 && scrolledPastHeader === false) {
-          scrolledPastHeader = false
-          this.stickyHeader = false
-        } else {
-          this.stickyHeader = true
-        }
+          console.log('scroll up')
+          this.hideHeader = false
       }
 
       this.lastScrollPos = window.pageYOffset
