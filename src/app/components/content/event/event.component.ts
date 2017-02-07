@@ -22,7 +22,7 @@ export class EventComponent implements OnInit {
 ) {
   }
   ngOnInit() {
-    this.types = _.filter(ContentTypes, {inMenu: true})
+    this.types = ContentTypes
     this.data = this.dataService.events().subscribe(
       (data) => {
         this.data = this.route.params

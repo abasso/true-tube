@@ -59,7 +59,7 @@ export class HomeListingComponent implements OnInit {
               item.contenttypes = []
               _.each(item.typesCount, (type, key) => {
                 _.each(ContentTypes, (contentType) => {
-                  if (contentType.term === key && contentType.inMenu === true) {
+                  if (contentType.term === key) {
                     let typestring: any = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
                     item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-'), 'query': { 'tab': key}})
                   }

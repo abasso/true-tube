@@ -102,9 +102,9 @@ fieldset[disabled] a.btn {
   text-transform:capitalize;
   @include button-variant($btn-assembly-plan-color, $btn-assembly-plan-bg, $btn-assembly-plan-border);
 }
-.btn-teachers-note {
+.btn-teachers-notes {
   text-transform:capitalize;
-  @include button-variant($btn-interactive-color, $btn-interactive-bg, $btn-interactive-border);
+  @include button-variant($btn-teachers-notes-color, $btn-teachers-notes-bg, $btn-teachers-notes-border);
 }
 .btn-interactive {
   text-transform:capitalize;

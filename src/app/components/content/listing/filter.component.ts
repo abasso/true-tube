@@ -79,7 +79,7 @@ export class ListFilterComponent implements OnInit {
     .subscribe((params) => {
       this.currentParams = _.assign({}, params)
     })
-    this.types = _.filter(ContentTypes, {inMenu: true})
+    this.types = ContentTypes
   }
 
   ngOnInit() {

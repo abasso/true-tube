@@ -42,7 +42,7 @@ export class ItemComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.types = _.filter(ContentTypes, {inMenu: true})
+    this.types = ContentTypes
     this.data = this.route.params
     .switchMap((params: Params) => this.dataService.item(params['id']))
     .subscribe(
