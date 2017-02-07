@@ -116,8 +116,10 @@ export class ListFilterComponent implements OnInit {
           item.typesCount = _.countBy(item._source.embedded, 'type')
           item.contenttypes = []
           _.each(item.typesCount, (type, key) => {
-            let typestring = (type > 1) ? key.replace('_', ' ') + 's' : key.replace('_', ' ')
-            item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-'), 'query': { 'tab': key}})
+            let typestring = key.replace('_', ' ')
+            if (_.findIndex(this.types, {'term': key}) !== -1) {
+              item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-'), 'query': { 'tab': key}})
+            }
           })
         })
         if (_.isUndefined(this.currentItemCount)) {

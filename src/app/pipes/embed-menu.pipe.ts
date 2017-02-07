@@ -11,8 +11,7 @@ export class EmbedMenuPipe implements PipeTransform {
     let embedMenu: any[] = []
     _.each(value, (embed, index) => {
       let type: any = _.find(ContentTypes, {term: embed.type})
-      console.log(typeof embed.count)
-      type.tabLabel = (embed.count === 1) ? _.trimEnd(type.label, 's') : type.label
+      type.tabLabel = (embed.count === 1 && type.label !== 'Teachers Notes') ? _.trimEnd(type.label, 's') : type.label
       type.active = (parseInt(index) === 0) ? true : false
       embedMenu.push(type)
     })

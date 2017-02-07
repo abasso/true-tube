@@ -33,6 +33,13 @@
         </a>
         <p class="block-media__description " [innerHTML]="related.description">
         </p>
+        <div class="block-media__types" *ngIf="related.contenttypes">
+          <a [routerLink]="[related.slug]" [queryParams]="type.query" *ngFor="let type of related.contenttypes" class="btn btn-sm {{ type.class }}">
+            <span>
+              {{ type.label }}
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

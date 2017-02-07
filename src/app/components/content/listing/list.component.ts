@@ -103,25 +103,11 @@ export class ListingComponent {
   @HostListener('window:scroll', ['$event'])
   scroll(event) {
     let main = document.querySelector('main').getBoundingClientRect()
-    let header = document.querySelector('header').getBoundingClientRect()
-    console.log(document.body.scrollTop + main.top)
-    console.log(header.top)
-    console.log(main.top)
-
-      // if (window.pageYOffset > this.lastScrollPos) {
-        console.log('scrolling down')
-          if (main.top <= 0) {
-            this.stickyTitle = true
-          }
-          else {
-            this.stickyTitle = false            
-          }
-      //   } else {
-      //     console.log('scroll up')
-      //     this.stickyTitle = false
-      // }
-
-      // this.lastScrollPos = window.pageYOffset
+    if (main.top <= 0) {
+      this.stickyTitle = true
+    } else {
+      this.stickyTitle = false
+    }
   }
 
 

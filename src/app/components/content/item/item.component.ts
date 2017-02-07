@@ -4,6 +4,7 @@ import { DataService } from './../../../services/data.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
 // import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './../../../pipes/sanitise-url.pipe'
+import { ContentTypes } from './../../../definitions/content-types'
 import { ActivatedRoute, Router, Params } from '@angular/router'
 import { Auth } from './../../../services/auth.service'
 import * as moment from 'moment'
@@ -30,6 +31,7 @@ export class ItemComponent implements OnInit {
   private embeddedContent: any = []
   private activeTab = 'film'
   private videoJSplayer: any
+  private types
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +42,7 @@ export class ItemComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.types = _.filter(ContentTypes, {inMenu: true})
     this.data = this.route.params
     .switchMap((params: Params) => this.dataService.item(params['id']))
     .subscribe(
@@ -52,7 +55,15 @@ export class ItemComponent implements OnInit {
           }
         })
         _.each(this.item.related, (item) => {
+          console.log(item)
           item.slug = '/item/' + item.uuid
+          item.contenttypes = []
+          _.each(item.resource_types, (type, key) => {
+            console.log(type.type)
+            if (_.findIndex(this.types, {'term': type.type}) !== -1) {
+              item.contenttypes.push({'label': type.label, 'class': 'btn-' + type.type.replace('_', '-'), 'query': { 'tab': type.type}})
+            }
+          })
         })
       }
     )

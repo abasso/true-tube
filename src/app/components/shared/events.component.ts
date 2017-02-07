@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../services/data.service'
-import { Observable, Subject, BehaviorSubject } from 'rxjs/Rx'
+import { BehaviorSubject } from 'rxjs/Rx'
 import * as moment from 'moment'
 import * as _ from 'lodash'
 
@@ -15,24 +15,23 @@ export class EventsBlockComponent implements OnInit {
   private month: any
   private data: any
   private subscriber: any
-  private noEvents: boolean = true
+  private noEvents = true
   public items: any[] = []
   constructor(
     public dataService: DataService
   ) {
     this.month = this.selectedMonth.subscribe(
       (month: any) => {
-        this.selectedMonthString = (this.currentTime.month() === month) ? "this month" : "in " + moment().month(month).format("MMMM")
+        this.selectedMonthString = (this.currentTime.month() === month) ? 'this month' : 'in ' + moment().month(month).format('MMMM')
         this.data = this.dataService.events(month)
         this.subscriber = this.data.subscribe(
           (data: any) => {
-            console.log("EVENT DATA", data)
-            this.items = _.sortBy(data.hits.hits, "date").reverse()
+            this.items = _.sortBy(data.hits.hits, 'date').reverse()
             this.noEvents = (this.items.length) ? false : true
-            if(this.items.length) {
+            if (this.items.length) {
               _.each(this.items, (item) => {
-                item.url = "/event/" + item._id
-                item.date = moment(item._source.date[0].value).format("Do")
+                item.url = '/event/' + item._id
+                item.date = moment(item._source.date.value).format('Do')
               })
             }
           }
@@ -47,7 +46,7 @@ export class EventsBlockComponent implements OnInit {
   prevMonth(event: any) {
     event.preventDefault()
     let currentMonth: any = this.selectedMonth.getValue()
-    if(currentMonth !== 0) {
+    if (currentMonth !== 0) {
       this.selectedMonth.next(currentMonth - 1)
     }
 
@@ -56,7 +55,7 @@ export class EventsBlockComponent implements OnInit {
   nextMonth(event: any) {
     event.preventDefault()
     let currentMonth: any = this.selectedMonth.getValue()
-    if(currentMonth !== 11) {
+    if (currentMonth !== 11) {
       this.selectedMonth.next(currentMonth + 1)
     }
   }

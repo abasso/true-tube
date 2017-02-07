@@ -91,7 +91,7 @@ export class CalendarComponent implements OnInit {
             this.items = _.sortBy(data.hits.hits, 'date').reverse()
             // Increment the events count for the title
             _.each(this.items, (item) => {
-              if (moment(item._source.date[0].value).month() === selectedMonth.month()) {
+              if (moment(item._source.date.value).month() === selectedMonth.month() && moment(item._source.date.value).year() === selectedMonth.year()) {
                 this.eventCount++
               }
             })
@@ -99,8 +99,8 @@ export class CalendarComponent implements OnInit {
             _.each(days, (day) => {
               day.events = []
               _.each(this.items, (event, index) => {
-                event.startDate = moment(event._source.date[0].value)
-                event.endDate = moment(event._source.date[0].end_value)
+                event.startDate = moment(event._source.date.value)
+                event.endDate = moment(event._source.date.end_value)
                 event.title = event._source.title
                 event.link = '/event/' + event._id
                 let eventClone: any = _.clone(event)

@@ -109,7 +109,7 @@
 					</div>
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{lesson.title}}</h6>
-						<p class="block-media__description">{{lesson.description}}</p>
+						<p class="block-media__description" [innerHTML]="lesson.description"></p>
 						<a href="{{lesson.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()">Download</a>
 						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link">Login</a> to download this lesson plan</p>
 					</div>
@@ -130,7 +130,7 @@
 					</div>
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{assembly.title}}</h6>
-						<p class="block-media__description">{{assembly.description}}</p>
+						<p class="block-media__description" [innerHTML]="assembly.description"></p>
 						<a href="{{assembly.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()">Download</a>
 						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link">Login</a> to download this assembly plan</p>
 					</div>
@@ -151,7 +151,7 @@
 					</div>
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{notes.title}}</h6>
-						<p class="block-media__description">{{notes.description}}</p>
+						<p class="block-media__description" [innerHTML]="notes.description"></p>
 						<a href="{{notes.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()">Download</a>
 						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link">Login</a> to download these teachers notes</p>
 					</div>
@@ -209,7 +209,7 @@
           <a [routerLink]="[related.slug]" class="block-media__link">
             <img [src]="related.thumbnail[0].url" alt="related.thumbnail[0].alt" />
             <div class="listing-time" *ngIf="related.duration">
-              {{ dataService.duration(related._source.duration) }}
+              <!-- {{ dataService.duration(related._source.duration) }} -->
             </div>
           </a>
         </div>
@@ -221,6 +221,13 @@
           </a>
           <p class="block-media__description " [innerHTML]="related.description">
           </p>
+					<div class="block-media__types" *ngIf="related.contenttypes">
+						<a [routerLink]="[related.slug]" [queryParams]="type.query" *ngFor="let type of related.contenttypes" class="btn btn-sm {{ type.class }}">
+							<span>
+								{{ type.label }}
+							</span>
+						</a>
+					</div>
         </div>
       </div>
     </div>

@@ -159,7 +159,7 @@ $number: 42;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     @media(min-width: 768px) {
-      left: .5rem;
+      //left: .5rem;
       width: 200%;
       &.event-two-lines {
         min-height: 3rem;
@@ -175,7 +175,7 @@ $number: 42;
     border-radius: 0;
     @media(min-width: 768px) {
       width: 130%;
-      margin: .25rem -1rem;
+      margin: .35rem -1rem;
       .event-desc {
         display: none;
       }

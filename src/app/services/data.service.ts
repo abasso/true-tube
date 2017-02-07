@@ -10,8 +10,8 @@ export class DataService {
   constructor(private http: Http) {
   }
 
-  private baseUrl = 'http://api.truetube.co.uk/resource2/_search'
-  private tempUrl = 'http://api.truetube.co.uk/resource2/resource'
+  private baseUrl = 'http://api.truetube.co.uk/resources/_search'
+  private tempUrl = 'http://api.truetube.co.uk/resources/resource'
   private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search?sort=updated:desc'
   private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date.value:desc'
   private pagesUrl = 'http://api.truetube.co.uk/pages/_search'
@@ -79,7 +79,7 @@ export class DataService {
         if (topicArray.length > 1 && index !== topicArray.length) {
           topicString += '" OR "'
         }
-        if (index === topicArray.length) {
+        if (index === topicArray.length - 1) {
           topicString += '")'
         }
       })
@@ -134,6 +134,7 @@ export class DataService {
       let monthEnd: any = moment({ M: month, D: moment({M: month} ).daysInMonth()}).format('YYYY-MM-DD')
       search.set('q', 'date.value:[' + monthStart + ' TO ' +  monthEnd + ']' )
     }
+    search.set('size', '1000')
     return this.http
     .get(this.eventsUrl, { search })
     .map((response) => ( response.json()))
