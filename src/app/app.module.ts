@@ -43,8 +43,8 @@ import { FooterNavComponent } from './components/navigation/footer-nav.component
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
 import { EventComponent } from './components/content/event/event.component'
-import {ProfileComponent} from "./components/profile/profile.component";
-import {ProfileResolver} from "./components/profile/profile.resolver";
+import {ProfileComponent} from './components/profile/profile.component';
+import {ProfileResolver} from './components/profile/profile.resolver';
 
 // import { MetaModule } from 'ng2-meta'
 

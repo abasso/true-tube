@@ -1,9 +1,10 @@
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
-import {AuthHttp, AuthConfig} from "angular2-jwt";
+import {AuthHttp, AuthConfig} from 'angular2-jwt';
 import {Http, RequestOptions} from '@angular/http'
 import { myConfig }        from './auth.config';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router'
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -11,21 +12,40 @@ declare var Auth0Lock: any;
 @Injectable()
 export class Auth {
   // Configure Auth0
-  lock = new Auth0Lock(myConfig.clientID, myConfig.domain, myConfig.options);
-
-  constructor() {
+  private lock
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    // myConfig.options['auth'].params.state = JSON.stringify({pathname: route})
+    this.lock = new Auth0Lock(myConfig.clientID, myConfig.domain, myConfig.options);
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem('id_token', authResult.idToken);
+      const redirectUrl: string = localStorage.getItem('redirectUrl');
+      if (redirectUrl) {
+          this.router.navigate([redirectUrl]);
+      } else {
+          this.router.navigate(['/me']);
+      }
     });
   }
 
   public login() {
+    console.log('called the login')
+    localStorage.setItem('redirectUrl', this.router.url)
     // Call the show method to display the widget.
-    this.lock.show();
+    this.lock.show()
+  };
+
+  public signup() {
+    localStorage.setItem('redirectUrl', '/me')
+    // Call the show method to display the widget.
+    this.lock.show({initialScreen: 'signUp'})
   };
 
   public authenticated() {
+
     // Check if there's an unexpired JWT
     // It searches for an item in localStorage with key == 'id_token'
     return tokenNotExpired();
@@ -44,6 +64,7 @@ export class LoggedInGuard implements CanActivate
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
   {
+    console.log("ITS BEEN AUTHENTICATED")
     return this.auth.authenticated();
   }
 }

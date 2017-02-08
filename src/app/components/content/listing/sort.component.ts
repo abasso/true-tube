@@ -31,7 +31,6 @@ export class ListingSortComponent {
     this.route.queryParams
     .subscribe((params) => {
       this.currentParams = _.assign({}, params)
-      console.log(this.currentParams)
     })
 
     this.setListDisplay((_.isUndefined(Cookies.get('list-display'))) ? 'grid' : Cookies.get('list-display'))

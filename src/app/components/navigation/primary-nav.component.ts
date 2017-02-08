@@ -35,8 +35,5 @@ export class PrimaryNavComponent implements OnInit {
     this.searchSubmitted.emit(event)
   }
 
-  login() {
-    this.auth.login()
-  }
 
 }

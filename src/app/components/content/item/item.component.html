@@ -40,6 +40,8 @@
 
 
 				<div class="video-actions hidden-sm-down">
+					<a href="" class="icon-embed icon-small icon-left icon-favourite_red video-embed text-link" (click)="addToFavourites($event)">Add to Favourites</a>
+
 					<span  *ngIf="embed.allow_download !== '0'">
 						<a href="" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
 						<a href="#" class="icon-download icon-small icon-left text-link" *ngIf="!auth.authenticated()">Download</a>
@@ -86,7 +88,7 @@
 
 				<div class="video-share">
 					<span class="share-title">Share</span>
-					<a href="https://www.facebook.com/sharer/sharer.php?u=/item/{{item.id}}" class="icon-facebook hidden-xs-down icon-social"></a>
+					<a href="https://www.facebook.com/sharer/sharer.php?u=http://www.truetube.co.uk/item/{{item.id}}" class="icon-facebook hidden-xs-down icon-social"></a>
 					<a href="https://twitter.com/intent/tweet?text={{item.title}}&amp;url=/item/{{item.id}}&amp;via=True Tube" class="icon-twitter hidden-xs-down icon-social"></a>
 					<a href="'https://plus.google.com/share?url=/item/{{item.id}}" class="icon-google-plus hidden-xs-down icon-social"></a>
 					<!-- <a href="" class="icon-share icon-social"></a> -->
@@ -169,7 +171,7 @@
 	<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
 		<div class="content-info">
 			<div class="add-to-toolbox">
-				<a href="#" class="icon-add icon-small icon-left icon-border text-link">Add to my toolbox</a>
+				<a href="#" class="icon-add icon-small icon-left icon-border text-link">Add to a list</a>
 			</div>
 			<p [innerHTML]="item.description">
 			</p>

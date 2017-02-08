@@ -55,10 +55,7 @@ export class ListingComponent {
     .map(params => params['page'])
     .subscribe((page) => {
       if (!_.isUndefined(page)) {
-        console.log('the page is', page)
         this.paginationData.currentPage = page - 1
-      } else {
-        console.log('no page sir')
       }
     })
   }

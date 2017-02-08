@@ -172,6 +172,11 @@ $grid-gutter-width: 30px !default;
 //
 // Font, line-height, and color for body text, headings, and more.
 
+@font-face {
+  font-family: 'opendyslexic';
+  src: url('/assets/fonts/OpenDyslexic3-Regular.ttf')  format('truetype');
+}
+
 $font-family-sans-serif: 'Roboto', sans-serif !default;
 $font-family-body: Arial, sans-serif !default;
 $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;

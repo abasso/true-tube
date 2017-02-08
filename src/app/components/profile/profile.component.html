@@ -1,4 +1,17 @@
-
+<!--
 <h1>Hello {{ profile.name }}</h1>
 
-<pre>{{ profile | json }}</pre>
+<pre>{{ profile | json }}</pre> -->
+
+
+<div class="row info-page">
+  <!-- <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
+    <a href="#" [routerLink]="menuItem.path" *ngFor="let menuItem of menu" class="menu-item">{{menuItem._source.title}}</a>
+  </div> -->
+  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
+    <h1 class="page-title">
+      Hello {{ profile.name }}
+    </h1>
+    <a href="#" *ngFor="let list of listArray">CATS</a>
+    </div>
+  </div>

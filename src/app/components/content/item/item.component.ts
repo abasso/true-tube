@@ -11,6 +11,11 @@ import * as moment from 'moment'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
 
+import { URLSearchParams } from '@angular/http'
+import {AuthHttp} from 'angular2-jwt'
+
+
+
 declare var videojs: any
 
 @Component({
@@ -38,7 +43,8 @@ export class ItemComponent implements OnInit {
     private router: Router,
     private dataService: DataService,
     private location: Location,
-    private auth: Auth
+    private auth: Auth,
+    private http: AuthHttp
   ) {}
 
   ngOnInit() {
@@ -136,5 +142,13 @@ export class ItemComponent implements OnInit {
     }, 1000)
   }
 
-
+  addToFavourites(event: any) {
+    event.preventDefault()
+    this.http.post('http://api.truetube.co.uk/me/test/7e90fdcf-7f7d-56d9-a824-586276982ecc', {})
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err),
+        () => console.log('Request Complete')
+      );
+    }
 }
