@@ -25,7 +25,7 @@ export class SearchComponent {
   }
 
   populateText(event: any) {
-    this.searchText = event.srcElement.value
+    this.searchText = event.target.value
   }
 
   emptyCheck(event: any) {

@@ -113,6 +113,9 @@ export class ListFilterComponent implements OnInit {
           })
         })
         _.each(data.hits.hits, (item) => {
+          if (_.findIndex(item._source.embedded, {'advisory': '1'}) !== -1) {
+            item.advisory = true
+          }
           item.typesCount = _.countBy(item._source.embedded, 'type')
           item.contenttypes = []
           _.each(item.typesCount, (type, key) => {
@@ -280,13 +283,18 @@ export class ListFilterComponent implements OnInit {
   }
 
   search(event: any) {
+    let searchTimeout
+    clearTimeout(searchTimeout)
     if (event.key === 'Enter') {
       return
     }
-    this.contentLoading = true
-    this.currentParams['search'] = event.target.value
-    this.setQueryString()
-    this.ListingComponent.resetPagination()
+    searchTimeout = setTimeout(
+      () => {
+        this.contentLoading = true
+        this.currentParams['search'] = event.target.value
+        this.setQueryString()
+        this.ListingComponent.resetPagination()
+    }, 500)
   }
 
   clearTerm(event: any) {

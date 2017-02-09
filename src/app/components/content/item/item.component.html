@@ -26,6 +26,7 @@
 				<span class="info icon-clock icon-small icon-left" *ngIf="embed.duration !== 0">{{dataService.duration(embed.duration)}}</span>
 
 				<span class="info icon-cc icon-large" *ngIf="embed.subtitles !== null"></span>
+				<span class="advisory-warning" *ngIf="embed.advisory !== null">ADVISORY</span>
 
 				<div class="rating" *ngIf="embed.rating">
 					<div class="rating-stars">
@@ -67,6 +68,12 @@
 			</div>
 
 			<div class="video-js-wrapper">
+				<a href="#" (click)="playPlayer($event)" class="advisory-warning-overlay" [ngClass]="{'hidden-xs-up': hideAdvisory}"  *ngIf="embed.advisory !== null">
+					<span class="advisory-warning"><span class="title icon-left icon icon-play">Advisory Warning</span>
+					<p>This video may contain content <strong>unsuitable for sensitive or younger students.</strong> Teacher discretion is advised.</p>
+						<span class="link">Click to play</span>
+					</span>
+				</a>
 				<video #player id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
 				poster="{{embed.thumbnail[0].url}}">
 				<source src="{{embed.source}}" type="video/mp4">

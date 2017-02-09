@@ -26,6 +26,8 @@
             <div class="listing-time" *ngIf="item._source.duration">
               {{ dataService.duration(item._source.duration) }}
             </div>
+            <span class="advisory-warning" *ngIf="item.advisory === true">ADVISORY</span>
+
           </a>
         </div>
         <div class="block-media__body">

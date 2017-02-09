@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core'
 import { Location } from '@angular/common'
 import { DataService } from './../../../services/data.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
@@ -37,6 +37,7 @@ export class ItemComponent implements OnInit {
   private activeTab = 'film'
   private videoJSplayer: any
   private types
+  private hideAdvisory = false
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -61,11 +62,9 @@ export class ItemComponent implements OnInit {
           }
         })
         _.each(this.item.related, (item) => {
-          console.log(item)
           item.slug = '/item/' + item.uuid
           item.contenttypes = []
           _.each(item.resource_types, (type, key) => {
-            console.log(type.type)
             if (_.findIndex(this.types, {'term': type.type}) !== -1) {
               item.contenttypes.push({'label': type.label, 'class': 'btn-' + type.type.replace('_', '-'), 'query': { 'tab': type.type}})
             }
@@ -86,7 +85,6 @@ export class ItemComponent implements OnInit {
         this.setActiveTab(type)
       }
     })
-
     setTimeout(
       () => {
       this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
@@ -94,8 +92,19 @@ export class ItemComponent implements OnInit {
     }, 200)
   }
 
+  ngOnDestroy() {
+    this.videoJSplayer.dispose()
+  }
+
+
   pausePlayer() {
     this.videoJSplayer.pause()
+  }
+
+  playPlayer(event) {
+    event.preventDefault()
+    this.videoJSplayer.play()
+    this.hideAdvisory = true
   }
 
   // ngOnDestroy() {
@@ -131,6 +140,7 @@ export class ItemComponent implements OnInit {
 
   tab(event: any) {
     this.router.navigateByUrl('/item/' + this.id + '?tab=' + event)
+    this.pausePlayer()
   }
 
   embedCopySuccess(event: any) {

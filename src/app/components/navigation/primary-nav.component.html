@@ -2,7 +2,7 @@
   <div *ngFor="let item of items | QueryStringPipe:'content types'" class="primary-nav__item"><a [routerLink]="['/list']" [queryParams]="item.query" (click)="resetRootPath($event, item.query)" class="primary-nav__link">{{ item.label }}</a></div>
 </div>
 <div class="primary-nav__item primary-nav__account" *ngIf="auth.authenticated()"><a [routerLink]="['/me']" class="primary-nav__link">Profile</a></div>
-<div class="primary-nav__item primary-nav__account" (click)="auth.logout()" *ngIf="auth.authenticated()"><a href="#" class="primary-nav__link">Logout</a></div>
-<div class="primary-nav__item primary-nav__account" (click)="auth.login()" *ngIf="!auth.authenticated()"><a href="#" class="primary-nav__link" data-toggle="modal" data-target="#modalLogin">Login</a></div>
-<div class="primary-nav__item primary-nav__account" (click)="auth.signup()" *ngIf="!auth.authenticated()"><a href="#" class="primary-nav__link">Register</a></div>
+<div class="primary-nav__item primary-nav__account" *ngIf="auth.authenticated()"><a href="#" (click)="auth.logout($event)" class="primary-nav__link">Logout</a></div>
+<div class="primary-nav__item primary-nav__account" *ngIf="!auth.authenticated()"><a href="#" (click)="auth.login($event)" class="primary-nav__link" data-toggle="modal" data-target="#modalLogin">Login</a></div>
+<div class="primary-nav__item primary-nav__account" *ngIf="!auth.authenticated()"><a href="#" (click)="auth.signup($event)" class="primary-nav__link">Register</a></div>
 <app-search #search (searchSubmitted)="searchDone($event)" class="primary-nav__search" [ngClass]="{'active': search.focussed}" ></app-search>

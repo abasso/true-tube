@@ -31,14 +31,16 @@ export class Auth {
     });
   }
 
-  public login() {
+  public login(event: any) {
+    event.preventDefault()
     console.log('called the login')
     localStorage.setItem('redirectUrl', this.router.url)
     // Call the show method to display the widget.
     this.lock.show()
   };
 
-  public signup() {
+  public signup(event: any) {
+    event.preventDefault()
     localStorage.setItem('redirectUrl', '/me')
     // Call the show method to display the widget.
     this.lock.show({initialScreen: 'signUp'})
@@ -51,7 +53,8 @@ export class Auth {
     return tokenNotExpired();
   };
 
-  public logout() {
+  public logout(event: any) {
+    event.preventDefault()
     // Remove token from localStorage
     localStorage.removeItem('id_token');
   };

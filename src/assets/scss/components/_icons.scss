@@ -5,6 +5,13 @@
   }
 }
 
+.icon-play {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/play.svg");
+  }
+}
+
 .icon-cc {
   &:before {
     content:"";
@@ -128,6 +135,19 @@
   }
 }
 
+.icon-list {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/list.svg");
+  }
+}
+
+.icon-advisory {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/warning.svg");
+  }
+}
 
 
 .icon-small {
@@ -136,7 +156,7 @@
     height:18px;
     background-repeat:no-repeat;
     background-position:center center;
-    background-size:18px;
+    background-size:contain;
     top:50%;
     margin-top:-9px;
 
@@ -279,6 +299,7 @@
     height:28px;
     background-repeat:no-repeat;
     background-position:center center;
+    background-size:contain;
     position:relative;
     display:inline-block;
   }
