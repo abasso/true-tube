@@ -26,7 +26,7 @@
 				<span class="info icon-clock icon-small icon-left" *ngIf="embed.duration !== 0">{{dataService.duration(embed.duration)}}</span>
 
 				<span class="info icon-cc icon-large" *ngIf="embed.subtitles !== null"></span>
-				<span class="advisory-warning" *ngIf="embed.advisory !== null">ADVISORY</span>
+				<span class="advisory-warning" *ngIf="embed.advisory === '1'">ADVISORY</span>
 
 				<div class="rating" *ngIf="embed.rating">
 					<div class="rating-stars">
@@ -68,7 +68,7 @@
 			</div>
 
 			<div class="video-js-wrapper">
-				<a href="#" (click)="playPlayer($event)" class="advisory-warning-overlay" [ngClass]="{'hidden-xs-up': hideAdvisory}"  *ngIf="embed.advisory !== null">
+				<a href="#" (click)="playPlayer($event)" class="advisory-warning-overlay" [ngClass]="{'hidden-xs-up': hideAdvisory}"  *ngIf="embed.advisory === '1'">
 					<span class="advisory-warning"><span class="title icon-left icon icon-play">Advisory Warning</span>
 					<p>This video may contain content <strong>unsuitable for sensitive or younger students.</strong> Teacher discretion is advised.</p>
 						<span class="link">Click to play</span>

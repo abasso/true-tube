@@ -1,8 +1,24 @@
-.auth0-lock.auth0-lock {
+.auth0-lock {
+  p {
+    color:$brand-gray !important;
+  }
+  &.auth0-lock {
   font-family: $font-family-sans-serif;
+  &.auth0-lock-opened
+  {
+    .auth0-lock-widget {
 
+    }
+  }
+  .auth0-lock-cred-pane {
+    border-radius:$border-radius-sm;
+  }
   .auth0-lock-widget {
+    position:relative;
+    box-shadow:none !important;
+    border-radius:$border-radius-sm !important;
     width:400px;
+    transform:none !important;
   }
   .auth0-lock-header-bg {
     display:none;
@@ -49,10 +65,54 @@
   .auth0-lock-submit {
     color:black;
     text-transform:capitalize;
+    letter-spacing:0;
+    font-size:$font-size-base;
+    transform:none !important;
+    border-radius:$border-radius-sm;
+    &:hover {
+      background:darken($brand-yellow, 10%) !important;
+    }
     span {
+      transform:none !important;
       span {
+        transform:none !important;
         display:none;
       }
     }
   }
+}
+}
+
+.auth0-lock-close-button {
+  background:$brand-gray !important;
+  box-shadow:none !important;
+  width:28px !important;
+  height:28px !important;
+  border-radius:28px !important;
+  border:none !important;
+  svg {
+    display:none !important;
+  }
+  &:before {
+    content:"";
+    background-image: url("/assets/images/close.svg");
+    background-size:contain;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 14px;
+    position: absolute;
+    background-position: center;
+    top: 7px;
+    left: 8px;
+  }
+
+  &:hover {
+    background:$brand-red !important;
+
+  }
+
+}
+
+.auth0-lock-overlay {
+  background:rgba(0,0,0,0.8) !important;
 }
