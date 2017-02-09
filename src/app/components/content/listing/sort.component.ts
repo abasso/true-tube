@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { ListingComponent } from './list.component'
+import { Location } from '@angular/common'
 import { ActivatedRoute, Router } from '@angular/router'
 
 import * as _ from 'lodash'
@@ -19,7 +20,8 @@ export class ListingSortComponent {
   constructor(
     public ListingComponent: ListingComponent,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     this.itemsPerPage = [
       '12',
@@ -78,7 +80,7 @@ export class ListingSortComponent {
     if (!hasPage) {
       appendedQuery += 'page=' + pageNumberString
     }
-    this.router.navigateByUrl('/list?' + appendedQuery)
+    this.location.replaceState('/list?' + appendedQuery)
   }
 
   setItemsPerPage(event: any) {
