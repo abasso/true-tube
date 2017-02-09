@@ -285,12 +285,12 @@ export class ListFilterComponent implements OnInit {
   search(event: any) {
     let searchTimeout
     clearTimeout(searchTimeout)
+    this.contentLoading = true
     if (event.key === 'Enter') {
       return
     }
     searchTimeout = setTimeout(
       () => {
-        this.contentLoading = true
         this.currentParams['search'] = event.target.value
         this.setQueryString()
         this.ListingComponent.resetPagination()
