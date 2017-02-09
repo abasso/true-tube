@@ -7,8 +7,7 @@
 			<nav id="nav" class="content-nav">
 				<button class="btn {{embed.class}}" (click)="tab(embed.term)" [ngClass]="{active: activeTab === embed.term}" *ngFor="let embed of item.resource_types | EmbedMenuPipe"><span>{{embed.tabLabel}}</span></button>
 			</nav>
-
-			<div class="input-group content-nav-mobile">
+			<div class="input-group content-nav-mobile" *ngIf="item.hideMenu !== true">
 				<select id="select" class="custom-select form-control" (change)="setActiveTab($event.target.value)">
 					<optgroup label="Select">
 						<option *ngFor="let embed of item.resource_types | EmbedMenuPipe" [value]="embed.term">{{embed.label}}</option>

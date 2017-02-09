@@ -56,6 +56,10 @@ export class ItemComponent implements OnInit {
       (data) => {
         this.item = data._source
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
+        if (this.item.resource_types.length === 1) {
+          this.item.hideMenu = true
+
+        }
         _.each(this.item.embedded, (embed) => {
           if (embed.thumbnail === null) {
             embed.thumbnail = this.item.thumbnail
