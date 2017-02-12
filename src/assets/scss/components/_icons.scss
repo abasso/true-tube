@@ -21,9 +21,15 @@
 
 .icon-add {
   &:before {
-
     content:"";
     background-image: url("/assets/images/plus.svg");
+  }
+}
+
+.icon-add-to-list {
+  &:before {
+    content:"";
+    background-image: url("/assets/images/add-to-list.svg");
   }
 }
 

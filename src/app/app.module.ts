@@ -17,6 +17,7 @@ import { ListingSortComponent } from './components/content/listing/sort.componen
 // import { EmbedComponent } from './components/content/embed/embed.component'
 import { DataService } from './services/data.service'
 import { ListService } from './services/list.service'
+import { UserService } from './services/user.service'
 import { QueryStringPipe } from './pipes/query-string.pipe'
 import { AttributePipe } from './pipes/attribute.pipe'
 import { PaginationPipe } from './pipes/pagination.pipe'
@@ -137,7 +138,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     ListFilterComponent,
     ListingComponent,
     DataService,
-    ListService
+    ListService,
+    UserService
   ],
   bootstrap: [
     AppComponent,

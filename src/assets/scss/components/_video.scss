@@ -186,14 +186,14 @@
       margin: 0 auto;
     }
     background:rgba(0,0,0,0.4);
-    border-radius:.5rem;
     border:none;
     font-weight:$font-weight-normal;
     text-align:center;
-    width:80%;
+    width:100%;
     font-size:$font-size-sm;
-    @media(min-width: $breakpoint-md) {
+    @media(min-width: $breakpoint-sm) {
       width:50%;
+      border-radius:.5rem;
     }
   }
 }

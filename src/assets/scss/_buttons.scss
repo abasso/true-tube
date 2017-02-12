@@ -110,6 +110,10 @@ fieldset[disabled] a.btn {
   text-transform:capitalize;
   @include button-variant($btn-interactive-color, $btn-interactive-bg, $btn-interactive-border);
 }
+.btn-audio {
+  text-transform:capitalize;
+  @include button-variant($btn-audio-color, $btn-audio-bg, $btn-audio-border);
+}
 
 // Remove all backgrounds
 .btn-outline-primary {

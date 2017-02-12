@@ -40,6 +40,16 @@ export const ContentTypes = [
     active: false
   },
   {
+    label: 'Audio',
+    slug: 'audio',
+    type: 'content types',
+    name: 'audio',
+    term: 'audio',
+    class: 'audio',
+    inMenu: false,
+    active: false
+  },
+  {
     label: 'Teachers Notes',
     slug: 'teachers notes',
     type: 'content types',

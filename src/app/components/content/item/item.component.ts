@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core'
 import { Location } from '@angular/common'
 import { DataService } from './../../../services/data.service'
+import { UserService } from './../../../services/user.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
 // import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './../../../pipes/sanitise-url.pipe'
@@ -11,7 +12,6 @@ import * as moment from 'moment'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
 
-import { URLSearchParams } from '@angular/http'
 import {AuthHttp} from 'angular2-jwt'
 
 
@@ -38,11 +38,16 @@ export class ItemComponent implements OnInit {
   private videoJSplayer: any
   private types
   private hideAdvisory = false
+  public addedToFavourites = false
+  public userData: any
+  public listTitle
+  public showLists = false
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
+    private userService: UserService,
     private location: Location,
     private auth: Auth,
     private http: AuthHttp
@@ -89,6 +94,9 @@ export class ItemComponent implements OnInit {
         this.setActiveTab(type)
       }
     })
+
+    this.isItemInList()
+
     setTimeout(
       () => {
       this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
@@ -158,11 +166,40 @@ export class ItemComponent implements OnInit {
 
   addToFavourites(event: any) {
     event.preventDefault()
-    this.http.post('http://api.truetube.co.uk/me/test/7e90fdcf-7f7d-56d9-a824-586276982ecc', {})
-      .subscribe(
-        data => console.log(data),
-        err => console.log(err),
-        () => console.log('Request Complete')
-      );
+    this.userService.addToList('favourites', this.id)
+    this.addedToFavourites = true
+  }
+
+  removeFromFavourites(event: any) {
+    event.preventDefault()
+    this.userService.removeFromList('favourites', this.id)
+    this.addedToFavourites = false
+  }
+
+  toggleLists(event: any) {
+    event.preventDefault()
+    if (this.showLists === true) {
+      this.showLists = false
+    } else {
+      this.showLists = true;
     }
+  }
+
+  isItemInList() {
+    this.http.get('http://api.truetube.co.uk/me')
+      .subscribe(
+        (data) => {
+          this.userData = JSON.parse(data['_body'])
+          _.each(this.userData.lists, (list, key) => {
+            _.each(list, (listItem) => {
+              if (listItem === this.id && key === 'favourites') {
+                this.addedToFavourites = true
+              } else if (listItem === this.id) {
+                this.listTitle = key
+              }
+            })
+          })
+        }
+      )
+  }
 }

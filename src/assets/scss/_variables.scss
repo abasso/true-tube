@@ -64,6 +64,7 @@ $color-lesson-plans:        $brand-yellow !default;
 $color-assembly-plans:      #262625 !default;
 $color-interactive:         #4A90E2 !default;
 $color-teachers-notes:      #2A8B61 !default;
+$color-audio:               #C52C79 !default;
 
 
 // Options
@@ -346,6 +347,10 @@ $btn-interactive-border:         $color-interactive !default;
 $btn-teachers-notes-color:       #fff !default;
 $btn-teachers-notes-bg:          $color-teachers-notes !default;
 $btn-teachers-notes-border:      $color-teachers-notes !default;
+
+$btn-audio-color:                #fff !default;
+$btn-audio-bg:                   $color-audio !default;
+$btn-audio-border:               $color-audio !default;
 
 $btn-login-color:               $brand-gray !default;
 $btn-login-bg:                  $brand-yellow !default;

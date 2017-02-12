@@ -73,4 +73,105 @@
       }
     }
   }
+
+  .add-to-toolbox-wrapper {
+    background:$gray-lightest;
+    // border:solid 1px $gray-lighter;
+    margin:1rem 0 0;
+    border-radius:$border-radius-sm;
+    padding:20px;
+    display:flex;
+    flex-direction: column;
+    max-height:4rem;
+    position:relative;
+    transition: all 0.8s ease;
+    label {
+      font-size:$font-size-sm;
+    }
+    @media(min-width: $breakpoint-xl) {
+      max-height:10000rem;
+    }
+    &.show {
+      max-height:100rem;
+    }
+    .grid-filter-header {
+      display:flex;
+      flex-direction:row;
+      min-height:19px;
+      margin-bottom:1.5rem;
+      @media(min-width: $breakpoint-xl) {
+        margin-bottom:1rem;
+      }
+      h5 {
+        position:relative;
+        margin:0;
+      }
+      .clear {
+        min-height:1.2rem;
+        @media(min-width: $breakpoint-xl) {
+          margin-left:auto;
+        }
+      }
+    }
+
+    .form-group {
+      font-size:$font-size-sm;
+      margin-bottom:.35rem;
+      padding-left:2px;
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      &::-webkit-input-placeholder {
+        color: $gray-light;
+      }
+      &::-moz-placeholder {
+        color: $gray-light;
+      }
+      &:-ms-input-placeholder {
+        color: $gray-light;
+      }
+      &:-moz-placeholder {
+        color: $gray-light;
+      }
+    }
+
+    .form-check {
+      padding-left:2px;
+    }
+    .btn {
+      background:$brand-yellow;
+      box-shadow:none;
+      border:solid 1px $brand-yellow;
+      color:$gray;
+      font-weight: $font-weight-normal;
+      border-radius:$border-radius-xs;
+      width:100%;
+      margin:.25rem 0 0 0;
+    }
+
+    input {
+      background-image:none !important;
+      background-color:white !important;
+    }
+    .manage-lists {
+      display:block;
+      margin:1rem 0 0;
+      padding-top:.5rem;
+      border-top:solid 1px $gray-lighter;
+      text-align:center;
+      a {
+        font-size:$font-size-sm;
+
+      }
+    }
+    .new-list {
+      margin: 0;
+      padding:1rem 0 0 0;
+      border-top:solid 1px $gray-lighter;
+    }
+  }
+
+
 }

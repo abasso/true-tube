@@ -40,7 +40,8 @@
 
 
 				<div class="video-actions hidden-sm-down">
-					<a href="" class="icon-embed icon-small icon-left icon-favourite_red video-embed text-link" (click)="addToFavourites($event)">Add to Favourites</a>
+					<a href="" *ngIf="addedToFavourites === false" class="icon-embed icon-small icon-left icon-favourite video-embed text-link" (click)="addToFavourites($event)">Add to Favourites</a>
+					<a href="" *ngIf="addedToFavourites === true" class="icon-embed icon-small icon-left icon-favourite_red video-embed text-link" (click)="removeFromFavourites($event)">Remove from Favourites</a>
 
 					<span  *ngIf="embed.allow_download !== '0'">
 						<a href="" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
@@ -177,8 +178,48 @@
 	<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
 		<div class="content-info">
 			<div class="add-to-toolbox">
-				<a href="#" class="icon-add icon-small icon-left icon-border text-link">Add to a list</a>
+				<a href="#" class="icon-add-to-list icon-small icon-left icon-border text-link" (click)=toggleLists($event)>Add to a list</a>
+				<div class="add-to-toolbox-wrapper" *ngIf="showLists" id="GridFilter">
+					<fieldset class="filter-fieldset flex-none">
+						<div class="form-group">
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" value="1">
+								<div class="custom-control-indicator"></div>
+								<span class="custom-control-description">Favourites</span>
+								<!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->
+							</label>
+						</div>
+						<div class="form-group">
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" value="1">
+								<div class="custom-control-indicator"></div>
+								<span class="custom-control-description">Christmas List</span>
+								<!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->
+							</label>
+						</div>
+						<div class="form-group">
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" value="1">
+								<div class="custom-control-indicator"></div>
+								<span class="custom-control-description">Easter Videos</span>
+								<!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->
+							</label>
+						</div>
+					</fieldset>
+					<fieldset class="filter-fieldset new-list">
+						<label>Add to a new list</label>
+						<input id="filterSearch" class="form-control filter-search-term" type="text" placeholder="e.g. Easter Videos" />
+						<button class="btn btn-sm">Create List & Add</button>
+
+					</fieldset>
+					<fieldset class="filter-fieldset manage-lists">
+						<a href="" class="text-link">Manage your Lists</a>
+					</fieldset>
+				</div>
 			</div>
+
+
+
 			<p [innerHTML]="item.description">
 			</p>
 			<div class="content-info-attributes">

@@ -28,7 +28,7 @@ export const myConfig: AuthConfiguration = {
 
           {
           type: 'select',
-          name: 'location',
+          name: 'account_type',
           placeholder: 'Teacher or student?',
           options: [
             {value: 'Teacher', label: 'Teacher'},

@@ -8,25 +8,28 @@ import * as _ from 'lodash'
 })
 export class ProfileComponent {
     public profile: Profile
+    public lists: any[] = []
     public menu: any[] = [
       {
-        label: 'Account'
+        label: 'Profile',
+        css: ''
       },
       {
-        label: 'Lists'
+        label: 'Lists',
+        css: 'icon icon-small icon-list icon-left'
       },
       {
-        label: 'Favourites'
+        label: 'Favourites',
+        css: 'icon icon-small icon-favourite icon-left'
       }
     ]
     constructor(route: ActivatedRoute) {
         route.data.subscribe(data => {
-            let listArray = []
             this.profile = data['profile']
             _.each(this.profile.lists, (list, key) => {
-              console.log("THE LIST", key)
-              listArray.push(list)
+              this.lists.push(key)
             })
+            console.log(this.lists)
         })
     }
 }

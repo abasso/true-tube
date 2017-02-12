@@ -13,6 +13,7 @@ declare var Auth0Lock: any;
 export class Auth {
   // Configure Auth0
   private lock
+  private userProfile
   constructor(
     private route: ActivatedRoute,
     private router: Router
@@ -23,6 +24,16 @@ export class Auth {
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem('id_token', authResult.idToken);
       const redirectUrl: string = localStorage.getItem('redirectUrl');
+      // Fetch profile information
+       this.lock.getProfile(authResult.idToken, (error, profile) => {
+         if (error) {
+           // Handle error
+           return;
+         }
+         localStorage.setItem('profile', JSON.stringify(profile));
+         this.userProfile = profile;
+         console.log(this.userProfile)
+       });
       if (redirectUrl) {
           this.router.navigate([redirectUrl]);
       } else {
@@ -33,7 +44,6 @@ export class Auth {
 
   public login(event: any) {
     event.preventDefault()
-    console.log('called the login')
     localStorage.setItem('redirectUrl', this.router.url)
     // Call the show method to display the widget.
     this.lock.show()
@@ -57,6 +67,7 @@ export class Auth {
     event.preventDefault()
     // Remove token from localStorage
     localStorage.removeItem('id_token');
+    this.userProfile = undefined;
   };
 }
 
@@ -67,7 +78,6 @@ export class LoggedInGuard implements CanActivate
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
   {
-    console.log("ITS BEEN AUTHENTICATED")
     return this.auth.authenticated();
   }
 }

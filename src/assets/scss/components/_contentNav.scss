@@ -108,6 +108,13 @@
             border-top: 20px solid $color-interactive;
           }
         }
+        &.audio {
+          background:$color-audio;
+          border-color:$color-audio;
+          &:after {
+            border-top: 20px solid $color-audio;
+          }
+        }
       }
     }
     }
