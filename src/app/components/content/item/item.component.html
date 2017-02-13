@@ -40,13 +40,17 @@
 
 
 				<div class="video-actions hidden-sm-down">
-					<a href="" *ngIf="addedToFavourites === false" class="icon-embed icon-small icon-left icon-favourite video-embed text-link" (click)="addToFavourites($event)">Add to Favourites</a>
-					<a href="" *ngIf="addedToFavourites === true" class="icon-embed icon-small icon-left icon-favourite_red video-embed text-link" (click)="removeFromFavourites($event)">Remove from Favourites</a>
-
-					<span  *ngIf="embed.allow_download !== '0'">
-						<a href="" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
+					<div *ngIf="!auth.authenticated()">
+						<a href="#" class="icon-embed icon-small icon-left icon-favourite video-embed text-link" (click)="auth.login($event)">Login</a> to Add to Favourites
+					</div>
+					<div *ngIf="auth.authenticated()" >
+						<a href="#" *ngIf="addedToFavourites === false" class="icon-embed icon-small icon-left icon-favourite video-embed text-link" (click)="addToFavourites($event)">Add to Favourites</a>
+						<a href="#" *ngIf="addedToFavourites === true" class="icon-embed icon-small icon-left icon-favourite_red video-embed text-link" (click)="removeFromFavourites($event)">Remove from Favourites</a>
+					</div>
+					<div *ngIf="embed.allow_download !== '0'">
+						<a href="#" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
 						<a href="#" class="icon-download icon-small icon-left text-link" *ngIf="!auth.authenticated()">Download</a>
-					</span>
+					</div>
 
 					<a href="" class="icon-embed icon-small icon-left video-embed text-link" (click)="toggleEmbed($event)">Embed</a>
 
@@ -177,45 +181,36 @@
 	</div>
 	<div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left">
 		<div class="content-info">
-			<div class="add-to-toolbox">
+			<div class="add-to-list" >
 				<a href="#" class="icon-add-to-list icon-small icon-left icon-border text-link" (click)=toggleLists($event)>Add to a list</a>
-				<div class="add-to-toolbox-wrapper" *ngIf="showLists" id="GridFilter">
-					<fieldset class="filter-fieldset flex-none">
+				<div class="add-to-list-wrapper" *ngIf="showLists" id="GridFilter" [ngClass]="{'not-logged-in': auth.authenticated() === false}">
+					<div class="login-warning-overlay" *ngIf="!auth.authenticated()">
+						<span class="login-warning"><span class="title icon-left icon icon-play">Login Required</span>
+						<p>You need to login to add content to lists <a href="#" class="link" (click)="auth.loginWithState($event, '')" >click here</a> to login.</p>
+						</span>
+					</div>
+					<div class="list-controls">
+					<fieldset class="filter-fieldset flex-none" *ngFor="let list of userData.listArray">
 						<div class="form-group">
 							<label class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" value="1">
+								<input type="checkbox" (click)="setList($event, list.name)" class="custom-control-input" value="1" [checked]="list.checked">
 								<div class="custom-control-indicator"></div>
-								<span class="custom-control-description">Favourites</span>
-								<!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->
-							</label>
-						</div>
-						<div class="form-group">
-							<label class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" value="1">
-								<div class="custom-control-indicator"></div>
-								<span class="custom-control-description">Christmas List</span>
-								<!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->
-							</label>
-						</div>
-						<div class="form-group">
-							<label class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" value="1">
-								<div class="custom-control-indicator"></div>
-								<span class="custom-control-description">Easter Videos</span>
+								<span class="custom-control-description">{{list.name}}</span>
 								<!-- <span class="custom-control-description">{{subcategory.label}} ({{subcategory.count}})</span> -->
 							</label>
 						</div>
 					</fieldset>
 					<fieldset class="filter-fieldset new-list">
 						<label>Add to a new list</label>
-						<input id="filterSearch" class="form-control filter-search-term" type="text" placeholder="e.g. Easter Videos" />
-						<button class="btn btn-sm">Create List & Add</button>
+						<input class="form-control" type="text" [ngClass]="{'form-control-warning': addListError === true }" [(ngModel)]="createListName" placeholder="e.g. Easter Videos" />
+						<button (click)="addList($event)" class="btn btn-sm">Create List & Add</button>
 
 					</fieldset>
 					<fieldset class="filter-fieldset manage-lists">
 						<a href="" class="text-link">Manage your Lists</a>
 					</fieldset>
 				</div>
+			</div>
 			</div>
 
 
@@ -255,7 +250,7 @@
 		<div class="row grid-row">
         <div class="list-item" *ngFor="let related of item.related">
         <div class="block-media__media" *ngIf="related.thumbnail[0]">
-          <a [routerLink]="[related.slug]" class="block-media__link">
+          <a [routerLink]="[related.slug]" (click)="resetPlayer()" class="block-media__link">
             <img [src]="related.thumbnail[0].url" alt="related.thumbnail[0].alt" />
             <div class="listing-time" *ngIf="related.duration">
               <!-- {{ dataService.duration(related._source.duration) }} -->

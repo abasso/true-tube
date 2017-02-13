@@ -33,7 +33,7 @@
         Your Lists
       </h1>
       <div *ngFor="let list of lists" class="user-list">
-        <a href="" class="user-list-link">{{list}}</a><a *ngIf="list !== 'favourites'" href="" class="text-link icon-small icon-left icon-close user-list-delete">delete</a>
+        <a href="" class="user-list-link text-link">{{list}}</a><a *ngIf="list !== 'favourites'" href="" class="text-link icon-small icon-left icon-close user-list-delete">delete</a>
       </div>
     </div>
   </div>

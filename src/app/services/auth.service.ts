@@ -45,15 +45,19 @@ export class Auth {
   public login(event: any) {
     event.preventDefault()
     localStorage.setItem('redirectUrl', this.router.url)
-    // Call the show method to display the widget.
     this.lock.show()
   };
 
   public signup(event: any) {
     event.preventDefault()
     localStorage.setItem('redirectUrl', '/me')
-    // Call the show method to display the widget.
     this.lock.show({initialScreen: 'signUp'})
+  };
+
+  public loginWithState(event: any, state: any) {
+    event.preventDefault()
+    localStorage.setItem('redirectUrl', this.router.url + state)
+    this.lock.show()
   };
 
   public authenticated() {

@@ -26,7 +26,7 @@ declare var videojs: any
     SanitiseUrlPipe
   ]
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent implements OnInit, OnDestroy {
   private item: any = {}
   private data: any
   private id: string
@@ -42,6 +42,8 @@ export class ItemComponent implements OnInit {
   public userData: any
   public listTitle
   public showLists = false
+  public createListName = ''
+  public addListError = false
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -95,19 +97,20 @@ export class ItemComponent implements OnInit {
       }
     })
 
-    this.isItemInList()
-
+    if (this.auth.authenticated()) {
+      this.isItemInList()
+    }
     setTimeout(
       () => {
       this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
       })
-    }, 200)
+    }, 500)
   }
 
   ngOnDestroy() {
+    console.log('destroying')
     this.videoJSplayer.dispose()
   }
-
 
   pausePlayer() {
     this.videoJSplayer.pause()
@@ -117,6 +120,16 @@ export class ItemComponent implements OnInit {
     event.preventDefault()
     this.videoJSplayer.play()
     this.hideAdvisory = true
+  }
+
+  resetPlayer() {
+    console.log('resetting')
+    this.videoJSplayer.dispose()
+    setTimeout(
+      () => {
+      this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
+      })
+    }, 500)
   }
 
   // ngOnDestroy() {
@@ -167,12 +180,22 @@ export class ItemComponent implements OnInit {
   addToFavourites(event: any) {
     event.preventDefault()
     this.userService.addToList('favourites', this.id)
+    _.find(this.userData.listArray, (listItem) => {
+      if (listItem.name === 'favourites') {
+        listItem.checked = true
+      }
+    })
     this.addedToFavourites = true
   }
 
   removeFromFavourites(event: any) {
     event.preventDefault()
     this.userService.removeFromList('favourites', this.id)
+    _.find(this.userData.listArray, (listItem) => {
+      if (listItem.name === 'favourites') {
+        listItem.checked = false
+      }
+    })
     this.addedToFavourites = false
   }
 
@@ -185,19 +208,61 @@ export class ItemComponent implements OnInit {
     }
   }
 
+  addList(event) {
+    if (this.createListName !== '') {
+      this.addListError = false
+      this.http.post('http://api.truetube.co.uk/me/' + this.createListName + '/' + this.id, {}).subscribe(
+      (data) => {
+        this.userData.listArray.push({
+          name: this.createListName,
+          checked: true
+        })
+      })
+    } else {
+      this.addListError = true
+    }
+  }
+
+  setList(event, list) {
+    if (event.target.checked) {
+      if (list === 'favourites') {
+        this.addedToFavourites = true
+      }
+      this.http.post('http://api.truetube.co.uk/me/' + list + '/' + this.id, {}).subscribe(
+      (data) => {
+      })
+    } else {
+      if (list === 'favourites') {
+        this.addedToFavourites = false
+      }
+      this.http.delete('http://api.truetube.co.uk/me/' + list + '/' + this.id, {}).subscribe(
+      (data) => {
+      })
+    }
+  }
+
   isItemInList() {
     this.http.get('http://api.truetube.co.uk/me')
       .subscribe(
         (data) => {
           this.userData = JSON.parse(data['_body'])
+          console.log(this.userData)
+          this.userData.listArray = []
           _.each(this.userData.lists, (list, key) => {
+            let arrayItem = {
+              name: key,
+              checked: false
+            }
             _.each(list, (listItem) => {
               if (listItem === this.id && key === 'favourites') {
+                arrayItem.checked = true
                 this.addedToFavourites = true
               } else if (listItem === this.id) {
+                arrayItem.checked = true
                 this.listTitle = key
               }
             })
+            this.userData.listArray.push(arrayItem)
           })
         }
       )

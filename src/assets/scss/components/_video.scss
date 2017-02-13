@@ -60,6 +60,7 @@
   font-weight: $font-weight-normal;
   align-items:center;
   .video-actions {
+    display:flex;
     font-size:$font-size-sm;
     margin-left:auto;
     a {
