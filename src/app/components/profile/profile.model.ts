@@ -10,7 +10,6 @@ export class Profile {
     public lists
 
     public static hydrate(data: any): Profile {
-        console.log(data);
         const instance = new Profile()
         instance.uuid = _.get(data, 'uuid', '')
         instance.name = _.get(data, 'name', '')

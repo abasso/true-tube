@@ -1,0 +1,27 @@
+<!--
+<h1>Hello {{ profile.name }}</h1>
+
+<pre>{{ profile | json }}</pre> -->
+
+
+<div class="row profile-listing">
+  <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
+    <ul class="p-a-0">
+    <li *ngFor="let menuItem of menu" class="menu-item">
+      <a href="#" [routerLink]="menuItem.url" class="text-link {{menuItem.css}}">{{menuItem.label}}</a>
+    </li>
+  </ul>
+  </div>
+    <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
+      <h1 class="page-title">
+        Your Lists
+      </h1>
+      <div *ngFor="let list of lists" class="user-list">
+        <a href="" [routerLink]="[list.url]" class="user-list-link text-link list-title">{{list.name}}</a>
+        <div class="user-list-options">
+          <a href="" *ngIf="list.canDelete" class="btn btn-film user-list-delete btn-sm">delete</a>
+          <a href="" [routerLink]="[list.url]" class="btn btn-assembly-plan user-list-view btn-sm">view</a>
+        </div>
+      </div>
+    </div>
+  </div>

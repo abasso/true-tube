@@ -44,6 +44,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   public showLists = false
   public createListName = ''
   public addListError = false
+  public listArray: any[] = []
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -81,8 +82,15 @@ export class ItemComponent implements OnInit, OnDestroy {
             }
           })
         })
+        this.resetPlayer()
+        if (this.auth.authenticated()) {
+          this.isItemInList()
+        }
       }
     )
+    this.auth.loggedInStatus.subscribe((data) => {
+      this.isItemInList()
+    })
     this.route.params
     .map(params => params['id'])
     .subscribe((id) => {
@@ -96,19 +104,9 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.setActiveTab(type)
       }
     })
-
-    if (this.auth.authenticated()) {
-      this.isItemInList()
-    }
-    setTimeout(
-      () => {
-      this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
-      })
-    }, 500)
   }
 
   ngOnDestroy() {
-    console.log('destroying')
     this.videoJSplayer.dispose()
   }
 
@@ -123,18 +121,17 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   resetPlayer() {
-    console.log('resetting')
-    this.videoJSplayer.dispose()
+    if (!_.isUndefined(this.videoJSplayer) && this.videoJSplayer !== null) {
+      setTimeout(() => {
+          this.videoJSplayer.dispose()
+      }, 100);
+    }
     setTimeout(
       () => {
       this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
       })
-    }, 500)
+    }, 200)
   }
-
-  // ngOnDestroy() {
-  //   this.videoJSplayer.dispose();
-  // }
 
   hasAttributes(attribute: any) {
     return (_.isUndefined(attribute) || attribute === null || attribute === false || attribute.length === 0) ? false : true
@@ -180,7 +177,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   addToFavourites(event: any) {
     event.preventDefault()
     this.userService.addToList('favourites', this.id)
-    _.find(this.userData.listArray, (listItem) => {
+    _.find(this.listArray, (listItem) => {
       if (listItem.name === 'favourites') {
         listItem.checked = true
       }
@@ -191,7 +188,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   removeFromFavourites(event: any) {
     event.preventDefault()
     this.userService.removeFromList('favourites', this.id)
-    _.find(this.userData.listArray, (listItem) => {
+    _.find(this.listArray, (listItem) => {
       if (listItem.name === 'favourites') {
         listItem.checked = false
       }
@@ -213,7 +210,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       this.addListError = false
       this.http.post('http://api.truetube.co.uk/me/' + this.createListName + '/' + this.id, {}).subscribe(
       (data) => {
-        this.userData.listArray.push({
+        this.listArray.push({
           name: this.createListName,
           checked: true
         })
@@ -245,9 +242,11 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.http.get('http://api.truetube.co.uk/me')
       .subscribe(
         (data) => {
+          console.log("getting item in list")
+          console.log(data)
+          this.addedToFavourites = false
           this.userData = JSON.parse(data['_body'])
-          console.log(this.userData)
-          this.userData.listArray = []
+          this.listArray = []
           _.each(this.userData.lists, (list, key) => {
             let arrayItem = {
               name: key,
@@ -262,7 +261,7 @@ export class ItemComponent implements OnInit, OnDestroy {
                 this.listTitle = key
               }
             })
-            this.userData.listArray.push(arrayItem)
+            this.listArray.push(arrayItem)
           })
         }
       )

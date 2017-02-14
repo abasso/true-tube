@@ -3,14 +3,19 @@ import { Http, URLSearchParams } from '@angular/http'
 import * as _ from 'lodash'
 import * as moment from 'moment'
 import 'rxjs/add/operator/map'
+import {AuthHttp} from 'angular2-jwt'
 
 @Injectable()
 export class DataService {
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private authHttp: AuthHttp
+  ) {
   }
 
   private baseUrl = 'http://api.truetube.co.uk/resources/_search'
+  private meUrl = 'http://api.truetube.co.uk/me'
   private tempUrl = 'http://api.truetube.co.uk/resources/resource'
   private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search?sort=updated:desc'
   private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date.value:desc'
@@ -115,8 +120,16 @@ export class DataService {
   }
 
   item(uri: string) {
-    let itemUrl: string = this.tempUrl + '/' + uri
+    let itemUrl: string = this.tempUrl + '/' + uri.split('?')[0]
+    itemUrl = itemUrl.split('%3F')[0]
     return this.http
+    .get(itemUrl)
+    .map((response) => ( response.json() ))
+  }
+
+  userList(uri: string) {
+    let itemUrl: string = this.meUrl + '/' + uri.split('?')[0]
+    return this.authHttp
     .get(itemUrl)
     .map((response) => ( response.json() ))
   }

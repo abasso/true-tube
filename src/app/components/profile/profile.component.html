@@ -8,15 +8,14 @@
   <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
     <ul class="p-a-0">
     <li *ngFor="let menuItem of menu" class="menu-item">
-      <a href="#" [routerLink]="menuItem.path" class="text-link {{menuItem.css}}">{{menuItem.label}}</a>
+      <a href="#" [routerLink]="menuItem.url" class="text-link {{menuItem.css}}">{{menuItem.label}}</a>
     </li>
   </ul>
   </div>
-  <!-- <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
+  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
     <h1 class="page-title">
       Hello {{ profile.name }}
     </h1>
-
     <div class="form-group row">
       <label for="example-text-input" class="col-xs-12 col-sm-3 col-form-label">
         Name
@@ -26,14 +25,5 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
-
-    </div> -->
-    <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
-      <h1 class="page-title">
-        Your Lists
-      </h1>
-      <div *ngFor="let list of lists" class="user-list">
-        <a href="" class="user-list-link text-link">{{list}}</a><a *ngIf="list !== 'favourites'" href="" class="text-link icon-small icon-left icon-close user-list-delete">delete</a>
-      </div>
     </div>
   </div>

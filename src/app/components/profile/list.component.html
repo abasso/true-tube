@@ -1,0 +1,51 @@
+<!--
+<h1>Hello {{ profile.name }}</h1>
+
+<pre>{{ profile | json }}</pre> -->
+
+
+<div class="row info-page">
+  <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
+    <ul class="p-a-0">
+    <li *ngFor="let menuItem of menu" class="menu-item">
+      <a href="#" [routerLink]="menuItem.url" class="text-link {{menuItem.css}}">{{menuItem.label}}</a>
+    </li>
+  </ul>
+  </div>
+    <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
+      <h1 class="page-title">
+        {{title}}
+      </h1>
+
+      <div [ngClass]="{'row': true, 'list-row': true, 'content-grid': true}">
+        <div class="list-item" *ngFor="let item of items">
+          <div class="block-media__media" *ngIf="item.thumbnail">
+            <a [routerLink]="[item.slug]" class="block-media__link">
+              <img [src]="item.thumbnail[0].url" alt="item.thumbnail[0].alt" />
+              <div class="listing-time" *ngIf="item.duration">
+                {{ dataService.duration(item.duration) }}
+              </div>
+            </a>
+          </div>
+          <div class="block-media__body">
+            <a [routerLink]="[item.slug]" class="block-media__link">
+              <h6 class="block-media__headline" *ngIf="item.title">
+                {{ item.title }}
+              </h6>
+            </a>
+            <p class="block-media__description small" [innerHTML]="item.description">
+            </p>
+            <div class="block-media__types">
+              <a href="#" class="btn btn-sm btn-film">
+                <span>
+                  Remove
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>

@@ -44,8 +44,10 @@ import { FooterNavComponent } from './components/navigation/footer-nav.component
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
 import { EventComponent } from './components/content/event/event.component'
-import {ProfileComponent} from './components/profile/profile.component';
-import {ProfileResolver} from './components/profile/profile.resolver';
+import {ProfileComponent} from './components/profile/profile.component'
+import {ProfileResolver} from './components/profile/profile.resolver'
+import { UserListsComponent } from './components//profile/lists.component'
+import { UserListComponent } from './components/profile/list.component'
 
 // import { MetaModule } from 'ng2-meta'
 
@@ -60,19 +62,67 @@ const appRoutes: Routes = [
       }
     }
   },
-  { path: 'list', component: ListingComponent},
-  { path: 'calendar', component: CalendarComponent},
+  { path: 'list',
+    component: ListingComponent
+  },
+  { path: 'calendar',
+    component: CalendarComponent
+  },
   // { path: 'embed/:id', component: EmbedComponent},
-  { path: 'event/:id', component: EventComponent},
-  { path: 'item/:id', component: ItemComponent},
-  { path: 'page/:id', component: PageComponent},
-  { path: 'films', component: ListingComponent, data: [{filter: 'typeFilm', type: 'content types'}] },
-  { path: 'lesson plans', component: ListingComponent, data: [{filter: 'typeLesson', type: 'content types'}]},
-  { path: 'assembly scripts', component: ListingComponent, data: [{filter: 'typeAssembly', type: 'content types'}]},
-  { path: 'interactive', component: ListingComponent, data: [{filter: 'typeInteractive', type: 'content types'}]},
+  {
+    path: 'event/:id',
+    component: EventComponent
+  },
+  {
+    path: 'item/:id',
+    component: ItemComponent
+  },
+  {
+    path: 'page/:id',
+    component: PageComponent
+  },
+  {
+    path: 'films',
+    component: ListingComponent,
+    data: [{filter: 'typeFilm', type: 'content types'}]
+  },
+  {
+    path: 'lesson plans',
+    component: ListingComponent,
+    data: [{filter: 'typeLesson',
+    type: 'content types'}]
+  },
+  {
+    path: 'assembly scripts',
+    component: ListingComponent,
+    data: [{filter: 'typeAssembly',
+    type: 'content types'}]
+  },
+  {
+    path: 'interactive',
+    component: ListingComponent,
+    data: [{filter: 'typeInteractive',
+    type: 'content types'}]
+  },
   {
     path: 'me',
     component: ProfileComponent,
+    canActivate: [LoggedInGuard],
+    resolve: {
+      profile: ProfileResolver
+    }
+  },
+  {
+    path: 'me/lists',
+    component: UserListsComponent,
+    canActivate: [LoggedInGuard],
+    resolve: {
+      profile: ProfileResolver
+    }
+  },
+  {
+    path: 'me/list/:id',
+    component: UserListComponent,
     canActivate: [LoggedInGuard],
     resolve: {
       profile: ProfileResolver
@@ -118,7 +168,9 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     AccessibilityNavComponent,
     CalendarComponent,
     EventComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserListComponent,
+    UserListsComponent
   ],
   imports: [
     BrowserModule,
