@@ -11,6 +11,7 @@ import { Auth } from './../../../services/auth.service'
 import * as moment from 'moment'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
+import { Headers } from '@angular/http'
 
 
 import {AuthHttp} from 'angular2-jwt'
@@ -51,6 +52,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   public listButtonLabel = 'Create List &amp; Add'
   public notificationMessage = ''
   public showNotification = false
+  public notificationRemove = false
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -220,10 +222,12 @@ export class ItemComponent implements OnInit, OnDestroy {
     } else if (this.createListName !== '') {
 
       this.addListError = false
+      let header = new Headers()
       let listSlug = _.kebabCase(this.createListName)
+      header.append('Content-Type', 'application/json');
       this.http.post('http://api.truetube.co.uk/me/' + listSlug + '/' + this.id, {
-        title: decodeURI(this.createListName)
-      }).subscribe(
+        title : this.createListName
+      }, { headers: header }).subscribe(
       (data) => {
         this.listArray.push({
           name: this.createListName,
@@ -231,7 +235,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         })
         this.listButtonLabel = 'Created ' + _.capitalize(decodeURI(this.createListName))
         this.listButtonClass = 'btn-success'
-        this.toggleNotification(_.capitalize(decodeURI(this.createListName)), false)
+        this.toggleNotification(_.capitalize(decodeURI(this.createListName)), true)
         setTimeout(() => {
           this.listButtonLabel = 'Create List &amp; Add'
           this.listButtonClass = 'btn-lesson-plan'
@@ -241,18 +245,23 @@ export class ItemComponent implements OnInit, OnDestroy {
     } else {
       this.addListError = true
       this.addListErrorMessage = 'Please enter a list name'
-
     }
   }
 
   toggleNotification(list, added) {
     this.showNotification = false
-    let message = (added === true) ? 'Added to ' : 'Removed from '
+    let message = 'Removed from '
+    if (added === false) {
+      this.notificationRemove = true
+    } else {
+      message = 'Added to '
+      this.notificationRemove = false
+    }
     this.notificationMessage = message + _.capitalize(decodeURI(list))
     this.showNotification = true
     setTimeout(() => {
       this.showNotification = false
-    }, 3000)
+    }, 1000)
   }
 
   setList(event, list) {
@@ -270,7 +279,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       if (list === 'Favourites') {
         this.addedToFavourites = false
       }
-      this.http.delete('http://api.truetube.co.uk/me/' + list + '/' + this.id, {}).subscribe(
+      this.http.delete('http://api.truetube.co.uk/me/' + list + '/' + this.id).subscribe(
       (data) => {
       })
     }
@@ -286,7 +295,6 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.http.get('http://api.truetube.co.uk/me')
       .subscribe(
         (data) => {
-          console.log(data)
           this.addedToFavourites = false
           this.userData = JSON.parse(data['_body'])
           this.listArray = []
@@ -308,7 +316,6 @@ export class ItemComponent implements OnInit, OnDestroy {
             })
             this.listArray.push(arrayItem)
           })
-          // this.listArray = _.sortBy(this.listArray, 'order')
         }
       )
   }

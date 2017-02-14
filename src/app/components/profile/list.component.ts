@@ -40,8 +40,7 @@ export class UserListComponent {
     .switchMap((params: Params) => this.dataService.userList(params['id']))
     .subscribe(
       (data) => {
-        console.log(data)
-        this.items = data
+        this.items = data.items
         this.route.params
         .map(params => params['id'])
         .subscribe((id) => {

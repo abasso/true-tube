@@ -43,14 +43,14 @@ export class UserListsComponent {
             if (key === 'favourites') {
               this.lists.unshift({
                 key: key,
-                name: key + ' (' + list.length + ' Item' + ((list.length > 1) ? 's' : '') + ')',
+                name: key + ' (' + list.items.length + ' Item' + ((list.items.length > 1) ? 's' : '') + ')',
                 canDelete: false,
                 url: '/me/list/' + key
               })
             } else {
               this.lists.push({
                 key: key,
-                name: decodeURI(key) + ' (' + list.length + ' Item' + ((list.length > 1) ? 's' : '') + ')',
+                name: decodeURI(key) + ' (' + list.items.length + ' Item' + ((list.items.length > 1) ? 's' : '') + ')',
                 canDelete: true,
                 url: '/me/list/' + key
               })

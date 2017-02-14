@@ -190,7 +190,7 @@
 						</span>
 					</div>
 					<div class="list-controls" *ngIf="auth.authenticated()">
-						<div class="list-success-message col-xs-12 col-ml-12 col-xl-2" [ngClass]="{'visible': showNotification}" [innerHTML]="notificationMessage"></div>
+						<div class="notification col-xs-12 col-ml-12 col-xl-2" [ngClass]="{'visible': showNotification, 'remove': notificationRemove}" [innerHTML]="notificationMessage"></div>
 					<fieldset class="filter-fieldset flex-none" *ngFor="let list of listArray">
 						<div class="form-group">
 							<label class="custom-control custom-checkbox">
