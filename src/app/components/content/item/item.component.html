@@ -202,11 +202,11 @@
 					</fieldset>
 					<fieldset class="filter-fieldset new-list">
 						<label>Add to a new list</label>
-						<input class="form-control" type="text" [ngClass]="{'form-control-warning': addListError === true }" [(ngModel)]="createListName" placeholder="e.g. Easter Videos" />
-						<button (click)="addList($event)" class="btn btn-sm">Create List & Add</button>
+						<input (keydown)="keyCheck($event)" class="form-control" type="text" [ngClass]="{'form-control-warning': addListError === true }" [(ngModel)]="createListName" placeholder="e.g. Easter Videos" />
+						<button (click)="addList($event)" class="btn btn-sm {{listButtonClass}}" [innerHTML]="[listButtonLabel]"></button>
 					</fieldset>
 					<fieldset class="filter-fieldset manage-lists">
-						<a href="" class="text-link">Manage your Lists</a>
+						<a href="" [routerLink]="'/me/lists'" class="text-link">Manage your Lists</a>
 					</fieldset>
 				</div>
 				<div class="list-controls" *ngIf="!auth.authenticated()">
@@ -223,11 +223,11 @@
 				<fieldset class="filter-fieldset new-list">
 					<label>Add to a new list</label>
 					<input class="form-control" type="text" [ngClass]="{'form-control-warning': addListError === true }" [(ngModel)]="createListName" placeholder="e.g. Easter Videos" />
-					<button (click)="addList($event)" class="btn btn-sm">Create List & Add</button>
+					<button (click)="addList($event)" class="btn btn-sm {{listButtonClass}}" [innerHTML]="[listButtonLabel]"></button>
 
 				</fieldset>
 				<fieldset class="filter-fieldset manage-lists">
-					<a href="" class="text-link">Manage your Lists</a>
+					<a href="" [routerLink]="'/me/lists'" class="text-link">Manage your Lists</a>
 				</fieldset>
 			</div>
 			</div>

@@ -45,6 +45,8 @@ export class ItemComponent implements OnInit, OnDestroy {
   public createListName = ''
   public addListError = false
   public listArray: any[] = []
+  public listButtonClass = 'btn-lesson-plan'
+  public listButtonLabel = 'Create List &amp; Add'
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -214,6 +216,13 @@ export class ItemComponent implements OnInit, OnDestroy {
           name: this.createListName,
           checked: true
         })
+        this.listButtonLabel = 'Created ' + _.capitalize(this.createListName)
+        this.listButtonClass = 'btn-success'
+        setTimeout(() => {
+          this.listButtonLabel = 'Create List &amp; Add'
+          this.listButtonClass = 'btn-lesson-plan'
+          this.createListName = ''
+        }, 2000)
       })
     } else {
       this.addListError = true
@@ -235,6 +244,12 @@ export class ItemComponent implements OnInit, OnDestroy {
       this.http.delete('http://api.truetube.co.uk/me/' + list + '/' + this.id, {}).subscribe(
       (data) => {
       })
+    }
+  }
+
+  keyCheck(event) {
+    if (event.key === 'Enter') {
+      this.addList(event)
     }
   }
 
