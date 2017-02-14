@@ -45,7 +45,7 @@ export class UserListComponent {
         this.route.params
         .map(params => params['id'])
         .subscribe((id) => {
-          this.title = _.capitalize(id) + ' (' + this.items.length + ' Item' + ((this.items.length > 1) ? 's' : '') + ')'
+          this.title = _.capitalize(decodeURI(id)) + ' (' + this.items.length + ' Item' + ((this.items.length > 1) ? 's' : '') + ')'
         })
         _.each(this.items, (item) => {
           item.slug = "/item/" + item.id

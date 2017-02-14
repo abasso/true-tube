@@ -16,10 +16,16 @@
       <h1 class="page-title">
         Your Lists
       </h1>
-      <div *ngFor="let list of lists" class="user-list">
-        <a href="" [routerLink]="[list.url]" class="user-list-link text-link list-title">{{list.name}}</a>
+      <div *ngFor="let list of lists" class="user-list" [ngClass]="{'removed': list.removed, 'removing': list.removing, 'to-remove': list.toRemove}">
+        <a href="" [routerLink]="[list.url]" class="user-list-link text-link list-title" [innerHTML]="list.name"></a>
         <div class="user-list-options">
-          <a href="" *ngIf="list.canDelete" class="btn btn-film user-list-delete btn-sm">delete</a>
+          <a href="#" (click)='highlightRow($event, list.name)' (blur)="unHighlightRow(list.name)" *ngIf="list.canDelete" class="btn btn-film user-list-delete btn-sm"
+          mwlConfirmationPopover
+          [title]="deleteDialogTitle"
+          placement="left"
+          (confirm)="removeList($event, list.key)"
+          (cancel)="unHighlightRow(list.name)"
+      >delete</a>
           <a href="" [routerLink]="[list.url]" class="btn btn-assembly-plan user-list-view btn-sm">view</a>
         </div>
       </div>

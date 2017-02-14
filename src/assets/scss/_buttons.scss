@@ -19,6 +19,7 @@
   background:$brand-gray;
   color:#fff;
   margin:0 0.1rem 0.4rem;
+  border-radius:$border-radius-xs;
   &,
   &:active,
   &.active {
@@ -75,7 +76,7 @@ fieldset[disabled] a.btn {
   @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
 }
 .btn-danger {
-  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+  @include button-variant($btn-danger-color, $brand-red, $brand-red);
 }
 
 //

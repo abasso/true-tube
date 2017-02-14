@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
 
+
 import {AuthHttp} from 'angular2-jwt'
 
 
@@ -44,9 +45,12 @@ export class ItemComponent implements OnInit, OnDestroy {
   public showLists = false
   public createListName = ''
   public addListError = false
+  public addListErrorMessage = 'An error occured'
   public listArray: any[] = []
   public listButtonClass = 'btn-lesson-plan'
   public listButtonLabel = 'Create List &amp; Add'
+  public notificationMessage = ''
+  public showNotification = false
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -180,7 +184,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     event.preventDefault()
     this.userService.addToList('favourites', this.id)
     _.find(this.listArray, (listItem) => {
-      if (listItem.name === 'favourites') {
+      if (listItem.name === 'Favourites') {
         listItem.checked = true
       }
     })
@@ -191,7 +195,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     event.preventDefault()
     this.userService.removeFromList('favourites', this.id)
     _.find(this.listArray, (listItem) => {
-      if (listItem.name === 'favourites') {
+      if (listItem.name === 'Favourites') {
         listItem.checked = false
       }
     })
@@ -208,16 +212,26 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   addList(event) {
-    if (this.createListName !== '') {
+    if (_.findIndex(this.listArray, (list) => {
+      return list.name === this.createListName
+    }) !== -1) {
+      this.addListError = true
+      this.addListErrorMessage = 'A list with that name already exists'
+    } else if (this.createListName !== '') {
+
       this.addListError = false
-      this.http.post('http://api.truetube.co.uk/me/' + this.createListName + '/' + this.id, {}).subscribe(
+      let listSlug = _.kebabCase(this.createListName)
+      this.http.post('http://api.truetube.co.uk/me/' + listSlug + '/' + this.id, {
+        title: decodeURI(this.createListName)
+      }).subscribe(
       (data) => {
         this.listArray.push({
           name: this.createListName,
           checked: true
         })
-        this.listButtonLabel = 'Created ' + _.capitalize(this.createListName)
+        this.listButtonLabel = 'Created ' + _.capitalize(decodeURI(this.createListName))
         this.listButtonClass = 'btn-success'
+        this.toggleNotification(_.capitalize(decodeURI(this.createListName)), false)
         setTimeout(() => {
           this.listButtonLabel = 'Create List &amp; Add'
           this.listButtonClass = 'btn-lesson-plan'
@@ -226,19 +240,34 @@ export class ItemComponent implements OnInit, OnDestroy {
       })
     } else {
       this.addListError = true
+      this.addListErrorMessage = 'Please enter a list name'
+
     }
+  }
+
+  toggleNotification(list, added) {
+    this.showNotification = false
+    let message = (added === true) ? 'Added to ' : 'Removed from '
+    this.notificationMessage = message + _.capitalize(decodeURI(list))
+    this.showNotification = true
+    setTimeout(() => {
+      this.showNotification = false
+    }, 3000)
   }
 
   setList(event, list) {
     if (event.target.checked) {
-      if (list === 'favourites') {
+      if (list === 'Favourites') {
         this.addedToFavourites = true
       }
+      this.toggleNotification(list, true)
       this.http.post('http://api.truetube.co.uk/me/' + list + '/' + this.id, {}).subscribe(
       (data) => {
+
       })
     } else {
-      if (list === 'favourites') {
+      this.toggleNotification(list, false)
+      if (list === 'Favourites') {
         this.addedToFavourites = false
       }
       this.http.delete('http://api.truetube.co.uk/me/' + list + '/' + this.id, {}).subscribe(
@@ -257,27 +286,29 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.http.get('http://api.truetube.co.uk/me')
       .subscribe(
         (data) => {
-          console.log("getting item in list")
           console.log(data)
           this.addedToFavourites = false
           this.userData = JSON.parse(data['_body'])
           this.listArray = []
           _.each(this.userData.lists, (list, key) => {
             let arrayItem = {
-              name: key,
-              checked: false
+              name: _.capitalize(decodeURI(key)),
+              checked: false,
+              order: 1
             }
-            _.each(list, (listItem) => {
+            _.each(list.items, (listItem) => {
               if (listItem === this.id && key === 'favourites') {
                 arrayItem.checked = true
                 this.addedToFavourites = true
+                arrayItem.order = 0
               } else if (listItem === this.id) {
                 arrayItem.checked = true
-                this.listTitle = key
+                this.listTitle = _.capitalize(decodeURI(key))
               }
             })
             this.listArray.push(arrayItem)
           })
+          // this.listArray = _.sortBy(this.listArray, 'order')
         }
       )
   }

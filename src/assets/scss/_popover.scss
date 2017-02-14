@@ -12,12 +12,21 @@
   font-size: $font-size-sm;
   // Allow breaking very long words so they don't overflow the popover's bounds
   word-wrap: break-word;
-  background-color: $popover-bg;
+  background-color: $gray-dark;
   background-clip: padding-box;
-  border: $popover-border-width solid $popover-border-color;
-  @include border-radius($border-radius-lg);
+  color:white;
+  @include border-radius($border-radius-sm);
   @include box-shadow($popover-box-shadow);
 
+  .btn {
+    font-size:$font-size-sm;
+    &.btn-danger {
+      margin-right:.25rem;
+    }
+  }
+  .col-xs-6:nth-child(2) {
+    padding-left:.25rem;
+  }
 
   // Popover directions
 
@@ -105,14 +114,13 @@
 
 // Offset the popover to account for the popover arrow
 .popover-title {
-  padding: $popover-title-padding-y $popover-title-padding-x;
-  margin: 0; // reset heading margin
+  margin: 0 !important; // reset heading margin
   font-size: $font-size-base;
-  background-color: $popover-title-bg;
-  border-bottom: $popover-border-width solid darken($popover-title-bg, 5%);
-  $offset-border-width: ($border-width / $font-size-root);
-  @include border-radius(($border-radius-lg - $offset-border-width) ($border-radius-lg - $offset-border-width) 0 0);
-
+  background:none !important;
+  border:none !important;
+  padding:.5rem 0 0 .5rem !important;
+  color:white;
+  font-weight:500;
   &:empty {
     display: none;
   }

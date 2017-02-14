@@ -51,6 +51,14 @@ fieldset {
   }
 }
 
+.form-control-feedback {
+  font-size:$font-size-xs;
+  padding:.25rem .5rem;
+  background:$brand-red;
+  color:white;
+  border-radius:$border-radius-xs;
+  margin-top:-0.12rem;
+}
 
 // input:required:invalid, input:focus:invalid {
 //   background:no-repeat 99% center url("../../images/error.svg");
