@@ -34,7 +34,6 @@ export class EventComponent implements OnInit {
               item.slug = '/item/' + item.uuid
                 item.contenttypes = []
                 _.each(item.resource_types, (type, key) => {
-                  console.log(type.type)
                   if (_.findIndex(this.types, {'term': type.type}) !== -1) {
                     item.contenttypes.push({'label': type.label, 'class': 'btn-' + type.type.replace('_', '-'), 'query': { 'tab': type.type}})
                   }

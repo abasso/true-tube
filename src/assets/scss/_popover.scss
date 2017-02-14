@@ -20,6 +20,7 @@
 
   .btn {
     font-size:$font-size-sm;
+    margin:0;
     &.btn-danger {
       margin-right:.25rem;
     }
@@ -115,12 +116,12 @@
 // Offset the popover to account for the popover arrow
 .popover-title {
   margin: 0 !important; // reset heading margin
-  font-size: $font-size-base;
+  font-size: .875rem;
   background:none !important;
   border:none !important;
   padding:.5rem 0 0 .5rem !important;
   color:white;
-  font-weight:500;
+  font-weight:400;
   &:empty {
     display: none;
   }

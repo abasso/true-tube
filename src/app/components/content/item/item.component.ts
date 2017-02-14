@@ -44,7 +44,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   public userData: any
   public listTitle
   public showLists = false
-  public createListName = ''
+  public createListTitle = ''
   public addListError = false
   public addListErrorMessage = 'An error occured'
   public listArray: any[] = []
@@ -53,6 +53,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   public notificationMessage = ''
   public showNotification = false
   public notificationRemove = false
+  public notificationFavourite = false
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -132,7 +133,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     if (!_.isUndefined(this.videoJSplayer) && this.videoJSplayer !== null) {
       setTimeout(() => {
           this.videoJSplayer.dispose()
-      }, 100);
+      }, 100)
     }
     setTimeout(
       () => {
@@ -184,23 +185,27 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   addToFavourites(event: any) {
     event.preventDefault()
+    this.notificationFavourite = true
     this.userService.addToList('favourites', this.id)
     _.find(this.listArray, (listItem) => {
-      if (listItem.name === 'Favourites') {
+      if (listItem.title === 'Favourites') {
         listItem.checked = true
       }
     })
+    this.toggleNotification('Favourites', true)
     this.addedToFavourites = true
   }
 
   removeFromFavourites(event: any) {
     event.preventDefault()
+    this.notificationFavourite = true
     this.userService.removeFromList('favourites', this.id)
     _.find(this.listArray, (listItem) => {
-      if (listItem.name === 'Favourites') {
+      if (listItem.title === 'Favourites') {
         listItem.checked = false
       }
     })
+    this.toggleNotification('Favourites', false)
     this.addedToFavourites = false
   }
 
@@ -209,42 +214,45 @@ export class ItemComponent implements OnInit, OnDestroy {
     if (this.showLists === true) {
       this.showLists = false
     } else {
-      this.showLists = true;
+      this.showLists = true
     }
   }
 
   addList(event) {
     if (_.findIndex(this.listArray, (list) => {
-      return list.name === this.createListName
+      return list.title === this.createListTitle
     }) !== -1) {
       this.addListError = true
       this.addListErrorMessage = 'A list with that name already exists'
-    } else if (this.createListName !== '') {
+      setTimeout(() => {
+        this.addListError = false
+      }, 3000)
+    } else if (this.createListTitle !== '') {
 
       this.addListError = false
       let header = new Headers()
-      let listSlug = _.kebabCase(this.createListName)
-      header.append('Content-Type', 'application/json');
+      let listSlug = _.kebabCase(this.createListTitle)
+      header.append('Content-Type', 'application/json')
       this.http.post('http://api.truetube.co.uk/me/' + listSlug + '/' + this.id, {
-        title : this.createListName
+        title : this.createListTitle
       }, { headers: header }).subscribe(
       (data) => {
         this.listArray.push({
-          name: this.createListName,
+          title: this.createListTitle,
           checked: true
         })
-        this.listButtonLabel = 'Created ' + _.capitalize(decodeURI(this.createListName))
-        this.listButtonClass = 'btn-success'
-        this.toggleNotification(_.capitalize(decodeURI(this.createListName)), true)
+
+        this.toggleNotification(this.createListTitle, true)
         setTimeout(() => {
-          this.listButtonLabel = 'Create List &amp; Add'
-          this.listButtonClass = 'btn-lesson-plan'
-          this.createListName = ''
-        }, 2000)
+          this.createListTitle = ''
+        }, 2200)
       })
     } else {
       this.addListError = true
       this.addListErrorMessage = 'Please enter a list name'
+      setTimeout(() => {
+        this.addListError = false
+      }, 3000)
     }
   }
 
@@ -257,29 +265,33 @@ export class ItemComponent implements OnInit, OnDestroy {
       message = 'Added to '
       this.notificationRemove = false
     }
-    this.notificationMessage = message + _.capitalize(decodeURI(list))
+    this.notificationMessage = message + list
     this.showNotification = true
     setTimeout(() => {
       this.showNotification = false
-    }, 1000)
+    }, 3000)
   }
 
-  setList(event, list) {
+  setList(event, key, title) {
     if (event.target.checked) {
-      if (list === 'Favourites') {
+      this.notificationFavourite = false
+      if (key === 'favourites') {
         this.addedToFavourites = true
+        this.notificationFavourite = true
       }
-      this.toggleNotification(list, true)
-      this.http.post('http://api.truetube.co.uk/me/' + list + '/' + this.id, {}).subscribe(
+      this.toggleNotification(title, true)
+      this.http.post('http://api.truetube.co.uk/me/' + key + '/' + this.id, {}).subscribe(
       (data) => {
 
       })
     } else {
-      this.toggleNotification(list, false)
-      if (list === 'Favourites') {
+      this.notificationFavourite = false
+      this.toggleNotification(title, false)
+      if (key === 'favourites') {
         this.addedToFavourites = false
+        this.notificationFavourite = true
       }
-      this.http.delete('http://api.truetube.co.uk/me/' + list + '/' + this.id).subscribe(
+      this.http.delete('http://api.truetube.co.uk/me/' + key + '/' + this.id).subscribe(
       (data) => {
       })
     }
@@ -300,18 +312,19 @@ export class ItemComponent implements OnInit, OnDestroy {
           this.listArray = []
           _.each(this.userData.lists, (list, key) => {
             let arrayItem = {
-              name: _.capitalize(decodeURI(key)),
+              title: list.title,
+              key: key,
               checked: false,
               order: 1
             }
             _.each(list.items, (listItem) => {
-              if (listItem === this.id && key === 'favourites') {
+              if (listItem === this.id && list.title === 'Favourites') {
                 arrayItem.checked = true
                 this.addedToFavourites = true
                 arrayItem.order = 0
               } else if (listItem === this.id) {
                 arrayItem.checked = true
-                this.listTitle = _.capitalize(decodeURI(key))
+                this.listTitle = list.title
               }
             })
             this.listArray.push(arrayItem)

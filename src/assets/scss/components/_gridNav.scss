@@ -31,6 +31,7 @@
           margin-bottom:0;
         }
         a {
+          transition: all 0.2s;
           display:flex;
           &:nth-child(1) {
             position: relative;
@@ -50,7 +51,7 @@
           }
           &.disabled {
             cursor: default;
-            opacity: .5;
+            opacity: .3;
             // background:no-repeat center center url("/assets/images/chevron-left_black.svg");
           }
         }

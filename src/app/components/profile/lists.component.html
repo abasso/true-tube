@@ -4,29 +4,39 @@
 <pre>{{ profile | json }}</pre> -->
 
 
-<div class="row profile-listing">
-  <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
+<div class="row profile profile-listing">
+  <div class="col-xs-12 col-md-3 col-xl-3 col-lg-p-right m-t-2 hidden-md-down">
     <ul class="p-a-0">
     <li *ngFor="let menuItem of menu" class="menu-item">
       <a href="#" [routerLink]="menuItem.url" class="text-link {{menuItem.css}}">{{menuItem.label}}</a>
     </li>
   </ul>
   </div>
-    <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
+  <div class="input-group content-nav-mobile">
+    <select id="select" class="custom-select form-control" (change)="navigate($event.target.value)">
+      <optgroup label="Select">
+        <option *ngFor="let menuItem of menu" [value]="menuItem.url">{{menuItem.label}}</option>
+      </optgroup>
+    </select>
+  </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-lg-p-left m-t-1">
       <h1 class="page-title">
         Your Lists
       </h1>
+      <div class="notification-wrapper" [ngClass]="{'visible': showNotification, 'remove': notificationRemove}">
+        <div class="notification col-xs-12 col-ml-12 col-xl-2" [ngClass]="{'visible': showNotification, 'remove': notificationRemove}" [innerHTML]="notificationMessage"></div>
+      </div>
       <div *ngFor="let list of lists" class="user-list" [ngClass]="{'removed': list.removed, 'removing': list.removing, 'to-remove': list.toRemove}">
-        <a href="" [routerLink]="[list.url]" class="user-list-link text-link list-title" [innerHTML]="list.name"></a>
+        <a href="" [routerLink]="[list.url]" class="user-list-link text-link list-title" [innerHTML]="list.titleWithCount"></a>
         <div class="user-list-options">
-          <a href="#" (click)='highlightRow($event, list.name)' (blur)="unHighlightRow(list.name)" *ngIf="list.canDelete" class="btn btn-film user-list-delete btn-sm"
+          <a href="#" (click)='highlightRow($event, list.title)' (blur)="unHighlightRow(list.title)" *ngIf="list.canDelete" class="btn btn-assembly-plan user-list-delete btn-sm"
           mwlConfirmationPopover
           [title]="deleteDialogTitle"
           placement="left"
           (confirm)="removeList($event, list.key)"
-          (cancel)="unHighlightRow(list.name)"
+          (cancel)="unHighlightRow(list.title)"
       >delete</a>
-          <a href="" [routerLink]="[list.url]" class="btn btn-assembly-plan user-list-view btn-sm">view</a>
+          <!-- <a href="" [routerLink]="[list.url]" class="btn btn-assembly-plan user-list-view btn-sm">view</a> -->
         </div>
       </div>
     </div>

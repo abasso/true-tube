@@ -37,6 +37,7 @@
       "timeEnd",
       "trace"
     ],
+    "semicolon": [true, "never"],
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-key": true,
@@ -66,7 +67,6 @@
       "single"
     ],
     "radix": false,
-    "semicolon": false,
     "triple-equals": [
       true,
       "allow-null-check"

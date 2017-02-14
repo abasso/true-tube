@@ -1,8 +1,8 @@
 import {Component} from '@angular/core'
 import {Profile} from './profile.model'
-import {ActivatedRoute} from '@angular/router'
 import * as _ from 'lodash'
 import {AuthHttp} from 'angular2-jwt'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-lists',
@@ -16,6 +16,9 @@ export class UserListsComponent {
   public profile: Profile
   public lockBlur = false
   public lists: any[] = []
+  public notificationMessage = ''
+  public showNotification = false
+  public notificationRemove = false
   public menu: any[] = [
     {
       label: 'Profile',
@@ -35,34 +38,42 @@ export class UserListsComponent {
   ]
   constructor(
     public route: ActivatedRoute,
+    public router: Router,
     public http: AuthHttp
   ) {
       route.data.subscribe(data => {
           this.profile = data['profile']
           _.each(this.profile.lists, (list, key) => {
+            let listObject = {
+              key: key,
+              title: list.title,
+              titleWithCount: list.title + ' (' + list.items.length + ' Item' + ((list.items.length > 1) ? 's' : '') + ')',
+              canDelete: true,
+              url: '/me/list/' + key
+            }
             if (key === 'favourites') {
-              this.lists.unshift({
-                key: key,
-                name: key + ' (' + list.items.length + ' Item' + ((list.items.length > 1) ? 's' : '') + ')',
-                canDelete: false,
-                url: '/me/list/' + key
-              })
+              listObject.canDelete = false
+              this.lists.unshift(listObject)
             } else {
-              this.lists.push({
-                key: key,
-                name: decodeURI(key) + ' (' + list.items.length + ' Item' + ((list.items.length > 1) ? 's' : '') + ')',
-                canDelete: true,
-                url: '/me/list/' + key
-              })
+              this.lists.push(listObject)
             }
           })
       })
   }
 
+  toggleNotification(list) {
+    this.notificationRemove = true
+    this.notificationMessage = 'Removed ' + list
+    this.showNotification = true
+    setTimeout(() => {
+      this.showNotification = false
+    }, 3000)
+  }
+
   highlightRow(event, list) {
     event.preventDefault()
     _.each(this.lists, (item) => {
-      if (item.name === list) {
+      if (item.title === list) {
         item.removing = true
       }
     })
@@ -70,18 +81,23 @@ export class UserListsComponent {
 
   unHighlightRow(list) {
     _.each(this.lists, (item) => {
-      if (item.name === list) {
+      if (item.title === list) {
         item.removing = false
       }
     })
   }
 
+  navigate(event: any) {
+    this.router.navigateByUrl(event)
+  }
+
   removeList(event, key) {
-    this.http.delete('http://api.truetube.co.uk/me/' + key, {}).subscribe(
+    this.http.delete('http://api.truetube.co.uk/me/' + key).subscribe(
     (data) => {
       _.each(this.lists, (item) => {
         if (item.key === key) {
           item.removed = true
+          this.toggleNotification(item.title)
         }
       })
       setTimeout(() => {
