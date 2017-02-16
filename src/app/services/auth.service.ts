@@ -73,6 +73,7 @@ export class Auth {
     // Remove token from localStorage
     localStorage.removeItem('id_token')
     this.userProfile = undefined
+    this.router.navigate(['/'])
   }
 }
 

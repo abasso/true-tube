@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute } from '@angular/router'
 import * as _ from 'lodash'
-
 @Component({
-  selector: 'app-page',
-  templateUrl: './page.component.html'
+  selector: 'app-item-page',
+  templateUrl: './item-page.component.html'
 })
-export class PageComponent implements OnInit {
-  private data: any
+export class ItemPageComponent implements OnInit {
   private content: any
   private menu: any
   private menuData: any
@@ -33,14 +31,15 @@ export class PageComponent implements OnInit {
           console.log(this.menu)
         })
 
-      this.dataService.pages()
+      this.dataService.itemPages('team')
       .subscribe(
         (data) => {
-          _.each(data.hits.hits, (item) => {
-            item.slug = item._source.slug
-          })
-          let tempId = '/page/' + this.currentId
-          this.content = _.filter(data.hits.hits, {slug: tempId})
+          this.content = data
+          // _.each(data.hits.hits, (item) => {
+          //   item.slug = item._source.slug
+          // })
+          // let tempId = '/page/' + this.currentId
+          // this.content = _.filter(data.hits.hits, {slug: tempId})
         }
       )
     }

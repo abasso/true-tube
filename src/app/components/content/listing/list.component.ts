@@ -1,10 +1,10 @@
 import { Component, HostListener } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
-import { Observable } from 'rxjs/Rx'
 import { DataService } from './../../../services/data.service'
 import { ListService } from './../../../services/list.service'
 import * as _ from 'lodash'
+import { Observable, BehaviorSubject } from 'rxjs/Rx'
 
 @Component({
   selector: 'app-list',
@@ -36,6 +36,8 @@ export class ListingComponent {
     itemsPerPageCurrent: any
   }
 
+  public currentPage: any = new BehaviorSubject(0)
+
   constructor(
     private dataService: DataService,
     private listService: ListService,
@@ -56,6 +58,7 @@ export class ListingComponent {
     .subscribe((page) => {
       if (!_.isUndefined(page)) {
         this.paginationData.currentPage = page - 1
+        this.currentPage.next(page - 1)
       }
     })
   }
@@ -68,6 +71,7 @@ export class ListingComponent {
         this.paginationData.pages.push(i + 1)
       }
       this.paginationData.currentPage = this.paginationData.currentPage
+      this.currentPage.next(this.paginationData.currentPage)
     }, 1)
   }
 

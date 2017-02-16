@@ -16,9 +16,8 @@ export class ListingSortComponent {
   private itemsPerPage: string[]
   private loadMoreCount: number
   private currentParams: any
-  public firstPage = false
+  public firstPage = true
   public lastPage = false
-
   constructor(
     public ListingComponent: ListingComponent,
     private route: ActivatedRoute,
@@ -37,12 +36,18 @@ export class ListingSortComponent {
       this.currentParams = _.assign({}, params)
     })
 
+    this.ListingComponent.currentPage
+    .subscribe((page) => {
+      this.setPage({target: { value: page}}, null)
+    })
+
     this.setListDisplay((_.isUndefined(Cookies.get('list-display'))) ? 'grid' : Cookies.get('list-display'))
     this.ListingComponent.paginationData.itemsPerPageCurrent = (_.isUndefined(Cookies.get('items-per-page'))) ? this.itemsPerPage[0] : Cookies.get('items-per-page')
     this.ListingComponent.paginationData.pages = []
     this.ListingComponent.paginationData.totalPages = Math.ceil(this.ListingComponent.paginationData.totalItems / this.ListingComponent.paginationData.itemsPerPageCurrent)
-    this.firstPage = (this.currentParams.page === '1' || _.isUndefined(this.currentParams.page)) ? true : false
-    this.lastPage = (this.currentParams.page === this.ListingComponent.paginationData.currentPage || _.isUndefined(this.currentParams.page)) ? true : false
+    console.log(this.ListingComponent.paginationData.totalPages)
+    this.firstPage = (this.currentParams.page === '1' || _.isUndefined(this.currentParams.page) || this.ListingComponent.paginationData.currentPage === 1) ? true : false
+    this.lastPage = (this.currentParams.page === this.ListingComponent.paginationData.currentPage) ? true : false
 
     for (let i = 0; i < this.ListingComponent.paginationData.totalPages; i++) {
       this.ListingComponent.paginationData.pages.push(i + 1)
@@ -87,13 +92,6 @@ export class ListingSortComponent {
       appendedQuery += 'page=' + pageNumberString
     }
     this.location.replaceState('/list?' + appendedQuery)
-  }
-
-  testy(event) {
-    console.log("TESTY", event)
-    this.firstPage = (event === 0) ? true : false
-    this.lastPage = (event === this.ListingComponent.paginationData.totalPages - 1) ? true : false
-
   }
 
   setItemsPerPage(event: any) {

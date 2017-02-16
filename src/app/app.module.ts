@@ -40,12 +40,13 @@ import { SwiperConfigInterface } from 'angular2-swiper-wrapper'
 import { EventsBlockComponent } from './components/shared/events.component'
 import { TopicsComponent } from './components/shared/topics.component'
 import { PageComponent } from './components/content/pages/page.component'
+import { ItemPageComponent } from './components/content/pages/item-page.component'
 import { FooterNavComponent } from './components/navigation/footer-nav.component'
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
 import { EventComponent } from './components/content/event/event.component'
-import {ProfileComponent} from './components/profile/profile.component'
-import {ProfileResolver} from './components/profile/profile.resolver'
+import { ProfileComponent } from './components/profile/profile.component'
+import { ProfileResolver } from './components/profile/profile.resolver'
 import { UserListsComponent } from './components//profile/lists.component'
 import { UserListComponent } from './components/profile/list.component'
 
@@ -57,7 +58,6 @@ const appRoutes: Routes = [
     component: HomeComponent,
     data: {
       meta: {
-        title: 'FUCK CHOPS',
         description: 'Description of the home page'
       }
     }
@@ -79,6 +79,26 @@ const appRoutes: Routes = [
   },
   {
     path: 'page/:id',
+    component: PageComponent
+  },
+  {
+    path: 'awards',
+    component: ItemPageComponent
+  },
+  {
+    path: 'team',
+    component: ItemPageComponent
+  },
+  {
+    path: 'node/1961',
+    component: ItemPageComponent
+  },
+  {
+    path: 'terms',
+    component: PageComponent
+  },
+  {
+    path: 'about',
     component: PageComponent
   },
   {
@@ -164,6 +184,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     EventsBlockComponent,
     TopicsComponent,
     PageComponent,
+    ItemPageComponent,
     FooterNavComponent,
     AccessibilityNavComponent,
     CalendarComponent,

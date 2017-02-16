@@ -7,20 +7,24 @@ import * as _ from 'lodash'
   templateUrl: './footer-nav.component.html'
 })
 export class FooterNavComponent implements OnInit {
-  private data: any
+  private menuData: any
+  public menu: any
+  private pages: any
   private items: any[] = []
   constructor(
     private dataService: DataService
   ) { }
 
   ngOnInit() {
-    this.data = this.dataService.pages()
-    .subscribe(
+
+    this.menuData = this.dataService.menus().subscribe(
       (data) => {
-        _.each(data.hits.hits, (item) => {
-          item.slug = '/page/' + item._id
+        console.log(data)
+        _.each(data._source.items, (item) => {
+          item.slug = item.uri
         })
-        this.items = _.chunk(data.hits.hits, 4)
+        this.menu = data._source.items
+        this.menu = _.chunk(this.menu, 4)
       }
     )
   }

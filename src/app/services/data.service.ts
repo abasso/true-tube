@@ -18,8 +18,10 @@ export class DataService {
   private meUrl = 'http://api.truetube.co.uk/me'
   private tempUrl = 'http://api.truetube.co.uk/resources/resource'
   private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search?sort=updated:desc'
+  private menuUrl = 'http://api.truetube.co.uk/menus/menu/pages'
   private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date.value:desc'
   private pagesUrl = 'http://api.truetube.co.uk/pages/_search'
+  private itemPageUrl = 'http://api.truetube.co.uk/item_pages/page'
 
   search(data: any, types: any, keys: any, subject: any, topics: any, category: any) {
 
@@ -140,6 +142,12 @@ export class DataService {
     .map((response) => ( response.json()))
   }
 
+  menus() {
+    return this.http
+    .get(this.menuUrl)
+    .map((response) => ( response.json()))
+  }
+
   events(month: number = null) {
     let search: any = new URLSearchParams()
     if (month !== null) {
@@ -156,10 +164,16 @@ export class DataService {
   pages(page: string = null) {
     let search: any = new URLSearchParams()
     if (page !== null) {
-      search.set('q', 'id:' + page)
+      search.set('q', 'slug:' + page)
     }
     return this.http
     .get(this.pagesUrl, { search })
+    .map((response) => ( response.json()))
+  }
+
+  itemPages(page: string = null) {
+    return this.http
+    .get(this.itemPageUrl + '/' + page, {})
     .map((response) => ( response.json()))
   }
 

@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   templateUrl: './lists.component.html'
 })
 export class UserListsComponent {
-  public deleteDialogTitle = 'Are you sure?'
+  public deleteDialogTitle = 'Delete this list?'
   public message = ''
   public confirmClicked = false
   public cancelClicked = false

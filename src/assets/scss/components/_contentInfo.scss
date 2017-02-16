@@ -44,12 +44,12 @@
     font-weight: $font-weight-normal;
     a {
       color:$brand-gray;
-      &:hover {
-        &:before {
-          background-color:$brand-yellow;
-          border-color:$brand-yellow;
-        }
-      }
+      // &:hover {
+      //   &:before {
+      //     background-color:$brand-yellow;
+      //     border-color:$brand-yellow;
+      //   }
+      // }
       &:before {
         transition: all 0.3s ease;
       }
@@ -193,7 +193,7 @@
     .form-check {
       padding-left:2px;
     }
-    .btn {
+    .btn-create-list {
       box-shadow:none;
       color:$brand-gray;
       font-weight: $font-weight-normal;

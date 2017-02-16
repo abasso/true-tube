@@ -1,3 +1,3 @@
-<nav class="footer-nav" *ngFor="let item of items">
-			<div class="footer-nav__item"><a href="#" [routerLink]="[menuItem.slug]" *ngFor="let menuItem of item" class="footer-nav__link">{{menuItem._source.title}}</a></div>
+<nav class="footer-nav" *ngFor="let item of menu">
+			<div class="footer-nav__item"><a href="#" [routerLink]="[menuItem.slug]" *ngFor="let menuItem of item" class="footer-nav__link">{{menuItem.title}}</a></div>
 </nav>

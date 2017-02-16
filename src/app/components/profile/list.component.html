@@ -24,7 +24,7 @@
         {{title}}
       </h1>
       <div class="notification-wrapper" [ngClass]="{'visible': showNotification, 'remove': notificationRemove}">
-        <div class="notification col-xs-12 col-ml-12 col-xl-2" [ngClass]="{'visible': showNotification, 'remove': notificationRemove}" [innerHTML]="notificationMessage"></div>
+        <div class="notification" [ngClass]="{'visible': showNotification, 'remove': notificationRemove}" [innerHTML]="notificationMessage"></div>
       </div>
       <div [ngClass]="{'row': true, 'list-row': true, 'content-grid': true}">
         <div class="list-item" *ngFor="let item of items">

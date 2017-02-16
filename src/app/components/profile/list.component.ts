@@ -17,7 +17,7 @@ export class UserListComponent {
   public items: any[] = []
   public title
   public id
-  public deleteDialogTitle = 'Are you sure?'
+  public deleteDialogTitle
   public message = ''
   public notificationMessage = ''
   public showNotification = false
@@ -55,6 +55,7 @@ export class UserListComponent {
         .map(params => params['id'])
         .subscribe((id) => {
           this.id = id
+          this.deleteDialogTitle = 'Remove from ' + data.title + '?'
           this.title = data.title + ' (' + this.items.length + ' Item' + ((this.items.length > 1) ? 's' : '') + ')'
         })
         _.each(this.items, (item) => {

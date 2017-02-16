@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
     <ul class="p-a-0">
     <li *ngFor="let menuItem of menu" class="menu-item">
-      <a href="#" [routerLink]="menuItem.path" class="text-link">{{menuItem._source.title}}</a>
+      <a href="#" [routerLink]="menuItem.uri" class="text-link">{{menuItem.title}}</a>
     </li>
   </ul>
 

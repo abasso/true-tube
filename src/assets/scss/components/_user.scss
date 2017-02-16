@@ -68,8 +68,11 @@
 }
 
 .user-list-delete {
-    background: $brand-gray no-repeat 10px center url("/assets/images/removed.svg");
+    background: white no-repeat 10px center url("/assets/images/remove.svg");
+    color:$brand-gray;
+    border:solid 1px $gray-lighter;
     background-size:16px 16px;
     padding-left:36px;
+    font-size:$font-size-sm;
     border-radius:$border-radius-sm;
 }
