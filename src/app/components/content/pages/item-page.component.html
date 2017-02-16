@@ -3,38 +3,34 @@
 <div class="row info-page">
   <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
     <ul class="p-a-0">
-    <li *ngFor="let menuItem of menu" class="menu-item">
-      <a href="#" [routerLink]="menuItem.uri" class="text-link">{{menuItem.title}}</a>
-    </li>
-  </ul>
+      <li *ngFor="let menuItem of menu" class="menu-item">
+        <a href="#" [routerLink]="menuItem.uri" class="text-link">{{menuItem.title}}</a>
+      </li>
+    </ul>
 
   </div>
-  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1">
+  <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1" *ngFor="let items of content">
     <h1 class="page-title">
-      {{content.title}}
+      {{items.title}}
     </h1>
 
-    <div class="row" [ngClass]="{'grid-row-four': true}">
-      <div class="list-item" *ngFor="let item of items">
-        <div class="block-media__media" *ngIf="item.thumbnail[0]">
-          <a [routerLink]="[item.slug]" class="block-media__link">
-            <img [src]="item.thumbnail[0].url" alt="{{item.thumbnail[0].alt}}" />
-            <!-- <div class="listing-time" *ngIf="related.duration">
-              {{ dataService.duration(related._source.duration) }}
-            </div> -->
-          </a>
-        </div>
-        <div class="block-media__body">
-          <a [routerLink]="[item.slug]" class="block-media__link">
-            <h6 class="block-media__headline" *ngIf="item.title">
-              {{ item.title }}
-            </h6>
-          </a>
-          <p class="block-media__description " [innerHTML]="item.description">
-          </p>
-        </div>
+    <div class="row grid-row">
+      <div class="list-item" *ngFor="let item of items.items">
+        <div class="block-media__media">
+          <img [src]="item.image" />
+          <!-- <div class="listing-time" *ngIf="related.duration">
+          {{ dataService.duration(related._source.duration) }}
+        </div> -->
+      </div>
+      <div class="block-media__body">
+        <h6 class="block-media__headline" *ngIf="item.title">
+          {{ item.title }}
+        </h6>
+        <p class="block-media__description " [innerHTML]="item.description">
+        </p>
       </div>
     </div>
-
   </div>
+
+</div>
 </div>

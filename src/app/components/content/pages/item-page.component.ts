@@ -7,7 +7,7 @@ import * as _ from 'lodash'
   templateUrl: './item-page.component.html'
 })
 export class ItemPageComponent implements OnInit {
-  private content: any
+  private content: any[] = []
   private menu: any
   private menuData: any
   private param: any
@@ -34,7 +34,8 @@ export class ItemPageComponent implements OnInit {
       this.dataService.itemPages('team')
       .subscribe(
         (data) => {
-          this.content = data
+          console.log(data)
+          this.content.push(data._source)
           // _.each(data.hits.hits, (item) => {
           //   item.slug = item._source.slug
           // })
