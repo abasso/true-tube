@@ -22,7 +22,6 @@ export class FooterNavComponent implements OnInit {
 
     this.menuData = this.dataService.menus().subscribe(
       (data) => {
-        console.log(data)
         _.each(data._source.items, (item) => {
           item.slug = item.uri
         })

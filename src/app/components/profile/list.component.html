@@ -5,20 +5,7 @@
 
 
 <div class="row profile profile-list">
-  <div class="col-xs-12 col-md-3 col-xl-3 col-lg-p-right m-t-2 hidden-md-down">
-    <ul class="p-a-0">
-    <li *ngFor="let menuItem of menu" class="menu-item">
-      <a href="#" [routerLink]="menuItem.url" class="text-link {{menuItem.css}}">{{menuItem.label}}</a>
-    </li>
-  </ul>
-  </div>
-  <div class="input-group content-nav-mobile">
-    <select id="select" class="custom-select form-control" (change)="navigate($event.target.value)">
-      <optgroup label="Select">
-        <option *ngFor="let menuItem of menu" [value]="menuItem.url">{{menuItem.label}}</option>
-      </optgroup>
-    </select>
-  </div>
+  <app-user-nav class="col-xs-12 col-md-12 col-lg-3 col-xl-3 col-lg-p-right m-t-2"></app-user-nav>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-lg-p-left m-t-1">
       <h1 class="page-title">
         {{title}}
@@ -29,7 +16,7 @@
       <div [ngClass]="{'row': true, 'list-row': true, 'content-grid': true}">
         <div class="list-item" *ngFor="let item of items">
           <div class="block-media__media" *ngIf="item.thumbnail">
-            <a [routerLink]="[item.slug]" class="block-media__link">
+            <a [routerLink]="[item.slug]" class="block-media__link" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="User List" [angularticsProperties]="{label: item.title}">
               <img [src]="item.thumbnail[0].url" alt="item.thumbnail[0].alt" />
               <div class="listing-time" *ngIf="item.duration">
                 {{ dataService.duration(item.duration) }}
@@ -45,13 +32,14 @@
                 placement="left"
                 (confirm)="removeItem($event, item.id)"
                 (cancel)="unHighlightRow(list.title)"
+                angulartics2On="click" angularticsEvent="Action" angularticsCategory="User List Remove" [angularticsProperties]="{label: item.title}"
             >Remove</a>
               </h6>
 
             <p class="block-media__description small" [innerHTML]="item.description">
             </p>
             <div class="block-media__types" *ngIf="item.contenttypes">
-              <a [routerLink]="[item.slug]" [queryParams]="type.query" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
+              <a [routerLink]="[item.slug]" [queryParams]="type.query" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="User List Type" [angularticsProperties]="{label: item.title + ' ' + type.label}">
                 <span>
                   {{ type.label }}
                 </span>

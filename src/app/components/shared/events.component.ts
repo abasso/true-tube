@@ -3,6 +3,7 @@ import { DataService } from './../../services/data.service'
 import { BehaviorSubject } from 'rxjs/Rx'
 import * as moment from 'moment'
 import * as _ from 'lodash'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 @Component({
   selector: 'app-events-block',
@@ -18,7 +19,10 @@ export class EventsBlockComponent implements OnInit {
   private noEvents = true
   public items: any[] = []
   constructor(
-    public dataService: DataService
+    public dataService: DataService,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
+
   ) {
     this.month = this.selectedMonth.subscribe(
       (month: any) => {

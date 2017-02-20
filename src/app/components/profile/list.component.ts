@@ -3,6 +3,7 @@ import {Profile} from './profile.model'
 import { ActivatedRoute, Router, Params } from '@angular/router'
 import { DataService } from './../../services/data.service'
 import {AuthHttp} from 'angular2-jwt'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 import * as _ from 'lodash'
 
@@ -23,27 +24,12 @@ export class UserListComponent {
   public showNotification = false
   public notificationRemove = false
   public embeddedContent: any[] = []
-  public menu: any[] = [
-    {
-      label: 'Profile',
-      url: '/me',
-      css: ''
-    },
-    {
-      label: 'Lists',
-      url: '/me/lists',
-      css: 'icon icon-small icon-list icon-left'
-    },
-    {
-      label: 'Favourites',
-      url: '/me/list/favourites',
-      css: 'icon icon-small icon-favourite icon-left'
-    }
-  ]
   constructor(
     public route: ActivatedRoute,
     private dataService: DataService,
-    public http: AuthHttp
+    public http: AuthHttp,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
   ) {
     this.data = this.route.params
     .switchMap((params: Params) => this.dataService.userList(params['id']))
@@ -64,16 +50,6 @@ export class UserListComponent {
             item.contenttypes.push({'label': resource.label, 'class': 'btn-' + resource.type.replace('_', '-'), 'query': { 'tab': resource.type}, 'slug': item.slug + '?tab=' + resource.type})
           })
         })
-        // _.each(this.items, (item) => {
-        //   item.typesCount = _.countBy(item.embedded, 'type')
-        //   item.contenttypes = []
-        //   _.each(item.typesCount, (type, key) => {
-        //     let typestring = key.replace('_', ' ')
-        //     if (_.findIndex(this.types, {'term': key}) !== -1) {
-        //       item.contenttypes.push({'label': typestring, 'class': 'btn-' + key.replace('_', '-'), 'query': { 'tab': key}})
-        //     }
-        //   })
-        // })
       }
     )
 

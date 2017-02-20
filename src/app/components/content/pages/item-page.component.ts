@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute } from '@angular/router'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+
 import * as _ from 'lodash'
 @Component({
   selector: 'app-item-page',
@@ -13,7 +15,9 @@ export class ItemPageComponent implements OnInit {
   public gridSize = 'grid-row'
   constructor(
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
   ) {
   }
   ngOnInit() {
@@ -28,8 +32,6 @@ export class ItemPageComponent implements OnInit {
           if (data._source.grid_size !== 3) {
             this.gridSize = (data._source.grid_size === 4) ? 'grid-row-four' : 'grid-row-two'
           }
-
-
           this.content.push(data._source)
           _.each(this.content, (content) => {
             _.each(content.items, (item) => {
@@ -38,11 +40,6 @@ export class ItemPageComponent implements OnInit {
               }
             })
           })
-          // _.each(data.hits.hits, (item) => {
-          //   item.slug = item._source.slug
-          // })
-          // let tempId = '/page/' + this.currentId
-          // this.content = _.filter(data.hits.hits, {slug: tempId})
         }
       )
     }

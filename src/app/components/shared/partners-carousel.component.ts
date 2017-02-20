@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../services/data.service'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 @Component({
   selector: 'app-partners-carousel',
@@ -12,7 +13,6 @@ export class PartnersCarouselComponent implements OnInit {
     slidesPerGroup: 3,
     slidesPerView: 5,
     spaceBetween: 10,
-    // Responsive breakpoints
     breakpoints: {
       400: {
         slidesPerGroup: 1,
@@ -38,12 +38,11 @@ export class PartnersCarouselComponent implements OnInit {
       }
     }
   }
-  // $breakpoint-sm: 544px;
-  // $breakpoint-md: 767px;
-  // $breakpoint-lg: 992px;
-  // $breakpoint-xl: 1200px;
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
+
   ) {
 
   }

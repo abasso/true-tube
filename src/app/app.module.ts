@@ -38,6 +38,7 @@ import { TopicsComponent } from './components/shared/topics.component'
 import { PageComponent } from './components/content/pages/page.component'
 import { ItemPageComponent } from './components/content/pages/item-page.component'
 import { FooterNavComponent } from './components/navigation/footer-nav.component'
+import { UserNavComponent } from './components/navigation/user-nav.component'
 import { PagesNavComponent } from './components/navigation/pages-nav.component'
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
@@ -193,6 +194,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     PaginationPipe,
     PartnersCarouselComponent,
     PrimaryNavComponent,
+    UserNavComponent,
     ProfileComponent,
     QueryStringPipe,
     SanitiseUrlPipe,

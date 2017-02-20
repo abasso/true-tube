@@ -295,6 +295,8 @@ export class ListFilterComponent implements OnInit {
     searchTimeout = setTimeout(
       () => {
         this.currentParams['search'] = event.target.value
+        this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Search', label: event.target.value}})
+
         this.setQueryString()
         this.ListingComponent.resetPagination()
     }, 500)

@@ -15,7 +15,7 @@
     </a>
   </div>
   <div class="block-media__body">
-    <a [routerLink]="[item._source.slug]" class="block-media__link" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="List Item" [angularticsProperties]="{label: item._source.title}" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="List Item Title" [angularticsProperties]="{label: item._source.title}">
+    <a [routerLink]="[item._source.slug]" class="block-media__link" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="List Item Title" [angularticsProperties]="{label: item._source.title}">
       <h6 class="block-media__headline" *ngIf="item._source.title">
         {{ item._source.title }}
       </h6>

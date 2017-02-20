@@ -10,7 +10,6 @@ import * as _ from 'lodash'
 export class PageComponent implements OnInit {
   private content: any
   private menu: any
-  private menuData: any
   private param: any
   private currentId: string
   constructor(
@@ -27,14 +26,13 @@ export class PageComponent implements OnInit {
         })
         path = _.trimEnd(path, '/')
         this.currentId = path
-        this.menuData = this.route.params
+      this.route.params
         .switchMap(() =>
         this.dataService.menus()
       )
       .subscribe(
         (data) => {
           this.menu = data._source.items
-          console.log(this.menu)
         })
 
       this.dataService.pages()
@@ -43,8 +41,6 @@ export class PageComponent implements OnInit {
           _.each(data.hits.hits, (item) => {
             item.slug = item._source.slug
           })
-          console.log(this.currentId)
-          console.log(data.hits.hits)
           this.content = _.filter(data.hits.hits, {slug: this.currentId})
         }
       )

@@ -3,6 +3,7 @@ import {Profile} from './profile.model'
 import * as _ from 'lodash'
 import {AuthHttp} from 'angular2-jwt'
 import { ActivatedRoute, Router } from '@angular/router'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 @Component({
   selector: 'app-lists',
@@ -39,7 +40,10 @@ export class UserListsComponent {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public http: AuthHttp
+    public http: AuthHttp,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
+
   ) {
       route.data.subscribe(data => {
           this.profile = data['profile']

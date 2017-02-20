@@ -5,20 +5,7 @@
 
 
 <div class="row profile">
-  <div class="col-xs-12 col-md-3 col-xl-3 col-lg-p-right m-t-2 hidden-md-down">
-    <ul class="p-a-0">
-    <li *ngFor="let menuItem of menu" class="menu-item">
-      <a href="#" [routerLink]="menuItem.url" class="text-link {{menuItem.css}}">{{menuItem.label}}</a>
-    </li>
-  </ul>
-  </div>
-  <div class="input-group content-nav-mobile">
-    <select id="select" class="custom-select form-control" (change)="navigate($event.target.value)">
-      <optgroup label="Select">
-        <option *ngFor="let menuItem of menu" [value]="menuItem.url">{{menuItem.label}}</option>
-      </optgroup>
-    </select>
-  </div>
+  <app-user-nav class="col-xs-12 col-md-12 col-lg-3 col-xl-3 col-lg-p-right m-t-2"></app-user-nav>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 col-lg-p-left m-t-1">
     <h1 class="page-title">
       Hello {{ profile.name }}

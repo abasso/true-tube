@@ -27,7 +27,7 @@
         </h6>
         <p class="block-media__description " [innerHTML]="item.description">
         </p>
-        <a class="text-link listing-link" href="{{ item.link }}">{{ item.cleanLink }}</a>
+        <a class="text-link listing-link" href="{{ item.link }}" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="Item Page" [angularticsProperties]="{label: item.cleanLink}">{{ item.cleanLink }}</a>
       </div>
     </div>
   </div>
