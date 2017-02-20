@@ -91,6 +91,14 @@ app-list {
   margin-top:0;
 }
 
+.block-media__subtitle {
+  padding:.25rem 0 .75rem;
+  border-bottom:solid 1px $gray-lighter;
+  color:$gray-light;
+  font-weight:$font-weight-normal;
+  margin:0 0 1rem 0;
+}
+
 .block-media__types {
   margin-top:.5rem;
 }

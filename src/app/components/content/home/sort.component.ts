@@ -4,6 +4,7 @@ import { DataService } from './../../../services/data.service'
 import { Categories } from './../../../definitions/categories'
 import * as Cookies from 'js-cookie'
 import * as _ from 'lodash'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 @Component({
   selector: 'home-sort',
@@ -13,19 +14,15 @@ export class HomeSortComponent {
 
   public pages: number[]
   public itemsPerPageCurrent: any
-  public itemsPerPage: string[]
   public currentPage: number
   public loadMoreCount: number
   public categories: any[] = Categories
-
-  constructor(public ListingComponent: HomeListingComponent, public dataService: DataService) {
-    this.itemsPerPage = [
-      '12',
-      '24',
-      '48',
-      'All'
-    ]
-
+  constructor(
+    public ListingComponent: HomeListingComponent,
+    public dataService: DataService,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
+  ) {
     this.setListDisplay((_.isUndefined(Cookies.get('list-display'))) ? 'grid' : Cookies.get('list-display'))
     this.currentPage = 0
     this.ListingComponent.paginationData.itemsPerPageCurrent = 12
@@ -39,19 +36,6 @@ export class HomeSortComponent {
     this.ListingComponent.paginationData.currentPage = this.currentPage
   }
 
-  setItemsPerPage(event: any) {
-    event.preventDefault()
-    Cookies.set('items-per-page', event.target.value)
-    this.ListingComponent.paginationData.itemsPerPageCurrent = event.target.value
-    this.ListingComponent.paginationData.totalPages = Math.ceil(this.ListingComponent.paginationData.totalItems / this.ListingComponent.paginationData.itemsPerPageCurrent)
-    this.ListingComponent.paginationData.pages = []
-    for (let i = 0; i < this.ListingComponent.paginationData.totalPages; i++ ) {
-      this.ListingComponent.paginationData.pages.push(i + 1)
-    }
-    this.pages = this.ListingComponent.paginationData.pages
-    this.ListingComponent.paginationData.currentPage = 0
-  }
-
   setListDisplay(type: string) {
     Cookies.set('list-display', type)
     this.ListingComponent.displayGrid = (type === 'grid') ? true : false
@@ -61,11 +45,6 @@ export class HomeSortComponent {
   listDisplayClick(event: any, type: string) {
     event.preventDefault()
     this.setListDisplay(type)
-  }
-
-  loadMore(event: any) {
-    event.preventDefault()
-    this.loadMoreCount = this.loadMoreCount + 12
-    this.ListingComponent.paginationData.itemsPerPageCurrent = this.loadMoreCount
+    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Set List Type', label: type}})
   }
 }

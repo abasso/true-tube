@@ -97,7 +97,6 @@ export class ListFilterComponent implements OnInit {
         this.ListingComponent.itemCount = data.hits.total
         this.ListingComponent.items = data.hits.hits
         _.each(this.ListingComponent.items, (item) => {
-          item.slug = '/item/' + item._id
           item._source.description = this.dataService.trimDescription(item._source.description)
           if (_.endsWith(item._source.description, '...')) {
             item.readMore = true

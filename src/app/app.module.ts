@@ -76,8 +76,8 @@ const appRoutes: Routes = [
     component: ItemComponent
   },
   {
-    path: 'film/:id',
-    component: PageComponent
+    path: 'film/:slug',
+    component: ItemComponent
   },
   {
     path: 'awards',

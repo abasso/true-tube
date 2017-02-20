@@ -129,6 +129,16 @@ export class DataService {
     .map((response) => ( response.json() ))
   }
 
+  itemBySlug(slug: string = null, limit = 1) {
+    let search: any = new URLSearchParams()
+    search.set('q', 'slug:"' + slug + '"')
+    return this.http
+    .get(this.baseUrl, { search })
+    .map((response) => (
+      response.json()
+    ))
+  }
+
   userList(uri: string) {
     let itemUrl: string = this.meUrl + '/' + uri.split('?')[0]
     return this.authHttp

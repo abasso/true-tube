@@ -30,6 +30,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   private item: any = {}
   private data: any
   private id: string
+  public slug: string
   private showEmbed = false
   private embedButtonLabel = 'Copy'
   private embedButtonClass = 'btn-video'
@@ -72,11 +73,11 @@ export class ItemComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.types = ContentTypes
     this.data = this.route.params
-    .switchMap((params: Params) => this.dataService.item(params['id']))
+    .switchMap((params: Params) => this.dataService.itemBySlug('/film/' + params['slug']))
     .subscribe(
       (data) => {
-        this.item = data._source
-        console.log(this.item)
+        window.scrollTo(0, 0)
+        this.item = data.hits.hits[0]._source
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
         if (this.item.resource_types.length === 1) {
           this.item.hideMenu = true
@@ -87,7 +88,6 @@ export class ItemComponent implements OnInit, OnDestroy {
           }
         })
         _.each(this.item.related, (item) => {
-          item.slug = '/item/' + item.uuid
           item.contenttypes = []
           _.each(item.resource_types, (type, key) => {
             if (_.findIndex(this.types, {'term': type.type}) !== -1) {
@@ -113,13 +113,6 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.auth.loggedInStatus.subscribe((data) => {
       this.isItemInList()
     })
-    this.route.params
-    .map(params => params['id'])
-    .subscribe((id) => {
-      window.scrollTo(0, 0)
-      this.id = id
-    })
-
 
   }
 
@@ -161,6 +154,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   navigateAttribute(event: any, type: string, attribute: string) {
     event.preventDefault()
     this.router.navigateByUrl('/list?' + type + '=' + attribute)
+    this.angulartics2.eventTrack.next({ action: 'Navigate', properties: { category: 'Content Info ' + type, title: attribute}})
   }
 
   duration(seconds: number) {
@@ -183,7 +177,8 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   tab(event: any) {
-    this.router.navigateByUrl('/item/' + this.id + '?tab=' + event)
+    console.log(this.item.slug)
+    this.router.navigateByUrl(this.item.slug + '?tab=' + event)
     this.pausePlayer()
   }
 
@@ -199,7 +194,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   addToFavourites(event: any) {
     event.preventDefault()
     this.notificationFavourite = true
-    this.userService.addToList('favourites', this.id)
+    this.userService.addToList('favourites', this.item.id)
     _.find(this.listArray, (listItem) => {
       if (listItem.title === 'Favourites') {
         listItem.checked = true
@@ -213,7 +208,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   removeFromFavourites(event: any) {
     event.preventDefault()
     this.notificationFavourite = true
-    this.userService.removeFromList('favourites', this.id)
+    this.userService.removeFromList('favourites', this.item.id)
     _.find(this.listArray, (listItem) => {
       if (listItem.title === 'Favourites') {
         listItem.checked = false
@@ -247,7 +242,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       let header = new Headers()
       let listSlug = _.kebabCase(this.createListTitle)
       header.append('Content-Type', 'application/json')
-      this.http.post('http://api.truetube.co.uk/me/' + listSlug + '/' + this.id, {
+      this.http.post('http://api.truetube.co.uk/me/' + listSlug + '/' + this.item.id, {
         title : this.createListTitle
       }, { headers: header }).subscribe(
       (data) => {
@@ -294,9 +289,9 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.notificationFavourite = true
       }
       this.toggleNotification(title, true)
-      this.http.post('http://api.truetube.co.uk/me/' + key + '/' + this.id, {}).subscribe(
+      this.http.post('http://api.truetube.co.uk/me/' + key + '/' + this.item.id, {}).subscribe(
       (data) => {
-        this.angulartics2.eventTrack.next({ action: 'Add', properties: { category: 'List', title: this.id}})
+        this.angulartics2.eventTrack.next({ action: 'Add', properties: { category: 'List', title: this.item.id}})
       })
     } else {
       this.notificationFavourite = false
@@ -305,9 +300,9 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.addedToFavourites = false
         this.notificationFavourite = true
       }
-      this.http.delete('http://api.truetube.co.uk/me/' + key + '/' + this.id).subscribe(
+      this.http.delete('http://api.truetube.co.uk/me/' + key + '/' + this.item.id).subscribe(
       (data) => {
-        this.angulartics2.eventTrack.next({ action: 'Remove', properties: { category: 'List', title: this.id}})
+        this.angulartics2.eventTrack.next({ action: 'Remove', properties: { category: 'List', title: this.item.id}})
       })
     }
   }
@@ -333,11 +328,11 @@ export class ItemComponent implements OnInit, OnDestroy {
               order: 1
             }
             _.each(list.items, (listItem) => {
-              if (listItem === this.id && list.title === 'Favourites') {
+              if (listItem === this.item.id && list.title === 'Favourites') {
                 arrayItem.checked = true
                 this.addedToFavourites = true
                 arrayItem.order = 0
-              } else if (listItem === this.id) {
+              } else if (listItem === this.item.id) {
                 arrayItem.checked = true
                 this.listTitle = list.title
               }

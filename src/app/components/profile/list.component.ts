@@ -59,11 +59,9 @@ export class UserListComponent {
           this.title = data.title + ' (' + this.items.length + ' Item' + ((this.items.length > 1) ? 's' : '') + ')'
         })
         _.each(this.items, (item) => {
-          item.slug = '/item/' + item.id
-          console.log(item)
           item.contenttypes = []
           _.each(item.resource_types, (resource) => {
-            item.contenttypes.push({'label': resource.label, 'class': 'btn-' + resource.type.replace('_', '-'), 'query': { 'tab': resource.type}, 'slug': '/item/' + item.id + '?tab=' + resource.type})
+            item.contenttypes.push({'label': resource.label, 'class': 'btn-' + resource.type.replace('_', '-'), 'query': { 'tab': resource.type}, 'slug': item.slug + '?tab=' + resource.type})
           })
         })
         // _.each(this.items, (item) => {

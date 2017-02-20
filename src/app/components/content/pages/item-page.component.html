@@ -19,8 +19,11 @@
         </div> -->
       </div>
       <div class="block-media__body">
-        <h6 class="block-media__headline" *ngIf="item.title">
+        <h5 class="block-media__headline" *ngIf="item.title">
           {{ item.title }}
+        </h5>
+        <h6 class="block-media__subtitle" *ngIf="item.sub_title">
+          {{ item.sub_title }}
         </h6>
         <p class="block-media__description " [innerHTML]="item.description">
         </p>

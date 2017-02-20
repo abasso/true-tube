@@ -5,6 +5,8 @@ import { DataService } from './../../../services/data.service'
 import { ListService } from './../../../services/list.service'
 import { Categories } from './../../../definitions/categories'
 import { ContentTypes } from './../../../definitions/content-types'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+
 import * as _ from 'lodash'
 
 @Component({
@@ -36,7 +38,12 @@ export class HomeListingComponent implements OnInit {
   public sortBy: any = new BehaviorSubject('created')
   public contentLoading = true
 
-  constructor(public dataService: DataService, public listService: ListService) {
+  constructor(
+    public dataService: DataService,
+    public listService: ListService,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
+  ) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,
@@ -68,7 +75,6 @@ export class HomeListingComponent implements OnInit {
             })
             this.items = data.hits.hits
             _.each(this.items, (item) => {
-              item.slug = '/item/' + item._id
               item._source.description = this.dataService.trimDescription(item._source.description)
               if (_.endsWith(item._source.description, '...')) {
                 item.readMore = true

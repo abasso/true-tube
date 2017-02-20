@@ -35,7 +35,6 @@ export class EventComponent implements OnInit {
             this.items = _.filter(data.hits.hits, {_id: route['id'] })
             this.items[0].date = moment(this.items[0]._source.date.value).format('Do MMMM YYYY')
             _.each(this.items[0]._source.related, (item) => {
-              item.slug = '/item/' + item.uuid
                 item.contenttypes = []
                 _.each(item.resource_types, (type, key) => {
                   if (_.findIndex(this.types, {'term': type.type}) !== -1) {
