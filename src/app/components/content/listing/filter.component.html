@@ -4,7 +4,7 @@
     <h5>
       Filter
     </h5>
-    <span class="clear" *ngIf="filterActive()" (click)="clearAll($event)">
+    <span class="clear" *ngIf="filterActive()" (click)="clearAll($event)" >
       Clear All
     </span>
   </div>
@@ -60,7 +60,7 @@
         </span>
       </a>
     </legend>
-    <button class="btn btn-sm" *ngFor="let key of keystages" (click)="setFilter($event, key)" [ngClass]="{active: key.active}" ngDefaultControl>{{key.label}}</button>
+    <button class="btn btn-sm" *ngFor="let key of keystages" (click)="setFilter($event, key)" [ngClass]="{active: key.active}">{{key.label}}</button>
 
     <div class="form-group hidden-xs-up" *ngFor="let key of keystages">
       <label class="custom-control custom-checkbox">

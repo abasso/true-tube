@@ -9,6 +9,7 @@ import { Subjects } from './../../../definitions/subjects'
 import { ContentTypes } from './../../../definitions/content-types'
 import { KeyStages } from './../../../definitions/key-stages'
 import { ListService } from './../../../services/list.service'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/debounceTime'
@@ -44,7 +45,10 @@ export class ListFilterComponent implements OnInit {
     private ListingComponent: ListingComponent,
     private dataService: DataService,
     private location: Location,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
+
   ) {
     listService.pathToReset$.subscribe(
       query => {
@@ -301,6 +305,8 @@ export class ListFilterComponent implements OnInit {
     this.filter.patchValue({term: ''})
     delete this.currentParams.search
     if (event !== null) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Clear Term'}})
+
       event.preventDefault()
       this.setQueryString()
     }
@@ -312,6 +318,7 @@ export class ListFilterComponent implements OnInit {
     this.filterSubjects = 'All'
     delete this.currentParams.subject
     if (event !== null) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Clear Subject'}})
       event.preventDefault()
       this.setQueryString()
     }
@@ -325,6 +332,8 @@ export class ListFilterComponent implements OnInit {
       this.filter.patchValue(toClear)
       category.active = false
     })
+    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Clear Category'}})
+
     delete this.currentParams.category
     this.setQueryString()
   }
@@ -346,6 +355,7 @@ export class ListFilterComponent implements OnInit {
     })
     delete this.currentParams.category
     if (event !== null) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Clear Category and Topics'}})
       event.preventDefault()
       this.setQueryString()
     }
@@ -366,6 +376,7 @@ export class ListFilterComponent implements OnInit {
     }
     delete this.currentParams.topics
     if (event !== null) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Topics Clear'}})
       event.preventDefault()
       this.setQueryString()
     }
@@ -383,6 +394,7 @@ export class ListFilterComponent implements OnInit {
     delete this.currentParams['content types']
     this.resetFilterState(this.types)
     if (event !== null) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Types Clear'}})
       event.preventDefault()
       this.setQueryString()
     }
@@ -393,6 +405,7 @@ export class ListFilterComponent implements OnInit {
     delete this.currentParams.keystages
     this.resetFilterState(this.keystages)
     if (event !== null) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Keystages Clear'}})
       event.preventDefault()
       this.setQueryString()
     }
@@ -401,6 +414,7 @@ export class ListFilterComponent implements OnInit {
   clearAll(event: any) {
     if (event !== null) {
       event.preventDefault()
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Clear All'}})
     }
     this.contentLoading = true
     this.clearSubject(event)
@@ -427,6 +441,7 @@ export class ListFilterComponent implements OnInit {
       this.filter.patchValue({value: true})
     }
     this.currentParams[value.type] = filterQuery.join()
+    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter ' + _.capitalize(value.type), label: this.currentParams[value.type]}})
     this.setQueryString()
   }
 
@@ -450,6 +465,7 @@ export class ListFilterComponent implements OnInit {
   setSubject(event: any) {
     this.contentLoading = true
     this.filterSubjects = (<HTMLSelectElement>event.srcElement).value
+    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Subject', label: this.filterSubjects}})
     this.currentParams['subject'] = this.filterSubjects
     this.setQueryString()
     return this.filterSubjects
@@ -506,6 +522,7 @@ export class ListFilterComponent implements OnInit {
         topic.active = false
       })
     }
+    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Topics', label: this.currentParams['topics']}})
     this.setQueryString()
   }
 
@@ -534,6 +551,7 @@ export class ListFilterComponent implements OnInit {
     })
     this.currentParams['category'] = this.category[0].slug
     delete this.currentParams['topics']
+    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Filter Category', label: this.currentParams['category']}})
     this.setQueryString()
 
     this.category[0].active = true

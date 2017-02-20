@@ -115,6 +115,7 @@
 }
 
 .video-footer {
+  min-height:4rem;
   @media(max-width: $breakpoint-xl) {
     border-bottom: solid 2px $gray-lighter;
     margin-bottom:1rem;

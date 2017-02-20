@@ -80,6 +80,14 @@ const appRoutes: Routes = [
     component: ItemComponent
   },
   {
+    path: 'node/:slug',
+    component: ItemComponent
+  },
+  {
+    path: 'node/:slug',
+    component: ItemComponent
+  },
+  {
     path: 'awards',
     component: ItemPageComponent
   },
