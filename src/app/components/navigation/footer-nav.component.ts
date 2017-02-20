@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './../../services/data.service'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 import * as _ from 'lodash'
 
 @Component({
@@ -12,7 +13,9 @@ export class FooterNavComponent implements OnInit {
   private pages: any
   private items: any[] = []
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
   ) { }
 
   ngOnInit() {

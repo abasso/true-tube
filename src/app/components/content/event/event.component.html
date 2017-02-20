@@ -10,40 +10,8 @@
       <h3 class="page-sub-title p-t-1">{{item.date}}</h3>
     </div>
   </div>
-  <div class="col-xs-12 col-ml-12 col-xl-9 content-main" [ngClass]="{'col-xl-9': item._source.description !== '', 'col-xl-p-right': item._source.description !== ''}">
-      <div class="content-info hidden-xl-up m-t-1">
-        <p [innerHTML]="item._source.description">
-        </p>
-      </div>
-  <div class="row" [ngClass]="{'grid-row': item._source.description !== '', 'grid-row-four': item._source.description === ''}">
-    <div class="list-item" *ngFor="let related of item._source.related">
-      <div class="block-media__media" *ngIf="related.thumbnail[0]">
-        <a [routerLink]="[related.slug]" class="block-media__link">
-          <img [src]="related.thumbnail[0].url" alt="{{related.thumbnail[0].alt}}" />
-          <!-- <div class="listing-time" *ngIf="related.duration">
-            {{ dataService.duration(related._source.duration) }}
-          </div> -->
-        </a>
-      </div>
-      <div class="block-media__body">
-        <a [routerLink]="[related.slug]" class="block-media__link">
-          <h6 class="block-media__headline" *ngIf="related.title">
-            {{ related.title }}
-          </h6>
-        </a>
-        <p class="block-media__description " [innerHTML]="related.description">
-        </p>
-        <div class="block-media__types" *ngIf="related.contenttypes">
-          <a [routerLink]="[related.slug]" [queryParams]="type.query" *ngFor="let type of related.contenttypes" class="btn btn-sm {{ type.class }}">
-            <span>
-              {{ type.label }}
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <app-list-item [ngClass]="{'grid-row': item._source.description !== '', 'grid-row-four': item._source.description === ''}" [items]="item._source.related" [paginationData]="paginationData"></app-list-item>
+
 <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-left flex-order-lg-0 hidden-lg-down">
   <div class="content-info">
     <p [innerHTML]="item._source.description">

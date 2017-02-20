@@ -9,6 +9,7 @@ export const myConfig: AuthConfiguration = {
     domain: 'truetube.eu.auth0.com',
     options: {
       autoclose: true,
+      rememberLastLogin: false,
       languageDictionary: {
         emailInputPlaceholder: 'something@youremail.com',
         title: '',

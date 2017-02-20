@@ -51,7 +51,7 @@ export class HomeListingComponent implements OnInit {
     this.sortBy
     .subscribe(
       (sortData: any) => {
-        this.data = this.dataService.list(sortData)
+        this.data = this.dataService.list(sortData, 200)
         this.data.subscribe(
           (data: any) => {
             _.each(data.hits.hits, (item) => {

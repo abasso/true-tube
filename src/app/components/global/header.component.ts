@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Auth } from './../../services/auth.service'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 @Component({
   selector: 'app-header',
@@ -8,11 +9,12 @@ import { Auth } from './../../services/auth.service'
 export class HeaderComponent implements OnInit {
   public menuVisible = false
   constructor(
-    public auth: Auth
+    public auth: Auth,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
   ) {
   }
   ngOnInit() {
-
   }
   toggleMenu(event: any) {
     event.preventDefault()
@@ -23,9 +25,9 @@ export class HeaderComponent implements OnInit {
     this.menuVisible = true
     document.getElementById('search').focus()
   }
-
   searchDone() {
     this.menuVisible = false
+    document.getElementById('search').blur()
   }
 
 }

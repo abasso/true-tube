@@ -8,7 +8,6 @@ import * as _ from 'lodash'
   templateUrl: './page.component.html'
 })
 export class PageComponent implements OnInit {
-  private data: any
   private content: any
   private menu: any
   private menuData: any
@@ -22,7 +21,12 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.param = this.route.url.subscribe(
       (url) => {
-        this.currentId = url[0].path
+        let path = '/'
+        _.each(url, (urlPart) => {
+          path += urlPart.path + '/'
+        })
+        path = _.trimEnd(path, '/')
+        this.currentId = path
         this.menuData = this.route.params
         .switchMap(() =>
         this.dataService.menus()
@@ -39,8 +43,9 @@ export class PageComponent implements OnInit {
           _.each(data.hits.hits, (item) => {
             item.slug = item._source.slug
           })
-          let tempId = '/page/' + this.currentId
-          this.content = _.filter(data.hits.hits, {slug: tempId})
+          console.log(this.currentId)
+          console.log(data.hits.hits)
+          this.content = _.filter(data.hits.hits, {slug: this.currentId})
         }
       )
     }

@@ -164,8 +164,7 @@
     background-position:center center;
     background-size:contain;
     top:50%;
-    margin-top:-9px;
-
+    margin-top:-8px;
   }
   &.icon-right {
     margin-right: 28px;
@@ -202,7 +201,6 @@
       width:32px;
       height:32px;
       margin-top:-15px;
-
     }
   }
   &.icon-inline {
@@ -214,14 +212,19 @@
       left:0px;
     }
   }
+  &.icon-v-shift {
+    &:before {
+      margin-top:-9px;
+    }
+  }
 }
 
 .icon-nav {
   &:before {
     width:24px;
-    height:24px;
+    height:25px;
     background-repeat:no-repeat;
-    background-position:center center;
+    background-position:top center;
     background-size:24px;
     top:50%;
     margin-top:-11px;

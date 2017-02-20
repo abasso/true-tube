@@ -1,23 +1,39 @@
 .partners-carousel {
   margin-top:1rem;
   background:$gray-lightest;
-  padding:.5rem 0 1rem;
+  padding:.5rem 0 0;
+
   .partners-carousel-header {
+    margin:1.75rem 0 1rem 0;
+    h3 {
+      margin:0;
+      padding:0 0 0.25rem;
+      border-bottom:solid 2px $brand-yellow;
+    }
     display:flex;
     align-items: center;
-    .partners-carousel-link {
+    a {
       margin-left:auto;
-      border-bottom:dotted 1px $gray-lighter;
     }
+  }
+  .swiper {
+    margin: 0 1rem;
   }
   .swiper-wrapper {
     padding-bottom:3.5rem;
   }
   .swiper-slide {
-    padding:1rem;
     text-align:center;
     border-radius:$border-radius-lg;
     background:#fff;
+    display:flex;
+    align-items:center;
+    min-height:10rem;
+
+    a {
+      margin:auto;
+      width:60%;
+    }
   }
   .swiper-pagination {
     border:none;
@@ -113,6 +129,9 @@ footer {
 .copyright {
   @media(max-width: $breakpoint-md) {
     order:2;
+  }
+  a {
+    margin-left:.25rem;
   }
 }
 

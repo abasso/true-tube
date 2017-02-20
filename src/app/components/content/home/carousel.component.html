@@ -2,10 +2,10 @@
     <div class="swiper-slide" *ngFor="let item of slides">
         <a href="#" [routerLink]="[item._source.link]">
           <picture>
-            <source srcset="{{item._source.image[0].url}}" media="(min-width: 1024px)">
-            <source srcset="{{item._source.image[0].url}}" media="(min-width: 769px)">
-            <source srcset="{{item._source.image[0].url}}" media="(min-width: 0px)">
-          <img srcset="{{item._source.image[0].url}}" alt="{{item._source.image[0].alt}}">
+            <source srcset="{{item._source.image[0].styles.large}}" media="(min-width: 1024px)">
+            <source srcset="{{item._source.image[0].styles.medium}}" media="(min-width: 769px)">
+            <source srcset="{{item._source.image[0].styles.small}}" media="(min-width: 0px)">
+          <img srcset="{{item._source.image[0].styles.large}}" alt="{{item._source.image[0].alt}}">
         </picture>
           <h2 class="display-4" *ngIf="item._source.hide_text !== '1'">
             <a href="#" [routerLink]="[item._source.link]">

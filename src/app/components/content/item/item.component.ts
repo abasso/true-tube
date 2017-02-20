@@ -12,10 +12,8 @@ import * as moment from 'moment'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
 import { Headers } from '@angular/http'
-
-
 import {AuthHttp} from 'angular2-jwt'
-
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 
 declare var videojs: any
@@ -54,6 +52,10 @@ export class ItemComponent implements OnInit, OnDestroy {
   public showNotification = false
   public notificationRemove = false
   public notificationFavourite = false
+  public paginationData = {
+    currentPage: 0,
+    itemsPerPage: 100000
+  }
   @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
@@ -62,7 +64,9 @@ export class ItemComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private location: Location,
     private auth: Auth,
-    private http: AuthHttp
+    private http: AuthHttp,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
   ) {}
 
   ngOnInit() {
@@ -72,10 +76,10 @@ export class ItemComponent implements OnInit, OnDestroy {
     .subscribe(
       (data) => {
         this.item = data._source
+        console.log(this.item)
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
         if (this.item.resource_types.length === 1) {
           this.item.hideMenu = true
-
         }
         _.each(this.item.embedded, (embed) => {
           if (embed.thumbnail === null) {
@@ -95,6 +99,15 @@ export class ItemComponent implements OnInit, OnDestroy {
         if (this.auth.authenticated()) {
           this.isItemInList()
         }
+        this.route.queryParams
+        .map(params => params['tab'])
+        .subscribe((type) => {
+          if (!_.isUndefined(type)) {
+            this.setActiveTab(type)
+          } else {
+            this.setActiveTab(this.item.resource_types[0].type)
+          }
+        })
       }
     )
     this.auth.loggedInStatus.subscribe((data) => {
@@ -103,16 +116,11 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.route.params
     .map(params => params['id'])
     .subscribe((id) => {
+      window.scrollTo(0, 0)
       this.id = id
     })
 
-    this.route.queryParams
-    .map(params => params['tab'])
-    .subscribe((type) => {
-      if (!_.isUndefined(type)) {
-        this.setActiveTab(type)
-      }
-    })
+
   }
 
   ngOnDestroy() {
@@ -137,8 +145,12 @@ export class ItemComponent implements OnInit, OnDestroy {
     }
     setTimeout(
       () => {
-      this.videoJSplayer = videojs(this.player.nativeElement.id, {}, function() {
-      })
+
+      this.videoJSplayer = videojs(this.player.nativeElement.id, {})
+      if (this.activeTab === 'audio') {
+        let poster = document.querySelectorAll('.vjs-poster')
+        poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
+      }
     }, 200)
   }
 
@@ -167,6 +179,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   setActiveTab(event: any) {
     event = event.replace(' ', '_')
     this.activeTab = event
+    this.angulartics2.eventTrack.next({ action: event, properties: { category: 'Content Tab', title: ''}})
   }
 
   tab(event: any) {
@@ -194,6 +207,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     })
     this.toggleNotification('Favourites', true)
     this.addedToFavourites = true
+
   }
 
   removeFromFavourites(event: any) {
@@ -228,7 +242,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.addListError = false
       }, 3000)
     } else if (this.createListTitle !== '') {
-
+      this.angulartics2.eventTrack.next({ action: 'Create', properties: { category: 'List', title: this.createListTitle}})
       this.addListError = false
       let header = new Headers()
       let listSlug = _.kebabCase(this.createListTitle)
@@ -282,7 +296,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       this.toggleNotification(title, true)
       this.http.post('http://api.truetube.co.uk/me/' + key + '/' + this.id, {}).subscribe(
       (data) => {
-
+        this.angulartics2.eventTrack.next({ action: 'Add', properties: { category: 'List', title: this.id}})
       })
     } else {
       this.notificationFavourite = false
@@ -293,6 +307,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       }
       this.http.delete('http://api.truetube.co.uk/me/' + key + '/' + this.id).subscribe(
       (data) => {
+        this.angulartics2.eventTrack.next({ action: 'Remove', properties: { category: 'List', title: this.id}})
       })
     }
   }

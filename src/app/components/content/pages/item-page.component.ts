@@ -8,10 +8,9 @@ import * as _ from 'lodash'
 })
 export class ItemPageComponent implements OnInit {
   private content: any[] = []
-  private menu: any
-  private menuData: any
   private param: any
   private currentId: string
+  public gridSize = 'grid-row'
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute
@@ -20,22 +19,25 @@ export class ItemPageComponent implements OnInit {
   ngOnInit() {
     this.param = this.route.url.subscribe(
       (url) => {
-        this.currentId = url[0].path
-        this.menuData = this.route.params
-        .switchMap(() =>
-        this.dataService.menus()
-      )
-      .subscribe(
-        (data) => {
-          this.menu = data._source.items
-          console.log(this.menu)
-        })
+        this.currentId = url[url.length - 1].path
 
-      this.dataService.itemPages('team')
+      this.dataService.itemPages(this.currentId)
       .subscribe(
         (data) => {
-          console.log(data)
+          window.scrollTo(0, 0)
+          if (data._source.grid_size !== 3) {
+            this.gridSize = (data._source.grid_size === 4) ? 'grid-row-four' : 'grid-row-two'
+          }
+
+
           this.content.push(data._source)
+          _.each(this.content, (content) => {
+            _.each(content.items, (item) => {
+              if (item.link) {
+                item.cleanLink = item.link.split('/')[2]
+              }
+            })
+          })
           // _.each(data.hits.hits, (item) => {
           //   item.slug = item._source.slug
           // })

@@ -10,19 +10,19 @@ export class AppComponent {
   public lastScrollPos = 0
   public animateHeader = false
   public sticky = false
-  @HostListener('window:scroll', ['$event'])
-  scroll(event) {
-    let main = document.querySelector('main').getBoundingClientRect()
-    let header = document.querySelector('header').getBoundingClientRect()
-      if (window.pageYOffset > this.lastScrollPos) {
-          if (main.top - 100 <= 0) {
-            this.animateHeader = true
-            this.hideHeader = true
-          }
-        } else {
-          this.hideHeader = false
-      }
-
-      this.lastScrollPos = window.pageYOffset
-  }
+  // @HostListener('window:scroll', ['$event'])
+  // scroll(event) {
+  //   let main = document.querySelector('main').getBoundingClientRect()
+  //   let header = document.querySelector('header').getBoundingClientRect()
+  //     if (window.pageYOffset > this.lastScrollPos) {
+  //         if (main.top - 100 <= 0) {
+  //           this.animateHeader = true
+  //           this.hideHeader = true
+  //         }
+  //       } else {
+  //         this.hideHeader = false
+  //     }
+  //
+  //     this.lastScrollPos = window.pageYOffset
+  // }
 }

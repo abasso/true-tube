@@ -51,8 +51,9 @@
           }
           &.disabled {
             cursor: default;
-            opacity: .3;
-            // background:no-repeat center center url("/assets/images/chevron-left_black.svg");
+            &:before {
+              opacity: .1;
+            }
           }
         }
       }

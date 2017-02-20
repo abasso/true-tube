@@ -1,4 +1,4 @@
-.video-js-wrapper {
+.video-js-wrapper, .audio-wrapper {
   width:100%;
   padding-bottom:56.25%;
   height:0;
@@ -54,7 +54,23 @@
   }
 }
 
-.video-header {
+.audio-wrapper {
+  .vjs-big-play-button {
+    background:$color-audio no-repeat 57% 50% url("/assets/images/play.svg");
+  }
+  .vjs-poster {
+    display:block !important;
+  }
+  .vjs-fullscreen-control {
+    display:none !important;
+  }
+  .audio-header {
+
+  }
+}
+
+.video-header, .audio-header {
+  min-height:4rem;
   border-top:solid 1px $gray-lighter;
   display:flex;
   font-weight: $font-weight-normal;

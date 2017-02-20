@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import * as Cookies from 'js-cookie'
 import * as _ from 'lodash'
 import { Auth } from './../../services/auth.service'
+import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 
 @Component({
   selector: 'app-call-to-action',
@@ -12,7 +13,9 @@ export class CallToActionComponent implements OnInit {
   private dyslexiaEnabled = false
   private dyslexiaLabel = 'Dyslexia Font'
   constructor(
-    private auth: Auth
+    public auth: Auth,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    private angulartics2: Angulartics2
   ) { }
 
   ngOnInit() {
@@ -26,6 +29,7 @@ export class CallToActionComponent implements OnInit {
   toggleDyslexiaFont(event: any) {
     this.dyslexiaEnabled = (this.dyslexiaEnabled) ? false : true
     this.dyslexiaLabel = (this.dyslexiaEnabled) ? 'Standard Font' : 'Dyslexia Font'
+    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Dyslexia Font', label: this.dyslexiaLabel}})
     event.preventDefault()
     this.setDyslexiaFont()
     this.setDyslexiaCookie()

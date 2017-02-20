@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
-
-import {HttpModule, Http, RequestOptions} from '@angular/http'
+import {HttpModule} from '@angular/http'
 import { RouterModule, Routes } from '@angular/router'
-// import { Location } from '@angular/common'
 import { AppComponent } from './app.component'
 import { ListingComponent } from './components/content/listing/list.component'
+import { ListItemComponent } from './components/content/listing/list-item.component'
 import { HeaderComponent } from './components/global/header.component'
 import { PrimaryNavComponent } from './components/navigation/primary-nav.component'
 import { SearchComponent } from './components/navigation/search.component'
@@ -14,27 +13,24 @@ import { CallToActionComponent } from './components/messaging/call-to-action.com
 import { ItemComponent } from './components/content/item/item.component'
 import { ListFilterComponent } from './components/content/listing/filter.component'
 import { ListingSortComponent } from './components/content/listing/sort.component'
-// import { EmbedComponent } from './components/content/embed/embed.component'
 import { DataService } from './services/data.service'
 import { ListService } from './services/list.service'
 import { UserService } from './services/user.service'
 import { QueryStringPipe } from './pipes/query-string.pipe'
+import { ImagePipe } from './pipes/image.pipe'
 import { AttributePipe } from './pipes/attribute.pipe'
 import { PaginationPipe } from './pipes/pagination.pipe'
 import { EmbedMenuPipe } from './pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './pipes/sanitise-url.pipe'
-import {ConfirmationPopoverModule} from 'angular-confirmation-popover';
-
-import {Auth, AUTH_PROVIDERS, LoggedInGuard} from './services/auth.service'
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover'
+import { Auth, AUTH_PROVIDERS, LoggedInGuard } from './services/auth.service'
 import { ClipboardModule } from 'ngx-clipboard'
-// import * as moment from 'moment'
-// import * as _ from 'lodash'
-// import * as Cookies from 'js-cookie'
 import { FooterComponent } from './components/global/footer.component'
 import { HomeComponent } from './components/content/home/home.component'
 import { HomeListingComponent } from './components/content/home/list.component'
 import { HomeSortComponent } from './components/content/home/sort.component'
 import { CarouselComponent } from './components/content/home/carousel.component'
+import { PartnersCarouselComponent } from './components/shared/partners-carousel.component'
 import { SwiperModule } from 'angular2-swiper-wrapper'
 import { SwiperConfigInterface } from 'angular2-swiper-wrapper'
 import { EventsBlockComponent } from './components/shared/events.component'
@@ -42,6 +38,7 @@ import { TopicsComponent } from './components/shared/topics.component'
 import { PageComponent } from './components/content/pages/page.component'
 import { ItemPageComponent } from './components/content/pages/item-page.component'
 import { FooterNavComponent } from './components/navigation/footer-nav.component'
+import { PagesNavComponent } from './components/navigation/pages-nav.component'
 import { AccessibilityNavComponent } from './components/navigation/accessibility-nav.component'
 import { CalendarComponent } from './components/content/calendar/calendar.component'
 import { EventComponent } from './components/content/event/event.component'
@@ -49,6 +46,7 @@ import { ProfileComponent } from './components/profile/profile.component'
 import { ProfileResolver } from './components/profile/profile.resolver'
 import { UserListsComponent } from './components//profile/lists.component'
 import { UserListComponent } from './components/profile/list.component'
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2'
 
 // import { MetaModule } from 'ng2-meta'
 
@@ -78,7 +76,7 @@ const appRoutes: Routes = [
     component: ItemComponent
   },
   {
-    path: 'page/:id',
+    path: 'film/:id',
     component: PageComponent
   },
   {
@@ -90,7 +88,7 @@ const appRoutes: Routes = [
     component: ItemPageComponent
   },
   {
-    path: 'node/1961',
+    path: 'partners',
     component: ItemPageComponent
   },
   {
@@ -148,7 +146,7 @@ const appRoutes: Routes = [
       profile: ProfileResolver
     }
   }
-];
+]
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
       pagination: '.swiper-pagination',
@@ -161,64 +159,67 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 
 @NgModule({
   declarations: [
+    AccessibilityNavComponent,
     AppComponent,
-    ListingComponent,
-    HeaderComponent,
-    PrimaryNavComponent,
-    SearchComponent,
-    CallToActionComponent,
-    ItemComponent,
-    ListFilterComponent,
-    ListingSortComponent,
-    PaginationPipe,
-    QueryStringPipe,
     AttributePipe,
+    CalendarComponent,
+    CallToActionComponent,
+    CarouselComponent,
     EmbedMenuPipe,
-    SanitiseUrlPipe,
+    EventComponent,
+    EventsBlockComponent,
     FooterComponent,
-    // EmbedComponent,
+    FooterNavComponent,
+    HeaderComponent,
     HomeComponent,
     HomeListingComponent,
     HomeSortComponent,
-    CarouselComponent,
-    EventsBlockComponent,
-    TopicsComponent,
-    PageComponent,
+    ItemComponent,
     ItemPageComponent,
-    FooterNavComponent,
-    AccessibilityNavComponent,
-    CalendarComponent,
-    EventComponent,
+    ListFilterComponent,
+    ListingComponent,
+    ListItemComponent,
+    ListingSortComponent,
+    PageComponent,
+    PagesNavComponent,
+    PaginationPipe,
+    PartnersCarouselComponent,
+    PrimaryNavComponent,
     ProfileComponent,
+    QueryStringPipe,
+    SanitiseUrlPipe,
+    ImagePipe,
+    SearchComponent,
+    TopicsComponent,
     UserListComponent,
     UserListsComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
     ClipboardModule,
-    SwiperModule.forRoot(SWIPER_CONFIG),
-    RouterModule.forRoot(appRoutes),
     ConfirmationPopoverModule.forRoot({
-      confirmButtonType: 'danger' // set defaults here
-    })
+      confirmButtonType: 'danger'
+    }),
+    FormsModule,
+    HttpModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+    SwiperModule.forRoot(SWIPER_CONFIG),
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
   ],
   providers: [
     AUTH_PROVIDERS,
     Auth,
-    LoggedInGuard,
-    ProfileResolver,
+    DataService,
     ListFilterComponent,
     ListingComponent,
-    DataService,
     ListService,
+    LoggedInGuard,
+    ProfileResolver,
     UserService
   ],
   bootstrap: [
-    AppComponent,
-    // EmbedComponent
+    AppComponent
   ]
 })
 export class AppModule { }

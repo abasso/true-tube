@@ -1,20 +1,16 @@
 
 
 <div class="row info-page">
-  <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2">
-    <ul class="p-a-0">
-      <li *ngFor="let menuItem of menu" class="menu-item">
-        <a href="#" [routerLink]="menuItem.uri" class="text-link">{{menuItem.title}}</a>
-      </li>
-    </ul>
-
+  <div class="col-xs-12 col-ml-12 col-xl-3 col-xl-p-right m-t-2 hidden-lg-down">
+    <app-pages-nav>
+		</app-pages-nav>
   </div>
   <div class="col-xs-12 col-ml-12 col-xl-9 col-xl-p-left m-t-1" *ngFor="let items of content">
     <h1 class="page-title">
       {{items.title}}
     </h1>
-
-    <div class="row grid-row">
+    <div *ngIf="items.description" class="content m-b-1 p-b-1 list-description" [innerHTML]="items.description"></div>
+    <div class="row {{gridSize}}">
       <div class="list-item" *ngFor="let item of items.items">
         <div class="block-media__media">
           <img [src]="item.image" />
@@ -28,6 +24,7 @@
         </h6>
         <p class="block-media__description " [innerHTML]="item.description">
         </p>
+        <a class="text-link listing-link" href="{{ item.link }}">{{ item.cleanLink }}</a>
       </div>
     </div>
   </div>

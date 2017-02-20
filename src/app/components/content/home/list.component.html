@@ -2,34 +2,8 @@
 <div class="row grid-row content-grid loading-grid" *ngIf="contentLoading === true">
   <img src="/assets/images/loading.svg"/>
 </div>
-<div [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}" *ngIf="contentLoading !== true">
-  <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
-    <div class="block-media__media" *ngIf="item._source.thumbnail">
-      <a [routerLink]="[item.slug]" class="block-media__link">
-        <img [src]="item._source.thumbnail[0].url" alt="item._source.thumbnail[0].alt" />
-        <div class="listing-time" *ngIf="item._source.duration">
-          {{ dataService.duration(item._source.duration) }}
-        </div>
-      </a>
-    </div>
-    <div class="block-media__body">
-      <a [routerLink]="[item.slug]" class="block-media__link">
-        <h6 class="block-media__headline" *ngIf="item._source.title">
-          {{ item._source.title }}
-        </h6>
-      </a>
-      <p class="block-media__description small" [innerHTML]="item._source.description">
-      </p>
-      <div class="block-media__types" *ngIf="item.contenttypes">
-        <a [routerLink]="[item.slug]" [queryParams]="type.query" *ngFor="let type of item.contenttypes" class="btn btn-sm {{ type.class }}">
-          <span>
-            {{ type.label }}
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+<app-list-item [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}" *ngIf="contentLoading === false" [items]="items" [paginationData]="paginationData"></app-list-item>
+
 <div class="load-more">
   <a href="" class="btn-load-more" (click)="loadMore($event)">Load More</a>
 </div>

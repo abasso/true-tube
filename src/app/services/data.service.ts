@@ -17,13 +17,13 @@ export class DataService {
   private baseUrl = 'http://api.truetube.co.uk/resources/_search'
   private meUrl = 'http://api.truetube.co.uk/me'
   private tempUrl = 'http://api.truetube.co.uk/resources/resource'
-  private carouselUrl = 'http://api.truetube.co.uk/carousel/homepage/_search?sort=updated:desc'
+  private carouselUrl = 'http://api.truetube.co.uk/carousels/homepage/_search?sort=updated:desc'
   private menuUrl = 'http://api.truetube.co.uk/menus/menu/pages'
   private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date.value:desc'
   private pagesUrl = 'http://api.truetube.co.uk/pages/_search'
   private itemPageUrl = 'http://api.truetube.co.uk/item_pages/page'
 
-  search(data: any, types: any, keys: any, subject: any, topics: any, category: any) {
+  search(data: any, types: any, keys: any, subject: any, topics: any, category: any, limit = 1000) {
 
     let termArray: string[] = []
 
@@ -99,21 +99,21 @@ export class DataService {
 
     let termString: string = (termArray.length) ? termArray.join(' AND ') : ''
     let search: any = new URLSearchParams()
-    if (termString != '') {
+    if (termString !== '') {
       search.set('q', termString)
     }
-    search.set('size', '1000')
+    search.set('size', limit)
     return this.http
     .get(this.baseUrl, { search })
     .map((response) => ( response.json()))
   }
 
-  list(sort: string = null) {
+  list(sort: string = null, limit = 1000) {
     let search: any = new URLSearchParams()
     if (sort) {
       search.set('sort', sort + ':desc')
     }
-    search.set('size', '1000')
+    search.set('size', limit)
     return this.http
     .get(this.baseUrl, { search })
     .map((response) => (

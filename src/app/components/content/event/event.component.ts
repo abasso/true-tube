@@ -15,6 +15,10 @@ export class EventComponent implements OnInit {
   private data: any
   private items: any
   private types
+  public paginationData = {
+    currentPage: 0,
+    itemsPerPage: 100000
+  }
   constructor(
     public dataService: DataService,
     private route: ActivatedRoute,
