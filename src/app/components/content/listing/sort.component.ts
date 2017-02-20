@@ -45,7 +45,6 @@ export class ListingSortComponent {
     this.ListingComponent.paginationData.itemsPerPageCurrent = (_.isUndefined(Cookies.get('items-per-page'))) ? this.itemsPerPage[0] : Cookies.get('items-per-page')
     this.ListingComponent.paginationData.pages = []
     this.ListingComponent.paginationData.totalPages = Math.ceil(this.ListingComponent.paginationData.totalItems / this.ListingComponent.paginationData.itemsPerPageCurrent)
-    console.log(this.ListingComponent.paginationData.totalPages)
     this.firstPage = (this.currentParams.page === '1' || _.isUndefined(this.currentParams.page) || this.ListingComponent.paginationData.currentPage === 1) ? true : false
     this.lastPage = (this.currentParams.page === this.ListingComponent.paginationData.currentPage) ? true : false
 

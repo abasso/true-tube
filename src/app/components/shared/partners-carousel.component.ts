@@ -50,7 +50,6 @@ export class PartnersCarouselComponent implements OnInit {
     this.data = this.dataService.itemPages('partners')
     .subscribe(
       (data) => {
-        console.log(data)
         this.slides = data._source.items
       }
     )

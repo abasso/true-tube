@@ -37,7 +37,7 @@
     margin:-10px -10px 20px;
   }
   .auth0-lock-tabs {
-    box-shadow:none;
+    box-shadow:none !important;
      li {
        background:$gray-lighter;
        a {
@@ -45,15 +45,15 @@
       }
       &.auth0-lock-tabs-current {
         background:white;
-        box-shadow:none;
+        box-shadow:none !important;
       }
     }
   }
   .auth0-lock-header-logo {
-    width:auto;
-    margin:1rem;
-    display:block;
-    height:45px;
+    width:auto !important;
+    margin:1rem !important;
+    display:block !important;
+    height:45px !important;
   }
   .auth0-lock-name {
     display:none;

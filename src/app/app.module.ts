@@ -35,6 +35,7 @@ import { SwiperModule } from 'angular2-swiper-wrapper'
 import { SwiperConfigInterface } from 'angular2-swiper-wrapper'
 import { EventsBlockComponent } from './components/shared/events.component'
 import { TopicsComponent } from './components/shared/topics.component'
+import { CookieNoticeComponent } from './components/messaging/cookie-notice.component'
 import { PageComponent } from './components/content/pages/page.component'
 import { ItemPageComponent } from './components/content/pages/item-page.component'
 import { FooterNavComponent } from './components/navigation/footer-nav.component'
@@ -101,7 +102,11 @@ const appRoutes: Routes = [
     component: ItemPageComponent
   },
   {
-    path: 'terms',
+    path: 'terms-and-conditions',
+    component: PageComponent
+  },
+  {
+    path: 'privacy-and-cookies',
     component: PageComponent
   },
   {
@@ -193,6 +198,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     PagesNavComponent,
     PaginationPipe,
     PartnersCarouselComponent,
+    CookieNoticeComponent,
     PrimaryNavComponent,
     UserNavComponent,
     ProfileComponent,

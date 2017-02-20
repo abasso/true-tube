@@ -14,9 +14,7 @@ export class UserService {
           if (data['message'] = 'item added') {
             return true
           }
-        },
-        err => console.log(err),
-        () => console.log('Request Complete')
+        }
       )
   }
   removeFromList(list, id) {
@@ -26,9 +24,7 @@ export class UserService {
           if (data['message'] = 'item removed') {
             return true
           }
-        },
-        err => console.log(err),
-        () => console.log('Request Complete')
+        }
       )
     }
     removeList(list) {
@@ -38,9 +34,7 @@ export class UserService {
             if (data['message'] = 'item removed') {
               return true
             }
-          },
-          err => console.log(err),
-          () => console.log('Request Complete')
+          }
         )
       }
 }

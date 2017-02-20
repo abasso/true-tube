@@ -8,7 +8,6 @@ import * as _ from 'lodash'
 })
 export class ImagePipe implements PipeTransform {
   transform(value: any, args?: any): any {
-    console.log(value)
     return ''
   }
 }

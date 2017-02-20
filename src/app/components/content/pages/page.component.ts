@@ -20,6 +20,7 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.param = this.route.url.subscribe(
       (url) => {
+        window.scrollTo(0, 0)
         let path = '/'
         _.each(url, (urlPart) => {
           path += urlPart.path + '/'
