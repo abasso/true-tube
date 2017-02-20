@@ -1,6 +1,6 @@
 <home-sort #sort *ngIf="contentLoading !== true"></home-sort>
 <div class="row grid-row content-grid loading-grid" *ngIf="contentLoading === true">
-  <img src="/assets/images/loading.svg"/>
+  <div class="spinner"></div>
 </div>
 <app-list-item [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}" *ngIf="contentLoading === false" [items]="items" [paginationData]="paginationData"></app-list-item>
 

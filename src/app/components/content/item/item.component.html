@@ -44,9 +44,11 @@
 						<a href="#" *ngIf="addedToFavourites === true" class="icon-embed icon-small icon-left icon-favourite_red video-embed text-link" (click)="removeFromFavourites($event)" angulartics2On="click" angularticsEvent="Remove From Favourites" angularticsCategory="Content" [angularticsProperties]="{label: item.title}">Remove from Favourites</a>
 					</div>
 					<div *ngIf="embed.allow_download !== '0'">
-						<a href="#" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
+						<a href="https://www.truetube.co.uk/v5/api/file/{{embed.uuid}}" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
+						<div *ngIf="!auth.authenticated()">
 						<a href="#" class="icon-download icon-small icon-left video-download text-link" (click)="auth.login($event)" angulartics2On="click" angularticsEvent="Download Login" angularticsCategory="Content" [angularticsProperties]="{label: item.title}">Login</a> to Download</div>
-					<a href="" class="icon-embed icon-small icon-left video-embed text-link" (click)="toggleEmbed($event)" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Embed Video Toggle" [angularticsProperties]="{label: item.title}">Embed</a>
+					</div>
+					<a href="" class="icon-embed icon-small icon-left video-embed text-link download-link" (click)="toggleEmbed($event)" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Embed Video Toggle" [angularticsProperties]="{label: item.title}">Embed</a>
 				</div>
 			</div>
 			<div class="video-embed-container p-t-1 m-b-1" [ngClass]="{show: showEmbed}">
@@ -55,7 +57,7 @@
 					<!-- <a href="" class="hide-embed" (click)="toggleEmbed($event)">Hide</a> -->
 
 					<div class="input-group">
-						<input type="text" class="form-control" #inputTarget value="<iframe src='https://www.truetube.co.uk/embed/1970/700/395' width='700' height='395' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>">
+						<input type="text" class="form-control" #inputTarget value="<iframe src='https://www.truetube.co.uk/v5/embed/{{embed.uuid}}' width='700' height='395' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>">
 						<span class="input-group-btn">
 							<button class="btn {{embedButtonClass}}" [ngxClipboard]="inputTarget" (cbOnSuccess)="embedCopySuccess()" type="button" [innerHTML]="embedButtonLabel" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Embed Video Copy" [angularticsProperties]="{label: item.title}"></button>
 						</span>
@@ -114,7 +116,7 @@
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{lesson.title}}</h6>
 						<p class="block-media__description" [innerHTML]="lesson.description"></p>
-						<a href="{{lesson.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Lesson Plan" [angularticsProperties]="{label: item.title}">Download</a>
+						<a href="{{lesson.file}}" class="icon-download icon-small icon-left text-link download-link" *ngIf="auth.authenticated()" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Lesson Plan" [angularticsProperties]="{label: item.title}">Download</a>
 						<p *ngIf="!auth.authenticated()" class="login-prompt"><a href="#" (click)="auth.login($event)" class="icon-download icon-small icon-left black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Lesson Plan Login" [angularticsProperties]="{label: item.title}">Login</a> to download this lesson plan</p>
 
 					</div>
@@ -136,7 +138,7 @@
 					<div class="block-media__body">
 						<h6 class="block-media__headline">{{assembly.title}}</h6>
 						<p class="block-media__description" [innerHTML]="assembly.description"></p>
-						<a href="{{assembly.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Assembly Plan" [angularticsProperties]="{label: item.title}">Download</a>
+						<a href="{{assembly.file}}" class="icon-download icon-small icon-left text-link download-link" *ngIf="auth.authenticated()" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Assembly Plan" [angularticsProperties]="{label: item.title}">Download</a>
 						<p *ngIf="!auth.authenticated()" class="login-prompt"><a href="#" (click)="auth.login($event)" class="icon-download icon-small icon-left black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Assembly Plan Login" [angularticsProperties]="{label: item.title}">Login</a> to download this assembly plan</p>
 					</div>
 				</div>

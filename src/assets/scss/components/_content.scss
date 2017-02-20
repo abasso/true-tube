@@ -30,5 +30,11 @@ main {
 .login-prompt {
   font-size:$font-size-sm;
   font-weight:$font-weight-normal;
-  
+}
+
+.download-link {
+  display:flex;
+  margin-right:auto;
+  font-size:$font-size-sm;
+  font-weight:$font-weight-normal;
 }

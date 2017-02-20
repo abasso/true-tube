@@ -39,6 +39,10 @@
     padding-bottom:.5rem;
     margin-bottom:.5rem;
   }
+  p {
+    font-weight:$font-weight-normal;
+    font-size:$font-size-sm;
+  }
 }
 
 .profile {
@@ -75,4 +79,9 @@
     padding-left:36px;
     font-size:$font-size-sm;
     border-radius:$border-radius-sm;
+}
+
+.profile-password {
+  border-top:solid 2px $gray-lighter;
+
 }

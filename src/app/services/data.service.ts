@@ -4,6 +4,7 @@ import * as _ from 'lodash'
 import * as moment from 'moment'
 import 'rxjs/add/operator/map'
 import {AuthHttp} from 'angular2-jwt'
+import { Headers, RequestOptions } from '@angular/http'
 
 @Injectable()
 export class DataService {
@@ -13,7 +14,7 @@ export class DataService {
     private authHttp: AuthHttp
   ) {
   }
-  private baseUrl = 'http://api.truetube.co.uk/'
+  private baseUrl = 'https://www.truetube.co.uk/v5/api/'
   private searchUrl = this.baseUrl + 'resources/_search'
   private meUrl = this.baseUrl + 'me'
   private tempUrl = this.baseUrl + 'resources/resource'
@@ -144,6 +145,16 @@ export class DataService {
     return this.authHttp
     .get(itemUrl)
     .map((response) => ( response.json() ))
+  }
+
+  updateUser(data) {
+    console.log('Updating the user')
+    let header = new Headers()
+    let options = new RequestOptions({ headers: header })
+    header.append('Content-Type', 'multipart/form-data')
+    return this.authHttp
+    .post(this.meUrl, data, options)
+    .subscribe((response) => ( console.log(response) ))
   }
 
   carousel() {

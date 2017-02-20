@@ -1,7 +1,7 @@
 <div id="calendar-wrap">
   <div class="content-header wrap-title m-t-1 m-b-2 p-b-1">
 
-    <h1 class="page-title"> {{selectedMonthString}} <span>({{eventCountString}})</span> </h1>
+    <h1 class="page-title"> {{selectedMonthString}} <span>{{eventCountString}}</span> </h1>
     <div class="month-selector">
       <a href="#" (click)="prevMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 0}" class="icon-circle-left icon-nav icon-left text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Calendar Previous"><span>Previous month</span></a>
       <a href="#" (click)="nextMonth($event)" [ngClass]="{disabled: selectedMonth.getValue() === 11}" class="icon-circle-right icon-nav icon-right text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Calendar Next"><span>Next month</span></a>
@@ -17,8 +17,6 @@
       <li>Friday</li>
       <li>Saturday</li>
     </ul>
-
-
     <ul class="days" *ngFor="let week of weeks">
       <li class="day {{day.css}} calendar-day-{{i}}" *ngFor="let day of week; let i = index">
         <div class="date">{{day.day}}</div>
@@ -32,5 +30,8 @@
       </a>
     </li>
   </ul>
+  <div class="row grid-row content-grid loading-grid m-t-3" *ngIf="calendarLoaded === false">
+    <div class="spinner"></div>
+  </div>
 </div>
 </div>

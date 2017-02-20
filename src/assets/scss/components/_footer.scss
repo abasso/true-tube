@@ -73,6 +73,13 @@ footer {
   font-weight: $font-weight-normal;
 
   .footer-nav-container {
+    app-footer-nav {
+      display:flex;
+      flex-direction:column;
+      @media(min-width: $breakpoint-md) {
+        flex-direction:row;
+      }
+    }
     display:flex;
     flex-direction:column;
     @media(min-width: $breakpoint-md) {

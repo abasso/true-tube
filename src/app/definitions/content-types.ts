@@ -48,15 +48,15 @@ export const ContentTypes = [
     class: 'audio',
     inMenu: false,
     active: false
-  },
-  {
-    label: 'Teachers Notes',
-    slug: 'teachers notes',
-    type: 'content types',
-    name: 'teachersNotes',
-    term: 'teachers_notes',
-    class: 'teachers-notes',
-    inMenu: false,
-    active: false
   }
+  // {
+  //   label: 'Teachers Notes',
+  //   slug: 'teachers notes',
+  //   type: 'content types',
+  //   name: 'teachersNotes',
+  //   term: 'teachers_notes',
+  //   class: 'teachers-notes',
+  //   inMenu: false,
+  //   active: false
+  // }
 ]

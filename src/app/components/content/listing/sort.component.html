@@ -12,7 +12,7 @@
         </div>
         <div class="form-group" *ngIf="ListingComponent.paginationData.pages.length > 1">
           <label class="c-field__label ">Page</label>
-          <select class="custom-select form-control" [ngModel]="ListingComponent.paginationData.currentPage" (ngModelChange)="testy($event)" (change)="setPage($event, null)">
+          <select class="custom-select form-control" [ngModel]="ListingComponent.paginationData.currentPage" (change)="setPage($event, null)">
             <optgroup label="Select">
               <option *ngFor="let page of ListingComponent.paginationData.pages" [value]="page-1">{{page}}</option>
             </optgroup>

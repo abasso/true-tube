@@ -1,6 +1,6 @@
 <div class="list-item" *ngFor="let item of items | PaginationPipe:paginationData">
   <div class="block-media__media" *ngIf="item._source.thumbnail">
-    <a [routerLink]="[item._source.slug]" [queryParams]="filter.currentType" class="block-media__link" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="List Item Image" [angularticsProperties]="{label: item._source.title}">
+    <a [routerLink]="[item._source.slug]" [queryParams]="currentType" class="block-media__link" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="List Item Image" [angularticsProperties]="{label: item._source.title}">
       <picture>
         <source srcset="{{item._source.thumbnail[0].styles.small}}" media="(min-width: 1024px)">
         <source srcset="{{item._source.thumbnail[0].styles.large}}" media="(min-width: 769px)">

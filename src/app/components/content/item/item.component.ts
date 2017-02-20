@@ -3,7 +3,6 @@ import { Location } from '@angular/common'
 import { DataService } from './../../../services/data.service'
 import { UserService } from './../../../services/user.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
-// import { EmbedMenuPipe } from './../../../pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './../../../pipes/sanitise-url.pipe'
 import { ContentTypes } from './../../../definitions/content-types'
 import { ActivatedRoute, Router, Params } from '@angular/router'
@@ -14,7 +13,6 @@ import 'rxjs/add/operator/switchMap'
 import { Headers } from '@angular/http'
 import {AuthHttp} from 'angular2-jwt'
 import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
-
 
 declare var videojs: any
 
@@ -53,6 +51,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   public showNotification = false
   public notificationRemove = false
   public notificationFavourite = false
+  public apiUrl = 'https://www.truetube.co.uk/v5/api/me'
   public paginationData = {
     currentPage: 0,
     itemsPerPage: 100000
@@ -83,6 +82,9 @@ export class ItemComponent implements OnInit, OnDestroy {
           this.item.hideMenu = true
         }
         _.each(this.item.embedded, (embed) => {
+          if (embed === null) {
+            return
+          }
           if (embed.thumbnail === null) {
             embed.thumbnail = this.item.thumbnail
           }
@@ -113,7 +115,6 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.auth.loggedInStatus.subscribe((data) => {
       this.isItemInList()
     })
-
   }
 
   ngOnDestroy() {
@@ -139,7 +140,9 @@ export class ItemComponent implements OnInit, OnDestroy {
     setTimeout(
       () => {
 
-      this.videoJSplayer = videojs(this.player.nativeElement.id, {})
+      this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
+    nativeTextTracks: false
+}})
       if (this.activeTab === 'audio') {
         let poster = document.querySelectorAll('.vjs-poster')
         poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
@@ -177,7 +180,6 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   tab(event: any) {
-    console.log(this.item.slug)
     this.router.navigateByUrl(this.item.slug + '?tab=' + event)
     this.pausePlayer()
   }
@@ -239,10 +241,10 @@ export class ItemComponent implements OnInit, OnDestroy {
     } else if (this.createListTitle !== '') {
       this.angulartics2.eventTrack.next({ action: 'Create', properties: { category: 'List', title: this.createListTitle}})
       this.addListError = false
-      let header = new Headers()
       let listSlug = _.kebabCase(this.createListTitle)
+      let header = new Headers()
       header.append('Content-Type', 'application/json')
-      this.http.post('http://api.truetube.co.uk/me/' + listSlug + '/' + this.item.id, {
+      this.http.post(this.apiUrl + listSlug + '/' + this.item.id, {
         title : this.createListTitle
       }, { headers: header }).subscribe(
       (data) => {
@@ -289,7 +291,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.notificationFavourite = true
       }
       this.toggleNotification(title, true)
-      this.http.post('http://api.truetube.co.uk/me/' + key + '/' + this.item.id, {}).subscribe(
+      this.http.post(this.apiUrl + key + '/' + this.item.id, {}).subscribe(
       (data) => {
         this.angulartics2.eventTrack.next({ action: 'Add', properties: { category: 'List', title: this.item.id}})
       })
@@ -300,7 +302,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.addedToFavourites = false
         this.notificationFavourite = true
       }
-      this.http.delete('http://api.truetube.co.uk/me/' + key + '/' + this.item.id).subscribe(
+      this.http.delete(this.apiUrl + key + '/' + this.item.id).subscribe(
       (data) => {
         this.angulartics2.eventTrack.next({ action: 'Remove', properties: { category: 'List', title: this.item.id}})
       })
@@ -314,7 +316,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   isItemInList() {
-    this.http.get('http://api.truetube.co.uk/me')
+    this.http.get(this.apiUrl)
       .subscribe(
         (data) => {
           this.addedToFavourites = false

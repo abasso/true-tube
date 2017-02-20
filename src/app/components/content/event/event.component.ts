@@ -29,6 +29,7 @@ export class EventComponent implements OnInit {
     this.types = ContentTypes
     this.data = this.dataService.events().subscribe(
       (data) => {
+        window.scrollTo(0, 0)
         this.data = this.route.params
         .subscribe(
           (route) => {

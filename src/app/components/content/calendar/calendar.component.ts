@@ -24,6 +24,7 @@ export class CalendarComponent implements OnInit {
   public toHighlight = ''
   public eventCount: number
   public eventCountString: string
+  public calendarLoaded = false
   constructor(
     public dataService: DataService,
     private route: ActivatedRoute,
@@ -36,7 +37,7 @@ export class CalendarComponent implements OnInit {
         this.data = this.dataService.events()
         this.subscriber = this.data.subscribe(
           (data: any) => {
-
+            window.scrollTo(0, 0)
             // Build the calendar days
             this.eventCount = 0
             let days: any[] = []
@@ -95,7 +96,7 @@ export class CalendarComponent implements OnInit {
                 this.eventCount++
               }
             })
-            this.eventCountString = (this.eventCount > 1) ? this.eventCount + ' Events' : this.eventCount + ' Event'
+            this.eventCountString = (this.eventCount > 1) ? '(' + this.eventCount + ' Events)' : '(' + this.eventCount + ' Event)'
             _.each(days, (day) => {
               day.events = []
               _.each(this.items, (event, index) => {
@@ -176,6 +177,7 @@ export class CalendarComponent implements OnInit {
                 item.date = moment(item._source.date).format('Do')
               })
             }
+            this.calendarLoaded = true
             this.route.queryParams
             .map(params => params['month'])
             .subscribe((month) => {

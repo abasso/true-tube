@@ -3,6 +3,7 @@ import { DataService } from './../../../services/data.service'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
 import { ImagePipe } from './../../../pipes/image.pipe'
 import { ListFilterComponent } from './filter.component'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 import * as _ from 'lodash'
 
@@ -17,19 +18,36 @@ import * as _ from 'lodash'
 export class ListItemComponent implements OnInit, OnChanges {
   @Input() items: any
   @Input() paginationData: any
-  public filter = ListFilterComponent
+  public currentType
   constructor(
+    private route: ActivatedRoute,
     private dataService: DataService,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-    private angulartics2: Angulartics2
+    private angulartics2: Angulartics2,
+    public listFilterComponent: ListFilterComponent,
   ) { }
 
   ngOnInit() {
     this.fixSource()
+    this.route.queryParams
+    .map(params => params['content types'])
+    .subscribe((types) => {
+      if (!_.isUndefined(types)) {
+          let typeArray: any[] = types.split(',')
+          _.each(typeArray, (type) => {
+            if (typeArray.length === 1) {
+              this.currentType = {
+                'tab': _.trim(type, 's')
+              }
+            } else {
+              this.currentType = {}
+            }
+          })
+      }
+    })
   }
 
   ngOnChanges() {
-    console.log(this.filter)
     this.fixSource()
   }
 

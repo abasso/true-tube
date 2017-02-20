@@ -215,3 +215,13 @@
     }
   }
 }
+
+.vjs-captions-button {
+  &:before {
+    content:'' !important;
+    background-image: url("/assets/images/cc_white.svg");
+    background-size: 24px;
+    background-repeat:no-repeat;
+    background-position:center;
+  }
+}

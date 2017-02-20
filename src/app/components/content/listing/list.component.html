@@ -16,7 +16,7 @@
     </div>
 
     <div class="row grid-row content-grid loading-grid" *ngIf="filter.contentLoading === true">
-      <img src="/assets/images/loading.svg"/>
+      <div class="spinner"></div>
     </div>
       <app-list-item [ngClass]="{'row': true, 'grid-row': displayGrid, 'list-row': displayList, 'content-grid': true}" *ngIf="filter.contentLoading === false" [items]="items" [paginationData]="paginationData"></app-list-item>
     <listing-sort class="last-sort" *ngIf="itemCount !== 0"></listing-sort>
