@@ -170,6 +170,9 @@ footer {
 
 app-awards {
   display:flex;
+  @media(max-width: $breakpoint-sm) {
+    flex-direction:column;
+  }
 }
 
 .award {
@@ -177,5 +180,11 @@ app-awards {
   display:flex;
   img {
     height:50px;
+  }
+  @media(max-width: $breakpoint-md) {
+    padding:1rem 0;
+  }
+  @media(max-width: $breakpoint-sm) {
+    padding:.5rem 0;
   }
 }

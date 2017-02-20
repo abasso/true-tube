@@ -72,6 +72,9 @@
     margin-left:0;
     flex-direction:row;
     .btn {
+      @media(max-width: $breakpoint-md) {
+        font-size:$font-size-xs;
+      }
       margin:0 .5rem 0 0;
       // color:white;
       color:$brand-gray;
