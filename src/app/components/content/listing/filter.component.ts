@@ -10,6 +10,7 @@ import { ContentTypes } from './../../../definitions/content-types'
 import { KeyStages } from './../../../definitions/key-stages'
 import { ListService } from './../../../services/list.service'
 import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Subject } from 'rxjs/Rx'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/debounceTime'
@@ -37,7 +38,9 @@ export class ListFilterComponent implements OnInit {
   private currentParams: any
   private currentCategory: string
   public currentCategoryString: string
-  private currentType: any
+  //private currentType: any
+  public currentType: any = new Subject()
+
   constructor(
     private listService: ListService,
     private route: ActivatedRoute,
@@ -144,11 +147,11 @@ export class ListFilterComponent implements OnInit {
           let typeArray: any[] = types.split(',')
           _.each(typeArray, (type) => {
             if (typeArray.length === 1) {
-              this.currentType = {
+              this.currentType.next({
                 'tab': _.trim(type, 's')
-              }
+              })
             } else {
-              this.currentType = {}
+              this.currentType.next('')
             }
             let pathType: any = _.find(this.types, { slug: type})
             pathType.active = true

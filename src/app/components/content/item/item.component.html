@@ -45,8 +45,7 @@
 					</div>
 					<div *ngIf="embed.allow_download !== '0'">
 						<a href="#" class="icon-download icon-small icon-left video-download text-link" *ngIf="auth.authenticated()">Download</a>
-						<a href="#" class="icon-download icon-small icon-left text-link" *ngIf="!auth.authenticated()">Download</a>
-					</div>
+						<a href="#" class="icon-download icon-small icon-left video-download text-link" (click)="auth.login($event)" angulartics2On="click" angularticsEvent="Download Login" angularticsCategory="Content" [angularticsProperties]="{label: item.title}">Login</a> to Download</div>
 					<a href="" class="icon-embed icon-small icon-left video-embed text-link" (click)="toggleEmbed($event)" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Embed Video Toggle" [angularticsProperties]="{label: item.title}">Embed</a>
 				</div>
 			</div>
@@ -116,7 +115,8 @@
 						<h6 class="block-media__headline">{{lesson.title}}</h6>
 						<p class="block-media__description" [innerHTML]="lesson.description"></p>
 						<a href="{{lesson.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Lesson Plan" [angularticsProperties]="{label: item.title}">Download</a>
-						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Lesson Plan Login" [angularticsProperties]="{label: item.title}">Login</a> to download this lesson plan</p>
+						<p *ngIf="!auth.authenticated()" class="login-prompt"><a href="#" (click)="auth.login($event)" class="icon-download icon-small icon-left black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Lesson Plan Login" [angularticsProperties]="{label: item.title}">Login</a> to download this lesson plan</p>
+
 					</div>
 				</div>
 			</div>
@@ -137,7 +137,7 @@
 						<h6 class="block-media__headline">{{assembly.title}}</h6>
 						<p class="block-media__description" [innerHTML]="assembly.description"></p>
 						<a href="{{assembly.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Assembly Plan" [angularticsProperties]="{label: item.title}">Download</a>
-						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Assembly Plan Login" [angularticsProperties]="{label: item.title}">Login</a> to download this assembly plan</p>
+						<p *ngIf="!auth.authenticated()" class="login-prompt"><a href="#" (click)="auth.login($event)" class="icon-download icon-small icon-left black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Assembly Plan Login" [angularticsProperties]="{label: item.title}">Login</a> to download this assembly plan</p>
 					</div>
 				</div>
 			</div>
@@ -158,7 +158,7 @@
 						<h6 class="block-media__headline">{{notes.title}}</h6>
 						<p class="block-media__description" [innerHTML]="notes.description"></p>
 						<a href="{{notes.file}}" class="icon-download icon-small icon-left text-link" *ngIf="auth.authenticated()" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Teachers Notes" [angularticsProperties]="{label: item.title}">Download</a>
-						<p *ngIf="!auth.authenticated()"><a href="#" class="icon-login icon-small icon-left icon-inline black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Teachers Notes Login" [angularticsProperties]="{label: item.title}">Login</a> to download these teachers notes</p>
+						<p *ngIf="!auth.authenticated()" class="login-prompt"><a href="#" (click)="auth.login($event)" class="icon-download icon-small icon-left black text-link" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Download Teachers Notes Login" [angularticsProperties]="{label: item.title}">Login</a> to download these teachers notes</p>
 					</div>
 				</div>
 			</div>
@@ -216,7 +216,7 @@
 
 
 
-		<div class="hidden-lg-down" *ngIf="hasAttributes(item.related)">
+		<div class="hidden-lg-down related" *ngIf="hasAttributes(item.related)">
 			<h2 class="section-title">
 				Related
 			</h2>

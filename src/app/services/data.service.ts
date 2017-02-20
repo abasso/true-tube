@@ -13,15 +13,15 @@ export class DataService {
     private authHttp: AuthHttp
   ) {
   }
-
-  private baseUrl = 'http://api.truetube.co.uk/resources/_search'
-  private meUrl = 'http://api.truetube.co.uk/me'
-  private tempUrl = 'http://api.truetube.co.uk/resources/resource'
-  private carouselUrl = 'http://api.truetube.co.uk/carousels/homepage/_search?sort=updated:desc'
-  private menuUrl = 'http://api.truetube.co.uk/menus/menu/pages'
-  private eventsUrl = 'http://api.truetube.co.uk/events/_search?sort=date.value:desc'
-  private pagesUrl = 'http://api.truetube.co.uk/pages/_search'
-  private itemPageUrl = 'http://api.truetube.co.uk/item_pages/page'
+  private baseUrl = 'http://api.truetube.co.uk/'
+  private searchUrl = this.baseUrl + 'resources/_search'
+  private meUrl = this.baseUrl + 'me'
+  private tempUrl = this.baseUrl + 'resources/resource'
+  private carouselUrl = this.baseUrl + 'carousels/homepage/_search?sort=updated:desc'
+  private menuUrl = this.baseUrl + 'menus/menu/pages'
+  private eventsUrl = this.baseUrl + 'events/_search?sort=date.value:desc'
+  private pagesUrl = this.baseUrl + 'pages/_search'
+  private itemPageUrl = this.baseUrl + 'item_pages/page'
 
   search(data: any, types: any, keys: any, subject: any, topics: any, category: any, limit = 1000) {
 
@@ -104,7 +104,7 @@ export class DataService {
     }
     search.set('size', limit)
     return this.http
-    .get(this.baseUrl, { search })
+    .get(this.searchUrl, { search })
     .map((response) => ( response.json()))
   }
 
@@ -115,7 +115,7 @@ export class DataService {
     }
     search.set('size', limit)
     return this.http
-    .get(this.baseUrl, { search })
+    .get(this.searchUrl, { search })
     .map((response) => (
       response.json()
     ))
@@ -133,7 +133,7 @@ export class DataService {
     let search: any = new URLSearchParams()
     search.set('q', 'slug:"' + slug + '"')
     return this.http
-    .get(this.baseUrl, { search })
+    .get(this.searchUrl, { search })
     .map((response) => (
       response.json()
     ))

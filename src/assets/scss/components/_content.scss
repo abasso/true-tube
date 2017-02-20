@@ -22,3 +22,13 @@ main {
     height:100%;
   }
 }
+
+.related {
+  border-top:solid 3px $gray-lighter;
+}
+
+.login-prompt {
+  font-size:$font-size-sm;
+  font-weight:$font-weight-normal;
+  
+}

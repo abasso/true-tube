@@ -160,3 +160,15 @@ footer {
     }
   }
 }
+
+app-awards {
+  display:flex;
+}
+
+.award {
+  margin-right:.5rem;
+  display:flex;
+  img {
+    height:50px;
+  }
+}

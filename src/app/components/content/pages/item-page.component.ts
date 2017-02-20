@@ -30,7 +30,7 @@ export class ItemPageComponent implements OnInit {
         (data) => {
           window.scrollTo(0, 0)
           if (data._source.grid_size !== 3) {
-            this.gridSize = (data._source.grid_size === 4) ? 'grid-row-four' : 'grid-row-two'
+            this.gridSize = (data._source.grid_size === 4) ? 'grid-row-four' : (data._source.grid_size === 2) ? 'grid-row-two' : 'list-row'
           }
           this.content.push(data._source)
           _.each(this.content, (content) => {
