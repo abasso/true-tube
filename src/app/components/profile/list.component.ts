@@ -82,7 +82,7 @@ export class UserListComponent {
   }
 
   removeItem(event, key) {
-    this.http.delete('http://api.truetube.co.uk/me/' + this.id + '/' + key).subscribe(
+    this.http.delete('https://www.truetube.co.uk/v5/api/me/' + this.id + '/' + key).subscribe(
     (data) => {
       _.each(this.items, (item) => {
         if (item.id === key) {

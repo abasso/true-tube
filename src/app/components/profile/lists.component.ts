@@ -96,7 +96,7 @@ export class UserListsComponent {
   }
 
   removeList(event, key) {
-    this.http.delete('http://api.truetube.co.uk/me/' + key).subscribe(
+    this.http.delete('https://www.truetube.co.uk/v5/api/me/' + key).subscribe(
     (data) => {
       _.each(this.lists, (item) => {
         if (item.key === key) {

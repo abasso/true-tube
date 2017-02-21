@@ -57,6 +57,11 @@ export class CallToActionComponent implements OnInit {
     }
   }
 
+  toggleSite() {
+    Cookies.remove('proxy_override')
+    window.location.reload()
+  }
+
   setDyslexiaFont() {
     let body: any = document.getElementsByTagName('body')[0]
     let className = 'dyslexia'

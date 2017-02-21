@@ -6,6 +6,7 @@
     flex-shrink:0;
     border-left:solid 1px rgba(0,0,0,0.1);
     padding-left:1rem;
+    margin-top:-2px;
   }
   .btn-font-smaller {
     // font-size:$font-size-sm;
@@ -19,4 +20,29 @@
 
 .standard {
   font-family: $font-family-sans-serif;
+}
+
+
+.btn-switch {
+  font-weight:400 !important;
+  &:hover {
+    background:darken($brand-yellow, 3%) !important;
+    border:solid 1px rgba(0,0,0,0.2) !important;
+    color:black !important;
+    transition:all 0s;
+    &:before {
+      transform:rotate(180deg)
+    }
+  }
+}
+
+.footer-address {
+  .btn-switch {
+    border-color:$brand-yellow !important;
+    &:hover {
+      border-color:darken($brand-yellow, 3%) !important;
+
+    }
+  }
+
 }

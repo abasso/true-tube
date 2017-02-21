@@ -39,24 +39,24 @@ export const ContentTypes = [
     inMenu: true,
     active: false
   },
-  {
-    label: 'Audio',
-    slug: 'audio',
-    type: 'content types',
-    name: 'audio',
-    term: 'audio',
-    class: 'audio',
-    inMenu: false,
-    active: false
-  }
   // {
-  //   label: 'Teachers Notes',
-  //   slug: 'teachers notes',
+  //   label: 'Audio',
+  //   slug: 'audio',
   //   type: 'content types',
-  //   name: 'teachersNotes',
-  //   term: 'teachers_notes',
-  //   class: 'teachers-notes',
+  //   name: 'audio',
+  //   term: 'audio',
+  //   class: 'audio',
   //   inMenu: false,
   //   active: false
   // }
+  {
+    label: 'Teachers Notes',
+    slug: 'teachers notes',
+    type: 'content types',
+    name: 'teachersNotes',
+    term: 'teachers_notes',
+    class: 'teachers-notes',
+    inMenu: false,
+    active: false
+  }
 ]

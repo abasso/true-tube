@@ -63,12 +63,12 @@
     font-size:$font-size-base;
   }
   .auth0-lock-submit {
-    color:black;
-    text-transform:capitalize;
-    letter-spacing:0;
-    font-size:$font-size-base;
+    color:black !important;
+    text-transform:capitalize !important;
+    letter-spacing:0 !important;
+    font-size:$font-size-base !important;
     transform:none !important;
-    border-radius:$border-radius-sm;
+    border-radius:$border-radius-sm !important;
     &:hover {
       background:darken($brand-yellow, 10%) !important;
     }
@@ -76,7 +76,7 @@
       transform:none !important;
       span {
         transform:none !important;
-        display:none;
+        display:none !important;
       }
     }
   }

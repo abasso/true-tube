@@ -11,7 +11,7 @@
       {{item.date}}
       </span>
       <span>
-      <a href="#" [routerLink]="item.url" class="block-event__link text-link" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="Event Block" [angularticsProperties]="{label: item._source.title}">
+      <a href="#" [routerLink]="item._source.slug" class="block-event__link text-link" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="Event Block" [angularticsProperties]="{label: item._source.title}">
       	{{item._source.title}}
       </a>
     </span>

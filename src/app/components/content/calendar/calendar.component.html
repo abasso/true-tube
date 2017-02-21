@@ -20,7 +20,7 @@
     <ul class="days" *ngFor="let week of weeks">
       <li class="day {{day.css}} calendar-day-{{i}}" *ngFor="let day of week; let i = index">
         <div class="date">{{day.day}}</div>
-        <a [routerLink]="event.link" [ngClass]="{active: toHighlight === event._id}" class="event {{event.css}} event-order-{{event.index}}" *ngFor="let event of day.events" (mouseover)="highlightEvent($event, event._id)" (mouseout)="highlightEvent($event, null)" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="Calendar" [angularticsProperties]="{label: event._source.title}">
+        <a [routerLink]="event._source.slug" [ngClass]="{active: toHighlight === event._id}" class="event {{event.css}} event-order-{{event.index}}" *ngFor="let event of day.events" (mouseover)="highlightEvent($event, event._id)" (mouseout)="highlightEvent($event, null)" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="Calendar" [angularticsProperties]="{label: event._source.title}">
           <span class="event-desc">
             {{event._source.title}}
           </span>

@@ -130,9 +130,14 @@ export class DataService {
     .map((response) => ( response.json() ))
   }
 
-  itemBySlug(slug: string = null, limit = 1) {
+  itemBySlug(slug: any = null, limit = 1) {
+    let slugString = ''
+    _.each(slug, (part) => {
+      slugString += '/' + part.path
+    })
+
     let search: any = new URLSearchParams()
-    search.set('q', 'slug:"' + slug + '"')
+    search.set('q', 'slug:"' + slugString + '"')
     return this.http
     .get(this.searchUrl, { search })
     .map((response) => (

@@ -71,8 +71,8 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.types = ContentTypes
-    this.data = this.route.params
-    .switchMap((params: Params) => this.dataService.itemBySlug('/film/' + params['slug']))
+    this.data = this.route.url
+    .switchMap((url) => this.dataService.itemBySlug(url))
     .subscribe(
       (data) => {
         window.scrollTo(0, 0)
@@ -118,12 +118,23 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.videoJSplayer.dispose()
+    if (!_.isUndefined(this.videoJSplayer)) {
+      if (this.videoJSplayer !== null) {
+        this.videoJSplayer.dispose()
+      }
+    }
   }
 
-  pausePlayer() {
-    this.videoJSplayer.pause()
-  }
+  // pausePlayer() {
+  //   if (!_.isUndefined(this.videoJSplayer)) {
+  //     console.log(this.videoJSplayer)
+  //     if (this.videoJSplayer !== null) {
+  //       console.log(this.videoJSplayer)
+  //       this.videoJSplayer.pause()
+  //     }
+  //   }
+  //
+  // }
 
   playPlayer(event) {
     event.preventDefault()
@@ -133,21 +144,22 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   resetPlayer() {
     if (!_.isUndefined(this.videoJSplayer) && this.videoJSplayer !== null) {
-      setTimeout(() => {
-          this.videoJSplayer.dispose()
-      }, 100)
+        setTimeout(() => {
+            this.videoJSplayer.dispose()
+        }, 100)
     }
-    setTimeout(
-      () => {
-
-      this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
-    nativeTextTracks: false
-}})
-      if (this.activeTab === 'audio') {
-        let poster = document.querySelectorAll('.vjs-poster')
-        poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
+    if (this.activeTab === 'audio' || this.activeTab === 'film') {
+        setTimeout(
+          () => {
+          this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
+          nativeTextTracks: false
+      }})
+          if (this.activeTab === 'audio') {
+            let poster = document.querySelectorAll('.vjs-poster')
+            poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
+          }
+        }, 200)
       }
-    }, 200)
   }
 
   hasAttributes(attribute: any) {
@@ -181,7 +193,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   tab(event: any) {
     this.router.navigateByUrl(this.item.slug + '?tab=' + event)
-    this.pausePlayer()
+    // this.pausePlayer()
   }
 
   embedCopySuccess(event: any) {

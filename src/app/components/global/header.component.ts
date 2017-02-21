@@ -26,8 +26,16 @@ export class HeaderComponent implements OnInit {
     document.getElementById('search').focus()
   }
   searchDone() {
-    this.menuVisible = false
+    this.hideMenu()
     document.getElementById('search').blur()
+  }
+
+  menuClick() {
+    this.hideMenu()
+  }
+
+  hideMenu() {
+    this.menuVisible = false
   }
 
 }

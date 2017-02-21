@@ -45,31 +45,43 @@
   </script> -->
   <!-- End Inspectlet Embed Code -->
   <style type="text/css">
-    .spinner {
-    height: 120px;
-    width: 120px;
-    -webkit-animation: rotation .6s infinite linear;
-    -moz-animation: rotation .6s infinite linear;
-    -o-animation: rotation .6s infinite linear;
-    animation: rotation .6s infinite linear;
-    border-left: 6px solid #FBE407;
-    border-right: 6px solid #FBE407;
-    border-bottom: 6px solid #FBE407;
-    border-top: 6px solid #fff;
-    border-radius: 100%;
-    position:relative;
+
+  .spinner {
+  height: 110px;
+  width: 110px;
+  -webkit-animation: rotation .6s infinite linear;
+  -moz-animation: rotation .6s infinite linear;
+  animation: rotation .6s infinite linear;
+  border-left: 6px solid #FBE407;
+  border-right: 6px solid #FBE407;
+  border-bottom: 6px solid #FBE407;
+  border-top: 6px solid #fff;
+  border-radius: 110px;
+  position:relative;
+  margin:0;
+  padding:0;
   }
 
   .spinner:before {
-    content:"";
-    width:108px;
-    height:108px;
-    border:solid 1px #eceeef;
-    border-radius:108px;
-    position:absolute;
-    top:5px;
-    left:5px;
-    z-index:999;
+  content:"";
+  width:88px;
+  height:88px;
+  border:solid 1px #eceeef;
+  border-radius:88px;
+  position:absolute;
+  top:5px;
+  left:5px;
+  z-index:999;
+  -webkit-animation: rotation .8s infinite linear;
+  -moz-animation: rotation .8s infinite linear;
+  animation: rotation .8s infinite linear;
+  animation-direction: reverse;
+  border-left: 1px solid #eceeef;
+  border-right: 1px solid #eceeef;
+  border-bottom: 1px solid #eceeef;
+  border-top: 1px solid #fff;
+  margin:0;
+  padding:0;
   }
 
   @-webkit-keyframes rotation {
@@ -118,11 +130,11 @@
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   // ga('create', 'UA-17019852-4', 'auto');
-  ga('create', 'UA-4554130-9', 'none');
+  ga('create', 'UA-4554130-9', 'auto');
 
 </script>
   <app-root>
-    <div class="site-loading" style="
+    <div style="
       width:100%;
       height:100%;
       position:fixed;
@@ -132,8 +144,10 @@
       align-items: center;
       justify-content: center;
       background:center center url(/assets/images/true-tube-logo_black.svg);
-      background-size:90px 90px;
+      background-size:70px auto;
       background-repeat:no-repeat;
+      margin:0;
+      padding:0;
       ">
       <div class="spinner"></div>
     </div>

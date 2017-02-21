@@ -30,10 +30,17 @@ export class EventComponent implements OnInit {
     this.data = this.dataService.events().subscribe(
       (data) => {
         window.scrollTo(0, 0)
-        this.data = this.route.params
+        this.data = this.route.url
         .subscribe(
           (route) => {
-            this.items = _.filter(data.hits.hits, {_id: route['id'] })
+            let slugString = ''
+            _.each(route, (part) => {
+              slugString += '/' + part.path
+            })
+            this.items = _.filter(data.hits.hits, (item) => {
+              return item._source.slug === slugString
+            })
+            console.log(this.items)
             this.items[0].date = moment(this.items[0]._source.date.value).format('Do MMMM YYYY')
             _.each(this.items[0]._source.related, (item) => {
                 item.contenttypes = []

@@ -8,7 +8,7 @@ export class UserService {
     private http: AuthHttp
   ) {}
   addToList(list, id) {
-    this.http.post('http://api.truetube.co.uk/me/' + list + '/' + id, {})
+    this.http.post('https://www.truetube.co.uk/v5/api/me/' + list + '/' + id, {})
       .subscribe(
         (data) => {
           if (data['message'] = 'item added') {
@@ -18,7 +18,7 @@ export class UserService {
       )
   }
   removeFromList(list, id) {
-    this.http.delete('http://api.truetube.co.uk/me/' + list + '/' + id)
+    this.http.delete('https://www.truetube.co.uk/v5/api/me/' + list + '/' + id)
       .subscribe(
         data => {
           if (data['message'] = 'item removed') {
@@ -28,7 +28,7 @@ export class UserService {
       )
     }
     removeList(list) {
-      this.http.delete('http://api.truetube.co.uk/me/' + list)
+      this.http.delete('https://www.truetube.co.uk/v5/api/me/' + list)
         .subscribe(
           data => {
             if (data['message'] = 'item removed') {

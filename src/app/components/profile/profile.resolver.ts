@@ -7,7 +7,7 @@ import {AuthHttp} from 'angular2-jwt'
 @Injectable()
 export class ProfileResolver implements Resolve<Profile> {
     // TODO: load this from injectable config object?
-    private profileUrl = 'http://api.truetube.co.uk/me'
+    private profileUrl = 'https://www.truetube.co.uk/v5/api/me'
 
     constructor(private http: AuthHttp) {}
 

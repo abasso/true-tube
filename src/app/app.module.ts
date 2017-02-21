@@ -83,7 +83,11 @@ const appRoutes: Routes = [
     component: ItemComponent
   },
   {
-    path: 'node/:slug',
+    path: 'interactive/:slug',
+    component: ItemComponent
+  },
+  {
+    path: 'audio/:slug',
     component: ItemComponent
   },
   {

@@ -14,6 +14,7 @@ import * as _ from 'lodash'
 })
 export class PrimaryNavComponent implements OnInit {
   @Output() searchSubmitted = new EventEmitter()
+  @Output() menuClick = new EventEmitter()
   public items: any[]
   public item: any = ItemComponent
   constructor(
@@ -33,12 +34,32 @@ export class PrimaryNavComponent implements OnInit {
   resetRootPath(event: any, query: any) {
     event.preventDefault()
     this.listService.resetCurrentPath(query)
+    this.menuClick.emit(event)
+  }
+
+  logout(event) {
+    this.auth.logout(event)
+    this.menuClick.emit(event)
+  }
+
+  login(event) {
+    this.auth.login(event)
+    this.menuClick.emit(event)
+  }
+
+  register(event) {
+    this.auth.signup(event)
+    this.menuClick.emit(event)
+  }
+
+  profile(event) {
+    this.auth.logout(event)
+    this.menuClick.emit(event)
   }
 
   searchDone(event: any) {
     this.angulartics2.eventTrack.next({ action: 'Search', properties: { category: 'Primary Nav', label: event.target.elements[0].value}})
     this.searchSubmitted.emit(event)
   }
-
 
 }
