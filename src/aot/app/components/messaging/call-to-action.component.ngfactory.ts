@@ -13,20 +13,34 @@ import * as import4 from '@angular/core/src/metadata/view';
 import * as import5 from '@angular/core/src/linker/view_type';
 import * as import6 from '@angular/core/src/change_detection/constants';
 import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
-import * as import9 from '@angular/core/src/change_detection/change_detection_util';
-import * as import10 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import11 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import12 from '@angular/core/src/linker/element_ref';
-import * as import13 from '@angular/common/src/directives/ng_class';
-import * as import14 from '@angular/core/src/security';
+import * as import8 from '../../../../app/services/auth.service';
+import * as import9 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import10 from 'angulartics2/dist/core/angulartics2';
+import * as import11 from '../../../node_modules/angulartics2/dist/core/angulartics2On.ngfactory';
+import * as import12 from '@angular/core/src/linker/view_container';
+import * as import13 from '@angular/core/src/linker/element_ref';
+import * as import14 from '@angular/platform-browser/src/dom/events/event_manager';
+import * as import15 from 'angulartics2/dist/core/angulartics2On';
+import * as import16 from '../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
+import * as import17 from '@angular/router/src/router';
+import * as import18 from '@angular/router/src/router_state';
+import * as import19 from '@angular/router/src/directives/router_link';
+import * as import20 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import21 from '../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
+import * as import22 from '@angular/core/src/change_detection/change_detection_util';
+import * as import23 from '@angular/core/src/linker/template_ref';
+import * as import24 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import25 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import26 from '@angular/common/src/directives/ng_if';
+import * as import27 from '@angular/common/src/directives/ng_class';
+import * as import28 from '@angular/core/src/security';
 export class Wrapper_CallToActionComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CallToActionComponent;
   /*private*/ _changed:boolean;
-  constructor() {
+  constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
-    this.context = new import0.CallToActionComponent();
+    this.context = new import0.CallToActionComponent(p0,p1,p2);
   }
   ngOnDetach(view:import1.AppView<any>,componentView:import1.AppView<any>,el:any):void {
   }
@@ -59,7 +73,7 @@ class View_CallToActionComponent_Host0 extends import1.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'app-call-to-action',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_CallToActionComponent0(this.viewUtils,this,0,this._el_0);
-    this._CallToActionComponent_0_3 = new Wrapper_CallToActionComponent();
+    this._CallToActionComponent_0_3 = new Wrapper_CallToActionComponent(this.injectorGet(import8.Auth,this.parentIndex),this.injectorGet(import9.Angulartics2GoogleAnalytics,this.parentIndex),this.injectorGet(import10.Angulartics2,this.parentIndex));
     this.compView_0.create(this._CallToActionComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._CallToActionComponent_0_3.context);
@@ -81,34 +95,251 @@ class View_CallToActionComponent_Host0 extends import1.AppView<any> {
 }
 export const CallToActionComponentNgFactory:import7.ComponentFactory<import0.CallToActionComponent> = new import7.ComponentFactory<import0.CallToActionComponent>('app-call-to-action',View_CallToActionComponent_Host0,import0.CallToActionComponent);
 const styles_CallToActionComponent:any[] = ([] as any[]);
+class View_CallToActionComponent1 extends import1.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  _Angulartics2On_2_3:import11.Wrapper_Angulartics2On;
+  _text_3:any;
+  _text_4:any;
+  _map_6:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+    super(View_CallToActionComponent1,renderType_CallToActionComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._map_6 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+  }
+  createInternal(rootSelector:string):import7.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','call-to-action-copy'),(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n  Award-winning free resources for RE, PSHE and Citizenship\n  ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'button',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Call To Action','angularticsEvent','Action','class','btn btn-login','href','#'),(null as any));
+    this._Angulartics2On_2_3 = new import11.Wrapper_Angulartics2On(new import13.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import10.Angulartics2,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import14.EventManager,this.parentView.parentIndex));
+    this._text_3 = this.renderer.createText(this._el_2,'Register for Free',(null as any));
+    this._text_4 = this.renderer.createText(this._el_0,'\n',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_2));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._text_4
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import15.Angulartics2On) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._Angulartics2On_2_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = 'click';
+    this._Angulartics2On_2_3.check_angulartics2On(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = 'Action';
+    this._Angulartics2On_2_3.check_angularticsEvent(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = 'Call To Action';
+    this._Angulartics2On_2_3.check_angularticsCategory(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_3:any = this._map_6('Register');
+    this._Angulartics2On_2_3.check_angularticsProperties(currVal_2_0_3,throwOnChange,false);
+    this._Angulartics2On_2_3.ngDoCheck(this,this._el_2,throwOnChange);
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Angulartics2On_2_3.context.ngAfterContentInit(); } }
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_2(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'click')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.auth.signup($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
+class View_CallToActionComponent2 extends import1.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  _RouterLink_2_3:import16.Wrapper_RouterLink;
+  _Angulartics2On_2_4:import11.Wrapper_Angulartics2On;
+  _text_3:any;
+  _text_4:any;
+  _el_5:any;
+  _RouterLink_5_3:import16.Wrapper_RouterLink;
+  _Angulartics2On_5_4:import11.Wrapper_Angulartics2On;
+  _text_6:any;
+  _text_7:any;
+  _el_8:any;
+  _RouterLink_8_3:import16.Wrapper_RouterLink;
+  _Angulartics2On_8_4:import11.Wrapper_Angulartics2On;
+  _text_9:any;
+  _text_10:any;
+  _map_17:any;
+  _map_18:any;
+  _map_19:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+    super(View_CallToActionComponent2,renderType_CallToActionComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._map_17 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._map_18 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._map_19 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+  }
+  createInternal(rootSelector:string):import7.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','call-to-action-copy call-to-action-tools'),(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n  ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'button',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','User Nav','angularticsEvent','Navigate','class','btn btn-toolbox icon-list icon-button icon-left','href','#'),(null as any));
+    this._RouterLink_2_3 = new import16.Wrapper_RouterLink(this.parentView.parentView.injectorGet(import17.Router,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import18.ActivatedRoute,this.parentView.parentIndex));
+    this._Angulartics2On_2_4 = new import11.Wrapper_Angulartics2On(new import13.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import10.Angulartics2,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import14.EventManager,this.parentView.parentIndex));
+    this._text_3 = this.renderer.createText(this._el_2,'Lists',(null as any));
+    this._text_4 = this.renderer.createText(this._el_0,'\n  ',(null as any));
+    this._el_5 = import3.createRenderElement(this.renderer,this._el_0,'button',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','User Nav','angularticsEvent','Navigate','class','btn btn-favourites icon-favourite icon-button icon-left','href','#'),(null as any));
+    this._RouterLink_5_3 = new import16.Wrapper_RouterLink(this.parentView.parentView.injectorGet(import17.Router,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import18.ActivatedRoute,this.parentView.parentIndex));
+    this._Angulartics2On_5_4 = new import11.Wrapper_Angulartics2On(new import13.ElementRef(this._el_5),this.parentView.parentView.injectorGet(import10.Angulartics2,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import14.EventManager,this.parentView.parentIndex));
+    this._text_6 = this.renderer.createText(this._el_5,'Favourites',(null as any));
+    this._text_7 = this.renderer.createText(this._el_0,'\n    ',(null as any));
+    this._el_8 = import3.createRenderElement(this.renderer,this._el_0,'button',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','User Nav','angularticsEvent','Navigate','class','btn btn-calendar icon-posted icon-button icon-left','href','#'),(null as any));
+    this._RouterLink_8_3 = new import16.Wrapper_RouterLink(this.parentView.parentView.injectorGet(import17.Router,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import18.ActivatedRoute,this.parentView.parentIndex));
+    this._Angulartics2On_8_4 = new import11.Wrapper_Angulartics2On(new import13.ElementRef(this._el_8),this.parentView.parentView.injectorGet(import10.Angulartics2,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import14.EventManager,this.parentView.parentIndex));
+    this._text_9 = this.renderer.createText(this._el_8,'Calendar',(null as any));
+    this._text_10 = this.renderer.createText(this._el_0,'\n',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_2));
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_5));
+    var disposable_2:Function = import3.subscribeToRenderElement(this,this._el_8,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_8));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._text_4,
+      this._el_5,
+      this._text_6,
+      this._text_7,
+      this._el_8,
+      this._text_9,
+      this._text_10
+    ]
+    ),[
+      disposable_0,
+      disposable_1,
+      disposable_2
+    ]
+    );
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import19.RouterLink) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._RouterLink_2_3.context; }
+    if (((token === import15.Angulartics2On) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._Angulartics2On_2_4.context; }
+    if (((token === import19.RouterLink) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._RouterLink_5_3.context; }
+    if (((token === import15.Angulartics2On) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._Angulartics2On_5_4.context; }
+    if (((token === import19.RouterLink) && ((8 <= requestNodeIndex) && (requestNodeIndex <= 9)))) { return this._RouterLink_8_3.context; }
+    if (((token === import15.Angulartics2On) && ((8 <= requestNodeIndex) && (requestNodeIndex <= 9)))) { return this._Angulartics2On_8_4.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = 'me/lists';
+    this._RouterLink_2_3.check_routerLink(currVal_2_0_0,throwOnChange,false);
+    this._RouterLink_2_3.ngDoCheck(this,this._el_2,throwOnChange);
+    const currVal_2_1_0:any = 'click';
+    this._Angulartics2On_2_4.check_angulartics2On(currVal_2_1_0,throwOnChange,false);
+    const currVal_2_1_1:any = 'Navigate';
+    this._Angulartics2On_2_4.check_angularticsEvent(currVal_2_1_1,throwOnChange,false);
+    const currVal_2_1_2:any = 'User Nav';
+    this._Angulartics2On_2_4.check_angularticsCategory(currVal_2_1_2,throwOnChange,false);
+    const currVal_2_1_3:any = this._map_17('Lists');
+    this._Angulartics2On_2_4.check_angularticsProperties(currVal_2_1_3,throwOnChange,false);
+    this._Angulartics2On_2_4.ngDoCheck(this,this._el_2,throwOnChange);
+    const currVal_5_0_0:any = 'me/list/favourites';
+    this._RouterLink_5_3.check_routerLink(currVal_5_0_0,throwOnChange,false);
+    this._RouterLink_5_3.ngDoCheck(this,this._el_5,throwOnChange);
+    const currVal_5_1_0:any = 'click';
+    this._Angulartics2On_5_4.check_angulartics2On(currVal_5_1_0,throwOnChange,false);
+    const currVal_5_1_1:any = 'Navigate';
+    this._Angulartics2On_5_4.check_angularticsEvent(currVal_5_1_1,throwOnChange,false);
+    const currVal_5_1_2:any = 'User Nav';
+    this._Angulartics2On_5_4.check_angularticsCategory(currVal_5_1_2,throwOnChange,false);
+    const currVal_5_1_3:any = this._map_18('Favourites');
+    this._Angulartics2On_5_4.check_angularticsProperties(currVal_5_1_3,throwOnChange,false);
+    this._Angulartics2On_5_4.ngDoCheck(this,this._el_5,throwOnChange);
+    const currVal_8_0_0:any = '/calendar';
+    this._RouterLink_8_3.check_routerLink(currVal_8_0_0,throwOnChange,false);
+    this._RouterLink_8_3.ngDoCheck(this,this._el_8,throwOnChange);
+    const currVal_8_1_0:any = 'click';
+    this._Angulartics2On_8_4.check_angulartics2On(currVal_8_1_0,throwOnChange,false);
+    const currVal_8_1_1:any = 'Navigate';
+    this._Angulartics2On_8_4.check_angularticsEvent(currVal_8_1_1,throwOnChange,false);
+    const currVal_8_1_2:any = 'User Nav';
+    this._Angulartics2On_8_4.check_angularticsCategory(currVal_8_1_2,throwOnChange,false);
+    const currVal_8_1_3:any = this._map_19('Calendar');
+    this._Angulartics2On_8_4.check_angularticsProperties(currVal_8_1_3,throwOnChange,false);
+    this._Angulartics2On_8_4.ngDoCheck(this,this._el_8,throwOnChange);
+    if (!throwOnChange) {
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_2_4.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_5_4.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_8_4.context.ngAfterContentInit(); }
+    }
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_2(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._RouterLink_2_3.handleEvent(eventName,$event) && result);
+    return result;
+  }
+  handleEvent_5(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._RouterLink_5_3.handleEvent(eventName,$event) && result);
+    return result;
+  }
+  handleEvent_8(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._RouterLink_8_3.handleEvent(eventName,$event) && result);
+    return result;
+  }
+}
 var renderType_CallToActionComponent:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,styles_CallToActionComponent,{});
 export class View_CallToActionComponent0 extends import1.AppView<import0.CallToActionComponent> {
   _el_0:any;
   _text_1:any;
-  _el_2:any;
+  _anchor_2:any;
+  /*private*/ _vc_2:import12.ViewContainer;
+  _TemplateRef_2_5:any;
+  _NgIf_2_6:import20.Wrapper_NgIf;
   _text_3:any;
-  _el_4:any;
+  _anchor_4:any;
+  /*private*/ _vc_4:import12.ViewContainer;
+  _TemplateRef_4_5:any;
+  _NgIf_4_6:import20.Wrapper_NgIf;
   _text_5:any;
-  _text_6:any;
+  _el_6:any;
   _text_7:any;
   _el_8:any;
   _text_9:any;
   _el_10:any;
+  _NgClass_10_3:import21.Wrapper_NgClass;
   _text_11:any;
-  _el_12:any;
-  _NgClass_12_3:import8.Wrapper_NgClass;
+  _text_12:any;
   _text_13:any;
   _text_14:any;
-  _text_15:any;
+  _el_15:any;
   _text_16:any;
   _text_17:any;
   _text_18:any;
-  /*private*/ _expr_20:any;
-  _map_21:any;
+  _text_19:any;
+  /*private*/ _expr_27:any;
+  _map_28:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_CallToActionComponent0,renderType_CallToActionComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
-    this._expr_20 = import9.UNINITIALIZED;
-    this._map_21 = import3.pureProxy2((p0:any,p1:any):{[key: string]:any} => {
+    this._expr_27 = import22.UNINITIALIZED;
+    this._map_28 = import3.pureProxy2((p0:any,p1:any):{[key: string]:any} => {
       return {
         dyslexia: p0,
         standard: p1
@@ -120,70 +351,113 @@ export class View_CallToActionComponent0 extends import1.AppView<import0.CallToA
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._el_0 = import3.createRenderElement(this.renderer,parentRenderNode,'div',new import3.InlineArray2(2,'class','container'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','call-to-action-copy'),(null as any));
-    this._text_3 = this.renderer.createText(this._el_2,'\nOnline resources and materials for RE, PSHE & Citizenship\n',(null as any));
-    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'button',new import3.InlineArray8(8,'class','btn btn-login','data-target','#modalLogin','data-toggle','modal','href','#'),(null as any));
-    this._text_5 = this.renderer.createText(this._el_4,'Register for Free',(null as any));
-    this._text_6 = this.renderer.createText(this._el_2,'\n ',(null as any));
-    this._text_7 = this.renderer.createText(this._el_0,'\n',(null as any));
-    this._el_8 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','call-to-action-nav'),(null as any));
-    this._text_9 = this.renderer.createText(this._el_8,'\n',(null as any));
-    this._el_10 = import3.createRenderElement(this.renderer,this._el_8,'nav',new import3.InlineArray4(4,'class','accessibility-nav hidden-md-down','id','nav'),(null as any));
-    this._text_11 = this.renderer.createText(this._el_10,'\n  ',(null as any));
-    this._el_12 = import3.createRenderElement(this.renderer,this._el_10,'a',new import3.InlineArray4(4,'class','btn-dyslexia','href','#'),(null as any));
-    this._NgClass_12_3 = new import8.Wrapper_NgClass(this.parentView.injectorGet(import10.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import11.KeyValueDiffers,this.parentIndex),new import12.ElementRef(this._el_12),this.renderer);
-    this._text_13 = this.renderer.createText(this._el_10,'\n  ',(null as any));
-    this._text_14 = this.renderer.createText(this._el_10,'\n  ',(null as any));
-    this._text_15 = this.renderer.createText(this._el_10,'\n',(null as any));
-    this._text_16 = this.renderer.createText(this._el_8,'\n\n',(null as any));
-    this._text_17 = this.renderer.createText(this._el_0,'\n',(null as any));
-    this._text_18 = this.renderer.createText(parentRenderNode,'\n',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_12,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_12));
+    this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_2 = new import12.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import23.TemplateRef_(this,2,this._anchor_2);
+    this._NgIf_2_6 = new import20.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
+    this._text_3 = this.renderer.createText(this._el_0,'\n',(null as any));
+    this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_4 = new import12.ViewContainer(4,0,this,this._anchor_4);
+    this._TemplateRef_4_5 = new import23.TemplateRef_(this,4,this._anchor_4);
+    this._NgIf_4_6 = new import20.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
+    this._text_5 = this.renderer.createText(this._el_0,'\n',(null as any));
+    this._el_6 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','call-to-action-nav'),(null as any));
+    this._text_7 = this.renderer.createText(this._el_6,'\n',(null as any));
+    this._el_8 = import3.createRenderElement(this.renderer,this._el_6,'nav',new import3.InlineArray4(4,'class','accessibility-nav hidden-md-down','id','nav'),(null as any));
+    this._text_9 = this.renderer.createText(this._el_8,'\n  ',(null as any));
+    this._el_10 = import3.createRenderElement(this.renderer,this._el_8,'a',new import3.InlineArray4(4,'class','btn-dyslexia','href','#'),(null as any));
+    this._NgClass_10_3 = new import21.Wrapper_NgClass(this.parentView.injectorGet(import24.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import25.KeyValueDiffers,this.parentIndex),new import13.ElementRef(this._el_10),this.renderer);
+    this._text_11 = this.renderer.createText(this._el_8,'\n  ',(null as any));
+    this._text_12 = this.renderer.createText(this._el_8,'\n  ',(null as any));
+    this._text_13 = this.renderer.createText(this._el_8,'\n',(null as any));
+    this._text_14 = this.renderer.createText(this._el_6,'\n',(null as any));
+    this._el_15 = import3.createRenderElement(this.renderer,this._el_6,'a',new import3.InlineArray4(4,'class','btn btn-login icon-switch icon-button btn-switch m-l-1 hidden-md-down','href','#'),(null as any));
+    this._text_16 = this.renderer.createText(this._el_15,'Switch to old site',(null as any));
+    this._text_17 = this.renderer.createText(this._el_6,'\n\n',(null as any));
+    this._text_18 = this.renderer.createText(this._el_0,'\n',(null as any));
+    this._text_19 = this.renderer.createText(parentRenderNode,'\n',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_10,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_10));
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_15,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_15));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
-      this._el_2,
+      this._anchor_2,
       this._text_3,
-      this._el_4,
+      this._anchor_4,
       this._text_5,
-      this._text_6,
+      this._el_6,
       this._text_7,
       this._el_8,
       this._text_9,
       this._el_10,
       this._text_11,
-      this._el_12,
+      this._text_12,
       this._text_13,
       this._text_14,
-      this._text_15,
+      this._el_15,
       this._text_16,
       this._text_17,
-      this._text_18
+      this._text_18,
+      this._text_19
     ]
-    ),[disposable_0]);
+    ),[
+      disposable_0,
+      disposable_1
+    ]
+    );
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import13.NgClass) && (12 === requestNodeIndex))) { return this._NgClass_12_3.context; }
+    if (((token === import23.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import26.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
+    if (((token === import23.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
+    if (((token === import26.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
+    if (((token === import27.NgClass) && (10 === requestNodeIndex))) { return this._NgClass_10_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_12_0_0:any = 'btn-dyslexia';
-    this._NgClass_12_3.check_klass(currVal_12_0_0,throwOnChange,false);
-    const currVal_12_0_1:any = this._map_21((this.context.dyslexiaEnabled === false),(this.context.dyslexiaEnabled === true));
-    this._NgClass_12_3.check_ngClass(currVal_12_0_1,throwOnChange,false);
-    this._NgClass_12_3.ngDoCheck(this,this._el_12,throwOnChange);
-    const currVal_20:any = this.context.dyslexiaLabel;
-    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
-      this.renderer.setElementProperty(this._el_12,'innerHTML',this.viewUtils.sanitizer.sanitize(import14.SecurityContext.HTML,currVal_20));
-      this._expr_20 = currVal_20;
+    const currVal_2_0_0:boolean = !this.context.auth.authenticated();
+    this._NgIf_2_6.check_ngIf(currVal_2_0_0,throwOnChange,false);
+    this._NgIf_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
+    const currVal_4_0_0:any = this.context.auth.authenticated();
+    this._NgIf_4_6.check_ngIf(currVal_4_0_0,throwOnChange,false);
+    this._NgIf_4_6.ngDoCheck(this,this._anchor_4,throwOnChange);
+    const currVal_10_0_0:any = 'btn-dyslexia';
+    this._NgClass_10_3.check_klass(currVal_10_0_0,throwOnChange,false);
+    const currVal_10_0_1:any = this._map_28((this.context.dyslexiaEnabled === false),(this.context.dyslexiaEnabled === true));
+    this._NgClass_10_3.check_ngClass(currVal_10_0_1,throwOnChange,false);
+    this._NgClass_10_3.ngDoCheck(this,this._el_10,throwOnChange);
+    this._vc_2.detectChangesInNestedViews(throwOnChange);
+    this._vc_4.detectChangesInNestedViews(throwOnChange);
+    const currVal_27:any = this.context.dyslexiaLabel;
+    if (import3.checkBinding(throwOnChange,this._expr_27,currVal_27)) {
+      this.renderer.setElementProperty(this._el_10,'innerHTML',this.viewUtils.sanitizer.sanitize(import28.SecurityContext.HTML,currVal_27));
+      this._expr_27 = currVal_27;
     }
   }
-  handleEvent_12(eventName:string,$event:any):boolean {
+  destroyInternal():void {
+    this._vc_2.destroyNestedViews();
+    this._vc_4.destroyNestedViews();
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import1.AppView<any> {
+    if ((nodeIndex == 2)) { return new View_CallToActionComponent1(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
+    if ((nodeIndex == 4)) { return new View_CallToActionComponent2(this.viewUtils,this,4,this._anchor_4,this._vc_4); }
+    return (null as any);
+  }
+  handleEvent_10(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
       const pd_sub_0:any = ((<any>this.context.toggleDyslexiaFont($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+  handleEvent_15(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'click')) {
+      const pd_sub_0:any = ((<any>this.context.toggleSite($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

@@ -15,18 +15,20 @@ import * as import6 from '@angular/core/src/change_detection/constants';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../../../../app/components/content/home/list.component';
 import * as import9 from '../../../../../app/services/data.service';
-import * as import10 from '../../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
-import * as import11 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import12 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import13 from '@angular/core/src/linker/element_ref';
-import * as import14 from '@angular/common/src/directives/ng_class';
+import * as import10 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import11 from 'angulartics2/dist/core/angulartics2';
+import * as import12 from '../../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
+import * as import13 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import14 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import15 from '@angular/core/src/linker/element_ref';
+import * as import16 from '@angular/common/src/directives/ng_class';
 export class Wrapper_HomeSortComponent {
   /*private*/ _eventHandler:Function;
   context:import0.HomeSortComponent;
   /*private*/ _changed:boolean;
-  constructor(p0:any,p1:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
-    this.context = new import0.HomeSortComponent(p0,p1);
+    this.context = new import0.HomeSortComponent(p0,p1,p2,p3);
   }
   ngOnDetach(view:import1.AppView<any>,componentView:import1.AppView<any>,el:any):void {
   }
@@ -58,7 +60,7 @@ class View_HomeSortComponent_Host0 extends import1.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'home-sort',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_HomeSortComponent0(this.viewUtils,this,0,this._el_0);
-    this._HomeSortComponent_0_3 = new Wrapper_HomeSortComponent(this.injectorGet(import8.HomeListingComponent,this.parentIndex),this.injectorGet(import9.DataService,this.parentIndex));
+    this._HomeSortComponent_0_3 = new Wrapper_HomeSortComponent(this.injectorGet(import8.HomeListingComponent,this.parentIndex),this.injectorGet(import9.DataService,this.parentIndex),this.injectorGet(import10.Angulartics2GoogleAnalytics,this.parentIndex),this.injectorGet(import11.Angulartics2,this.parentIndex));
     this.compView_0.create(this._HomeSortComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._HomeSortComponent_0_3.context);
@@ -93,14 +95,14 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
   _el_8:any;
   _text_9:any;
   _el_10:any;
-  _NgClass_10_3:import10.Wrapper_NgClass;
+  _NgClass_10_3:import12.Wrapper_NgClass;
   _text_11:any;
   _el_12:any;
   _text_13:any;
   _text_14:any;
   _text_15:any;
   _el_16:any;
-  _NgClass_16_3:import10.Wrapper_NgClass;
+  _NgClass_16_3:import12.Wrapper_NgClass;
   _text_17:any;
   _el_18:any;
   _text_19:any;
@@ -116,20 +118,20 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
   _text_29:any;
   _el_30:any;
   _text_31:any;
-  _text_32:any;
-  _el_33:any;
-  _text_34:any;
-  _el_35:any;
-  _NgClass_35_3:import10.Wrapper_NgClass;
-  _text_36:any;
-  _el_37:any;
+  _el_32:any;
+  _text_33:any;
+  _el_34:any;
+  _NgClass_34_3:import12.Wrapper_NgClass;
+  _text_35:any;
+  _el_36:any;
+  _text_37:any;
   _text_38:any;
   _text_39:any;
-  _text_40:any;
-  _el_41:any;
-  _NgClass_41_3:import10.Wrapper_NgClass;
-  _text_42:any;
-  _el_43:any;
+  _el_40:any;
+  _NgClass_40_3:import12.Wrapper_NgClass;
+  _text_41:any;
+  _el_42:any;
+  _text_43:any;
   _text_44:any;
   _text_45:any;
   _text_46:any;
@@ -137,14 +139,13 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
   _text_48:any;
   _text_49:any;
   _text_50:any;
-  _text_51:any;
+  _map_55:any;
   _map_56:any;
   _map_57:any;
   _map_58:any;
-  _map_59:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_HomeSortComponent0,renderType_HomeSortComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
-    this._map_56 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
+    this._map_55 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
       return {
         'page-item': p0,
         'grid-nav-item': p1,
@@ -153,7 +154,7 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
       }
       ;
     });
-    this._map_57 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
+    this._map_56 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
       return {
         'page-item': p0,
         'grid-nav-item': p1,
@@ -162,7 +163,7 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
       }
       ;
     });
-    this._map_58 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
+    this._map_57 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
       return {
         'page-item': p0,
         'grid-nav-item': p1,
@@ -171,7 +172,7 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
       }
       ;
     });
-    this._map_59 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
+    this._map_58 = import3.pureProxy4((p0:any,p1:any,p2:any,p3:any):{[key: string]:any} => {
       return {
         'page-item': p0,
         'grid-nav-item': p1,
@@ -194,14 +195,14 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
     this._el_8 = import3.createRenderElement(this.renderer,this._el_6,'ol',new import3.InlineArray4(4,'class','grid-type','id','contentGrid'),(null as any));
     this._text_9 = this.renderer.createText(this._el_8,'\n          ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_8,'li',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._NgClass_10_3 = new import10.Wrapper_NgClass(this.parentView.injectorGet(import11.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import12.KeyValueDiffers,this.parentIndex),new import13.ElementRef(this._el_10),this.renderer);
+    this._NgClass_10_3 = new import12.Wrapper_NgClass(this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import14.KeyValueDiffers,this.parentIndex),new import15.ElementRef(this._el_10),this.renderer);
     this._text_11 = this.renderer.createText(this._el_10,'\n            ',(null as any));
     this._el_12 = import3.createRenderElement(this.renderer,this._el_10,'a',new import3.InlineArray2(2,'href','#'),(null as any));
     this._text_13 = this.renderer.createText(this._el_12,'Most Recent',(null as any));
     this._text_14 = this.renderer.createText(this._el_10,'\n          ',(null as any));
     this._text_15 = this.renderer.createText(this._el_8,'\n          ',(null as any));
     this._el_16 = import3.createRenderElement(this.renderer,this._el_8,'li',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._NgClass_16_3 = new import10.Wrapper_NgClass(this.parentView.injectorGet(import11.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import12.KeyValueDiffers,this.parentIndex),new import13.ElementRef(this._el_16),this.renderer);
+    this._NgClass_16_3 = new import12.Wrapper_NgClass(this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import14.KeyValueDiffers,this.parentIndex),new import15.ElementRef(this._el_16),this.renderer);
     this._text_17 = this.renderer.createText(this._el_16,'\n            ',(null as any));
     this._el_18 = import3.createRenderElement(this.renderer,this._el_16,'a',new import3.InlineArray2(2,'href','#'),(null as any));
     this._text_19 = this.renderer.createText(this._el_18,'Most Popular',(null as any));
@@ -216,33 +217,32 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
     this._el_28 = import3.createRenderElement(this.renderer,this._el_26,'div',new import3.InlineArray2(2,'class','input-group'),(null as any));
     this._text_29 = this.renderer.createText(this._el_28,'\n      ',(null as any));
     this._el_30 = import3.createRenderElement(this.renderer,this._el_28,'div',new import3.InlineArray2(2,'class','form-inline'),(null as any));
-    this._text_31 = this.renderer.createText(this._el_30,'\n       ',(null as any));
-    this._text_32 = this.renderer.createText(this._el_30,'\n        ',(null as any));
-    this._el_33 = import3.createRenderElement(this.renderer,this._el_30,'ol',new import3.InlineArray4(4,'class','list-mode','id','contentGrid'),(null as any));
-    this._text_34 = this.renderer.createText(this._el_33,'\n          ',(null as any));
-    this._el_35 = import3.createRenderElement(this.renderer,this._el_33,'li',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._NgClass_35_3 = new import10.Wrapper_NgClass(this.parentView.injectorGet(import11.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import12.KeyValueDiffers,this.parentIndex),new import13.ElementRef(this._el_35),this.renderer);
-    this._text_36 = this.renderer.createText(this._el_35,'\n            ',(null as any));
-    this._el_37 = import3.createRenderElement(this.renderer,this._el_35,'a',new import3.InlineArray2(2,'href','#'),(null as any));
-    this._text_38 = this.renderer.createText(this._el_37,'Grid',(null as any));
-    this._text_39 = this.renderer.createText(this._el_35,'\n          ',(null as any));
-    this._text_40 = this.renderer.createText(this._el_33,'\n          ',(null as any));
-    this._el_41 = import3.createRenderElement(this.renderer,this._el_33,'li',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._NgClass_41_3 = new import10.Wrapper_NgClass(this.parentView.injectorGet(import11.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import12.KeyValueDiffers,this.parentIndex),new import13.ElementRef(this._el_41),this.renderer);
-    this._text_42 = this.renderer.createText(this._el_41,'\n            ',(null as any));
-    this._el_43 = import3.createRenderElement(this.renderer,this._el_41,'a',new import3.InlineArray2(2,'href','#'),(null as any));
-    this._text_44 = this.renderer.createText(this._el_43,'List',(null as any));
-    this._text_45 = this.renderer.createText(this._el_41,'\n          ',(null as any));
-    this._text_46 = this.renderer.createText(this._el_33,'\n        ',(null as any));
-    this._text_47 = this.renderer.createText(this._el_30,'\n      ',(null as any));
-    this._text_48 = this.renderer.createText(this._el_28,'\n    ',(null as any));
-    this._text_49 = this.renderer.createText(this._el_26,'\n  ',(null as any));
-    this._text_50 = this.renderer.createText(this._el_0,'\n',(null as any));
-    this._text_51 = this.renderer.createText(parentRenderNode,'\n',(null as any));
+    this._text_31 = this.renderer.createText(this._el_30,'\n        ',(null as any));
+    this._el_32 = import3.createRenderElement(this.renderer,this._el_30,'ol',new import3.InlineArray4(4,'class','list-mode','id','contentGrid'),(null as any));
+    this._text_33 = this.renderer.createText(this._el_32,'\n          ',(null as any));
+    this._el_34 = import3.createRenderElement(this.renderer,this._el_32,'li',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._NgClass_34_3 = new import12.Wrapper_NgClass(this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import14.KeyValueDiffers,this.parentIndex),new import15.ElementRef(this._el_34),this.renderer);
+    this._text_35 = this.renderer.createText(this._el_34,'\n            ',(null as any));
+    this._el_36 = import3.createRenderElement(this.renderer,this._el_34,'a',new import3.InlineArray2(2,'href','#'),(null as any));
+    this._text_37 = this.renderer.createText(this._el_36,'Grid',(null as any));
+    this._text_38 = this.renderer.createText(this._el_34,'\n          ',(null as any));
+    this._text_39 = this.renderer.createText(this._el_32,'\n          ',(null as any));
+    this._el_40 = import3.createRenderElement(this.renderer,this._el_32,'li',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._NgClass_40_3 = new import12.Wrapper_NgClass(this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import14.KeyValueDiffers,this.parentIndex),new import15.ElementRef(this._el_40),this.renderer);
+    this._text_41 = this.renderer.createText(this._el_40,'\n            ',(null as any));
+    this._el_42 = import3.createRenderElement(this.renderer,this._el_40,'a',new import3.InlineArray2(2,'href','#'),(null as any));
+    this._text_43 = this.renderer.createText(this._el_42,'List',(null as any));
+    this._text_44 = this.renderer.createText(this._el_40,'\n          ',(null as any));
+    this._text_45 = this.renderer.createText(this._el_32,'\n        ',(null as any));
+    this._text_46 = this.renderer.createText(this._el_30,'\n      ',(null as any));
+    this._text_47 = this.renderer.createText(this._el_28,'\n    ',(null as any));
+    this._text_48 = this.renderer.createText(this._el_26,'\n  ',(null as any));
+    this._text_49 = this.renderer.createText(this._el_0,'\n',(null as any));
+    this._text_50 = this.renderer.createText(parentRenderNode,'\n',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_12,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_12));
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_18,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_18));
-    var disposable_2:Function = import3.subscribeToRenderElement(this,this._el_37,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_37));
-    var disposable_3:Function = import3.subscribeToRenderElement(this,this._el_43,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_43));
+    var disposable_2:Function = import3.subscribeToRenderElement(this,this._el_36,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_36));
+    var disposable_3:Function = import3.subscribeToRenderElement(this,this._el_42,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_42));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -276,26 +276,25 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
       this._text_29,
       this._el_30,
       this._text_31,
-      this._text_32,
-      this._el_33,
-      this._text_34,
-      this._el_35,
-      this._text_36,
-      this._el_37,
+      this._el_32,
+      this._text_33,
+      this._el_34,
+      this._text_35,
+      this._el_36,
+      this._text_37,
       this._text_38,
       this._text_39,
-      this._text_40,
-      this._el_41,
-      this._text_42,
-      this._el_43,
+      this._el_40,
+      this._text_41,
+      this._el_42,
+      this._text_43,
       this._text_44,
       this._text_45,
       this._text_46,
       this._text_47,
       this._text_48,
       this._text_49,
-      this._text_50,
-      this._text_51
+      this._text_50
     ]
     ),[
       disposable_0,
@@ -307,25 +306,25 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.NgClass) && ((10 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._NgClass_10_3.context; }
-    if (((token === import14.NgClass) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 20)))) { return this._NgClass_16_3.context; }
-    if (((token === import14.NgClass) && ((35 <= requestNodeIndex) && (requestNodeIndex <= 39)))) { return this._NgClass_35_3.context; }
-    if (((token === import14.NgClass) && ((41 <= requestNodeIndex) && (requestNodeIndex <= 45)))) { return this._NgClass_41_3.context; }
+    if (((token === import16.NgClass) && ((10 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._NgClass_10_3.context; }
+    if (((token === import16.NgClass) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 20)))) { return this._NgClass_16_3.context; }
+    if (((token === import16.NgClass) && ((34 <= requestNodeIndex) && (requestNodeIndex <= 38)))) { return this._NgClass_34_3.context; }
+    if (((token === import16.NgClass) && ((40 <= requestNodeIndex) && (requestNodeIndex <= 44)))) { return this._NgClass_40_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_10_0_0:any = this._map_56(true,true,true,(this.context.ListingComponent.sortBy.value === 'created'));
+    const currVal_10_0_0:any = this._map_55(true,true,true,(this.context.ListingComponent.sortBy.value === 'created'));
     this._NgClass_10_3.check_ngClass(currVal_10_0_0,throwOnChange,false);
     this._NgClass_10_3.ngDoCheck(this,this._el_10,throwOnChange);
-    const currVal_16_0_0:any = this._map_57(true,true,true,(this.context.ListingComponent.sortBy.value === ''));
+    const currVal_16_0_0:any = this._map_56(true,true,true,(this.context.ListingComponent.sortBy.value === ''));
     this._NgClass_16_3.check_ngClass(currVal_16_0_0,throwOnChange,false);
     this._NgClass_16_3.ngDoCheck(this,this._el_16,throwOnChange);
-    const currVal_35_0_0:any = this._map_58(true,true,true,this.context.ListingComponent.displayGrid);
-    this._NgClass_35_3.check_ngClass(currVal_35_0_0,throwOnChange,false);
-    this._NgClass_35_3.ngDoCheck(this,this._el_35,throwOnChange);
-    const currVal_41_0_0:any = this._map_59(true,true,true,this.context.ListingComponent.displayList);
-    this._NgClass_41_3.check_ngClass(currVal_41_0_0,throwOnChange,false);
-    this._NgClass_41_3.ngDoCheck(this,this._el_41,throwOnChange);
+    const currVal_34_0_0:any = this._map_57(true,true,true,this.context.ListingComponent.displayGrid);
+    this._NgClass_34_3.check_ngClass(currVal_34_0_0,throwOnChange,false);
+    this._NgClass_34_3.ngDoCheck(this,this._el_34,throwOnChange);
+    const currVal_40_0_0:any = this._map_58(true,true,true,this.context.ListingComponent.displayList);
+    this._NgClass_40_3.check_ngClass(currVal_40_0_0,throwOnChange,false);
+    this._NgClass_40_3.ngDoCheck(this,this._el_40,throwOnChange);
   }
   handleEvent_12(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
@@ -345,7 +344,7 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
     }
     return result;
   }
-  handleEvent_37(eventName:string,$event:any):boolean {
+  handleEvent_36(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
@@ -354,7 +353,7 @@ export class View_HomeSortComponent0 extends import1.AppView<import0.HomeSortCom
     }
     return result;
   }
-  handleEvent_43(eventName:string,$event:any):boolean {
+  handleEvent_42(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {

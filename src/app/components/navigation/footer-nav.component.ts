@@ -27,7 +27,6 @@ export class FooterNavComponent implements OnInit {
         })
         this.menu = data._source.items
         this.menu = _.chunk(this.menu, 5)
-        console.log(this.menu)
       }
     )
   }

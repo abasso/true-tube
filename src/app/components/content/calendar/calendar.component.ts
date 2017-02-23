@@ -199,7 +199,7 @@ export class CalendarComponent implements OnInit {
   }
 
   setMonth(month: string) {
-    moment({'M': month})
+    // moment({'M': month})
     this.selectedMonth.next(month)
   }
 

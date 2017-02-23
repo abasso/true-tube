@@ -9,6 +9,18 @@ import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 export class CarouselComponent implements OnInit {
   private data: any
   private slides: any
+  public config = {
+        pagination: '.swiper-pagination',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 0,
+        loop: false,
+        autoplay: 5000,
+        // nextButton: '.swiper-button-next',
+        // prevButton: '.swiper-button-prev',
+        parallax: true,
+        speed:600
+      }
   constructor(
     private dataService: DataService,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,

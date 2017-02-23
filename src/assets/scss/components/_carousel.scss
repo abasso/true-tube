@@ -74,10 +74,10 @@
 }
 
 .swiper-pagination-bullet {
-  background:none !important;
   width:12px !important;
   height:12px !important;
-  border:solid 1px rgba(0,0,0,0.8) !important;
+  border:none !important;
+  background:white !important;
   @media(min-width:$breakpoint-md) {
   }
 }
@@ -85,4 +85,9 @@
 .swiper-pagination-bullet-active {
   background:$brand-yellow !important;
   border-color:$brand-yellow !important;
+}
+
+.swiper-button-disabled {
+  display:none;
+
 }

@@ -47,13 +47,12 @@ export class ProfileComponent {
         })
     }
 
-    setName(event) {
+    setName(event: any) {
       this.profile.name = event.target.value
     }
 
     passwordReminder() {
       let userProfile = JSON.parse(localStorage.getItem('profile'))
-      console.log(userProfile)
       let header = new Headers()
       header.append('Content-Type', 'application/json')
       return this.http
@@ -82,7 +81,6 @@ export class ProfileComponent {
         nickname: this.profile.name
       }, { headers: header })
       .subscribe((response) => {
-          console.log(response)
           this.showNotification = true
           this.notificationMessage = 'User details updated.'
           this.notificationEmail = true
@@ -91,29 +89,4 @@ export class ProfileComponent {
           }, 3000)
       })
     }
-   //
-  //   update() {
-  //      let inputEl: HTMLInputElement = this.inputEl.nativeElement
-  //      let fileCount: number = inputEl.files.length
-  //      let formData = new FormData()
-  //      if (fileCount > 0) { // a file was selected
-  //          for (let i = 0; i < fileCount; i++) {
-  //              formData.append('file[]', inputEl.files.item(i))
-  //          }
-  //      }
-  //      formData.append('name', this.profile.name)
-  //      const logFormData = (formData) => {
-  //          const entries = formData.entries()
-  //          const result = {}
-  //          let next
-  //          let pair
-  //          while ((next = entries.next()) && next.done === false) {
-  //              pair = next.value;
-  //              result[pair[0]] = pair[1]
-  //          }
-  //          console.log(result)
-  //      }
-  //      logFormData(formData)
-  //     this.dataService.updateUser(formData)
-  //  }
 }

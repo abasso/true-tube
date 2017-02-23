@@ -7,7 +7,7 @@ export class UserService {
   constructor(
     private http: AuthHttp
   ) {}
-  addToList(list, id) {
+  addToList(list: any, id: any) {
     this.http.post('https://www.truetube.co.uk/v5/api/me/' + list + '/' + id, {})
       .subscribe(
         (data) => {
@@ -17,7 +17,7 @@ export class UserService {
         }
       )
   }
-  removeFromList(list, id) {
+  removeFromList(list: any, id: any) {
     this.http.delete('https://www.truetube.co.uk/v5/api/me/' + list + '/' + id)
       .subscribe(
         data => {
@@ -27,7 +27,7 @@ export class UserService {
         }
       )
     }
-    removeList(list) {
+    removeList(list: any) {
       this.http.delete('https://www.truetube.co.uk/v5/api/me/' + list)
         .subscribe(
           data => {

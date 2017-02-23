@@ -14,28 +14,34 @@ import * as import5 from '@angular/core/src/linker/view_type';
 import * as import6 from '@angular/core/src/change_detection/constants';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../../../../app/services/data.service';
-import * as import9 from '../../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
-import * as import10 from '../../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
-import * as import11 from '@angular/core/src/linker/view_container';
-import * as import12 from '@angular/core/src/change_detection/change_detection_util';
-import * as import13 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import14 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import15 from '@angular/core/src/linker/element_ref';
-import * as import16 from '@angular/router/src/router';
-import * as import17 from '@angular/router/src/router_state';
-import * as import18 from '@angular/common/src/location/location_strategy';
-import * as import19 from '@angular/common/src/directives/ng_class';
-import * as import20 from '@angular/router/src/directives/router_link';
-import * as import21 from '../../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import22 from '@angular/core/src/linker/template_ref';
-import * as import23 from '@angular/common/src/directives/ng_for';
+import * as import9 from '@angular/router/src/router_state';
+import * as import10 from '@angular/router/src/router';
+import * as import11 from '../../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
+import * as import12 from '../../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
+import * as import13 from '../../../../node_modules/angulartics2/dist/core/angulartics2On.ngfactory';
+import * as import14 from '@angular/core/src/linker/view_container';
+import * as import15 from '@angular/core/src/change_detection/change_detection_util';
+import * as import16 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import17 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import18 from '@angular/core/src/linker/element_ref';
+import * as import19 from '@angular/common/src/location/location_strategy';
+import * as import20 from 'angulartics2/dist/core/angulartics2';
+import * as import21 from '@angular/platform-browser/src/dom/events/event_manager';
+import * as import22 from '@angular/common/src/directives/ng_class';
+import * as import23 from '@angular/router/src/directives/router_link';
+import * as import24 from 'angulartics2/dist/core/angulartics2On';
+import * as import25 from '../../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import26 from '@angular/core/src/linker/template_ref';
+import * as import27 from '@angular/common/src/directives/ng_for';
+import * as import28 from '../../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import29 from '@angular/common/src/directives/ng_if';
 export class Wrapper_CalendarComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CalendarComponent;
   /*private*/ _changed:boolean;
-  constructor(p0:any) {
+  constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
-    this.context = new import0.CalendarComponent(p0);
+    this.context = new import0.CalendarComponent(p0,p1,p2);
   }
   ngOnDetach(view:import1.AppView<any>,componentView:import1.AppView<any>,el:any):void {
   }
@@ -68,7 +74,7 @@ class View_CalendarComponent_Host0 extends import1.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'app-calendar',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_CalendarComponent0(this.viewUtils,this,0,this._el_0);
-    this._CalendarComponent_0_3 = new Wrapper_CalendarComponent(this.injectorGet(import8.DataService,this.parentIndex));
+    this._CalendarComponent_0_3 = new Wrapper_CalendarComponent(this.injectorGet(import8.DataService,this.parentIndex),this.injectorGet(import9.ActivatedRoute,this.parentIndex),this.injectorGet(import10.Router,this.parentIndex));
     this.compView_0.create(this._CalendarComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._CalendarComponent_0_3.context);
@@ -92,26 +98,32 @@ export const CalendarComponentNgFactory:import7.ComponentFactory<import0.Calenda
 const styles_CalendarComponent:any[] = ([] as any[]);
 class View_CalendarComponent3 extends import1.AppView<any> {
   _el_0:any;
-  _NgClass_0_3:import9.Wrapper_NgClass;
-  _RouterLinkWithHref_0_4:import10.Wrapper_RouterLinkWithHref;
+  _NgClass_0_3:import11.Wrapper_NgClass;
+  _RouterLinkWithHref_0_4:import12.Wrapper_RouterLinkWithHref;
+  _Angulartics2On_0_5:import13.Wrapper_Angulartics2On;
   _text_1:any;
   _el_2:any;
   _text_3:any;
   _text_4:any;
   _text_5:any;
-  _map_8:any;
-  /*private*/ _expr_9:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+  _map_9:any;
+  _map_10:any;
+  /*private*/ _expr_11:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
     super(View_CalendarComponent3,renderType_CalendarComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._map_8 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+    this._map_9 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {active: p0};
     });
-    this._expr_9 = import12.UNINITIALIZED;
+    this._map_10 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._expr_11 = import15.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'a',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._NgClass_0_3 = new import9.Wrapper_NgClass(this.parentView.parentView.parentView.parentView.injectorGet(import13.IterableDiffers,this.parentView.parentView.parentView.parentIndex),this.parentView.parentView.parentView.parentView.injectorGet(import14.KeyValueDiffers,this.parentView.parentView.parentView.parentIndex),new import15.ElementRef(this._el_0),this.renderer);
-    this._RouterLinkWithHref_0_4 = new import10.Wrapper_RouterLinkWithHref(this.parentView.parentView.parentView.parentView.injectorGet(import16.Router,this.parentView.parentView.parentView.parentIndex),this.parentView.parentView.parentView.parentView.injectorGet(import17.ActivatedRoute,this.parentView.parentView.parentView.parentIndex),this.parentView.parentView.parentView.parentView.injectorGet(import18.LocationStrategy,this.parentView.parentView.parentView.parentIndex));
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'a',new import3.InlineArray8(6,'angulartics2On','click','angularticsCategory','Calendar','angularticsEvent','Navigate'),(null as any));
+    this._NgClass_0_3 = new import11.Wrapper_NgClass(this.parentView.parentView.parentView.parentView.injectorGet(import16.IterableDiffers,this.parentView.parentView.parentView.parentIndex),this.parentView.parentView.parentView.parentView.injectorGet(import17.KeyValueDiffers,this.parentView.parentView.parentView.parentIndex),new import18.ElementRef(this._el_0),this.renderer);
+    this._RouterLinkWithHref_0_4 = new import12.Wrapper_RouterLinkWithHref(this.parentView.parentView.parentView.parentView.injectorGet(import10.Router,this.parentView.parentView.parentView.parentIndex),this.parentView.parentView.parentView.parentView.injectorGet(import9.ActivatedRoute,this.parentView.parentView.parentView.parentIndex),this.parentView.parentView.parentView.parentView.injectorGet(import19.LocationStrategy,this.parentView.parentView.parentView.parentIndex));
+    this._Angulartics2On_0_5 = new import13.Wrapper_Angulartics2On(new import18.ElementRef(this._el_0),this.parentView.parentView.parentView.parentView.injectorGet(import20.Angulartics2,this.parentView.parentView.parentView.parentIndex),this.parentView.parentView.parentView.parentView.injectorGet(import21.EventManager,this.parentView.parentView.parentView.parentIndex));
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'span',new import3.InlineArray2(2,'class','event-desc'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'',(null as any));
@@ -130,24 +142,35 @@ class View_CalendarComponent3 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.NgClass) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._NgClass_0_3.context; }
-    if (((token === import20.RouterLinkWithHref) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._RouterLinkWithHref_0_4.context; }
+    if (((token === import22.NgClass) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._NgClass_0_3.context; }
+    if (((token === import23.RouterLinkWithHref) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._RouterLinkWithHref_0_4.context; }
+    if (((token === import24.Angulartics2On) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._Angulartics2On_0_5.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = import3.inlineInterpolate(2,'event ',this.context.$implicit.css,' event-order-',this.context.$implicit.index,'');
     this._NgClass_0_3.check_klass(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this._map_8((this.parentView.parentView.parentView.context.toHighlight === this.context.$implicit._id));
+    const currVal_0_0_1:any = this._map_9((this.parentView.parentView.parentView.context.toHighlight === this.context.$implicit._id));
     this._NgClass_0_3.check_ngClass(currVal_0_0_1,throwOnChange,false);
     this._NgClass_0_3.ngDoCheck(this,this._el_0,throwOnChange);
-    const currVal_0_1_0:any = this.context.$implicit.link;
+    const currVal_0_1_0:any = this.context.$implicit._source.slug;
     this._RouterLinkWithHref_0_4.check_routerLink(currVal_0_1_0,throwOnChange,false);
     this._RouterLinkWithHref_0_4.ngDoCheck(this,this._el_0,throwOnChange);
+    const currVal_0_2_0:any = 'click';
+    this._Angulartics2On_0_5.check_angulartics2On(currVal_0_2_0,throwOnChange,false);
+    const currVal_0_2_1:any = 'Navigate';
+    this._Angulartics2On_0_5.check_angularticsEvent(currVal_0_2_1,throwOnChange,false);
+    const currVal_0_2_2:any = 'Calendar';
+    this._Angulartics2On_0_5.check_angularticsCategory(currVal_0_2_2,throwOnChange,false);
+    const currVal_0_2_3:any = this._map_10(this.context.$implicit._source.title);
+    this._Angulartics2On_0_5.check_angularticsProperties(currVal_0_2_3,throwOnChange,false);
+    this._Angulartics2On_0_5.ngDoCheck(this,this._el_0,throwOnChange);
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Angulartics2On_0_5.context.ngAfterContentInit(); } }
     this._RouterLinkWithHref_0_4.checkHost(this,this,this._el_0,throwOnChange);
-    const currVal_9:any = import3.inlineInterpolate(1,'\n            ',this.context.$implicit._source.title,'\n          ');
-    if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
-      this.renderer.setText(this._text_3,currVal_9);
-      this._expr_9 = currVal_9;
+    const currVal_11:any = import3.inlineInterpolate(1,'\n            ',this.context.$implicit._source.title,'\n          ');
+    if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
+      this.renderer.setText(this._text_3,currVal_11);
+      this._expr_11 = currVal_11;
     }
   }
   destroyInternal():void {
@@ -178,16 +201,16 @@ class View_CalendarComponent2 extends import1.AppView<any> {
   _text_3:any;
   _text_4:any;
   _anchor_5:any;
-  /*private*/ _vc_5:import11.ViewContainer;
+  /*private*/ _vc_5:import14.ViewContainer;
   _TemplateRef_5_5:any;
-  _NgFor_5_6:import21.Wrapper_NgFor;
+  _NgFor_5_6:import25.Wrapper_NgFor;
   _text_6:any;
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
     super(View_CalendarComponent2,renderType_CalendarComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_10 = import12.UNINITIALIZED;
-    this._expr_11 = import12.UNINITIALIZED;
+    this._expr_10 = import15.UNINITIALIZED;
+    this._expr_11 = import15.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'li',import3.EMPTY_INLINE_ARRAY,(null as any));
@@ -196,9 +219,9 @@ class View_CalendarComponent2 extends import1.AppView<any> {
     this._text_3 = this.renderer.createText(this._el_2,'',(null as any));
     this._text_4 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_5 = new import11.ViewContainer(5,0,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import22.TemplateRef_(this,5,this._anchor_5);
-    this._NgFor_5_6 = new import21.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.parentView.parentView.injectorGet(import13.IterableDiffers,this.parentView.parentView.parentIndex),this.parentView.parentView.ref);
+    this._vc_5 = new import14.ViewContainer(5,0,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import26.TemplateRef_(this,5,this._anchor_5);
+    this._NgFor_5_6 = new import25.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.parentView.parentView.injectorGet(import16.IterableDiffers,this.parentView.parentView.parentIndex),this.parentView.parentView.ref);
     this._text_6 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -213,8 +236,8 @@ class View_CalendarComponent2 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import22.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import23.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
+    if (((token === import26.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import27.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -227,7 +250,7 @@ class View_CalendarComponent2 extends import1.AppView<any> {
       this.renderer.setElementProperty(this._el_0,'className',currVal_10);
       this._expr_10 = currVal_10;
     }
-    const currVal_11:any = import3.inlineInterpolate(1,'',this.context.$implicit.date,'');
+    const currVal_11:any = import3.inlineInterpolate(1,'',this.context.$implicit.day,'');
     if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
       this.renderer.setText(this._text_3,currVal_11);
       this._expr_11 = currVal_11;
@@ -248,20 +271,20 @@ class View_CalendarComponent1 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
-  /*private*/ _vc_2:import11.ViewContainer;
+  /*private*/ _vc_2:import14.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgFor_2_6:import21.Wrapper_NgFor;
+  _NgFor_2_6:import25.Wrapper_NgFor;
   _text_3:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
     super(View_CalendarComponent1,renderType_CalendarComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'ul',new import3.InlineArray2(2,'class','days'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import11.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import22.TemplateRef_(this,2,this._anchor_2);
-    this._NgFor_2_6 = new import21.Wrapper_NgFor(this._vc_2.vcRef,this._TemplateRef_2_5,this.parentView.parentView.injectorGet(import13.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
+    this._vc_2 = new import14.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import26.TemplateRef_(this,2,this._anchor_2);
+    this._NgFor_2_6 = new import25.Wrapper_NgFor(this._vc_2.vcRef,this._TemplateRef_2_5,this.parentView.parentView.injectorGet(import16.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
     this._text_3 = this.renderer.createText(this._el_0,'\n  ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -273,8 +296,8 @@ class View_CalendarComponent1 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import22.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import23.NgFor) && (2 === requestNodeIndex))) { return this._NgFor_2_6.context; }
+    if (((token === import26.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import27.NgFor) && (2 === requestNodeIndex))) { return this._NgFor_2_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -294,6 +317,32 @@ class View_CalendarComponent1 extends import1.AppView<any> {
     return (null as any);
   }
 }
+class View_CalendarComponent4 extends import1.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  _text_3:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_CalendarComponent4,renderType_CalendarComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import7.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','row grid-row content-grid loading-grid m-t-3'),(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n    ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','spinner'),(null as any));
+    this._text_3 = this.renderer.createText(this._el_0,'\n  ',(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
 var renderType_CalendarComponent:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,styles_CalendarComponent,{});
 export class View_CalendarComponent0 extends import1.AppView<import0.CalendarComponent> {
   _el_0:any;
@@ -309,12 +358,14 @@ export class View_CalendarComponent0 extends import1.AppView<import0.CalendarCom
   _el_10:any;
   _text_11:any;
   _el_12:any;
-  _NgClass_12_3:import9.Wrapper_NgClass;
+  _NgClass_12_3:import11.Wrapper_NgClass;
+  _Angulartics2On_12_4:import13.Wrapper_Angulartics2On;
   _el_13:any;
   _text_14:any;
   _text_15:any;
   _el_16:any;
-  _NgClass_16_3:import9.Wrapper_NgClass;
+  _NgClass_16_3:import11.Wrapper_NgClass;
+  _Angulartics2On_16_4:import13.Wrapper_Angulartics2On;
   _el_17:any;
   _text_18:any;
   _text_19:any;
@@ -347,24 +398,29 @@ export class View_CalendarComponent0 extends import1.AppView<import0.CalendarCom
   _text_46:any;
   _text_47:any;
   _anchor_48:any;
-  /*private*/ _vc_48:import11.ViewContainer;
+  /*private*/ _vc_48:import14.ViewContainer;
   _TemplateRef_48_5:any;
-  _NgFor_48_6:import21.Wrapper_NgFor;
+  _NgFor_48_6:import25.Wrapper_NgFor;
   _text_49:any;
-  _text_50:any;
+  _anchor_50:any;
+  /*private*/ _vc_50:import14.ViewContainer;
+  _TemplateRef_50_5:any;
+  _NgIf_50_6:import28.Wrapper_NgIf;
   _text_51:any;
-  /*private*/ _expr_57:any;
-  /*private*/ _expr_58:any;
-  _map_59:any;
-  _map_60:any;
+  _text_52:any;
+  _text_53:any;
+  /*private*/ _expr_64:any;
+  /*private*/ _expr_65:any;
+  _map_66:any;
+  _map_67:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_CalendarComponent0,renderType_CalendarComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
-    this._expr_57 = import12.UNINITIALIZED;
-    this._expr_58 = import12.UNINITIALIZED;
-    this._map_59 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+    this._expr_64 = import15.UNINITIALIZED;
+    this._expr_65 = import15.UNINITIALIZED;
+    this._map_66 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {disabled: p0};
     });
-    this._map_60 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+    this._map_67 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {disabled: p0};
     });
   }
@@ -382,13 +438,15 @@ export class View_CalendarComponent0 extends import1.AppView<import0.CalendarCom
     this._text_9 = this.renderer.createText(this._el_2,'\n    ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_2,'div',new import3.InlineArray2(2,'class','month-selector'),(null as any));
     this._text_11 = this.renderer.createText(this._el_10,'\n      ',(null as any));
-    this._el_12 = import3.createRenderElement(this.renderer,this._el_10,'a',new import3.InlineArray4(4,'class','icon-circle-left icon-large icon-left text-link','href','#'),(null as any));
-    this._NgClass_12_3 = new import9.Wrapper_NgClass(this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import14.KeyValueDiffers,this.parentIndex),new import15.ElementRef(this._el_12),this.renderer);
+    this._el_12 = import3.createRenderElement(this.renderer,this._el_10,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Calendar Previous','angularticsEvent','Action','class','icon-circle-left icon-nav icon-left text-link','href','#'),(null as any));
+    this._NgClass_12_3 = new import11.Wrapper_NgClass(this.parentView.injectorGet(import16.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import17.KeyValueDiffers,this.parentIndex),new import18.ElementRef(this._el_12),this.renderer);
+    this._Angulartics2On_12_4 = new import13.Wrapper_Angulartics2On(new import18.ElementRef(this._el_12),this.parentView.injectorGet(import20.Angulartics2,this.parentIndex),this.parentView.injectorGet(import21.EventManager,this.parentIndex));
     this._el_13 = import3.createRenderElement(this.renderer,this._el_12,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_14 = this.renderer.createText(this._el_13,'Previous month',(null as any));
     this._text_15 = this.renderer.createText(this._el_10,'\n      ',(null as any));
-    this._el_16 = import3.createRenderElement(this.renderer,this._el_10,'a',new import3.InlineArray4(4,'class','icon-circle-right icon-large icon-right text-link','href','#'),(null as any));
-    this._NgClass_16_3 = new import9.Wrapper_NgClass(this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import14.KeyValueDiffers,this.parentIndex),new import15.ElementRef(this._el_16),this.renderer);
+    this._el_16 = import3.createRenderElement(this.renderer,this._el_10,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Calendar Next','angularticsEvent','Action','class','icon-circle-right icon-nav icon-right text-link','href','#'),(null as any));
+    this._NgClass_16_3 = new import11.Wrapper_NgClass(this.parentView.injectorGet(import16.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import17.KeyValueDiffers,this.parentIndex),new import18.ElementRef(this._el_16),this.renderer);
+    this._Angulartics2On_16_4 = new import13.Wrapper_Angulartics2On(new import18.ElementRef(this._el_16),this.parentView.injectorGet(import20.Angulartics2,this.parentIndex),this.parentView.injectorGet(import21.EventManager,this.parentIndex));
     this._el_17 = import3.createRenderElement(this.renderer,this._el_16,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_18 = this.renderer.createText(this._el_17,'Next month',(null as any));
     this._text_19 = this.renderer.createText(this._el_10,'\n    ',(null as any));
@@ -419,14 +477,19 @@ export class View_CalendarComponent0 extends import1.AppView<import0.CalendarCom
     this._el_44 = import3.createRenderElement(this.renderer,this._el_24,'li',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_45 = this.renderer.createText(this._el_44,'Saturday',(null as any));
     this._text_46 = this.renderer.createText(this._el_24,'\n    ',(null as any));
-    this._text_47 = this.renderer.createText(this._el_22,'\n\n\n    ',(null as any));
+    this._text_47 = this.renderer.createText(this._el_22,'\n    ',(null as any));
     this._anchor_48 = this.renderer.createTemplateAnchor(this._el_22,(null as any));
-    this._vc_48 = new import11.ViewContainer(48,22,this,this._anchor_48);
-    this._TemplateRef_48_5 = new import22.TemplateRef_(this,48,this._anchor_48);
-    this._NgFor_48_6 = new import21.Wrapper_NgFor(this._vc_48.vcRef,this._TemplateRef_48_5,this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.ref);
-    this._text_49 = this.renderer.createText(this._el_22,'\n',(null as any));
-    this._text_50 = this.renderer.createText(this._el_0,'\n',(null as any));
-    this._text_51 = this.renderer.createText(parentRenderNode,'\n',(null as any));
+    this._vc_48 = new import14.ViewContainer(48,22,this,this._anchor_48);
+    this._TemplateRef_48_5 = new import26.TemplateRef_(this,48,this._anchor_48);
+    this._NgFor_48_6 = new import25.Wrapper_NgFor(this._vc_48.vcRef,this._TemplateRef_48_5,this.parentView.injectorGet(import16.IterableDiffers,this.parentIndex),this.ref);
+    this._text_49 = this.renderer.createText(this._el_22,'\n  ',(null as any));
+    this._anchor_50 = this.renderer.createTemplateAnchor(this._el_22,(null as any));
+    this._vc_50 = new import14.ViewContainer(50,22,this,this._anchor_50);
+    this._TemplateRef_50_5 = new import26.TemplateRef_(this,50,this._anchor_50);
+    this._NgIf_50_6 = new import28.Wrapper_NgIf(this._vc_50.vcRef,this._TemplateRef_50_5);
+    this._text_51 = this.renderer.createText(this._el_22,'\n',(null as any));
+    this._text_52 = this.renderer.createText(this._el_0,'\n',(null as any));
+    this._text_53 = this.renderer.createText(parentRenderNode,'\n',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_12,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_12));
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_16,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_16));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -480,8 +543,10 @@ export class View_CalendarComponent0 extends import1.AppView<import0.CalendarCom
       this._text_47,
       this._anchor_48,
       this._text_49,
-      this._text_50,
-      this._text_51
+      this._anchor_50,
+      this._text_51,
+      this._text_52,
+      this._text_53
     ]
     ),[
       disposable_0,
@@ -491,43 +556,71 @@ export class View_CalendarComponent0 extends import1.AppView<import0.CalendarCom
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.NgClass) && ((12 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._NgClass_12_3.context; }
-    if (((token === import19.NgClass) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._NgClass_16_3.context; }
-    if (((token === import22.TemplateRef) && (48 === requestNodeIndex))) { return this._TemplateRef_48_5; }
-    if (((token === import23.NgFor) && (48 === requestNodeIndex))) { return this._NgFor_48_6.context; }
+    if (((token === import22.NgClass) && ((12 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._NgClass_12_3.context; }
+    if (((token === import24.Angulartics2On) && ((12 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._Angulartics2On_12_4.context; }
+    if (((token === import22.NgClass) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._NgClass_16_3.context; }
+    if (((token === import24.Angulartics2On) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._Angulartics2On_16_4.context; }
+    if (((token === import26.TemplateRef) && (48 === requestNodeIndex))) { return this._TemplateRef_48_5; }
+    if (((token === import27.NgFor) && (48 === requestNodeIndex))) { return this._NgFor_48_6.context; }
+    if (((token === import26.TemplateRef) && (50 === requestNodeIndex))) { return this._TemplateRef_50_5; }
+    if (((token === import29.NgIf) && (50 === requestNodeIndex))) { return this._NgIf_50_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_12_0_0:any = 'icon-circle-left icon-large icon-left text-link';
+    const currVal_12_0_0:any = 'icon-circle-left icon-nav icon-left text-link';
     this._NgClass_12_3.check_klass(currVal_12_0_0,throwOnChange,false);
-    const currVal_12_0_1:any = this._map_59((this.context.selectedMonth.getValue() === 0));
+    const currVal_12_0_1:any = this._map_66((this.context.selectedMonth.getValue() === 0));
     this._NgClass_12_3.check_ngClass(currVal_12_0_1,throwOnChange,false);
     this._NgClass_12_3.ngDoCheck(this,this._el_12,throwOnChange);
-    const currVal_16_0_0:any = 'icon-circle-right icon-large icon-right text-link';
+    const currVal_12_1_0:any = 'click';
+    this._Angulartics2On_12_4.check_angulartics2On(currVal_12_1_0,throwOnChange,false);
+    const currVal_12_1_1:any = 'Action';
+    this._Angulartics2On_12_4.check_angularticsEvent(currVal_12_1_1,throwOnChange,false);
+    const currVal_12_1_2:any = 'Calendar Previous';
+    this._Angulartics2On_12_4.check_angularticsCategory(currVal_12_1_2,throwOnChange,false);
+    this._Angulartics2On_12_4.ngDoCheck(this,this._el_12,throwOnChange);
+    const currVal_16_0_0:any = 'icon-circle-right icon-nav icon-right text-link';
     this._NgClass_16_3.check_klass(currVal_16_0_0,throwOnChange,false);
-    const currVal_16_0_1:any = this._map_60((this.context.selectedMonth.getValue() === 11));
+    const currVal_16_0_1:any = this._map_67((this.context.selectedMonth.getValue() === 11));
     this._NgClass_16_3.check_ngClass(currVal_16_0_1,throwOnChange,false);
     this._NgClass_16_3.ngDoCheck(this,this._el_16,throwOnChange);
+    const currVal_16_1_0:any = 'click';
+    this._Angulartics2On_16_4.check_angulartics2On(currVal_16_1_0,throwOnChange,false);
+    const currVal_16_1_1:any = 'Action';
+    this._Angulartics2On_16_4.check_angularticsEvent(currVal_16_1_1,throwOnChange,false);
+    const currVal_16_1_2:any = 'Calendar Next';
+    this._Angulartics2On_16_4.check_angularticsCategory(currVal_16_1_2,throwOnChange,false);
+    this._Angulartics2On_16_4.ngDoCheck(this,this._el_16,throwOnChange);
     const currVal_48_0_0:any = this.context.weeks;
     this._NgFor_48_6.check_ngForOf(currVal_48_0_0,throwOnChange,false);
     this._NgFor_48_6.ngDoCheck(this,this._anchor_48,throwOnChange);
+    const currVal_50_0_0:any = (this.context.calendarLoaded === false);
+    this._NgIf_50_6.check_ngIf(currVal_50_0_0,throwOnChange,false);
+    this._NgIf_50_6.ngDoCheck(this,this._anchor_50,throwOnChange);
     this._vc_48.detectChangesInNestedViews(throwOnChange);
-    const currVal_57:any = import3.inlineInterpolate(1,' ',this.context.selectedMonthString,' ');
-    if (import3.checkBinding(throwOnChange,this._expr_57,currVal_57)) {
-      this.renderer.setText(this._text_5,currVal_57);
-      this._expr_57 = currVal_57;
+    this._vc_50.detectChangesInNestedViews(throwOnChange);
+    if (!throwOnChange) {
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_12_4.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_16_4.context.ngAfterContentInit(); }
     }
-    const currVal_58:any = import3.inlineInterpolate(1,'(',this.context.eventCount,' Events)');
-    if (import3.checkBinding(throwOnChange,this._expr_58,currVal_58)) {
-      this.renderer.setText(this._text_7,currVal_58);
-      this._expr_58 = currVal_58;
+    const currVal_64:any = import3.inlineInterpolate(1,' ',this.context.selectedMonthString,' ');
+    if (import3.checkBinding(throwOnChange,this._expr_64,currVal_64)) {
+      this.renderer.setText(this._text_5,currVal_64);
+      this._expr_64 = currVal_64;
+    }
+    const currVal_65:any = import3.inlineInterpolate(1,'',this.context.eventCountString,'');
+    if (import3.checkBinding(throwOnChange,this._expr_65,currVal_65)) {
+      this.renderer.setText(this._text_7,currVal_65);
+      this._expr_65 = currVal_65;
     }
   }
   destroyInternal():void {
     this._vc_48.destroyNestedViews();
+    this._vc_50.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import1.AppView<any> {
     if ((nodeIndex == 48)) { return new View_CalendarComponent1(this.viewUtils,this,48,this._anchor_48,this._vc_48); }
+    if ((nodeIndex == 50)) { return new View_CalendarComponent4(this.viewUtils,this,50,this._anchor_50,this._vc_50); }
     return (null as any);
   }
   handleEvent_12(eventName:string,$event:any):boolean {

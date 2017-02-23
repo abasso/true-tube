@@ -7,7 +7,7 @@ import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
   templateUrl: './pages-nav.component.html'
 })
 export class PagesNavComponent implements OnInit {
-  public menu
+  public menu: any
   constructor(
     private dataService: DataService,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,

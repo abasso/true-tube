@@ -102,7 +102,7 @@ export class ListingComponent {
   }
 
   @HostListener('window:scroll', ['$event'])
-  scroll(event) {
+  scroll(event: any) {
     let main = document.querySelector('main').getBoundingClientRect()
     if (main.top <= 0) {
       this.stickyTitle = true

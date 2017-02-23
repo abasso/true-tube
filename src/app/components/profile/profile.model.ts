@@ -7,7 +7,7 @@ export class Profile {
     public picture: string
     public created: string
     public lastLogin: string
-    public lists
+    public lists: string
 
     public static hydrate(data: any): Profile {
         const instance = new Profile()

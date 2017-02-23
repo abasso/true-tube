@@ -27,7 +27,6 @@ declare var videojs: any
 export class ItemComponent implements OnInit, OnDestroy {
   private item: any = {}
   private data: any
-  private id: string
   public slug: string
   private showEmbed = false
   private embedButtonLabel = 'Copy'
@@ -35,11 +34,11 @@ export class ItemComponent implements OnInit, OnDestroy {
   private embeddedContent: any = []
   private activeTab = 'film'
   private videoJSplayer: any
-  private types
+  private types: any
   private hideAdvisory = false
   public addedToFavourites = false
   public userData: any
-  public listTitle
+  public listTitle: any
   public showLists = false
   public createListTitle = ''
   public addListError = false
@@ -72,11 +71,12 @@ export class ItemComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.types = ContentTypes
     this.data = this.route.url
-    .switchMap((url) => this.dataService.itemBySlug(url))
+    .switchMap((url: any) => this.dataService.itemBySlug(url))
     .subscribe(
       (data) => {
         window.scrollTo(0, 0)
         this.item = data.hits.hits[0]._source
+        console.log(this.item)
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
         if (this.item.resource_types.length === 1) {
           this.item.hideMenu = true
@@ -112,7 +112,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         })
       }
     )
-    this.auth.loggedInStatus.subscribe((data) => {
+    this.auth.loggedInStatus.subscribe((data: any) => {
       this.isItemInList()
     })
   }
@@ -136,7 +136,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   //
   // }
 
-  playPlayer(event) {
+  playPlayer(event: any) {
     event.preventDefault()
     this.videoJSplayer.play()
     this.hideAdvisory = true
@@ -241,7 +241,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  addList(event) {
+  addList(event: any) {
     if (_.findIndex(this.listArray, (list) => {
       return list.title === this.createListTitle
     }) !== -1) {
@@ -256,7 +256,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       let listSlug = _.kebabCase(this.createListTitle)
       let header = new Headers()
       header.append('Content-Type', 'application/json')
-      this.http.post(this.apiUrl + listSlug + '/' + this.item.id, {
+      this.http.post(this.apiUrl + '/' + listSlug + '/' + this.item.id, {
         title : this.createListTitle
       }, { headers: header }).subscribe(
       (data) => {
@@ -279,7 +279,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleNotification(list, added) {
+  toggleNotification(list: any, added: any) {
     this.showNotification = false
     let message = 'Removed from '
     if (added === false) {
@@ -295,7 +295,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     }, 3000)
   }
 
-  setList(event, key, title) {
+  setList(event: any, key: any, title: string) {
     if (event.target.checked) {
       this.notificationFavourite = false
       if (key === 'favourites') {
@@ -303,7 +303,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.notificationFavourite = true
       }
       this.toggleNotification(title, true)
-      this.http.post(this.apiUrl + key + '/' + this.item.id, {}).subscribe(
+      this.http.post(this.apiUrl + '/' + key + '/' + this.item.id, {}).subscribe(
       (data) => {
         this.angulartics2.eventTrack.next({ action: 'Add', properties: { category: 'List', title: this.item.id}})
       })
@@ -314,14 +314,14 @@ export class ItemComponent implements OnInit, OnDestroy {
         this.addedToFavourites = false
         this.notificationFavourite = true
       }
-      this.http.delete(this.apiUrl + key + '/' + this.item.id).subscribe(
+      this.http.delete(this.apiUrl + '/' + key + '/' + this.item.id).subscribe(
       (data) => {
         this.angulartics2.eventTrack.next({ action: 'Remove', properties: { category: 'List', title: this.item.id}})
       })
     }
   }
 
-  keyCheck(event) {
+  keyCheck(event: any) {
     if (event.key === 'Enter') {
       this.addList(event)
     }

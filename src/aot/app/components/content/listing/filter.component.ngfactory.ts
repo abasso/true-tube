@@ -20,44 +20,46 @@ import * as import11 from '../../../../../app/components/content/listing/list.co
 import * as import12 from '../../../../../app/services/data.service';
 import * as import13 from '@angular/common/src/location/location';
 import * as import14 from '@angular/forms/src/form_builder';
-import * as import15 from '@angular/core/src/linker/view_container';
-import * as import16 from '../../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
-import * as import17 from '../../../../node_modules/@angular/forms/src/directives/default_value_accessor.ngfactory';
-import * as import18 from '@angular/core/src/change_detection/change_detection_util';
-import * as import19 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import20 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import21 from '@angular/core/src/linker/element_ref';
-import * as import22 from '@angular/common/src/directives/ng_class';
-import * as import23 from '@angular/forms/src/directives/default_value_accessor';
-import * as import24 from '@angular/forms/src/directives/control_value_accessor';
-import * as import25 from '../../../../node_modules/@angular/forms/src/directives/checkbox_value_accessor.ngfactory';
-import * as import26 from '../../../../node_modules/@angular/forms/src/directives/reactive_directives/form_control_name.ngfactory';
-import * as import27 from '../../../../node_modules/@angular/forms/src/directives/ng_control_status.ngfactory';
-import * as import28 from '@angular/forms/src/directives/checkbox_value_accessor';
-import * as import29 from '@angular/forms/src/directives/reactive_directives/form_control_name';
-import * as import30 from '@angular/forms/src/directives/ng_control';
-import * as import31 from '@angular/forms/src/directives/ng_control_status';
-import * as import32 from '../../../../node_modules/@angular/forms/src/directives/select_control_value_accessor.ngfactory';
-import * as import33 from '../../../../node_modules/@angular/forms/src/directives/select_multiple_control_value_accessor.ngfactory';
-import * as import34 from '@angular/forms/src/directives/select_control_value_accessor';
-import * as import35 from '@angular/forms/src/directives/select_multiple_control_value_accessor';
-import * as import36 from '../../../../node_modules/@angular/forms/src/directives/radio_control_value_accessor.ngfactory';
-import * as import37 from '@angular/forms/src/directives/radio_control_value_accessor';
-import * as import38 from '../../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import39 from '../../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import40 from '@angular/core/src/linker/template_ref';
-import * as import41 from '@angular/common/src/directives/ng_if';
-import * as import42 from '@angular/common/src/directives/ng_for';
-import * as import43 from '../../../../node_modules/@angular/forms/src/directives/reactive_directives/form_group_directive.ngfactory';
-import * as import44 from '@angular/forms/src/directives/reactive_directives/form_group_directive';
-import * as import45 from '@angular/forms/src/directives/control_container';
-export class Wrapper_ListFilter {
+import * as import15 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import16 from 'angulartics2/dist/core/angulartics2';
+import * as import17 from '@angular/core/src/linker/view_container';
+import * as import18 from '../../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
+import * as import19 from '../../../../node_modules/@angular/forms/src/directives/default_value_accessor.ngfactory';
+import * as import20 from '@angular/core/src/change_detection/change_detection_util';
+import * as import21 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import22 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import23 from '@angular/core/src/linker/element_ref';
+import * as import24 from '@angular/common/src/directives/ng_class';
+import * as import25 from '@angular/forms/src/directives/default_value_accessor';
+import * as import26 from '@angular/forms/src/directives/control_value_accessor';
+import * as import27 from '../../../../node_modules/@angular/forms/src/directives/checkbox_value_accessor.ngfactory';
+import * as import28 from '../../../../node_modules/@angular/forms/src/directives/reactive_directives/form_control_name.ngfactory';
+import * as import29 from '../../../../node_modules/@angular/forms/src/directives/ng_control_status.ngfactory';
+import * as import30 from '@angular/forms/src/directives/checkbox_value_accessor';
+import * as import31 from '@angular/forms/src/directives/reactive_directives/form_control_name';
+import * as import32 from '@angular/forms/src/directives/ng_control';
+import * as import33 from '@angular/forms/src/directives/ng_control_status';
+import * as import34 from '../../../../node_modules/@angular/forms/src/directives/select_control_value_accessor.ngfactory';
+import * as import35 from '../../../../node_modules/@angular/forms/src/directives/select_multiple_control_value_accessor.ngfactory';
+import * as import36 from '@angular/forms/src/directives/select_control_value_accessor';
+import * as import37 from '@angular/forms/src/directives/select_multiple_control_value_accessor';
+import * as import38 from '../../../../node_modules/@angular/forms/src/directives/radio_control_value_accessor.ngfactory';
+import * as import39 from '@angular/forms/src/directives/radio_control_value_accessor';
+import * as import40 from '../../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import41 from '../../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import42 from '@angular/core/src/linker/template_ref';
+import * as import43 from '@angular/common/src/directives/ng_if';
+import * as import44 from '@angular/common/src/directives/ng_for';
+import * as import45 from '../../../../node_modules/@angular/forms/src/directives/reactive_directives/form_group_directive.ngfactory';
+import * as import46 from '@angular/forms/src/directives/reactive_directives/form_group_directive';
+import * as import47 from '@angular/forms/src/directives/control_container';
+export class Wrapper_ListFilterComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.ListFilter;
+  context:import0.ListFilterComponent;
   /*private*/ _changed:boolean;
-  constructor(p0:any,p1:any,p2:any,p3:any,p4:any,p5:any,p6:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any,p4:any,p5:any,p6:any,p7:any,p8:any) {
     this._changed = false;
-    this.context = new import0.ListFilter(p0,p1,p2,p3,p4,p5,p6);
+    this.context = new import0.ListFilterComponent(p0,p1,p2,p3,p4,p5,p6,p7,p8);
   }
   ngOnDetach(view:import1.AppView<any>,componentView:import1.AppView<any>,el:any):void {
   }
@@ -79,28 +81,28 @@ export class Wrapper_ListFilter {
     this._eventHandler = _eventHandler;
   }
 }
-var renderType_ListFilter_Host:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,([] as any[]),{});
-class View_ListFilter_Host0 extends import1.AppView<any> {
+var renderType_ListFilterComponent_Host:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,([] as any[]),{});
+class View_ListFilterComponent_Host0 extends import1.AppView<any> {
   _el_0:any;
-  compView_0:import1.AppView<import0.ListFilter>;
-  _ListFilter_0_3:Wrapper_ListFilter;
+  compView_0:import1.AppView<import0.ListFilterComponent>;
+  _ListFilterComponent_0_3:Wrapper_ListFilterComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_ListFilter_Host0,renderType_ListFilter_Host,import5.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
+    super(View_ListFilterComponent_Host0,renderType_ListFilterComponent_Host,import5.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'app-filter',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_ListFilter0(this.viewUtils,this,0,this._el_0);
-    this._ListFilter_0_3 = new Wrapper_ListFilter(this.injectorGet(import8.ListService,this.parentIndex),this.injectorGet(import9.ActivatedRoute,this.parentIndex),this.injectorGet(import10.Router,this.parentIndex),this.injectorGet(import11.ListingComponent,this.parentIndex),this.injectorGet(import12.DataService,this.parentIndex),this.injectorGet(import13.Location,this.parentIndex),this.injectorGet(import14.FormBuilder,this.parentIndex));
-    this.compView_0.create(this._ListFilter_0_3.context);
+    this.compView_0 = new View_ListFilterComponent0(this.viewUtils,this,0,this._el_0);
+    this._ListFilterComponent_0_3 = new Wrapper_ListFilterComponent(this.injectorGet(import8.ListService,this.parentIndex),this.injectorGet(import9.ActivatedRoute,this.parentIndex),this.injectorGet(import10.Router,this.parentIndex),this.injectorGet(import11.ListingComponent,this.parentIndex),this.injectorGet(import12.DataService,this.parentIndex),this.injectorGet(import13.Location,this.parentIndex),this.injectorGet(import14.FormBuilder,this.parentIndex),this.injectorGet(import15.Angulartics2GoogleAnalytics,this.parentIndex),this.injectorGet(import16.Angulartics2,this.parentIndex));
+    this.compView_0.create(this._ListFilterComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._ListFilter_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._ListFilterComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.ListFilter) && (0 === requestNodeIndex))) { return this._ListFilter_0_3.context; }
+    if (((token === import0.ListFilterComponent) && (0 === requestNodeIndex))) { return this._ListFilterComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    this._ListFilter_0_3.ngDoCheck(this,this._el_0,throwOnChange);
+    this._ListFilterComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange);
     this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -110,13 +112,13 @@ class View_ListFilter_Host0 extends import1.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const ListFilterNgFactory:import7.ComponentFactory<import0.ListFilter> = new import7.ComponentFactory<import0.ListFilter>('app-filter',View_ListFilter_Host0,import0.ListFilter);
-const styles_ListFilter:any[] = ([] as any[]);
-class View_ListFilter1 extends import1.AppView<any> {
+export const ListFilterComponentNgFactory:import7.ComponentFactory<import0.ListFilterComponent> = new import7.ComponentFactory<import0.ListFilterComponent>('app-filter',View_ListFilterComponent_Host0,import0.ListFilterComponent);
+const styles_ListFilterComponent:any[] = ([] as any[]);
+class View_ListFilterComponent1 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter1,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent1,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',new import3.InlineArray2(2,'class','clear'),(null as any));
@@ -142,11 +144,11 @@ class View_ListFilter1 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter2 extends import1.AppView<any> {
+class View_ListFilterComponent2 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter2,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent2,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',new import3.InlineArray2(2,'class','clear'),(null as any));
@@ -172,11 +174,11 @@ class View_ListFilter2 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter3 extends import1.AppView<any> {
+class View_ListFilterComponent3 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter3,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent3,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',new import3.InlineArray2(2,'class','clear'),(null as any));
@@ -202,20 +204,20 @@ class View_ListFilter3 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter4 extends import1.AppView<any> {
+class View_ListFilterComponent4 extends import1.AppView<any> {
   _el_0:any;
-  _NgClass_0_3:import16.Wrapper_NgClass;
-  _DefaultValueAccessor_0_4:import17.Wrapper_DefaultValueAccessor;
+  _NgClass_0_3:import18.Wrapper_NgClass;
+  _DefaultValueAccessor_0_4:import19.Wrapper_DefaultValueAccessor;
   __NG_VALUE_ACCESSOR_0_5:any[];
   _text_1:any;
   _map_5:any;
   /*private*/ _expr_6:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter4,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent4,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._map_5 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {active: p0};
     });
-    this._expr_6 = import18.UNINITIALIZED;
+    this._expr_6 = import20.UNINITIALIZED;
   }
   get _NG_VALUE_ACCESSOR_0_5():any[] {
     if ((this.__NG_VALUE_ACCESSOR_0_5 == null)) { (this.__NG_VALUE_ACCESSOR_0_5 = [this._DefaultValueAccessor_0_4.context]); }
@@ -223,8 +225,8 @@ class View_ListFilter4 extends import1.AppView<any> {
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'button',new import3.InlineArray2(2,'ngDefaultControl',''),(null as any));
-    this._NgClass_0_3 = new import16.Wrapper_NgClass(this.parentView.parentView.injectorGet(import19.IterableDiffers,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import20.KeyValueDiffers,this.parentView.parentIndex),new import21.ElementRef(this._el_0),this.renderer);
-    this._DefaultValueAccessor_0_4 = new import17.Wrapper_DefaultValueAccessor(this.renderer,new import21.ElementRef(this._el_0));
+    this._NgClass_0_3 = new import18.Wrapper_NgClass(this.parentView.parentView.injectorGet(import21.IterableDiffers,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import22.KeyValueDiffers,this.parentView.parentIndex),new import23.ElementRef(this._el_0),this.renderer);
+    this._DefaultValueAccessor_0_4 = new import19.Wrapper_DefaultValueAccessor(this.renderer,new import23.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText(this._el_0,'',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'click',(null as any),'input',(null as any),'blur',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -235,9 +237,9 @@ class View_ListFilter4 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import22.NgClass) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgClass_0_3.context; }
-    if (((token === import23.DefaultValueAccessor) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._DefaultValueAccessor_0_4.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NG_VALUE_ACCESSOR_0_5; }
+    if (((token === import24.NgClass) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgClass_0_3.context; }
+    if (((token === import25.DefaultValueAccessor) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._DefaultValueAccessor_0_4.context; }
+    if (((token === import26.NG_VALUE_ACCESSOR) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NG_VALUE_ACCESSOR_0_5; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -267,26 +269,26 @@ class View_ListFilter4 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter5 extends import1.AppView<any> {
+class View_ListFilterComponent5 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
   _text_3:any;
   _el_4:any;
-  _CheckboxControlValueAccessor_4_3:import25.Wrapper_CheckboxControlValueAccessor;
+  _CheckboxControlValueAccessor_4_3:import27.Wrapper_CheckboxControlValueAccessor;
   _NG_VALUE_ACCESSOR_4_4:any[];
-  _FormControlName_4_5:import26.Wrapper_FormControlName;
+  _FormControlName_4_5:import28.Wrapper_FormControlName;
   _NgControl_4_6:any;
-  _NgControlStatus_4_7:import27.Wrapper_NgControlStatus;
+  _NgControlStatus_4_7:import29.Wrapper_NgControlStatus;
   _text_5:any;
   _el_6:any;
   _text_7:any;
   _text_8:any;
   _text_9:any;
   /*private*/ _expr_15:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter5,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_15 = import18.UNINITIALIZED;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent5,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_15 = import20.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','form-group hidden-xs-up'),(null as any));
@@ -294,11 +296,11 @@ class View_ListFilter5 extends import1.AppView<any> {
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'label',new import3.InlineArray2(2,'class','custom-control custom-checkbox'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'\n        ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'input',new import3.InlineArray2(2,'type','checkbox'),(null as any));
-    this._CheckboxControlValueAccessor_4_3 = new import25.Wrapper_CheckboxControlValueAccessor(this.renderer,new import21.ElementRef(this._el_4));
+    this._CheckboxControlValueAccessor_4_3 = new import27.Wrapper_CheckboxControlValueAccessor(this.renderer,new import23.ElementRef(this._el_4));
     this._NG_VALUE_ACCESSOR_4_4 = [this._CheckboxControlValueAccessor_4_3.context];
-    this._FormControlName_4_5 = new import26.Wrapper_FormControlName((<View_ListFilter0>this.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_4_4);
+    this._FormControlName_4_5 = new import28.Wrapper_FormControlName((<View_ListFilterComponent0>this.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_4_4);
     this._NgControl_4_6 = this._FormControlName_4_5.context;
-    this._NgControlStatus_4_7 = new import27.Wrapper_NgControlStatus(this._NgControl_4_6);
+    this._NgControlStatus_4_7 = new import29.Wrapper_NgControlStatus(this._NgControl_4_6);
     this._text_5 = this.renderer.createText(this._el_2,'\n        ',(null as any));
     this._el_6 = import3.createRenderElement(this.renderer,this._el_2,'span',new import3.InlineArray2(2,'class','custom-control-description'),(null as any));
     this._text_7 = this.renderer.createText(this._el_6,'',(null as any));
@@ -321,11 +323,11 @@ class View_ListFilter5 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import28.CheckboxControlValueAccessor) && (4 === requestNodeIndex))) { return this._CheckboxControlValueAccessor_4_3.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && (4 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_4_4; }
-    if (((token === import29.FormControlName) && (4 === requestNodeIndex))) { return this._FormControlName_4_5.context; }
-    if (((token === import30.NgControl) && (4 === requestNodeIndex))) { return this._NgControl_4_6; }
-    if (((token === import31.NgControlStatus) && (4 === requestNodeIndex))) { return this._NgControlStatus_4_7.context; }
+    if (((token === import30.CheckboxControlValueAccessor) && (4 === requestNodeIndex))) { return this._CheckboxControlValueAccessor_4_3.context; }
+    if (((token === import26.NG_VALUE_ACCESSOR) && (4 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_4_4; }
+    if (((token === import31.FormControlName) && (4 === requestNodeIndex))) { return this._FormControlName_4_5.context; }
+    if (((token === import32.NgControl) && (4 === requestNodeIndex))) { return this._NgControl_4_6; }
+    if (((token === import33.NgControlStatus) && (4 === requestNodeIndex))) { return this._NgControlStatus_4_7.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -354,11 +356,11 @@ class View_ListFilter5 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter6 extends import1.AppView<any> {
+class View_ListFilterComponent6 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter6,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent6,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',new import3.InlineArray2(2,'class','clear'),(null as any));
@@ -384,20 +386,20 @@ class View_ListFilter6 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter7 extends import1.AppView<any> {
+class View_ListFilterComponent7 extends import1.AppView<any> {
   _el_0:any;
-  _NgSelectOption_0_3:import32.Wrapper_NgSelectOption;
-  _NgSelectMultipleOption_0_4:import33.Wrapper_NgSelectMultipleOption;
+  _NgSelectOption_0_3:import34.Wrapper_NgSelectOption;
+  _NgSelectMultipleOption_0_4:import35.Wrapper_NgSelectMultipleOption;
   _text_1:any;
   /*private*/ _expr_4:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter7,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_4 = import18.UNINITIALIZED;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent7,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_4 = import20.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'option',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._NgSelectOption_0_3 = new import32.Wrapper_NgSelectOption(new import21.ElementRef(this._el_0),this.renderer,(<View_ListFilter0>this.parentView)._SelectControlValueAccessor_52_3.context);
-    this._NgSelectMultipleOption_0_4 = new import33.Wrapper_NgSelectMultipleOption(new import21.ElementRef(this._el_0),this.renderer,(null as any));
+    this._NgSelectOption_0_3 = new import34.Wrapper_NgSelectOption(new import23.ElementRef(this._el_0),this.renderer,(<View_ListFilterComponent0>this.parentView)._SelectControlValueAccessor_52_3.context);
+    this._NgSelectMultipleOption_0_4 = new import35.Wrapper_NgSelectMultipleOption(new import23.ElementRef(this._el_0),this.renderer,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -407,8 +409,8 @@ class View_ListFilter7 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import34.NgSelectOption) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgSelectOption_0_3.context; }
-    if (((token === import35.NgSelectMultipleOption) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgSelectMultipleOption_0_4.context; }
+    if (((token === import36.NgSelectOption) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgSelectOption_0_3.context; }
+    if (((token === import37.NgSelectMultipleOption) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgSelectMultipleOption_0_4.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -432,11 +434,11 @@ class View_ListFilter7 extends import1.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_ListFilter8 extends import1.AppView<any> {
+class View_ListFilterComponent8 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter8,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent8,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',new import3.InlineArray2(2,'class','clear'),(null as any));
@@ -462,31 +464,24 @@ class View_ListFilter8 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter9 extends import1.AppView<any> {
+class View_ListFilterComponent9 extends import1.AppView<any> {
   _el_0:any;
-  _NgClass_0_3:import16.Wrapper_NgClass;
-  _DefaultValueAccessor_0_4:import17.Wrapper_DefaultValueAccessor;
-  __NG_VALUE_ACCESSOR_0_5:any[];
+  _NgClass_0_3:import18.Wrapper_NgClass;
   _text_1:any;
-  _map_5:any;
-  /*private*/ _expr_6:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter9,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._map_5 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+  _map_3:any;
+  /*private*/ _expr_4:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent9,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._map_3 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {active: p0};
     });
-    this._expr_6 = import18.UNINITIALIZED;
-  }
-  get _NG_VALUE_ACCESSOR_0_5():any[] {
-    if ((this.__NG_VALUE_ACCESSOR_0_5 == null)) { (this.__NG_VALUE_ACCESSOR_0_5 = [this._DefaultValueAccessor_0_4.context]); }
-    return this.__NG_VALUE_ACCESSOR_0_5;
+    this._expr_4 = import20.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'button',new import3.InlineArray4(4,'class','btn btn-sm','ngDefaultControl',''),(null as any));
-    this._NgClass_0_3 = new import16.Wrapper_NgClass(this.parentView.parentView.injectorGet(import19.IterableDiffers,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import20.KeyValueDiffers,this.parentView.parentIndex),new import21.ElementRef(this._el_0),this.renderer);
-    this._DefaultValueAccessor_0_4 = new import17.Wrapper_DefaultValueAccessor(this.renderer,new import21.ElementRef(this._el_0));
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'button',new import3.InlineArray2(2,'class','btn btn-sm'),(null as any));
+    this._NgClass_0_3 = new import18.Wrapper_NgClass(this.parentView.parentView.injectorGet(import21.IterableDiffers,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import22.KeyValueDiffers,this.parentView.parentIndex),new import23.ElementRef(this._el_0),this.renderer);
     this._text_1 = this.renderer.createText(this._el_0,'',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'click',(null as any),'input',(null as any),'blur',(null as any)),this.eventHandler(this.handleEvent_0));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -495,22 +490,19 @@ class View_ListFilter9 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import22.NgClass) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgClass_0_3.context; }
-    if (((token === import23.DefaultValueAccessor) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._DefaultValueAccessor_0_4.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NG_VALUE_ACCESSOR_0_5; }
+    if (((token === import24.NgClass) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgClass_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = 'btn btn-sm';
     this._NgClass_0_3.check_klass(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this._map_5(this.context.$implicit.active);
+    const currVal_0_0_1:any = this._map_3(this.context.$implicit.active);
     this._NgClass_0_3.check_ngClass(currVal_0_0_1,throwOnChange,false);
     this._NgClass_0_3.ngDoCheck(this,this._el_0,throwOnChange);
-    this._DefaultValueAccessor_0_4.ngDoCheck(this,this._el_0,throwOnChange);
-    const currVal_6:any = import3.inlineInterpolate(1,'',this.context.$implicit.label,'');
-    if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
-      this.renderer.setText(this._text_1,currVal_6);
-      this._expr_6 = currVal_6;
+    const currVal_4:any = import3.inlineInterpolate(1,'',this.context.$implicit.label,'');
+    if (import3.checkBinding(throwOnChange,this._expr_4,currVal_4)) {
+      this.renderer.setText(this._text_1,currVal_4);
+      this._expr_4 = currVal_4;
     }
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
@@ -519,7 +511,6 @@ class View_ListFilter9 extends import1.AppView<any> {
   handleEvent_0(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    result = (this._DefaultValueAccessor_0_4.handleEvent(eventName,$event) && result);
     if ((eventName == 'click')) {
       const pd_sub_0:any = ((<any>this.parentView.context.setFilter($event,this.context.$implicit)) !== false);
       result = (pd_sub_0 && result);
@@ -527,26 +518,26 @@ class View_ListFilter9 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter10 extends import1.AppView<any> {
+class View_ListFilterComponent10 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
   _text_3:any;
   _el_4:any;
-  _CheckboxControlValueAccessor_4_3:import25.Wrapper_CheckboxControlValueAccessor;
+  _CheckboxControlValueAccessor_4_3:import27.Wrapper_CheckboxControlValueAccessor;
   _NG_VALUE_ACCESSOR_4_4:any[];
-  _FormControlName_4_5:import26.Wrapper_FormControlName;
+  _FormControlName_4_5:import28.Wrapper_FormControlName;
   _NgControl_4_6:any;
-  _NgControlStatus_4_7:import27.Wrapper_NgControlStatus;
+  _NgControlStatus_4_7:import29.Wrapper_NgControlStatus;
   _text_5:any;
   _el_6:any;
   _text_7:any;
   _text_8:any;
   _text_9:any;
   /*private*/ _expr_15:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter10,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_15 = import18.UNINITIALIZED;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent10,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_15 = import20.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','form-group hidden-xs-up'),(null as any));
@@ -554,11 +545,11 @@ class View_ListFilter10 extends import1.AppView<any> {
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'label',new import3.InlineArray2(2,'class','custom-control custom-checkbox'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'\n        ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'input',new import3.InlineArray2(2,'type','checkbox'),(null as any));
-    this._CheckboxControlValueAccessor_4_3 = new import25.Wrapper_CheckboxControlValueAccessor(this.renderer,new import21.ElementRef(this._el_4));
+    this._CheckboxControlValueAccessor_4_3 = new import27.Wrapper_CheckboxControlValueAccessor(this.renderer,new import23.ElementRef(this._el_4));
     this._NG_VALUE_ACCESSOR_4_4 = [this._CheckboxControlValueAccessor_4_3.context];
-    this._FormControlName_4_5 = new import26.Wrapper_FormControlName((<View_ListFilter0>this.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_4_4);
+    this._FormControlName_4_5 = new import28.Wrapper_FormControlName((<View_ListFilterComponent0>this.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_4_4);
     this._NgControl_4_6 = this._FormControlName_4_5.context;
-    this._NgControlStatus_4_7 = new import27.Wrapper_NgControlStatus(this._NgControl_4_6);
+    this._NgControlStatus_4_7 = new import29.Wrapper_NgControlStatus(this._NgControl_4_6);
     this._text_5 = this.renderer.createText(this._el_2,'\n        ',(null as any));
     this._el_6 = import3.createRenderElement(this.renderer,this._el_2,'span',new import3.InlineArray2(2,'class','custom-control-description'),(null as any));
     this._text_7 = this.renderer.createText(this._el_6,'',(null as any));
@@ -581,11 +572,11 @@ class View_ListFilter10 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import28.CheckboxControlValueAccessor) && (4 === requestNodeIndex))) { return this._CheckboxControlValueAccessor_4_3.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && (4 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_4_4; }
-    if (((token === import29.FormControlName) && (4 === requestNodeIndex))) { return this._FormControlName_4_5.context; }
-    if (((token === import30.NgControl) && (4 === requestNodeIndex))) { return this._NgControl_4_6; }
-    if (((token === import31.NgControlStatus) && (4 === requestNodeIndex))) { return this._NgControlStatus_4_7.context; }
+    if (((token === import30.CheckboxControlValueAccessor) && (4 === requestNodeIndex))) { return this._CheckboxControlValueAccessor_4_3.context; }
+    if (((token === import26.NG_VALUE_ACCESSOR) && (4 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_4_4; }
+    if (((token === import31.FormControlName) && (4 === requestNodeIndex))) { return this._FormControlName_4_5.context; }
+    if (((token === import32.NgControl) && (4 === requestNodeIndex))) { return this._NgControl_4_6; }
+    if (((token === import33.NgControlStatus) && (4 === requestNodeIndex))) { return this._NgControlStatus_4_7.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -614,11 +605,11 @@ class View_ListFilter10 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter11 extends import1.AppView<any> {
+class View_ListFilterComponent11 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter11,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent11,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',new import3.InlineArray2(2,'class','clear'),(null as any));
@@ -644,7 +635,7 @@ class View_ListFilter11 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter12 extends import1.AppView<any> {
+class View_ListFilterComponent12 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -654,12 +645,12 @@ class View_ListFilter12 extends import1.AppView<any> {
   _el_6:any;
   _text_7:any;
   _el_8:any;
-  _DefaultValueAccessor_8_3:import17.Wrapper_DefaultValueAccessor;
-  _RadioControlValueAccessor_8_4:import36.Wrapper_RadioControlValueAccessor;
+  _DefaultValueAccessor_8_3:import19.Wrapper_DefaultValueAccessor;
+  _RadioControlValueAccessor_8_4:import38.Wrapper_RadioControlValueAccessor;
   _NG_VALUE_ACCESSOR_8_5:any[];
-  _FormControlName_8_6:import26.Wrapper_FormControlName;
+  _FormControlName_8_6:import28.Wrapper_FormControlName;
   _NgControl_8_7:any;
-  _NgControlStatus_8_8:import27.Wrapper_NgControlStatus;
+  _NgControlStatus_8_8:import29.Wrapper_NgControlStatus;
   _text_9:any;
   _el_10:any;
   _text_11:any;
@@ -670,11 +661,11 @@ class View_ListFilter12 extends import1.AppView<any> {
   /*private*/ _expr_22:any;
   /*private*/ _expr_23:any;
   /*private*/ _expr_24:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter12,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_22 = import18.UNINITIALIZED;
-    this._expr_23 = import18.UNINITIALIZED;
-    this._expr_24 = import18.UNINITIALIZED;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent12,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_22 = import20.UNINITIALIZED;
+    this._expr_23 = import20.UNINITIALIZED;
+    this._expr_24 = import20.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','form-group'),(null as any));
@@ -686,16 +677,16 @@ class View_ListFilter12 extends import1.AppView<any> {
     this._el_6 = import3.createRenderElement(this.renderer,this._el_4,'div',new import3.InlineArray2(2,'class','custom-control custom-radio'),(null as any));
     this._text_7 = this.renderer.createText(this._el_6,'\n            ',(null as any));
     this._el_8 = import3.createRenderElement(this.renderer,this._el_6,'input',new import3.InlineArray4(4,'class','custom-control-input','type','radio'),(null as any));
-    this._DefaultValueAccessor_8_3 = new import17.Wrapper_DefaultValueAccessor(this.renderer,new import21.ElementRef(this._el_8));
-    this._RadioControlValueAccessor_8_4 = new import36.Wrapper_RadioControlValueAccessor(this.renderer,new import21.ElementRef(this._el_8),this.parentView.parentView.injectorGet(import37.RadioControlRegistry,this.parentView.parentIndex),this.injector(8));
+    this._DefaultValueAccessor_8_3 = new import19.Wrapper_DefaultValueAccessor(this.renderer,new import23.ElementRef(this._el_8));
+    this._RadioControlValueAccessor_8_4 = new import38.Wrapper_RadioControlValueAccessor(this.renderer,new import23.ElementRef(this._el_8),this.parentView.parentView.injectorGet(import39.RadioControlRegistry,this.parentView.parentIndex),this.injector(8));
     this._NG_VALUE_ACCESSOR_8_5 = [
       this._DefaultValueAccessor_8_3.context,
       this._RadioControlValueAccessor_8_4.context
     ]
     ;
-    this._FormControlName_8_6 = new import26.Wrapper_FormControlName((<View_ListFilter0>this.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_8_5);
+    this._FormControlName_8_6 = new import28.Wrapper_FormControlName((<View_ListFilterComponent0>this.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_8_5);
     this._NgControl_8_7 = this._FormControlName_8_6.context;
-    this._NgControlStatus_8_8 = new import27.Wrapper_NgControlStatus(this._NgControl_8_7);
+    this._NgControlStatus_8_8 = new import29.Wrapper_NgControlStatus(this._NgControl_8_7);
     this._text_9 = this.renderer.createText(this._el_6,'\n            ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_6,'div',new import3.InlineArray2(2,'class','custom-control-indicator'),(null as any));
     this._text_11 = this.renderer.createText(this._el_6,'\n          ',(null as any));
@@ -726,12 +717,12 @@ class View_ListFilter12 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import23.DefaultValueAccessor) && (8 === requestNodeIndex))) { return this._DefaultValueAccessor_8_3.context; }
-    if (((token === import37.RadioControlValueAccessor) && (8 === requestNodeIndex))) { return this._RadioControlValueAccessor_8_4.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && (8 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_8_5; }
-    if (((token === import29.FormControlName) && (8 === requestNodeIndex))) { return this._FormControlName_8_6.context; }
-    if (((token === import30.NgControl) && (8 === requestNodeIndex))) { return this._NgControl_8_7; }
-    if (((token === import31.NgControlStatus) && (8 === requestNodeIndex))) { return this._NgControlStatus_8_8.context; }
+    if (((token === import25.DefaultValueAccessor) && (8 === requestNodeIndex))) { return this._DefaultValueAccessor_8_3.context; }
+    if (((token === import39.RadioControlValueAccessor) && (8 === requestNodeIndex))) { return this._RadioControlValueAccessor_8_4.context; }
+    if (((token === import26.NG_VALUE_ACCESSOR) && (8 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_8_5; }
+    if (((token === import31.FormControlName) && (8 === requestNodeIndex))) { return this._FormControlName_8_6.context; }
+    if (((token === import32.NgControl) && (8 === requestNodeIndex))) { return this._NgControl_8_7; }
+    if (((token === import33.NgControlStatus) && (8 === requestNodeIndex))) { return this._NgControlStatus_8_8.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -783,11 +774,11 @@ class View_ListFilter12 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter14 extends import1.AppView<any> {
+class View_ListFilterComponent14 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter14,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent14,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',new import3.InlineArray2(2,'class','clear'),(null as any));
@@ -813,17 +804,17 @@ class View_ListFilter14 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter15 extends import1.AppView<any> {
+class View_ListFilterComponent15 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
   _text_3:any;
   _el_4:any;
-  _CheckboxControlValueAccessor_4_3:import25.Wrapper_CheckboxControlValueAccessor;
+  _CheckboxControlValueAccessor_4_3:import27.Wrapper_CheckboxControlValueAccessor;
   _NG_VALUE_ACCESSOR_4_4:any[];
-  _FormControlName_4_5:import26.Wrapper_FormControlName;
+  _FormControlName_4_5:import28.Wrapper_FormControlName;
   _NgControl_4_6:any;
-  _NgControlStatus_4_7:import27.Wrapper_NgControlStatus;
+  _NgControlStatus_4_7:import29.Wrapper_NgControlStatus;
   _text_5:any;
   _el_6:any;
   _text_7:any;
@@ -834,10 +825,10 @@ class View_ListFilter15 extends import1.AppView<any> {
   _text_12:any;
   /*private*/ _expr_18:any;
   /*private*/ _expr_19:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter15,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_18 = import18.UNINITIALIZED;
-    this._expr_19 = import18.UNINITIALIZED;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent15,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_18 = import20.UNINITIALIZED;
+    this._expr_19 = import20.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','form-group'),(null as any));
@@ -845,11 +836,11 @@ class View_ListFilter15 extends import1.AppView<any> {
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'label',new import3.InlineArray2(2,'class','custom-control custom-checkbox'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'\n        ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'input',new import3.InlineArray4(4,'class','custom-control-input','type','checkbox'),(null as any));
-    this._CheckboxControlValueAccessor_4_3 = new import25.Wrapper_CheckboxControlValueAccessor(this.renderer,new import21.ElementRef(this._el_4));
+    this._CheckboxControlValueAccessor_4_3 = new import27.Wrapper_CheckboxControlValueAccessor(this.renderer,new import23.ElementRef(this._el_4));
     this._NG_VALUE_ACCESSOR_4_4 = [this._CheckboxControlValueAccessor_4_3.context];
-    this._FormControlName_4_5 = new import26.Wrapper_FormControlName((<View_ListFilter0>this.parentView.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_4_4);
+    this._FormControlName_4_5 = new import28.Wrapper_FormControlName((<View_ListFilterComponent0>this.parentView.parentView)._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_4_4);
     this._NgControl_4_6 = this._FormControlName_4_5.context;
-    this._NgControlStatus_4_7 = new import27.Wrapper_NgControlStatus(this._NgControl_4_6);
+    this._NgControlStatus_4_7 = new import29.Wrapper_NgControlStatus(this._NgControl_4_6);
     this._text_5 = this.renderer.createText(this._el_2,'\n        ',(null as any));
     this._el_6 = import3.createRenderElement(this.renderer,this._el_2,'div',new import3.InlineArray2(2,'class','custom-control-indicator'),(null as any));
     this._text_7 = this.renderer.createText(this._el_2,'\n        ',(null as any));
@@ -878,11 +869,11 @@ class View_ListFilter15 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import28.CheckboxControlValueAccessor) && (4 === requestNodeIndex))) { return this._CheckboxControlValueAccessor_4_3.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && (4 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_4_4; }
-    if (((token === import29.FormControlName) && (4 === requestNodeIndex))) { return this._FormControlName_4_5.context; }
-    if (((token === import30.NgControl) && (4 === requestNodeIndex))) { return this._NgControl_4_6; }
-    if (((token === import31.NgControlStatus) && (4 === requestNodeIndex))) { return this._NgControlStatus_4_7.context; }
+    if (((token === import30.CheckboxControlValueAccessor) && (4 === requestNodeIndex))) { return this._CheckboxControlValueAccessor_4_3.context; }
+    if (((token === import26.NG_VALUE_ACCESSOR) && (4 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_4_4; }
+    if (((token === import31.FormControlName) && (4 === requestNodeIndex))) { return this._FormControlName_4_5.context; }
+    if (((token === import32.NgControl) && (4 === requestNodeIndex))) { return this._NgControl_4_6; }
+    if (((token === import33.NgControlStatus) && (4 === requestNodeIndex))) { return this._NgControlStatus_4_7.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -920,7 +911,7 @@ class View_ListFilter15 extends import1.AppView<any> {
     return result;
   }
 }
-class View_ListFilter13 extends import1.AppView<any> {
+class View_ListFilterComponent13 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -928,21 +919,21 @@ class View_ListFilter13 extends import1.AppView<any> {
   _el_4:any;
   _text_5:any;
   _anchor_6:any;
-  /*private*/ _vc_6:import15.ViewContainer;
+  /*private*/ _vc_6:import17.ViewContainer;
   _TemplateRef_6_5:any;
-  _NgIf_6_6:import38.Wrapper_NgIf;
+  _NgIf_6_6:import40.Wrapper_NgIf;
   _text_7:any;
   _text_8:any;
   _text_9:any;
   _anchor_10:any;
-  /*private*/ _vc_10:import15.ViewContainer;
+  /*private*/ _vc_10:import17.ViewContainer;
   _TemplateRef_10_5:any;
-  _NgFor_10_6:import39.Wrapper_NgFor;
+  _NgFor_10_6:import41.Wrapper_NgFor;
   _text_11:any;
   /*private*/ _expr_18:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
-    super(View_ListFilter13,renderType_ListFilter,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_18 = import18.UNINITIALIZED;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+    super(View_ListFilterComponent13,renderType_ListFilterComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_18 = import20.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'fieldset',new import3.InlineArray2(2,'class','filter-fieldset flex-none'),(null as any));
@@ -952,16 +943,16 @@ class View_ListFilter13 extends import1.AppView<any> {
     this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'a',new import3.InlineArray4(4,'class','collapse-toggle','href','#'),(null as any));
     this._text_5 = this.renderer.createText(this._el_4,'',(null as any));
     this._anchor_6 = this.renderer.createTemplateAnchor(this._el_4,(null as any));
-    this._vc_6 = new import15.ViewContainer(6,4,this,this._anchor_6);
-    this._TemplateRef_6_5 = new import40.TemplateRef_(this,6,this._anchor_6);
-    this._NgIf_6_6 = new import38.Wrapper_NgIf(this._vc_6.vcRef,this._TemplateRef_6_5);
+    this._vc_6 = new import17.ViewContainer(6,4,this,this._anchor_6);
+    this._TemplateRef_6_5 = new import42.TemplateRef_(this,6,this._anchor_6);
+    this._NgIf_6_6 = new import40.Wrapper_NgIf(this._vc_6.vcRef,this._TemplateRef_6_5);
     this._text_7 = this.renderer.createText(this._el_4,'\n      ',(null as any));
     this._text_8 = this.renderer.createText(this._el_2,'\n    ',(null as any));
     this._text_9 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this._anchor_10 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_10 = new import15.ViewContainer(10,0,this,this._anchor_10);
-    this._TemplateRef_10_5 = new import40.TemplateRef_(this,10,this._anchor_10);
-    this._NgFor_10_6 = new import39.Wrapper_NgFor(this._vc_10.vcRef,this._TemplateRef_10_5,this.parentView.parentView.injectorGet(import19.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
+    this._vc_10 = new import17.ViewContainer(10,0,this,this._anchor_10);
+    this._TemplateRef_10_5 = new import42.TemplateRef_(this,10,this._anchor_10);
+    this._NgFor_10_6 = new import41.Wrapper_NgFor(this._vc_10.vcRef,this._TemplateRef_10_5,this.parentView.parentView.injectorGet(import21.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
     this._text_11 = this.renderer.createText(this._el_0,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_4,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_4));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -982,10 +973,10 @@ class View_ListFilter13 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import40.TemplateRef) && (6 === requestNodeIndex))) { return this._TemplateRef_6_5; }
-    if (((token === import41.NgIf) && (6 === requestNodeIndex))) { return this._NgIf_6_6.context; }
-    if (((token === import40.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
-    if (((token === import42.NgFor) && (10 === requestNodeIndex))) { return this._NgFor_10_6.context; }
+    if (((token === import42.TemplateRef) && (6 === requestNodeIndex))) { return this._TemplateRef_6_5; }
+    if (((token === import43.NgIf) && (6 === requestNodeIndex))) { return this._NgIf_6_6.context; }
+    if (((token === import42.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
+    if (((token === import44.NgFor) && (10 === requestNodeIndex))) { return this._NgFor_10_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -1011,8 +1002,8 @@ class View_ListFilter13 extends import1.AppView<any> {
     cb(this._el_0,ctx);
   }
   createEmbeddedViewInternal(nodeIndex:number):import1.AppView<any> {
-    if ((nodeIndex == 6)) { return new View_ListFilter14(this.viewUtils,this,6,this._anchor_6,this._vc_6); }
-    if ((nodeIndex == 10)) { return new View_ListFilter15(this.viewUtils,this,10,this._anchor_10,this._vc_10); }
+    if ((nodeIndex == 6)) { return new View_ListFilterComponent14(this.viewUtils,this,6,this._anchor_6,this._vc_6); }
+    if ((nodeIndex == 10)) { return new View_ListFilterComponent15(this.viewUtils,this,10,this._anchor_10,this._vc_10); }
     return (null as any);
   }
   handleEvent_4(eventName:string,$event:any):boolean {
@@ -1025,14 +1016,14 @@ class View_ListFilter13 extends import1.AppView<any> {
     return result;
   }
 }
-var renderType_ListFilter:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,styles_ListFilter,{});
-export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
+var renderType_ListFilterComponent:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,styles_ListFilterComponent,{});
+export class View_ListFilterComponent0 extends import1.AppView<import0.ListFilterComponent> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  _FormGroupDirective_2_3:import43.Wrapper_FormGroupDirective;
+  _FormGroupDirective_2_3:import45.Wrapper_FormGroupDirective;
   _ControlContainer_2_4:any;
-  _NgControlStatusGroup_2_5:import27.Wrapper_NgControlStatusGroup;
+  _NgControlStatusGroup_2_5:import29.Wrapper_NgControlStatusGroup;
   _text_3:any;
   _el_4:any;
   _text_5:any;
@@ -1040,9 +1031,9 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
   _text_7:any;
   _text_8:any;
   _anchor_9:any;
-  /*private*/ _vc_9:import15.ViewContainer;
+  /*private*/ _vc_9:import17.ViewContainer;
   _TemplateRef_9_5:any;
-  _NgIf_9_6:import38.Wrapper_NgIf;
+  _NgIf_9_6:import40.Wrapper_NgIf;
   _text_10:any;
   _text_11:any;
   _el_12:any;
@@ -1055,18 +1046,18 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
   _el_19:any;
   _text_20:any;
   _anchor_21:any;
-  /*private*/ _vc_21:import15.ViewContainer;
+  /*private*/ _vc_21:import17.ViewContainer;
   _TemplateRef_21_5:any;
-  _NgIf_21_6:import38.Wrapper_NgIf;
+  _NgIf_21_6:import40.Wrapper_NgIf;
   _text_22:any;
   _text_23:any;
   _text_24:any;
   _el_25:any;
-  _DefaultValueAccessor_25_3:import17.Wrapper_DefaultValueAccessor;
+  _DefaultValueAccessor_25_3:import19.Wrapper_DefaultValueAccessor;
   _NG_VALUE_ACCESSOR_25_4:any[];
-  _FormControlName_25_5:import26.Wrapper_FormControlName;
+  _FormControlName_25_5:import28.Wrapper_FormControlName;
   _NgControl_25_6:any;
-  _NgControlStatus_25_7:import27.Wrapper_NgControlStatus;
+  _NgControlStatus_25_7:import29.Wrapper_NgControlStatus;
   _text_26:any;
   _text_27:any;
   _el_28:any;
@@ -1076,21 +1067,21 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
   _el_32:any;
   _text_33:any;
   _anchor_34:any;
-  /*private*/ _vc_34:import15.ViewContainer;
+  /*private*/ _vc_34:import17.ViewContainer;
   _TemplateRef_34_5:any;
-  _NgIf_34_6:import38.Wrapper_NgIf;
+  _NgIf_34_6:import40.Wrapper_NgIf;
   _text_35:any;
   _text_36:any;
   _text_37:any;
   _anchor_38:any;
-  /*private*/ _vc_38:import15.ViewContainer;
+  /*private*/ _vc_38:import17.ViewContainer;
   _TemplateRef_38_5:any;
-  _NgFor_38_6:import39.Wrapper_NgFor;
+  _NgFor_38_6:import41.Wrapper_NgFor;
   _text_39:any;
   _anchor_40:any;
-  /*private*/ _vc_40:import15.ViewContainer;
+  /*private*/ _vc_40:import17.ViewContainer;
   _TemplateRef_40_5:any;
-  _NgFor_40_6:import39.Wrapper_NgFor;
+  _NgFor_40_6:import41.Wrapper_NgFor;
   _text_41:any;
   _text_42:any;
   _el_43:any;
@@ -1100,27 +1091,27 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
   _el_47:any;
   _text_48:any;
   _anchor_49:any;
-  /*private*/ _vc_49:import15.ViewContainer;
+  /*private*/ _vc_49:import17.ViewContainer;
   _TemplateRef_49_5:any;
-  _NgIf_49_6:import38.Wrapper_NgIf;
+  _NgIf_49_6:import40.Wrapper_NgIf;
   _text_50:any;
   _text_51:any;
   _el_52:any;
-  _SelectControlValueAccessor_52_3:import32.Wrapper_SelectControlValueAccessor;
+  _SelectControlValueAccessor_52_3:import34.Wrapper_SelectControlValueAccessor;
   _NG_VALUE_ACCESSOR_52_4:any[];
-  _FormControlName_52_5:import26.Wrapper_FormControlName;
+  _FormControlName_52_5:import28.Wrapper_FormControlName;
   _NgControl_52_6:any;
-  _NgControlStatus_52_7:import27.Wrapper_NgControlStatus;
+  _NgControlStatus_52_7:import29.Wrapper_NgControlStatus;
   _text_53:any;
   _el_54:any;
-  _NgSelectOption_54_3:import32.Wrapper_NgSelectOption;
-  _NgSelectMultipleOption_54_4:import33.Wrapper_NgSelectMultipleOption;
+  _NgSelectOption_54_3:import34.Wrapper_NgSelectOption;
+  _NgSelectMultipleOption_54_4:import35.Wrapper_NgSelectMultipleOption;
   _text_55:any;
   _text_56:any;
   _anchor_57:any;
-  /*private*/ _vc_57:import15.ViewContainer;
+  /*private*/ _vc_57:import17.ViewContainer;
   _TemplateRef_57_5:any;
-  _NgFor_57_6:import39.Wrapper_NgFor;
+  _NgFor_57_6:import41.Wrapper_NgFor;
   _text_58:any;
   _text_59:any;
   _text_60:any;
@@ -1131,21 +1122,21 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
   _el_65:any;
   _text_66:any;
   _anchor_67:any;
-  /*private*/ _vc_67:import15.ViewContainer;
+  /*private*/ _vc_67:import17.ViewContainer;
   _TemplateRef_67_5:any;
-  _NgIf_67_6:import38.Wrapper_NgIf;
+  _NgIf_67_6:import40.Wrapper_NgIf;
   _text_68:any;
   _text_69:any;
   _text_70:any;
   _anchor_71:any;
-  /*private*/ _vc_71:import15.ViewContainer;
+  /*private*/ _vc_71:import17.ViewContainer;
   _TemplateRef_71_5:any;
-  _NgFor_71_6:import39.Wrapper_NgFor;
+  _NgFor_71_6:import41.Wrapper_NgFor;
   _text_72:any;
   _anchor_73:any;
-  /*private*/ _vc_73:import15.ViewContainer;
+  /*private*/ _vc_73:import17.ViewContainer;
   _TemplateRef_73_5:any;
-  _NgFor_73_6:import39.Wrapper_NgFor;
+  _NgFor_73_6:import41.Wrapper_NgFor;
   _text_74:any;
   _text_75:any;
   _el_76:any;
@@ -1155,36 +1146,36 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
   _el_80:any;
   _text_81:any;
   _anchor_82:any;
-  /*private*/ _vc_82:import15.ViewContainer;
+  /*private*/ _vc_82:import17.ViewContainer;
   _TemplateRef_82_5:any;
-  _NgIf_82_6:import38.Wrapper_NgIf;
+  _NgIf_82_6:import40.Wrapper_NgIf;
   _text_83:any;
   _text_84:any;
   _text_85:any;
   _anchor_86:any;
-  /*private*/ _vc_86:import15.ViewContainer;
+  /*private*/ _vc_86:import17.ViewContainer;
   _TemplateRef_86_5:any;
-  _NgFor_86_6:import39.Wrapper_NgFor;
+  _NgFor_86_6:import41.Wrapper_NgFor;
   _text_87:any;
   _text_88:any;
   _anchor_89:any;
-  /*private*/ _vc_89:import15.ViewContainer;
+  /*private*/ _vc_89:import17.ViewContainer;
   _TemplateRef_89_5:any;
-  _NgIf_89_6:import38.Wrapper_NgIf;
+  _NgIf_89_6:import40.Wrapper_NgIf;
   _text_90:any;
   _text_91:any;
   _text_92:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_ListFilter0,renderType_ListFilter,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
+    super(View_ListFilterComponent0,renderType_ListFilterComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._el_0 = import3.createRenderElement(this.renderer,parentRenderNode,'div',new import3.InlineArray4(4,'class','grid-filter','id','GridFilter'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n  ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._FormGroupDirective_2_3 = new import43.Wrapper_FormGroupDirective((null as any),(null as any));
+    this._FormGroupDirective_2_3 = new import45.Wrapper_FormGroupDirective((null as any),(null as any));
     this._ControlContainer_2_4 = this._FormGroupDirective_2_3.context;
-    this._NgControlStatusGroup_2_5 = new import27.Wrapper_NgControlStatusGroup(this._ControlContainer_2_4);
+    this._NgControlStatusGroup_2_5 = new import29.Wrapper_NgControlStatusGroup(this._ControlContainer_2_4);
     this._text_3 = this.renderer.createText(this._el_2,'\n  ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'div',new import3.InlineArray2(2,'class','grid-filter-header'),(null as any));
     this._text_5 = this.renderer.createText(this._el_4,'\n    ',(null as any));
@@ -1192,9 +1183,9 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     this._text_7 = this.renderer.createText(this._el_6,'\n      Filter\n    ',(null as any));
     this._text_8 = this.renderer.createText(this._el_4,'\n    ',(null as any));
     this._anchor_9 = this.renderer.createTemplateAnchor(this._el_4,(null as any));
-    this._vc_9 = new import15.ViewContainer(9,4,this,this._anchor_9);
-    this._TemplateRef_9_5 = new import40.TemplateRef_(this,9,this._anchor_9);
-    this._NgIf_9_6 = new import38.Wrapper_NgIf(this._vc_9.vcRef,this._TemplateRef_9_5);
+    this._vc_9 = new import17.ViewContainer(9,4,this,this._anchor_9);
+    this._TemplateRef_9_5 = new import42.TemplateRef_(this,9,this._anchor_9);
+    this._NgIf_9_6 = new import40.Wrapper_NgIf(this._vc_9.vcRef,this._TemplateRef_9_5);
     this._text_10 = this.renderer.createText(this._el_4,'\n  ',(null as any));
     this._text_11 = this.renderer.createText(this._el_2,'\n  ',(null as any));
     this._el_12 = import3.createRenderElement(this.renderer,this._el_2,'a',new import3.InlineArray4(4,'class','btn filter-show-hide','href','#'),(null as any));
@@ -1207,18 +1198,18 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     this._el_19 = import3.createRenderElement(this.renderer,this._el_17,'a',new import3.InlineArray4(4,'class','collapse-toggle','href','#'),(null as any));
     this._text_20 = this.renderer.createText(this._el_19,'\n        Search Term\n        ',(null as any));
     this._anchor_21 = this.renderer.createTemplateAnchor(this._el_19,(null as any));
-    this._vc_21 = new import15.ViewContainer(21,19,this,this._anchor_21);
-    this._TemplateRef_21_5 = new import40.TemplateRef_(this,21,this._anchor_21);
-    this._NgIf_21_6 = new import38.Wrapper_NgIf(this._vc_21.vcRef,this._TemplateRef_21_5);
+    this._vc_21 = new import17.ViewContainer(21,19,this,this._anchor_21);
+    this._TemplateRef_21_5 = new import42.TemplateRef_(this,21,this._anchor_21);
+    this._NgIf_21_6 = new import40.Wrapper_NgIf(this._vc_21.vcRef,this._TemplateRef_21_5);
     this._text_22 = this.renderer.createText(this._el_19,'\n      ',(null as any));
     this._text_23 = this.renderer.createText(this._el_17,'\n    ',(null as any));
     this._text_24 = this.renderer.createText(this._el_15,'\n    ',(null as any));
     this._el_25 = import3.createRenderElement(this.renderer,this._el_15,'input',new import3.InlineArray16(10,'class','form-control filter-search-term','formControlName','term','id','filterSearch','placeholder','e.g. Social studies','type','text'),(null as any));
-    this._DefaultValueAccessor_25_3 = new import17.Wrapper_DefaultValueAccessor(this.renderer,new import21.ElementRef(this._el_25));
+    this._DefaultValueAccessor_25_3 = new import19.Wrapper_DefaultValueAccessor(this.renderer,new import23.ElementRef(this._el_25));
     this._NG_VALUE_ACCESSOR_25_4 = [this._DefaultValueAccessor_25_3.context];
-    this._FormControlName_25_5 = new import26.Wrapper_FormControlName(this._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_25_4);
+    this._FormControlName_25_5 = new import28.Wrapper_FormControlName(this._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_25_4);
     this._NgControl_25_6 = this._FormControlName_25_5.context;
-    this._NgControlStatus_25_7 = new import27.Wrapper_NgControlStatus(this._NgControl_25_6);
+    this._NgControlStatus_25_7 = new import29.Wrapper_NgControlStatus(this._NgControl_25_6);
     this._text_26 = this.renderer.createText(this._el_15,'\n  ',(null as any));
     this._text_27 = this.renderer.createText(this._el_2,'\n  ',(null as any));
     this._el_28 = import3.createRenderElement(this.renderer,this._el_2,'fieldset',new import3.InlineArray2(2,'class','filter-fieldset flex-none'),(null as any));
@@ -1228,21 +1219,21 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     this._el_32 = import3.createRenderElement(this.renderer,this._el_30,'a',new import3.InlineArray4(4,'class','collapse-toggle','href','#'),(null as any));
     this._text_33 = this.renderer.createText(this._el_32,'\n        Content Type(s)\n        ',(null as any));
     this._anchor_34 = this.renderer.createTemplateAnchor(this._el_32,(null as any));
-    this._vc_34 = new import15.ViewContainer(34,32,this,this._anchor_34);
-    this._TemplateRef_34_5 = new import40.TemplateRef_(this,34,this._anchor_34);
-    this._NgIf_34_6 = new import38.Wrapper_NgIf(this._vc_34.vcRef,this._TemplateRef_34_5);
+    this._vc_34 = new import17.ViewContainer(34,32,this,this._anchor_34);
+    this._TemplateRef_34_5 = new import42.TemplateRef_(this,34,this._anchor_34);
+    this._NgIf_34_6 = new import40.Wrapper_NgIf(this._vc_34.vcRef,this._TemplateRef_34_5);
     this._text_35 = this.renderer.createText(this._el_32,'\n      ',(null as any));
     this._text_36 = this.renderer.createText(this._el_30,'\n    ',(null as any));
     this._text_37 = this.renderer.createText(this._el_28,'\n    ',(null as any));
     this._anchor_38 = this.renderer.createTemplateAnchor(this._el_28,(null as any));
-    this._vc_38 = new import15.ViewContainer(38,28,this,this._anchor_38);
-    this._TemplateRef_38_5 = new import40.TemplateRef_(this,38,this._anchor_38);
-    this._NgFor_38_6 = new import39.Wrapper_NgFor(this._vc_38.vcRef,this._TemplateRef_38_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_38 = new import17.ViewContainer(38,28,this,this._anchor_38);
+    this._TemplateRef_38_5 = new import42.TemplateRef_(this,38,this._anchor_38);
+    this._NgFor_38_6 = new import41.Wrapper_NgFor(this._vc_38.vcRef,this._TemplateRef_38_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
     this._text_39 = this.renderer.createText(this._el_28,'\n\n    ',(null as any));
     this._anchor_40 = this.renderer.createTemplateAnchor(this._el_28,(null as any));
-    this._vc_40 = new import15.ViewContainer(40,28,this,this._anchor_40);
-    this._TemplateRef_40_5 = new import40.TemplateRef_(this,40,this._anchor_40);
-    this._NgFor_40_6 = new import39.Wrapper_NgFor(this._vc_40.vcRef,this._TemplateRef_40_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_40 = new import17.ViewContainer(40,28,this,this._anchor_40);
+    this._TemplateRef_40_5 = new import42.TemplateRef_(this,40,this._anchor_40);
+    this._NgFor_40_6 = new import41.Wrapper_NgFor(this._vc_40.vcRef,this._TemplateRef_40_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
     this._text_41 = this.renderer.createText(this._el_28,'\n\n  ',(null as any));
     this._text_42 = this.renderer.createText(this._el_2,'\n  ',(null as any));
     this._el_43 = import3.createRenderElement(this.renderer,this._el_2,'fieldset',import3.EMPTY_INLINE_ARRAY,(null as any));
@@ -1252,27 +1243,27 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     this._el_47 = import3.createRenderElement(this.renderer,this._el_45,'a',new import3.InlineArray4(4,'class','collapse-toggle','href','#'),(null as any));
     this._text_48 = this.renderer.createText(this._el_47,'\n        Subject ',(null as any));
     this._anchor_49 = this.renderer.createTemplateAnchor(this._el_47,(null as any));
-    this._vc_49 = new import15.ViewContainer(49,47,this,this._anchor_49);
-    this._TemplateRef_49_5 = new import40.TemplateRef_(this,49,this._anchor_49);
-    this._NgIf_49_6 = new import38.Wrapper_NgIf(this._vc_49.vcRef,this._TemplateRef_49_5);
+    this._vc_49 = new import17.ViewContainer(49,47,this,this._anchor_49);
+    this._TemplateRef_49_5 = new import42.TemplateRef_(this,49,this._anchor_49);
+    this._NgIf_49_6 = new import40.Wrapper_NgIf(this._vc_49.vcRef,this._TemplateRef_49_5);
     this._text_50 = this.renderer.createText(this._el_45,'\n    ',(null as any));
     this._text_51 = this.renderer.createText(this._el_43,'\n    ',(null as any));
     this._el_52 = import3.createRenderElement(this.renderer,this._el_43,'select',new import3.InlineArray4(4,'class','custom-select form-control','formControlName','subject'),(null as any));
-    this._SelectControlValueAccessor_52_3 = new import32.Wrapper_SelectControlValueAccessor(this.renderer,new import21.ElementRef(this._el_52));
+    this._SelectControlValueAccessor_52_3 = new import34.Wrapper_SelectControlValueAccessor(this.renderer,new import23.ElementRef(this._el_52));
     this._NG_VALUE_ACCESSOR_52_4 = [this._SelectControlValueAccessor_52_3.context];
-    this._FormControlName_52_5 = new import26.Wrapper_FormControlName(this._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_52_4);
+    this._FormControlName_52_5 = new import28.Wrapper_FormControlName(this._ControlContainer_2_4,(null as any),(null as any),this._NG_VALUE_ACCESSOR_52_4);
     this._NgControl_52_6 = this._FormControlName_52_5.context;
-    this._NgControlStatus_52_7 = new import27.Wrapper_NgControlStatus(this._NgControl_52_6);
+    this._NgControlStatus_52_7 = new import29.Wrapper_NgControlStatus(this._NgControl_52_6);
     this._text_53 = this.renderer.createText(this._el_52,'\n      ',(null as any));
     this._el_54 = import3.createRenderElement(this.renderer,this._el_52,'option',new import3.InlineArray2(2,'selected','selected'),(null as any));
-    this._NgSelectOption_54_3 = new import32.Wrapper_NgSelectOption(new import21.ElementRef(this._el_54),this.renderer,this._SelectControlValueAccessor_52_3.context);
-    this._NgSelectMultipleOption_54_4 = new import33.Wrapper_NgSelectMultipleOption(new import21.ElementRef(this._el_54),this.renderer,(null as any));
+    this._NgSelectOption_54_3 = new import34.Wrapper_NgSelectOption(new import23.ElementRef(this._el_54),this.renderer,this._SelectControlValueAccessor_52_3.context);
+    this._NgSelectMultipleOption_54_4 = new import35.Wrapper_NgSelectMultipleOption(new import23.ElementRef(this._el_54),this.renderer,(null as any));
     this._text_55 = this.renderer.createText(this._el_54,'\n        All\n      ',(null as any));
     this._text_56 = this.renderer.createText(this._el_52,'\n      ',(null as any));
     this._anchor_57 = this.renderer.createTemplateAnchor(this._el_52,(null as any));
-    this._vc_57 = new import15.ViewContainer(57,52,this,this._anchor_57);
-    this._TemplateRef_57_5 = new import40.TemplateRef_(this,57,this._anchor_57);
-    this._NgFor_57_6 = new import39.Wrapper_NgFor(this._vc_57.vcRef,this._TemplateRef_57_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_57 = new import17.ViewContainer(57,52,this,this._anchor_57);
+    this._TemplateRef_57_5 = new import42.TemplateRef_(this,57,this._anchor_57);
+    this._NgFor_57_6 = new import41.Wrapper_NgFor(this._vc_57.vcRef,this._TemplateRef_57_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
     this._text_58 = this.renderer.createText(this._el_52,'\n    ',(null as any));
     this._text_59 = this.renderer.createText(this._el_43,'\n  ',(null as any));
     this._text_60 = this.renderer.createText(this._el_2,'\n  ',(null as any));
@@ -1283,21 +1274,21 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     this._el_65 = import3.createRenderElement(this.renderer,this._el_63,'a',new import3.InlineArray4(4,'class','collapse-toggle','href','#'),(null as any));
     this._text_66 = this.renderer.createText(this._el_65,'\n        Key Stage(s)\n        ',(null as any));
     this._anchor_67 = this.renderer.createTemplateAnchor(this._el_65,(null as any));
-    this._vc_67 = new import15.ViewContainer(67,65,this,this._anchor_67);
-    this._TemplateRef_67_5 = new import40.TemplateRef_(this,67,this._anchor_67);
-    this._NgIf_67_6 = new import38.Wrapper_NgIf(this._vc_67.vcRef,this._TemplateRef_67_5);
+    this._vc_67 = new import17.ViewContainer(67,65,this,this._anchor_67);
+    this._TemplateRef_67_5 = new import42.TemplateRef_(this,67,this._anchor_67);
+    this._NgIf_67_6 = new import40.Wrapper_NgIf(this._vc_67.vcRef,this._TemplateRef_67_5);
     this._text_68 = this.renderer.createText(this._el_65,'\n      ',(null as any));
     this._text_69 = this.renderer.createText(this._el_63,'\n    ',(null as any));
     this._text_70 = this.renderer.createText(this._el_61,'\n    ',(null as any));
     this._anchor_71 = this.renderer.createTemplateAnchor(this._el_61,(null as any));
-    this._vc_71 = new import15.ViewContainer(71,61,this,this._anchor_71);
-    this._TemplateRef_71_5 = new import40.TemplateRef_(this,71,this._anchor_71);
-    this._NgFor_71_6 = new import39.Wrapper_NgFor(this._vc_71.vcRef,this._TemplateRef_71_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_71 = new import17.ViewContainer(71,61,this,this._anchor_71);
+    this._TemplateRef_71_5 = new import42.TemplateRef_(this,71,this._anchor_71);
+    this._NgFor_71_6 = new import41.Wrapper_NgFor(this._vc_71.vcRef,this._TemplateRef_71_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
     this._text_72 = this.renderer.createText(this._el_61,'\n\n    ',(null as any));
     this._anchor_73 = this.renderer.createTemplateAnchor(this._el_61,(null as any));
-    this._vc_73 = new import15.ViewContainer(73,61,this,this._anchor_73);
-    this._TemplateRef_73_5 = new import40.TemplateRef_(this,73,this._anchor_73);
-    this._NgFor_73_6 = new import39.Wrapper_NgFor(this._vc_73.vcRef,this._TemplateRef_73_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_73 = new import17.ViewContainer(73,61,this,this._anchor_73);
+    this._TemplateRef_73_5 = new import42.TemplateRef_(this,73,this._anchor_73);
+    this._NgFor_73_6 = new import41.Wrapper_NgFor(this._vc_73.vcRef,this._TemplateRef_73_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
     this._text_74 = this.renderer.createText(this._el_61,'\n\n\n  ',(null as any));
     this._text_75 = this.renderer.createText(this._el_2,'\n  ',(null as any));
     this._el_76 = import3.createRenderElement(this.renderer,this._el_2,'fieldset',new import3.InlineArray2(2,'class','filter-fieldset flex-none'),(null as any));
@@ -1307,22 +1298,22 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     this._el_80 = import3.createRenderElement(this.renderer,this._el_78,'a',new import3.InlineArray4(4,'class','collapse-toggle','href','#'),(null as any));
     this._text_81 = this.renderer.createText(this._el_80,'\n        Categories\n        ',(null as any));
     this._anchor_82 = this.renderer.createTemplateAnchor(this._el_80,(null as any));
-    this._vc_82 = new import15.ViewContainer(82,80,this,this._anchor_82);
-    this._TemplateRef_82_5 = new import40.TemplateRef_(this,82,this._anchor_82);
-    this._NgIf_82_6 = new import38.Wrapper_NgIf(this._vc_82.vcRef,this._TemplateRef_82_5);
+    this._vc_82 = new import17.ViewContainer(82,80,this,this._anchor_82);
+    this._TemplateRef_82_5 = new import42.TemplateRef_(this,82,this._anchor_82);
+    this._NgIf_82_6 = new import40.Wrapper_NgIf(this._vc_82.vcRef,this._TemplateRef_82_5);
     this._text_83 = this.renderer.createText(this._el_80,'\n      ',(null as any));
     this._text_84 = this.renderer.createText(this._el_78,'\n    ',(null as any));
     this._text_85 = this.renderer.createText(this._el_76,'\n    ',(null as any));
     this._anchor_86 = this.renderer.createTemplateAnchor(this._el_76,(null as any));
-    this._vc_86 = new import15.ViewContainer(86,76,this,this._anchor_86);
-    this._TemplateRef_86_5 = new import40.TemplateRef_(this,86,this._anchor_86);
-    this._NgFor_86_6 = new import39.Wrapper_NgFor(this._vc_86.vcRef,this._TemplateRef_86_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_86 = new import17.ViewContainer(86,76,this,this._anchor_86);
+    this._TemplateRef_86_5 = new import42.TemplateRef_(this,86,this._anchor_86);
+    this._NgFor_86_6 = new import41.Wrapper_NgFor(this._vc_86.vcRef,this._TemplateRef_86_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
     this._text_87 = this.renderer.createText(this._el_76,'\n  ',(null as any));
     this._text_88 = this.renderer.createText(this._el_2,'\n  ',(null as any));
     this._anchor_89 = this.renderer.createTemplateAnchor(this._el_2,(null as any));
-    this._vc_89 = new import15.ViewContainer(89,2,this,this._anchor_89);
-    this._TemplateRef_89_5 = new import40.TemplateRef_(this,89,this._anchor_89);
-    this._NgIf_89_6 = new import38.Wrapper_NgIf(this._vc_89.vcRef,this._TemplateRef_89_5);
+    this._vc_89 = new import17.ViewContainer(89,2,this,this._anchor_89);
+    this._TemplateRef_89_5 = new import42.TemplateRef_(this,89,this._anchor_89);
+    this._NgIf_89_6 = new import40.Wrapper_NgIf(this._vc_89.vcRef,this._TemplateRef_89_5);
     this._text_90 = this.renderer.createText(this._el_2,'\n',(null as any));
     this._text_91 = this.renderer.createText(this._el_0,'\n',(null as any));
     this._text_92 = this.renderer.createText(parentRenderNode,'\n',(null as any));
@@ -1445,47 +1436,47 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import40.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
-    if (((token === import41.NgIf) && (9 === requestNodeIndex))) { return this._NgIf_9_6.context; }
-    if (((token === import40.TemplateRef) && (21 === requestNodeIndex))) { return this._TemplateRef_21_5; }
-    if (((token === import41.NgIf) && (21 === requestNodeIndex))) { return this._NgIf_21_6.context; }
-    if (((token === import23.DefaultValueAccessor) && (25 === requestNodeIndex))) { return this._DefaultValueAccessor_25_3.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && (25 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_25_4; }
-    if (((token === import29.FormControlName) && (25 === requestNodeIndex))) { return this._FormControlName_25_5.context; }
-    if (((token === import30.NgControl) && (25 === requestNodeIndex))) { return this._NgControl_25_6; }
-    if (((token === import31.NgControlStatus) && (25 === requestNodeIndex))) { return this._NgControlStatus_25_7.context; }
-    if (((token === import40.TemplateRef) && (34 === requestNodeIndex))) { return this._TemplateRef_34_5; }
-    if (((token === import41.NgIf) && (34 === requestNodeIndex))) { return this._NgIf_34_6.context; }
-    if (((token === import40.TemplateRef) && (38 === requestNodeIndex))) { return this._TemplateRef_38_5; }
-    if (((token === import42.NgFor) && (38 === requestNodeIndex))) { return this._NgFor_38_6.context; }
-    if (((token === import40.TemplateRef) && (40 === requestNodeIndex))) { return this._TemplateRef_40_5; }
-    if (((token === import42.NgFor) && (40 === requestNodeIndex))) { return this._NgFor_40_6.context; }
-    if (((token === import40.TemplateRef) && (49 === requestNodeIndex))) { return this._TemplateRef_49_5; }
-    if (((token === import41.NgIf) && (49 === requestNodeIndex))) { return this._NgIf_49_6.context; }
-    if (((token === import34.NgSelectOption) && ((54 <= requestNodeIndex) && (requestNodeIndex <= 55)))) { return this._NgSelectOption_54_3.context; }
-    if (((token === import35.NgSelectMultipleOption) && ((54 <= requestNodeIndex) && (requestNodeIndex <= 55)))) { return this._NgSelectMultipleOption_54_4.context; }
-    if (((token === import40.TemplateRef) && (57 === requestNodeIndex))) { return this._TemplateRef_57_5; }
-    if (((token === import42.NgFor) && (57 === requestNodeIndex))) { return this._NgFor_57_6.context; }
-    if (((token === import34.SelectControlValueAccessor) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._SelectControlValueAccessor_52_3.context; }
-    if (((token === import24.NG_VALUE_ACCESSOR) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._NG_VALUE_ACCESSOR_52_4; }
-    if (((token === import29.FormControlName) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._FormControlName_52_5.context; }
-    if (((token === import30.NgControl) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._NgControl_52_6; }
-    if (((token === import31.NgControlStatus) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._NgControlStatus_52_7.context; }
-    if (((token === import40.TemplateRef) && (67 === requestNodeIndex))) { return this._TemplateRef_67_5; }
-    if (((token === import41.NgIf) && (67 === requestNodeIndex))) { return this._NgIf_67_6.context; }
-    if (((token === import40.TemplateRef) && (71 === requestNodeIndex))) { return this._TemplateRef_71_5; }
-    if (((token === import42.NgFor) && (71 === requestNodeIndex))) { return this._NgFor_71_6.context; }
-    if (((token === import40.TemplateRef) && (73 === requestNodeIndex))) { return this._TemplateRef_73_5; }
-    if (((token === import42.NgFor) && (73 === requestNodeIndex))) { return this._NgFor_73_6.context; }
-    if (((token === import40.TemplateRef) && (82 === requestNodeIndex))) { return this._TemplateRef_82_5; }
-    if (((token === import41.NgIf) && (82 === requestNodeIndex))) { return this._NgIf_82_6.context; }
-    if (((token === import40.TemplateRef) && (86 === requestNodeIndex))) { return this._TemplateRef_86_5; }
-    if (((token === import42.NgFor) && (86 === requestNodeIndex))) { return this._NgFor_86_6.context; }
-    if (((token === import40.TemplateRef) && (89 === requestNodeIndex))) { return this._TemplateRef_89_5; }
-    if (((token === import41.NgIf) && (89 === requestNodeIndex))) { return this._NgIf_89_6.context; }
-    if (((token === import44.FormGroupDirective) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 90)))) { return this._FormGroupDirective_2_3.context; }
-    if (((token === import45.ControlContainer) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 90)))) { return this._ControlContainer_2_4; }
-    if (((token === import31.NgControlStatusGroup) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 90)))) { return this._NgControlStatusGroup_2_5.context; }
+    if (((token === import42.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
+    if (((token === import43.NgIf) && (9 === requestNodeIndex))) { return this._NgIf_9_6.context; }
+    if (((token === import42.TemplateRef) && (21 === requestNodeIndex))) { return this._TemplateRef_21_5; }
+    if (((token === import43.NgIf) && (21 === requestNodeIndex))) { return this._NgIf_21_6.context; }
+    if (((token === import25.DefaultValueAccessor) && (25 === requestNodeIndex))) { return this._DefaultValueAccessor_25_3.context; }
+    if (((token === import26.NG_VALUE_ACCESSOR) && (25 === requestNodeIndex))) { return this._NG_VALUE_ACCESSOR_25_4; }
+    if (((token === import31.FormControlName) && (25 === requestNodeIndex))) { return this._FormControlName_25_5.context; }
+    if (((token === import32.NgControl) && (25 === requestNodeIndex))) { return this._NgControl_25_6; }
+    if (((token === import33.NgControlStatus) && (25 === requestNodeIndex))) { return this._NgControlStatus_25_7.context; }
+    if (((token === import42.TemplateRef) && (34 === requestNodeIndex))) { return this._TemplateRef_34_5; }
+    if (((token === import43.NgIf) && (34 === requestNodeIndex))) { return this._NgIf_34_6.context; }
+    if (((token === import42.TemplateRef) && (38 === requestNodeIndex))) { return this._TemplateRef_38_5; }
+    if (((token === import44.NgFor) && (38 === requestNodeIndex))) { return this._NgFor_38_6.context; }
+    if (((token === import42.TemplateRef) && (40 === requestNodeIndex))) { return this._TemplateRef_40_5; }
+    if (((token === import44.NgFor) && (40 === requestNodeIndex))) { return this._NgFor_40_6.context; }
+    if (((token === import42.TemplateRef) && (49 === requestNodeIndex))) { return this._TemplateRef_49_5; }
+    if (((token === import43.NgIf) && (49 === requestNodeIndex))) { return this._NgIf_49_6.context; }
+    if (((token === import36.NgSelectOption) && ((54 <= requestNodeIndex) && (requestNodeIndex <= 55)))) { return this._NgSelectOption_54_3.context; }
+    if (((token === import37.NgSelectMultipleOption) && ((54 <= requestNodeIndex) && (requestNodeIndex <= 55)))) { return this._NgSelectMultipleOption_54_4.context; }
+    if (((token === import42.TemplateRef) && (57 === requestNodeIndex))) { return this._TemplateRef_57_5; }
+    if (((token === import44.NgFor) && (57 === requestNodeIndex))) { return this._NgFor_57_6.context; }
+    if (((token === import36.SelectControlValueAccessor) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._SelectControlValueAccessor_52_3.context; }
+    if (((token === import26.NG_VALUE_ACCESSOR) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._NG_VALUE_ACCESSOR_52_4; }
+    if (((token === import31.FormControlName) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._FormControlName_52_5.context; }
+    if (((token === import32.NgControl) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._NgControl_52_6; }
+    if (((token === import33.NgControlStatus) && ((52 <= requestNodeIndex) && (requestNodeIndex <= 58)))) { return this._NgControlStatus_52_7.context; }
+    if (((token === import42.TemplateRef) && (67 === requestNodeIndex))) { return this._TemplateRef_67_5; }
+    if (((token === import43.NgIf) && (67 === requestNodeIndex))) { return this._NgIf_67_6.context; }
+    if (((token === import42.TemplateRef) && (71 === requestNodeIndex))) { return this._TemplateRef_71_5; }
+    if (((token === import44.NgFor) && (71 === requestNodeIndex))) { return this._NgFor_71_6.context; }
+    if (((token === import42.TemplateRef) && (73 === requestNodeIndex))) { return this._TemplateRef_73_5; }
+    if (((token === import44.NgFor) && (73 === requestNodeIndex))) { return this._NgFor_73_6.context; }
+    if (((token === import42.TemplateRef) && (82 === requestNodeIndex))) { return this._TemplateRef_82_5; }
+    if (((token === import43.NgIf) && (82 === requestNodeIndex))) { return this._NgIf_82_6.context; }
+    if (((token === import42.TemplateRef) && (86 === requestNodeIndex))) { return this._TemplateRef_86_5; }
+    if (((token === import44.NgFor) && (86 === requestNodeIndex))) { return this._NgFor_86_6.context; }
+    if (((token === import42.TemplateRef) && (89 === requestNodeIndex))) { return this._TemplateRef_89_5; }
+    if (((token === import43.NgIf) && (89 === requestNodeIndex))) { return this._NgIf_89_6.context; }
+    if (((token === import46.FormGroupDirective) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 90)))) { return this._FormGroupDirective_2_3.context; }
+    if (((token === import47.ControlContainer) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 90)))) { return this._ControlContainer_2_4; }
+    if (((token === import33.NgControlStatusGroup) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 90)))) { return this._NgControlStatusGroup_2_5.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -1582,19 +1573,19 @@ export class View_ListFilter0 extends import1.AppView<import0.ListFilter> {
     this._FormGroupDirective_2_3.ngOnDestroy();
   }
   createEmbeddedViewInternal(nodeIndex:number):import1.AppView<any> {
-    if ((nodeIndex == 9)) { return new View_ListFilter1(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
-    if ((nodeIndex == 21)) { return new View_ListFilter2(this.viewUtils,this,21,this._anchor_21,this._vc_21); }
-    if ((nodeIndex == 34)) { return new View_ListFilter3(this.viewUtils,this,34,this._anchor_34,this._vc_34); }
-    if ((nodeIndex == 38)) { return new View_ListFilter4(this.viewUtils,this,38,this._anchor_38,this._vc_38); }
-    if ((nodeIndex == 40)) { return new View_ListFilter5(this.viewUtils,this,40,this._anchor_40,this._vc_40); }
-    if ((nodeIndex == 49)) { return new View_ListFilter6(this.viewUtils,this,49,this._anchor_49,this._vc_49); }
-    if ((nodeIndex == 57)) { return new View_ListFilter7(this.viewUtils,this,57,this._anchor_57,this._vc_57); }
-    if ((nodeIndex == 67)) { return new View_ListFilter8(this.viewUtils,this,67,this._anchor_67,this._vc_67); }
-    if ((nodeIndex == 71)) { return new View_ListFilter9(this.viewUtils,this,71,this._anchor_71,this._vc_71); }
-    if ((nodeIndex == 73)) { return new View_ListFilter10(this.viewUtils,this,73,this._anchor_73,this._vc_73); }
-    if ((nodeIndex == 82)) { return new View_ListFilter11(this.viewUtils,this,82,this._anchor_82,this._vc_82); }
-    if ((nodeIndex == 86)) { return new View_ListFilter12(this.viewUtils,this,86,this._anchor_86,this._vc_86); }
-    if ((nodeIndex == 89)) { return new View_ListFilter13(this.viewUtils,this,89,this._anchor_89,this._vc_89); }
+    if ((nodeIndex == 9)) { return new View_ListFilterComponent1(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
+    if ((nodeIndex == 21)) { return new View_ListFilterComponent2(this.viewUtils,this,21,this._anchor_21,this._vc_21); }
+    if ((nodeIndex == 34)) { return new View_ListFilterComponent3(this.viewUtils,this,34,this._anchor_34,this._vc_34); }
+    if ((nodeIndex == 38)) { return new View_ListFilterComponent4(this.viewUtils,this,38,this._anchor_38,this._vc_38); }
+    if ((nodeIndex == 40)) { return new View_ListFilterComponent5(this.viewUtils,this,40,this._anchor_40,this._vc_40); }
+    if ((nodeIndex == 49)) { return new View_ListFilterComponent6(this.viewUtils,this,49,this._anchor_49,this._vc_49); }
+    if ((nodeIndex == 57)) { return new View_ListFilterComponent7(this.viewUtils,this,57,this._anchor_57,this._vc_57); }
+    if ((nodeIndex == 67)) { return new View_ListFilterComponent8(this.viewUtils,this,67,this._anchor_67,this._vc_67); }
+    if ((nodeIndex == 71)) { return new View_ListFilterComponent9(this.viewUtils,this,71,this._anchor_71,this._vc_71); }
+    if ((nodeIndex == 73)) { return new View_ListFilterComponent10(this.viewUtils,this,73,this._anchor_73,this._vc_73); }
+    if ((nodeIndex == 82)) { return new View_ListFilterComponent11(this.viewUtils,this,82,this._anchor_82,this._vc_82); }
+    if ((nodeIndex == 86)) { return new View_ListFilterComponent12(this.viewUtils,this,86,this._anchor_86,this._vc_86); }
+    if ((nodeIndex == 89)) { return new View_ListFilterComponent13(this.viewUtils,this,89,this._anchor_89,this._vc_89); }
     return (null as any);
   }
   handleEvent_2(eventName:string,$event:any):boolean {

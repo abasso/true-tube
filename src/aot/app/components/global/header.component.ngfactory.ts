@@ -14,29 +14,34 @@ import * as import5 from '@angular/core/src/linker/view_type';
 import * as import6 from '@angular/core/src/change_detection/constants';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../../../app/services/auth.service';
-import * as import9 from '../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
-import * as import10 from '../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
-import * as import11 from '../../../../app/components/navigation/primary-nav.component';
-import * as import12 from '../navigation/primary-nav.component.ngfactory';
-import * as import13 from '../../../../app/components/messaging/call-to-action.component';
-import * as import14 from '../messaging/call-to-action.component.ngfactory';
-import * as import15 from '@angular/router/src/router';
-import * as import16 from '@angular/router/src/router_state';
-import * as import17 from '@angular/common/src/location/location_strategy';
-import * as import18 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import19 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import20 from '@angular/core/src/linker/element_ref';
-import * as import21 from '../../../../app/components/content/listing/filter.component';
-import * as import22 from '../../../../app/services/list.service';
-import * as import23 from '@angular/router/src/directives/router_link';
-import * as import24 from '@angular/common/src/directives/ng_class';
+import * as import9 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import10 from 'angulartics2/dist/core/angulartics2';
+import * as import11 from '../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
+import * as import12 from '../../../node_modules/angulartics2/dist/core/angulartics2On.ngfactory';
+import * as import13 from '../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
+import * as import14 from '../../../../app/components/navigation/primary-nav.component';
+import * as import15 from '../navigation/primary-nav.component.ngfactory';
+import * as import16 from '../../../../app/components/messaging/call-to-action.component';
+import * as import17 from '../messaging/call-to-action.component.ngfactory';
+import * as import18 from '@angular/router/src/router';
+import * as import19 from '@angular/router/src/router_state';
+import * as import20 from '@angular/common/src/location/location_strategy';
+import * as import21 from '@angular/core/src/linker/element_ref';
+import * as import22 from '@angular/platform-browser/src/dom/events/event_manager';
+import * as import23 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import24 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import25 from '../../../../app/components/content/listing/filter.component';
+import * as import26 from '../../../../app/services/list.service';
+import * as import27 from '@angular/router/src/directives/router_link';
+import * as import28 from 'angulartics2/dist/core/angulartics2On';
+import * as import29 from '@angular/common/src/directives/ng_class';
 export class Wrapper_HeaderComponent {
   /*private*/ _eventHandler:Function;
   context:import0.HeaderComponent;
   /*private*/ _changed:boolean;
-  constructor(p0:any) {
+  constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
-    this.context = new import0.HeaderComponent(p0);
+    this.context = new import0.HeaderComponent(p0,p1,p2);
   }
   ngOnDetach(view:import1.AppView<any>,componentView:import1.AppView<any>,el:any):void {
   }
@@ -69,7 +74,7 @@ class View_HeaderComponent_Host0 extends import1.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'app-header',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_HeaderComponent0(this.viewUtils,this,0,this._el_0);
-    this._HeaderComponent_0_3 = new Wrapper_HeaderComponent(this.injectorGet(import8.Auth,this.parentIndex));
+    this._HeaderComponent_0_3 = new Wrapper_HeaderComponent(this.injectorGet(import8.Auth,this.parentIndex),this.injectorGet(import9.Angulartics2GoogleAnalytics,this.parentIndex),this.injectorGet(import10.Angulartics2,this.parentIndex));
     this.compView_0.create(this._HeaderComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._HeaderComponent_0_3.context);
@@ -93,174 +98,214 @@ export const HeaderComponentNgFactory:import7.ComponentFactory<import0.HeaderCom
 const styles_HeaderComponent:any[] = ([] as any[]);
 var renderType_HeaderComponent:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,styles_HeaderComponent,{});
 export class View_HeaderComponent0 extends import1.AppView<import0.HeaderComponent> {
-  _el_0:any;
-  _text_1:any;
-  _el_2:any;
-  _text_3:any;
-  _el_4:any;
-  _text_5:any;
-  _el_6:any;
-  _RouterLinkWithHref_6_3:import9.Wrapper_RouterLinkWithHref;
-  _text_7:any;
-  _el_8:any;
-  _text_9:any;
+  _text_0:any;
+  _el_1:any;
+  _text_2:any;
+  _el_3:any;
+  _text_4:any;
+  _el_5:any;
+  _text_6:any;
+  _el_7:any;
+  _RouterLinkWithHref_7_3:import11.Wrapper_RouterLinkWithHref;
+  _Angulartics2On_7_4:import12.Wrapper_Angulartics2On;
+  _text_8:any;
+  _el_9:any;
   _text_10:any;
   _text_11:any;
-  _el_12:any;
+  _text_12:any;
   _el_13:any;
-  _text_14:any;
-  _el_15:any;
+  _el_14:any;
+  _Angulartics2On_14_3:import12.Wrapper_Angulartics2On;
+  _text_15:any;
   _el_16:any;
-  _text_17:any;
+  _el_17:any;
+  _Angulartics2On_17_3:import12.Wrapper_Angulartics2On;
   _text_18:any;
-  _el_19:any;
-  _NgClass_19_3:import10.Wrapper_NgClass;
-  _text_20:any;
-  _el_21:any;
-  _text_22:any;
-  _el_23:any;
-  _text_24:any;
-  _el_25:any;
-  _text_26:any;
-  _el_27:any;
-  _text_28:any;
-  _el_29:any;
-  _text_30:any;
+  _text_19:any;
+  _el_20:any;
+  _NgClass_20_3:import13.Wrapper_NgClass;
+  _text_21:any;
+  _el_22:any;
+  _text_23:any;
+  _el_24:any;
+  _text_25:any;
+  _el_26:any;
+  _RouterLinkWithHref_26_3:import11.Wrapper_RouterLinkWithHref;
+  _Angulartics2On_26_4:import12.Wrapper_Angulartics2On;
+  _text_27:any;
+  _el_28:any;
+  _text_29:any;
+  _el_30:any;
   _text_31:any;
   _text_32:any;
-  _el_33:any;
-  compView_33:import1.AppView<import11.PrimaryNavComponent>;
-  _PrimaryNavComponent_33_3:import12.Wrapper_PrimaryNavComponent;
-  _text_34:any;
+  _text_33:any;
+  _el_34:any;
+  compView_34:import1.AppView<import14.PrimaryNavComponent>;
+  _PrimaryNavComponent_34_3:import15.Wrapper_PrimaryNavComponent;
   _text_35:any;
   _text_36:any;
-  _el_37:any;
+  _text_37:any;
   _el_38:any;
-  _text_39:any;
+  _el_39:any;
   _text_40:any;
   _text_41:any;
   _el_42:any;
-  compView_42:import1.AppView<import13.CallToActionComponent>;
-  _CallToActionComponent_42_3:import14.Wrapper_CallToActionComponent;
+  compView_42:import1.AppView<import16.CallToActionComponent>;
+  _NgClass_42_3:import13.Wrapper_NgClass;
+  _CallToActionComponent_42_4:import17.Wrapper_CallToActionComponent;
   _text_43:any;
-  _arr_50:any;
-  _map_51:any;
+  _text_44:any;
+  _arr_57:any;
+  _map_58:any;
+  _map_59:any;
+  _map_60:any;
+  _map_61:any;
+  _arr_62:any;
+  _map_63:any;
+  _map_64:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_HeaderComponent0,renderType_HeaderComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
-    this._arr_50 = import3.pureProxy1((p0:any):any[] => {
+    this._arr_57 = import3.pureProxy1((p0:any):any[] => {
       return [p0];
     });
-    this._map_51 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+    this._map_58 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._map_59 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._map_60 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._map_61 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {show: p0};
+    });
+    this._arr_62 = import3.pureProxy1((p0:any):any[] => {
+      return [p0];
+    });
+    this._map_63 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._map_64 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {'logged-in': p0};
     });
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._el_0 = import3.createRenderElement(this.renderer,parentRenderNode,'header',new import3.InlineArray4(4,'class','c-header','role','banner'),(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n  ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','container'),(null as any));
-    this._text_3 = this.renderer.createText(this._el_2,'\n    ',(null as any));
-    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'div',new import3.InlineArray2(2,'class','mobile-logo hidden-lg-up'),(null as any));
-    this._text_5 = this.renderer.createText(this._el_4,'\n			',(null as any));
-    this._el_6 = import3.createRenderElement(this.renderer,this._el_4,'a',new import3.InlineArray2(2,'class','c-logo-link'),(null as any));
-    this._RouterLinkWithHref_6_3 = new import9.Wrapper_RouterLinkWithHref(this.parentView.injectorGet(import15.Router,this.parentIndex),this.parentView.injectorGet(import16.ActivatedRoute,this.parentIndex),this.parentView.injectorGet(import17.LocationStrategy,this.parentIndex));
-    this._text_7 = this.renderer.createText(this._el_6,'\n				',(null as any));
-    this._el_8 = import3.createRenderElement(this.renderer,this._el_6,'img',new import3.InlineArray8(6,'alt','True Tube','class','logo c-logo-link__img','src','/assets/images/true-tube-logo_black.svg'),(null as any));
-    this._text_9 = this.renderer.createText(this._el_6,'\n			',(null as any));
-    this._text_10 = this.renderer.createText(this._el_4,'\n    ',(null as any));
-    this._text_11 = this.renderer.createText(this._el_2,'\n    ',(null as any));
-    this._el_12 = import3.createRenderElement(this.renderer,this._el_2,'div',new import3.InlineArray2(2,'class','mobile-nav__search'),(null as any));
-    this._el_13 = import3.createRenderElement(this.renderer,this._el_12,'a',new import3.InlineArray4(4,'class','mobile-nav__burger_search','href',''),(null as any));
-    this._text_14 = this.renderer.createText(this._el_2,'\n    ',(null as any));
-    this._el_15 = import3.createRenderElement(this.renderer,this._el_2,'div',new import3.InlineArray2(2,'class','mobile-nav__burger'),(null as any));
-    this._el_16 = import3.createRenderElement(this.renderer,this._el_15,'a',new import3.InlineArray4(4,'class','mobile-nav__burger_link','href',''),(null as any));
-    this._text_17 = this.renderer.createText(this._el_2,'\n\n  ',(null as any));
-    this._text_18 = this.renderer.createText(this._el_0,'\n  ',(null as any));
-    this._el_19 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','menu-mobile'),(null as any));
-    this._NgClass_19_3 = new import10.Wrapper_NgClass(this.parentView.injectorGet(import18.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import19.KeyValueDiffers,this.parentIndex),new import20.ElementRef(this._el_19),this.renderer);
-    this._text_20 = this.renderer.createText(this._el_19,'\n    ',(null as any));
-    this._el_21 = import3.createRenderElement(this.renderer,this._el_19,'div',new import3.InlineArray2(2,'class','container'),(null as any));
-    this._text_22 = this.renderer.createText(this._el_21,'\n      ',(null as any));
-    this._el_23 = import3.createRenderElement(this.renderer,this._el_21,'div',new import3.InlineArray2(2,'class','mobile-logo'),(null as any));
-    this._text_24 = this.renderer.createText(this._el_23,'\n        ',(null as any));
-    this._el_25 = import3.createRenderElement(this.renderer,this._el_23,'a',new import3.InlineArray4(4,'class','c-logo-link','href','/'),(null as any));
-    this._text_26 = this.renderer.createText(this._el_25,'\n          ',(null as any));
-    this._el_27 = import3.createRenderElement(this.renderer,this._el_25,'img',new import3.InlineArray8(6,'alt','True Tube','class','logo c-logo-link__img hidden-lg-down','src','/assets/images/true-tube-logo_black.svg'),(null as any));
-    this._text_28 = this.renderer.createText(this._el_25,'\n          ',(null as any));
-    this._el_29 = import3.createRenderElement(this.renderer,this._el_25,'img',new import3.InlineArray8(6,'alt','True Tube','class','logo c-logo-link__img hidden-lg-up','src','/assets/images/true-tube-logo_white.svg'),(null as any));
-    this._text_30 = this.renderer.createText(this._el_25,'\n        ',(null as any));
-    this._text_31 = this.renderer.createText(this._el_23,'\n      ',(null as any));
-    this._text_32 = this.renderer.createText(this._el_21,'\n      ',(null as any));
-    this._el_33 = import3.createRenderElement(this.renderer,this._el_21,'app-primary-nav',new import3.InlineArray4(4,'class','primary-nav','id','primary-nav'),(null as any));
-    this.compView_33 = new import12.View_PrimaryNavComponent0(this.viewUtils,this,33,this._el_33);
-    this._PrimaryNavComponent_33_3 = new import12.Wrapper_PrimaryNavComponent(this.parentView.injectorGet(import21.ListFilter,this.parentIndex),this.parentView.injectorGet(import22.ListService,this.parentIndex),this.parentView.injectorGet(import8.Auth,this.parentIndex));
-    this.compView_33.create(this._PrimaryNavComponent_33_3.context);
-    this._text_34 = this.renderer.createText(this._el_21,'\n    ',(null as any));
-    this._text_35 = this.renderer.createText(this._el_19,'\n    ',(null as any));
-    this._text_36 = this.renderer.createText(this._el_19,'\n\n    ',(null as any));
-    this._el_37 = import3.createRenderElement(this.renderer,this._el_19,'div',new import3.InlineArray2(2,'class','mobile-nav__close'),(null as any));
-    this._el_38 = import3.createRenderElement(this.renderer,this._el_37,'a',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_39 = this.renderer.createText(this._el_19,'\n\n  ',(null as any));
-    this._text_40 = this.renderer.createText(this._el_0,'\n\n',(null as any));
-    this._text_41 = this.renderer.createText(parentRenderNode,'\n',(null as any));
-    this._el_42 = import3.createRenderElement(this.renderer,parentRenderNode,'app-call-to-action',new import3.InlineArray2(2,'class','call-to-action'),(null as any));
-    this.compView_42 = new import14.View_CallToActionComponent0(this.viewUtils,this,42,this._el_42);
-    this._CallToActionComponent_42_3 = new import14.Wrapper_CallToActionComponent();
-    this.compView_42.create(this._CallToActionComponent_42_3.context);
-    this._text_43 = this.renderer.createText(parentRenderNode,'\n',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_6,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_6));
-    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_12,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_12));
-    var disposable_2:Function = import3.subscribeToRenderElement(this,this._el_13,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_13));
-    var disposable_3:Function = import3.subscribeToRenderElement(this,this._el_15,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_15));
-    var disposable_4:Function = import3.subscribeToRenderElement(this,this._el_16,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_16));
-    var disposable_5:Function = import3.subscribeToRenderElement(this,this._el_33,new import3.InlineArray2(2,'searchSubmitted',(null as any)),this.eventHandler(this.handleEvent_33));
-    this._PrimaryNavComponent_33_3.subscribe(this,this.eventHandler(this.handleEvent_33),true);
-    var disposable_6:Function = import3.subscribeToRenderElement(this,this._el_37,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_37));
+    this._text_0 = this.renderer.createText(parentRenderNode,'  ',(null as any));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'header',new import3.InlineArray4(4,'class','c-header','role','banner'),(null as any));
+    this._text_2 = this.renderer.createText(this._el_1,'\n  ',(null as any));
+    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','container'),(null as any));
+    this._text_4 = this.renderer.createText(this._el_3,'\n    ',(null as any));
+    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','mobile-logo hidden-lg-up'),(null as any));
+    this._text_6 = this.renderer.createText(this._el_5,'\n			',(null as any));
+    this._el_7 = import3.createRenderElement(this.renderer,this._el_5,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Primary Nav','angularticsEvent','Navigate','class','c-logo-link','href','#'),(null as any));
+    this._RouterLinkWithHref_7_3 = new import11.Wrapper_RouterLinkWithHref(this.parentView.injectorGet(import18.Router,this.parentIndex),this.parentView.injectorGet(import19.ActivatedRoute,this.parentIndex),this.parentView.injectorGet(import20.LocationStrategy,this.parentIndex));
+    this._Angulartics2On_7_4 = new import12.Wrapper_Angulartics2On(new import21.ElementRef(this._el_7),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex),this.parentView.injectorGet(import22.EventManager,this.parentIndex));
+    this._text_8 = this.renderer.createText(this._el_7,'\n				',(null as any));
+    this._el_9 = import3.createRenderElement(this.renderer,this._el_7,'img',new import3.InlineArray8(6,'alt','True Tube','class','logo c-logo-link__img','src','/assets/images/true-tube-logo_black.svg'),(null as any));
+    this._text_10 = this.renderer.createText(this._el_7,'\n			',(null as any));
+    this._text_11 = this.renderer.createText(this._el_5,'\n    ',(null as any));
+    this._text_12 = this.renderer.createText(this._el_3,'\n    ',(null as any));
+    this._el_13 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','mobile-nav__search'),(null as any));
+    this._el_14 = import3.createRenderElement(this.renderer,this._el_13,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Primary Nav','angularticsEvent','Action','class','mobile-nav__burger_search','href',''),(null as any));
+    this._Angulartics2On_14_3 = new import12.Wrapper_Angulartics2On(new import21.ElementRef(this._el_14),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex),this.parentView.injectorGet(import22.EventManager,this.parentIndex));
+    this._text_15 = this.renderer.createText(this._el_3,'\n    ',(null as any));
+    this._el_16 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','mobile-nav__burger'),(null as any));
+    this._el_17 = import3.createRenderElement(this.renderer,this._el_16,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Primary Nav','angularticsEvent','Action','class','mobile-nav__burger_link','href',''),(null as any));
+    this._Angulartics2On_17_3 = new import12.Wrapper_Angulartics2On(new import21.ElementRef(this._el_17),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex),this.parentView.injectorGet(import22.EventManager,this.parentIndex));
+    this._text_18 = this.renderer.createText(this._el_3,'\n  ',(null as any));
+    this._text_19 = this.renderer.createText(this._el_1,'\n  ',(null as any));
+    this._el_20 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','menu-mobile'),(null as any));
+    this._NgClass_20_3 = new import13.Wrapper_NgClass(this.parentView.injectorGet(import23.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import24.KeyValueDiffers,this.parentIndex),new import21.ElementRef(this._el_20),this.renderer);
+    this._text_21 = this.renderer.createText(this._el_20,'\n    ',(null as any));
+    this._el_22 = import3.createRenderElement(this.renderer,this._el_20,'div',new import3.InlineArray2(2,'class','container'),(null as any));
+    this._text_23 = this.renderer.createText(this._el_22,'\n      ',(null as any));
+    this._el_24 = import3.createRenderElement(this.renderer,this._el_22,'div',new import3.InlineArray2(2,'class','mobile-logo'),(null as any));
+    this._text_25 = this.renderer.createText(this._el_24,'\n        ',(null as any));
+    this._el_26 = import3.createRenderElement(this.renderer,this._el_24,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Primary Nav','angularticsEvent','Navigate','class','c-logo-link','href','#'),(null as any));
+    this._RouterLinkWithHref_26_3 = new import11.Wrapper_RouterLinkWithHref(this.parentView.injectorGet(import18.Router,this.parentIndex),this.parentView.injectorGet(import19.ActivatedRoute,this.parentIndex),this.parentView.injectorGet(import20.LocationStrategy,this.parentIndex));
+    this._Angulartics2On_26_4 = new import12.Wrapper_Angulartics2On(new import21.ElementRef(this._el_26),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex),this.parentView.injectorGet(import22.EventManager,this.parentIndex));
+    this._text_27 = this.renderer.createText(this._el_26,'\n          ',(null as any));
+    this._el_28 = import3.createRenderElement(this.renderer,this._el_26,'img',new import3.InlineArray8(6,'alt','True Tube','class','logo c-logo-link__img hidden-md-down','src','/assets/images/true-tube-logo_black.svg'),(null as any));
+    this._text_29 = this.renderer.createText(this._el_26,'\n          ',(null as any));
+    this._el_30 = import3.createRenderElement(this.renderer,this._el_26,'img',new import3.InlineArray8(6,'alt','True Tube','class','logo c-logo-link__img hidden-md-up','src','/assets/images/true-tube-logo_white.svg'),(null as any));
+    this._text_31 = this.renderer.createText(this._el_26,'\n        ',(null as any));
+    this._text_32 = this.renderer.createText(this._el_24,'\n      ',(null as any));
+    this._text_33 = this.renderer.createText(this._el_22,'\n      ',(null as any));
+    this._el_34 = import3.createRenderElement(this.renderer,this._el_22,'app-primary-nav',new import3.InlineArray4(4,'class','primary-nav','id','primary-nav'),(null as any));
+    this.compView_34 = new import15.View_PrimaryNavComponent0(this.viewUtils,this,34,this._el_34);
+    this._PrimaryNavComponent_34_3 = new import15.Wrapper_PrimaryNavComponent(this.parentView.injectorGet(import25.ListFilterComponent,this.parentIndex),this.parentView.injectorGet(import26.ListService,this.parentIndex),this.parentView.injectorGet(import8.Auth,this.parentIndex),this.parentView.injectorGet(import9.Angulartics2GoogleAnalytics,this.parentIndex),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex));
+    this.compView_34.create(this._PrimaryNavComponent_34_3.context);
+    this._text_35 = this.renderer.createText(this._el_22,'\n    ',(null as any));
+    this._text_36 = this.renderer.createText(this._el_20,'\n    ',(null as any));
+    this._text_37 = this.renderer.createText(this._el_20,'\n\n    ',(null as any));
+    this._el_38 = import3.createRenderElement(this.renderer,this._el_20,'div',new import3.InlineArray2(2,'class','mobile-nav__close'),(null as any));
+    this._el_39 = import3.createRenderElement(this.renderer,this._el_38,'a',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_40 = this.renderer.createText(this._el_20,'\n\n  ',(null as any));
+    this._text_41 = this.renderer.createText(this._el_1,'\n  ',(null as any));
+    this._el_42 = import3.createRenderElement(this.renderer,this._el_1,'app-call-to-action',new import3.InlineArray2(2,'class','call-to-action'),(null as any));
+    this.compView_42 = new import17.View_CallToActionComponent0(this.viewUtils,this,42,this._el_42);
+    this._NgClass_42_3 = new import13.Wrapper_NgClass(this.parentView.injectorGet(import23.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import24.KeyValueDiffers,this.parentIndex),new import21.ElementRef(this._el_42),this.renderer);
+    this._CallToActionComponent_42_4 = new import17.Wrapper_CallToActionComponent(this.parentView.injectorGet(import8.Auth,this.parentIndex),this.parentView.injectorGet(import9.Angulartics2GoogleAnalytics,this.parentIndex),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex));
+    this.compView_42.create(this._CallToActionComponent_42_4.context);
+    this._text_43 = this.renderer.createText(this._el_1,'\n',(null as any));
+    this._text_44 = this.renderer.createText(parentRenderNode,'\n',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_7,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_7));
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_13,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_13));
+    var disposable_2:Function = import3.subscribeToRenderElement(this,this._el_14,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_14));
+    var disposable_3:Function = import3.subscribeToRenderElement(this,this._el_16,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_16));
+    var disposable_4:Function = import3.subscribeToRenderElement(this,this._el_17,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_17));
+    var disposable_5:Function = import3.subscribeToRenderElement(this,this._el_26,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_26));
+    var disposable_6:Function = import3.subscribeToRenderElement(this,this._el_34,new import3.InlineArray4(4,'searchSubmitted',(null as any),'menuClick',(null as any)),this.eventHandler(this.handleEvent_34));
+    this._PrimaryNavComponent_34_3.subscribe(this,this.eventHandler(this.handleEvent_34),true,true);
+    var disposable_7:Function = import3.subscribeToRenderElement(this,this._el_38,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_38));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._el_2,
-      this._text_3,
-      this._el_4,
-      this._text_5,
-      this._el_6,
-      this._text_7,
-      this._el_8,
-      this._text_9,
+      this._text_0,
+      this._el_1,
+      this._text_2,
+      this._el_3,
+      this._text_4,
+      this._el_5,
+      this._text_6,
+      this._el_7,
+      this._text_8,
+      this._el_9,
       this._text_10,
       this._text_11,
-      this._el_12,
+      this._text_12,
       this._el_13,
-      this._text_14,
-      this._el_15,
+      this._el_14,
+      this._text_15,
       this._el_16,
-      this._text_17,
+      this._el_17,
       this._text_18,
-      this._el_19,
-      this._text_20,
-      this._el_21,
-      this._text_22,
-      this._el_23,
-      this._text_24,
-      this._el_25,
-      this._text_26,
-      this._el_27,
-      this._text_28,
-      this._el_29,
-      this._text_30,
+      this._text_19,
+      this._el_20,
+      this._text_21,
+      this._el_22,
+      this._text_23,
+      this._el_24,
+      this._text_25,
+      this._el_26,
+      this._text_27,
+      this._el_28,
+      this._text_29,
+      this._el_30,
       this._text_31,
       this._text_32,
-      this._el_33,
-      this._text_34,
+      this._text_33,
+      this._el_34,
       this._text_35,
       this._text_36,
-      this._el_37,
+      this._text_37,
       this._el_38,
-      this._text_39,
+      this._el_39,
       this._text_40,
       this._text_41,
       this._el_42,
-      this._text_43
+      this._text_43,
+      this._text_44
     ]
     ),[
       disposable_0,
@@ -269,52 +314,102 @@ export class View_HeaderComponent0 extends import1.AppView<import0.HeaderCompone
       disposable_3,
       disposable_4,
       disposable_5,
-      disposable_6
+      disposable_6,
+      disposable_7
     ]
     );
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import23.RouterLinkWithHref) && ((6 <= requestNodeIndex) && (requestNodeIndex <= 9)))) { return this._RouterLinkWithHref_6_3.context; }
-    if (((token === import11.PrimaryNavComponent) && (33 === requestNodeIndex))) { return this._PrimaryNavComponent_33_3.context; }
-    if (((token === import24.NgClass) && ((19 <= requestNodeIndex) && (requestNodeIndex <= 39)))) { return this._NgClass_19_3.context; }
-    if (((token === import13.CallToActionComponent) && (42 === requestNodeIndex))) { return this._CallToActionComponent_42_3.context; }
+    if (((token === import27.RouterLinkWithHref) && ((7 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._RouterLinkWithHref_7_3.context; }
+    if (((token === import28.Angulartics2On) && ((7 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._Angulartics2On_7_4.context; }
+    if (((token === import28.Angulartics2On) && (14 === requestNodeIndex))) { return this._Angulartics2On_14_3.context; }
+    if (((token === import28.Angulartics2On) && (17 === requestNodeIndex))) { return this._Angulartics2On_17_3.context; }
+    if (((token === import27.RouterLinkWithHref) && ((26 <= requestNodeIndex) && (requestNodeIndex <= 31)))) { return this._RouterLinkWithHref_26_3.context; }
+    if (((token === import28.Angulartics2On) && ((26 <= requestNodeIndex) && (requestNodeIndex <= 31)))) { return this._Angulartics2On_26_4.context; }
+    if (((token === import14.PrimaryNavComponent) && (34 === requestNodeIndex))) { return this._PrimaryNavComponent_34_3.context; }
+    if (((token === import29.NgClass) && ((20 <= requestNodeIndex) && (requestNodeIndex <= 40)))) { return this._NgClass_20_3.context; }
+    if (((token === import29.NgClass) && (42 === requestNodeIndex))) { return this._NgClass_42_3.context; }
+    if (((token === import16.CallToActionComponent) && (42 === requestNodeIndex))) { return this._CallToActionComponent_42_4.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_6_0_0:any = this._arr_50('/');
-    this._RouterLinkWithHref_6_3.check_routerLink(currVal_6_0_0,throwOnChange,false);
-    this._RouterLinkWithHref_6_3.ngDoCheck(this,this._el_6,throwOnChange);
-    const currVal_19_0_0:any = 'menu-mobile';
-    this._NgClass_19_3.check_klass(currVal_19_0_0,throwOnChange,false);
-    const currVal_19_0_1:any = this._map_51(this.context.menuVisible);
-    this._NgClass_19_3.check_ngClass(currVal_19_0_1,throwOnChange,false);
-    this._NgClass_19_3.ngDoCheck(this,this._el_19,throwOnChange);
-    this._PrimaryNavComponent_33_3.ngDoCheck(this,this._el_33,throwOnChange);
-    this._CallToActionComponent_42_3.ngDoCheck(this,this._el_42,throwOnChange);
-    this._RouterLinkWithHref_6_3.checkHost(this,this,this._el_6,throwOnChange);
-    this.compView_33.internalDetectChanges(throwOnChange);
+    const currVal_7_0_0:any = this._arr_57('/');
+    this._RouterLinkWithHref_7_3.check_routerLink(currVal_7_0_0,throwOnChange,false);
+    this._RouterLinkWithHref_7_3.ngDoCheck(this,this._el_7,throwOnChange);
+    const currVal_7_1_0:any = 'click';
+    this._Angulartics2On_7_4.check_angulartics2On(currVal_7_1_0,throwOnChange,false);
+    const currVal_7_1_1:any = 'Navigate';
+    this._Angulartics2On_7_4.check_angularticsEvent(currVal_7_1_1,throwOnChange,false);
+    const currVal_7_1_2:any = 'Primary Nav';
+    this._Angulartics2On_7_4.check_angularticsCategory(currVal_7_1_2,throwOnChange,false);
+    const currVal_7_1_3:any = this._map_58('Home');
+    this._Angulartics2On_7_4.check_angularticsProperties(currVal_7_1_3,throwOnChange,false);
+    this._Angulartics2On_7_4.ngDoCheck(this,this._el_7,throwOnChange);
+    const currVal_14_0_0:any = 'click';
+    this._Angulartics2On_14_3.check_angulartics2On(currVal_14_0_0,throwOnChange,false);
+    const currVal_14_0_1:any = 'Action';
+    this._Angulartics2On_14_3.check_angularticsEvent(currVal_14_0_1,throwOnChange,false);
+    const currVal_14_0_2:any = 'Primary Nav';
+    this._Angulartics2On_14_3.check_angularticsCategory(currVal_14_0_2,throwOnChange,false);
+    const currVal_14_0_3:any = this._map_59('Mobile Search');
+    this._Angulartics2On_14_3.check_angularticsProperties(currVal_14_0_3,throwOnChange,false);
+    this._Angulartics2On_14_3.ngDoCheck(this,this._el_14,throwOnChange);
+    const currVal_17_0_0:any = 'click';
+    this._Angulartics2On_17_3.check_angulartics2On(currVal_17_0_0,throwOnChange,false);
+    const currVal_17_0_1:any = 'Action';
+    this._Angulartics2On_17_3.check_angularticsEvent(currVal_17_0_1,throwOnChange,false);
+    const currVal_17_0_2:any = 'Primary Nav';
+    this._Angulartics2On_17_3.check_angularticsCategory(currVal_17_0_2,throwOnChange,false);
+    const currVal_17_0_3:any = this._map_60('Mobile Menu');
+    this._Angulartics2On_17_3.check_angularticsProperties(currVal_17_0_3,throwOnChange,false);
+    this._Angulartics2On_17_3.ngDoCheck(this,this._el_17,throwOnChange);
+    const currVal_20_0_0:any = 'menu-mobile';
+    this._NgClass_20_3.check_klass(currVal_20_0_0,throwOnChange,false);
+    const currVal_20_0_1:any = this._map_61(this.context.menuVisible);
+    this._NgClass_20_3.check_ngClass(currVal_20_0_1,throwOnChange,false);
+    this._NgClass_20_3.ngDoCheck(this,this._el_20,throwOnChange);
+    const currVal_26_0_0:any = this._arr_62('/');
+    this._RouterLinkWithHref_26_3.check_routerLink(currVal_26_0_0,throwOnChange,false);
+    this._RouterLinkWithHref_26_3.ngDoCheck(this,this._el_26,throwOnChange);
+    const currVal_26_1_0:any = 'click';
+    this._Angulartics2On_26_4.check_angulartics2On(currVal_26_1_0,throwOnChange,false);
+    const currVal_26_1_1:any = 'Navigate';
+    this._Angulartics2On_26_4.check_angularticsEvent(currVal_26_1_1,throwOnChange,false);
+    const currVal_26_1_2:any = 'Primary Nav';
+    this._Angulartics2On_26_4.check_angularticsCategory(currVal_26_1_2,throwOnChange,false);
+    const currVal_26_1_3:any = this._map_63('Home');
+    this._Angulartics2On_26_4.check_angularticsProperties(currVal_26_1_3,throwOnChange,false);
+    this._Angulartics2On_26_4.ngDoCheck(this,this._el_26,throwOnChange);
+    this._PrimaryNavComponent_34_3.ngDoCheck(this,this._el_34,throwOnChange);
+    const currVal_42_0_0:any = 'call-to-action';
+    this._NgClass_42_3.check_klass(currVal_42_0_0,throwOnChange,false);
+    const currVal_42_0_1:any = this._map_64(this.context.auth.authenticated());
+    this._NgClass_42_3.check_ngClass(currVal_42_0_1,throwOnChange,false);
+    this._NgClass_42_3.ngDoCheck(this,this._el_42,throwOnChange);
+    this._CallToActionComponent_42_4.ngDoCheck(this,this._el_42,throwOnChange);
+    if (!throwOnChange) {
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_7_4.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_14_3.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_17_3.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_26_4.context.ngAfterContentInit(); }
+    }
+    this._RouterLinkWithHref_7_3.checkHost(this,this,this._el_7,throwOnChange);
+    this._RouterLinkWithHref_26_3.checkHost(this,this,this._el_26,throwOnChange);
+    this.compView_34.internalDetectChanges(throwOnChange);
     this.compView_42.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
-    this.compView_33.destroy();
+    this.compView_34.destroy();
     this.compView_42.destroy();
-    this._RouterLinkWithHref_6_3.ngOnDestroy();
-    this._PrimaryNavComponent_33_3.ngOnDestroy();
+    this._RouterLinkWithHref_7_3.ngOnDestroy();
+    this._RouterLinkWithHref_26_3.ngOnDestroy();
+    this._PrimaryNavComponent_34_3.ngOnDestroy();
   }
-  handleEvent_6(eventName:string,$event:any):boolean {
+  handleEvent_7(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    result = (this._RouterLinkWithHref_6_3.handleEvent(eventName,$event) && result);
-    return result;
-  }
-  handleEvent_12(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.mobileSearch($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
+    result = (this._RouterLinkWithHref_7_3.handleEvent(eventName,$event) && result);
     return result;
   }
   handleEvent_13(eventName:string,$event:any):boolean {
@@ -326,11 +421,11 @@ export class View_HeaderComponent0 extends import1.AppView<import0.HeaderCompone
     }
     return result;
   }
-  handleEvent_15(eventName:string,$event:any):boolean {
+  handleEvent_14(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.toggleMenu($event)) !== false);
+      const pd_sub_0:any = ((<any>this.context.mobileSearch($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
@@ -344,16 +439,35 @@ export class View_HeaderComponent0 extends import1.AppView<import0.HeaderCompone
     }
     return result;
   }
-  handleEvent_33(eventName:string,$event:any):boolean {
+  handleEvent_17(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'click')) {
+      const pd_sub_0:any = ((<any>this.context.toggleMenu($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+  handleEvent_26(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._RouterLinkWithHref_26_3.handleEvent(eventName,$event) && result);
+    return result;
+  }
+  handleEvent_34(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'searchSubmitted')) {
       const pd_sub_0:any = ((<any>this.context.searchDone($event)) !== false);
       result = (pd_sub_0 && result);
     }
+    if ((eventName == 'menuClick')) {
+      const pd_sub_1:any = ((<any>this.context.searchDone($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
     return result;
   }
-  handleEvent_37(eventName:string,$event:any):boolean {
+  handleEvent_38(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {

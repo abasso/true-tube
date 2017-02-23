@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
+import * as Raven from 'raven-js'
+import { NgModule, ErrorHandler } from '@angular/core'
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {HttpModule} from '@angular/http'
 import { RouterModule, Routes } from '@angular/router'
@@ -52,6 +53,10 @@ import { UserListComponent } from './components/profile/list.component'
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2'
 
 // import { MetaModule } from 'ng2-meta'
+
+Raven
+  .config('https://2978499738d5454a8c9bdaa1bc5ae034@sentry.io/141702')
+  .install()
 
 const appRoutes: Routes = [
   {
@@ -172,8 +177,15 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
       slidesPerView: 1,
       paginationClickable: true,
       spaceBetween: 0,
-      loop: false
-    }
+      loop: false,
+      autoplay: 5000
+      }
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    Raven.captureException(err.originalError)
+  }
+}
 
 
 @NgModule({
@@ -238,7 +250,8 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     ListService,
     LoggedInGuard,
     ProfileResolver,
-    UserService
+    UserService,
+    {provide: ErrorHandler, useClass: RavenErrorHandler}
   ],
   bootstrap: [
     AppComponent

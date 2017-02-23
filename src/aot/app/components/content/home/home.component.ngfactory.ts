@@ -24,7 +24,9 @@ import * as import15 from '../../shared/events.component.ngfactory';
 import * as import16 from '../../../../../app/components/shared/topics.component';
 import * as import17 from '../../shared/topics.component.ngfactory';
 import * as import18 from '../../../../../app/services/data.service';
-import * as import19 from '@angular/router/src/router';
+import * as import19 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import20 from 'angulartics2/dist/core/angulartics2';
+import * as import21 from '@angular/router/src/router';
 export class Wrapper_HomeComponent {
   /*private*/ _eventHandler:Function;
   context:import0.HomeComponent;
@@ -136,7 +138,7 @@ export class View_HomeComponent0 extends import1.AppView<import0.HomeComponent> 
     this._text_3 = this.renderer.createText(this._el_2,'\n    ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'app-carousel',import3.EMPTY_INLINE_ARRAY,(null as any));
     this.compView_4 = new import9.View_CarouselComponent0(this.viewUtils,this,4,this._el_4);
-    this._CarouselComponent_4_3 = new import9.Wrapper_CarouselComponent(this.parentView.injectorGet(import18.DataService,this.parentIndex));
+    this._CarouselComponent_4_3 = new import9.Wrapper_CarouselComponent(this.parentView.injectorGet(import18.DataService,this.parentIndex),this.parentView.injectorGet(import19.Angulartics2GoogleAnalytics,this.parentIndex),this.parentView.injectorGet(import20.Angulartics2,this.parentIndex));
     this.compView_4.create(this._CarouselComponent_4_3.context);
     this._text_5 = this.renderer.createText(this._el_2,'\n  ',(null as any));
     this._text_6 = this.renderer.createText(this._el_0,'\n',(null as any));
@@ -148,7 +150,7 @@ export class View_HomeComponent0 extends import1.AppView<import0.HomeComponent> 
     this._el_12 = import3.createRenderElement(this.renderer,this._el_10,'home-list',import3.EMPTY_INLINE_ARRAY,(null as any));
     this.compView_12 = new import12.View_HomeListingComponent0(this.viewUtils,this,12,this._el_12);
     this._ListService_12_3 = new import11.ListService();
-    this._HomeListingComponent_12_4 = new import12.Wrapper_HomeListingComponent(this.parentView.injectorGet(import18.DataService,this.parentIndex),this._ListService_12_3);
+    this._HomeListingComponent_12_4 = new import12.Wrapper_HomeListingComponent(this.parentView.injectorGet(import18.DataService,this.parentIndex),this._ListService_12_3,this.parentView.injectorGet(import19.Angulartics2GoogleAnalytics,this.parentIndex),this.parentView.injectorGet(import20.Angulartics2,this.parentIndex));
     this.compView_12.create(this._HomeListingComponent_12_4.context);
     this._text_13 = this.renderer.createText(this._el_10,'\n    ',(null as any));
     this._text_14 = this.renderer.createText(this._el_8,'\n    ',(null as any));
@@ -156,13 +158,13 @@ export class View_HomeComponent0 extends import1.AppView<import0.HomeComponent> 
     this._text_16 = this.renderer.createText(this._el_15,'\n      ',(null as any));
     this._el_17 = import3.createRenderElement(this.renderer,this._el_15,'app-events-block',import3.EMPTY_INLINE_ARRAY,(null as any));
     this.compView_17 = new import15.View_EventsBlockComponent0(this.viewUtils,this,17,this._el_17);
-    this._EventsBlockComponent_17_3 = new import15.Wrapper_EventsBlockComponent(this.parentView.injectorGet(import18.DataService,this.parentIndex));
+    this._EventsBlockComponent_17_3 = new import15.Wrapper_EventsBlockComponent(this.parentView.injectorGet(import18.DataService,this.parentIndex),this.parentView.injectorGet(import19.Angulartics2GoogleAnalytics,this.parentIndex),this.parentView.injectorGet(import20.Angulartics2,this.parentIndex));
     this.compView_17.create(this._EventsBlockComponent_17_3.context);
     this._text_18 = this.renderer.createText(this._el_15,'\n      ',(null as any));
     this._text_19 = this.renderer.createText(this._el_15,'\n      ',(null as any));
     this._el_20 = import3.createRenderElement(this.renderer,this._el_15,'app-topics-block',import3.EMPTY_INLINE_ARRAY,(null as any));
     this.compView_20 = new import17.View_TopicsComponent0(this.viewUtils,this,20,this._el_20);
-    this._TopicsComponent_20_3 = new import17.Wrapper_TopicsComponent(this.parentView.injectorGet(import19.Router,this.parentIndex));
+    this._TopicsComponent_20_3 = new import17.Wrapper_TopicsComponent(this.parentView.injectorGet(import21.Router,this.parentIndex));
     this.compView_20.create(this._TopicsComponent_20_3.context);
     this._text_21 = this.renderer.createText(this._el_15,'\n    ',(null as any));
     this._text_22 = this.renderer.createText(this._el_8,'\n',(null as any));

@@ -14,7 +14,7 @@ export class CookieNoticeComponent implements OnInit {
     this.cookieSet = (_.isUndefined(Cookies.get('cookie-notice'))) ? false : true
   }
 
-  setCookie(event) {
+  setCookie(event: any) {
     event.preventDefault()
     this.cookieSet = true
     Cookies.set('cookie-notice', 'True', { expires: 365 })

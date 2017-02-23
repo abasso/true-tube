@@ -1,0 +1,1 @@
+{"summaries":[{"symbol":{"__symbol":0},"metadata":{"__symbolic":"class"},"type":{"summaryKind":0,"type":{"reference":{"__symbol":0},"diDeps":[],"lifecycleHooks":[]},"name":"ImagePipe","pure":false}}],"symbols":[{"__symbol":0,"name":"ImagePipe","filePath":"/Users/tbp/Documents/Github/ctvc/true-tube/src/app/pipes/image.pipe.d.ts"}]}

@@ -37,7 +37,7 @@ export class ListingSortComponent {
     })
 
     this.ListingComponent.currentPage
-    .subscribe((page) => {
+    .subscribe((page: any) => {
       this.setPage({target: { value: page}}, null)
     })
 
@@ -55,7 +55,7 @@ export class ListingSortComponent {
     this.loadMoreCount = 12
   }
 
-  setPage(event: any, arg) {
+  setPage(event: any, arg: any) {
     if (arg === 'next') {
       event.preventDefault()
       if (this.ListingComponent.paginationData.currentPage === this.ListingComponent.paginationData.totalPages - 1) {

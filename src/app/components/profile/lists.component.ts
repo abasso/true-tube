@@ -50,12 +50,12 @@ export class UserListsComponent {
           _.each(this.profile.lists, (list, key) => {
             let listObject = {
               key: key,
-              title: list.title,
-              titleWithCount: list.title + ' (' + list.items.length + ' Item' + ((list.items.length > 1) ? 's' : '') + ')',
+              title: list['title'],
+              titleWithCount: list['title'] + ' (' + list['items'].length + ' Item' + ((list['items'].length > 1) ? 's' : '') + ')',
               canDelete: true,
               url: '/me/list/' + key
             }
-            if (key === 'favourites') {
+            if (key.toString() === 'favourites') {
               listObject.canDelete = false
               this.lists.unshift(listObject)
             } else {
@@ -65,7 +65,7 @@ export class UserListsComponent {
       })
   }
 
-  toggleNotification(list) {
+  toggleNotification(list: string) {
     this.notificationRemove = true
     this.notificationMessage = 'Removed ' + list
     this.showNotification = true
@@ -74,7 +74,7 @@ export class UserListsComponent {
     }, 3000)
   }
 
-  highlightRow(event, list) {
+  highlightRow(event: any, list: string) {
     event.preventDefault()
     _.each(this.lists, (item) => {
       if (item.title === list) {
@@ -83,7 +83,7 @@ export class UserListsComponent {
     })
   }
 
-  unHighlightRow(list) {
+  unHighlightRow(list: string) {
     _.each(this.lists, (item) => {
       if (item.title === list) {
         item.removing = false
@@ -95,7 +95,7 @@ export class UserListsComponent {
     this.router.navigateByUrl(event)
   }
 
-  removeList(event, key) {
+  removeList(event: any, key: string) {
     this.http.delete('https://www.truetube.co.uk/v5/api/me/' + key).subscribe(
     (data) => {
       _.each(this.lists, (item) => {

@@ -14,11 +14,12 @@ import * as moment from 'moment'
 export class EventComponent implements OnInit {
   private data: any
   private items: any
-  private types
+  private types: any
   public paginationData = {
     currentPage: 0,
-    itemsPerPage: 100000
-  }
+    itemsPerPage: 'All',
+    itemsPerPageCurrent: 'All'
+    }
   constructor(
     public dataService: DataService,
     private route: ActivatedRoute,
@@ -38,9 +39,8 @@ export class EventComponent implements OnInit {
               slugString += '/' + part.path
             })
             this.items = _.filter(data.hits.hits, (item) => {
-              return item._source.slug === slugString
+              return item['_source'].slug === slugString
             })
-            console.log(this.items)
             this.items[0].date = moment(this.items[0]._source.date.value).format('Do MMMM YYYY')
             _.each(this.items[0]._source.related, (item) => {
                 item.contenttypes = []

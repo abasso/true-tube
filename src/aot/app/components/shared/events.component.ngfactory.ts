@@ -14,30 +14,35 @@ import * as import5 from '@angular/core/src/linker/view_type';
 import * as import6 from '@angular/core/src/change_detection/constants';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../../../app/services/data.service';
-import * as import9 from '@angular/core/src/linker/view_container';
-import * as import10 from '../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
-import * as import11 from '@angular/core/src/change_detection/change_detection_util';
-import * as import12 from '@angular/router/src/router';
-import * as import13 from '@angular/router/src/router_state';
-import * as import14 from '@angular/common/src/location/location_strategy';
-import * as import15 from '@angular/router/src/directives/router_link';
-import * as import16 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import17 from '@angular/core/src/linker/template_ref';
-import * as import18 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import19 from '@angular/common/src/directives/ng_for';
-import * as import20 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import21 from '../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
-import * as import22 from '@angular/core/src/change_detection/differs/keyvalue_differs';
-import * as import23 from '@angular/core/src/linker/element_ref';
-import * as import24 from '@angular/common/src/directives/ng_if';
-import * as import25 from '@angular/common/src/directives/ng_class';
+import * as import9 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import10 from 'angulartics2/dist/core/angulartics2';
+import * as import11 from '@angular/core/src/linker/view_container';
+import * as import12 from '../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
+import * as import13 from '../../../node_modules/angulartics2/dist/core/angulartics2On.ngfactory';
+import * as import14 from '@angular/core/src/change_detection/change_detection_util';
+import * as import15 from '@angular/router/src/router';
+import * as import16 from '@angular/router/src/router_state';
+import * as import17 from '@angular/common/src/location/location_strategy';
+import * as import18 from '@angular/core/src/linker/element_ref';
+import * as import19 from '@angular/platform-browser/src/dom/events/event_manager';
+import * as import20 from '@angular/router/src/directives/router_link';
+import * as import21 from 'angulartics2/dist/core/angulartics2On';
+import * as import22 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import23 from '@angular/core/src/linker/template_ref';
+import * as import24 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import25 from '@angular/common/src/directives/ng_for';
+import * as import26 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import27 from '../../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
+import * as import28 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import29 from '@angular/common/src/directives/ng_if';
+import * as import30 from '@angular/common/src/directives/ng_class';
 export class Wrapper_EventsBlockComponent {
   /*private*/ _eventHandler:Function;
   context:import0.EventsBlockComponent;
   /*private*/ _changed:boolean;
-  constructor(p0:any) {
+  constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
-    this.context = new import0.EventsBlockComponent(p0);
+    this.context = new import0.EventsBlockComponent(p0,p1,p2);
   }
   ngOnDetach(view:import1.AppView<any>,componentView:import1.AppView<any>,el:any):void {
   }
@@ -70,7 +75,7 @@ class View_EventsBlockComponent_Host0 extends import1.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'app-events-block',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_EventsBlockComponent0(this.viewUtils,this,0,this._el_0);
-    this._EventsBlockComponent_0_3 = new Wrapper_EventsBlockComponent(this.injectorGet(import8.DataService,this.parentIndex));
+    this._EventsBlockComponent_0_3 = new Wrapper_EventsBlockComponent(this.injectorGet(import8.DataService,this.parentIndex),this.injectorGet(import9.Angulartics2GoogleAnalytics,this.parentIndex),this.injectorGet(import10.Angulartics2,this.parentIndex));
     this.compView_0.create(this._EventsBlockComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._EventsBlockComponent_0_3.context);
@@ -95,7 +100,7 @@ const styles_EventsBlockComponent:any[] = ([] as any[]);
 class View_EventsBlockComponent1 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
     super(View_EventsBlockComponent1,renderType_EventsBlockComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
@@ -121,16 +126,21 @@ class View_EventsBlockComponent3 extends import1.AppView<any> {
   _el_5:any;
   _text_6:any;
   _el_7:any;
-  _RouterLinkWithHref_7_3:import10.Wrapper_RouterLinkWithHref;
+  _RouterLinkWithHref_7_3:import12.Wrapper_RouterLinkWithHref;
+  _Angulartics2On_7_4:import13.Wrapper_Angulartics2On;
   _text_8:any;
   _text_9:any;
   _text_10:any;
-  /*private*/ _expr_12:any;
   /*private*/ _expr_13:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+  _map_14:any;
+  /*private*/ _expr_15:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
     super(View_EventsBlockComponent3,renderType_EventsBlockComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_12 = import11.UNINITIALIZED;
-    this._expr_13 = import11.UNINITIALIZED;
+    this._expr_13 = import14.UNINITIALIZED;
+    this._map_14 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._expr_15 = import14.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','list-item'),(null as any));
@@ -140,8 +150,9 @@ class View_EventsBlockComponent3 extends import1.AppView<any> {
     this._text_4 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_0,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_6 = this.renderer.createText(this._el_5,'\n      ',(null as any));
-    this._el_7 = import3.createRenderElement(this.renderer,this._el_5,'a',new import3.InlineArray4(4,'class','block-event__link text-link','href','#'),(null as any));
-    this._RouterLinkWithHref_7_3 = new import10.Wrapper_RouterLinkWithHref(this.parentView.parentView.parentView.injectorGet(import12.Router,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import13.ActivatedRoute,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import14.LocationStrategy,this.parentView.parentView.parentIndex));
+    this._el_7 = import3.createRenderElement(this.renderer,this._el_5,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Event Block','angularticsEvent','Navigate','class','block-event__link text-link','href','#'),(null as any));
+    this._RouterLinkWithHref_7_3 = new import12.Wrapper_RouterLinkWithHref(this.parentView.parentView.parentView.injectorGet(import15.Router,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import16.ActivatedRoute,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import17.LocationStrategy,this.parentView.parentView.parentIndex));
+    this._Angulartics2On_7_4 = new import13.Wrapper_Angulartics2On(new import18.ElementRef(this._el_7),this.parentView.parentView.parentView.injectorGet(import10.Angulartics2,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import19.EventManager,this.parentView.parentView.parentIndex));
     this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
     this._text_9 = this.renderer.createText(this._el_5,'\n    ',(null as any));
     this._text_10 = this.renderer.createText(this._el_0,'\n      ',(null as any));
@@ -163,23 +174,34 @@ class View_EventsBlockComponent3 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import15.RouterLinkWithHref) && ((7 <= requestNodeIndex) && (requestNodeIndex <= 8)))) { return this._RouterLinkWithHref_7_3.context; }
+    if (((token === import20.RouterLinkWithHref) && ((7 <= requestNodeIndex) && (requestNodeIndex <= 8)))) { return this._RouterLinkWithHref_7_3.context; }
+    if (((token === import21.Angulartics2On) && ((7 <= requestNodeIndex) && (requestNodeIndex <= 8)))) { return this._Angulartics2On_7_4.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_7_0_0:any = this.context.$implicit.url;
+    const currVal_7_0_0:any = this.context.$implicit._source.slug;
     this._RouterLinkWithHref_7_3.check_routerLink(currVal_7_0_0,throwOnChange,false);
     this._RouterLinkWithHref_7_3.ngDoCheck(this,this._el_7,throwOnChange);
-    const currVal_12:any = import3.inlineInterpolate(1,'\n      ',this.context.$implicit.date,'\n      ');
-    if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setText(this._text_3,currVal_12);
-      this._expr_12 = currVal_12;
+    const currVal_7_1_0:any = 'click';
+    this._Angulartics2On_7_4.check_angulartics2On(currVal_7_1_0,throwOnChange,false);
+    const currVal_7_1_1:any = 'Navigate';
+    this._Angulartics2On_7_4.check_angularticsEvent(currVal_7_1_1,throwOnChange,false);
+    const currVal_7_1_2:any = 'Event Block';
+    this._Angulartics2On_7_4.check_angularticsCategory(currVal_7_1_2,throwOnChange,false);
+    const currVal_7_1_3:any = this._map_14(this.context.$implicit._source.title);
+    this._Angulartics2On_7_4.check_angularticsProperties(currVal_7_1_3,throwOnChange,false);
+    this._Angulartics2On_7_4.ngDoCheck(this,this._el_7,throwOnChange);
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Angulartics2On_7_4.context.ngAfterContentInit(); } }
+    const currVal_13:any = import3.inlineInterpolate(1,'\n      ',this.context.$implicit.date,'\n      ');
+    if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
+      this.renderer.setText(this._text_3,currVal_13);
+      this._expr_13 = currVal_13;
     }
     this._RouterLinkWithHref_7_3.checkHost(this,this,this._el_7,throwOnChange);
-    const currVal_13:any = import3.inlineInterpolate(1,'\n      	',this.context.$implicit._source.title,'\n      ');
-    if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
-      this.renderer.setText(this._text_8,currVal_13);
-      this._expr_13 = currVal_13;
+    const currVal_15:any = import3.inlineInterpolate(1,'\n      	',this.context.$implicit._source.title,'\n      ');
+    if (import3.checkBinding(throwOnChange,this._expr_15,currVal_15)) {
+      this.renderer.setText(this._text_8,currVal_15);
+      this._expr_15 = currVal_15;
     }
   }
   destroyInternal():void {
@@ -199,20 +221,20 @@ class View_EventsBlockComponent2 extends import1.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
-  /*private*/ _vc_2:import9.ViewContainer;
+  /*private*/ _vc_2:import11.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgFor_2_6:import16.Wrapper_NgFor;
+  _NgFor_2_6:import22.Wrapper_NgFor;
   _text_3:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
     super(View_EventsBlockComponent2,renderType_EventsBlockComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import9.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import17.TemplateRef_(this,2,this._anchor_2);
-    this._NgFor_2_6 = new import16.Wrapper_NgFor(this._vc_2.vcRef,this._TemplateRef_2_5,this.parentView.parentView.injectorGet(import18.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
+    this._vc_2 = new import11.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import23.TemplateRef_(this,2,this._anchor_2);
+    this._NgFor_2_6 = new import22.Wrapper_NgFor(this._vc_2.vcRef,this._TemplateRef_2_5,this.parentView.parentView.injectorGet(import24.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
     this._text_3 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -224,8 +246,8 @@ class View_EventsBlockComponent2 extends import1.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import17.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import19.NgFor) && (2 === requestNodeIndex))) { return this._NgFor_2_6.context; }
+    if (((token === import23.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import25.NgFor) && (2 === requestNodeIndex))) { return this._NgFor_2_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -253,39 +275,42 @@ export class View_EventsBlockComponent0 extends import1.AppView<import0.EventsBl
   _text_3:any;
   _text_4:any;
   _anchor_5:any;
-  /*private*/ _vc_5:import9.ViewContainer;
+  /*private*/ _vc_5:import11.ViewContainer;
   _TemplateRef_5_5:any;
-  _NgIf_5_6:import20.Wrapper_NgIf;
+  _NgIf_5_6:import26.Wrapper_NgIf;
   _text_6:any;
   _anchor_7:any;
-  /*private*/ _vc_7:import9.ViewContainer;
+  /*private*/ _vc_7:import11.ViewContainer;
   _TemplateRef_7_5:any;
-  _NgIf_7_6:import20.Wrapper_NgIf;
+  _NgIf_7_6:import26.Wrapper_NgIf;
   _text_8:any;
   _el_9:any;
   _text_10:any;
   _el_11:any;
-  _NgClass_11_3:import21.Wrapper_NgClass;
+  _NgClass_11_3:import27.Wrapper_NgClass;
+  _Angulartics2On_11_4:import13.Wrapper_Angulartics2On;
   _text_12:any;
   _el_13:any;
-  _NgClass_13_3:import21.Wrapper_NgClass;
+  _NgClass_13_3:import27.Wrapper_NgClass;
+  _Angulartics2On_13_4:import13.Wrapper_Angulartics2On;
   _text_14:any;
   _text_15:any;
   _el_16:any;
-  _RouterLinkWithHref_16_3:import10.Wrapper_RouterLinkWithHref;
+  _RouterLinkWithHref_16_3:import12.Wrapper_RouterLinkWithHref;
+  _Angulartics2On_16_4:import13.Wrapper_Angulartics2On;
   _text_17:any;
   _text_18:any;
   _text_19:any;
-  /*private*/ _expr_29:any;
-  _map_30:any;
-  _map_31:any;
+  /*private*/ _expr_32:any;
+  _map_33:any;
+  _map_34:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_EventsBlockComponent0,renderType_EventsBlockComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
-    this._expr_29 = import11.UNINITIALIZED;
-    this._map_30 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+    this._expr_32 = import14.UNINITIALIZED;
+    this._map_33 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {disabled: p0};
     });
-    this._map_31 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+    this._map_34 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {disabled: p0};
     });
   }
@@ -297,26 +322,29 @@ export class View_EventsBlockComponent0 extends import1.AppView<import0.EventsBl
     this._text_3 = this.renderer.createText(this._el_2,'',(null as any));
     this._text_4 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_5 = new import9.ViewContainer(5,0,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import17.TemplateRef_(this,5,this._anchor_5);
-    this._NgIf_5_6 = new import20.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
+    this._vc_5 = new import11.ViewContainer(5,0,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import23.TemplateRef_(this,5,this._anchor_5);
+    this._NgIf_5_6 = new import26.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
     this._text_6 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_7 = new import9.ViewContainer(7,0,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import17.TemplateRef_(this,7,this._anchor_7);
-    this._NgIf_7_6 = new import20.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
+    this._vc_7 = new import11.ViewContainer(7,0,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import23.TemplateRef_(this,7,this._anchor_7);
+    this._NgIf_7_6 = new import26.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
     this._text_8 = this.renderer.createText(this._el_0,'\n\n        ',(null as any));
     this._el_9 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','month-selector'),(null as any));
     this._text_10 = this.renderer.createText(this._el_9,'\n            ',(null as any));
-    this._el_11 = import3.createRenderElement(this.renderer,this._el_9,'a',new import3.InlineArray4(4,'class',' btn-sm btn-month-back','href','#'),(null as any));
-    this._NgClass_11_3 = new import21.Wrapper_NgClass(this.parentView.injectorGet(import18.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import22.KeyValueDiffers,this.parentIndex),new import23.ElementRef(this._el_11),this.renderer);
+    this._el_11 = import3.createRenderElement(this.renderer,this._el_9,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Event Block Previous','angularticsEvent','Action','class',' btn-sm btn-month-back','href','#'),(null as any));
+    this._NgClass_11_3 = new import27.Wrapper_NgClass(this.parentView.injectorGet(import24.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import28.KeyValueDiffers,this.parentIndex),new import18.ElementRef(this._el_11),this.renderer);
+    this._Angulartics2On_11_4 = new import13.Wrapper_Angulartics2On(new import18.ElementRef(this._el_11),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex),this.parentView.injectorGet(import19.EventManager,this.parentIndex));
     this._text_12 = this.renderer.createText(this._el_9,'\n\n            ',(null as any));
-    this._el_13 = import3.createRenderElement(this.renderer,this._el_9,'a',new import3.InlineArray4(4,'class','btn-sm btn-month-fwd','href','#'),(null as any));
-    this._NgClass_13_3 = new import21.Wrapper_NgClass(this.parentView.injectorGet(import18.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import22.KeyValueDiffers,this.parentIndex),new import23.ElementRef(this._el_13),this.renderer);
+    this._el_13 = import3.createRenderElement(this.renderer,this._el_9,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Event Block Next','angularticsEvent','Action','class','btn-sm btn-month-fwd','href','#'),(null as any));
+    this._NgClass_13_3 = new import27.Wrapper_NgClass(this.parentView.injectorGet(import24.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import28.KeyValueDiffers,this.parentIndex),new import18.ElementRef(this._el_13),this.renderer);
+    this._Angulartics2On_13_4 = new import13.Wrapper_Angulartics2On(new import18.ElementRef(this._el_13),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex),this.parentView.injectorGet(import19.EventManager,this.parentIndex));
     this._text_14 = this.renderer.createText(this._el_9,'\n\n        ',(null as any));
     this._text_15 = this.renderer.createText(this._el_0,'\n        ',(null as any));
-    this._el_16 = import3.createRenderElement(this.renderer,this._el_0,'a',new import3.InlineArray4(4,'class','event-block__calendar text-link','href','#'),(null as any));
-    this._RouterLinkWithHref_16_3 = new import10.Wrapper_RouterLinkWithHref(this.parentView.injectorGet(import12.Router,this.parentIndex),this.parentView.injectorGet(import13.ActivatedRoute,this.parentIndex),this.parentView.injectorGet(import14.LocationStrategy,this.parentIndex));
+    this._el_16 = import3.createRenderElement(this.renderer,this._el_0,'a',new import3.InlineArray16(10,'angulartics2On','click','angularticsCategory','Event Block Full Calendar','angularticsEvent','Navigate','class','event-block__calendar text-link','href','#'),(null as any));
+    this._RouterLinkWithHref_16_3 = new import12.Wrapper_RouterLinkWithHref(this.parentView.injectorGet(import15.Router,this.parentIndex),this.parentView.injectorGet(import16.ActivatedRoute,this.parentIndex),this.parentView.injectorGet(import17.LocationStrategy,this.parentIndex));
+    this._Angulartics2On_16_4 = new import13.Wrapper_Angulartics2On(new import18.ElementRef(this._el_16),this.parentView.injectorGet(import10.Angulartics2,this.parentIndex),this.parentView.injectorGet(import19.EventManager,this.parentIndex));
     this._text_17 = this.renderer.createText(this._el_16,'Full Calendar',(null as any));
     this._text_18 = this.renderer.createText(this._el_0,'\n\n  ',(null as any));
     this._text_19 = this.renderer.createText(parentRenderNode,'\n',(null as any));
@@ -354,13 +382,16 @@ export class View_EventsBlockComponent0 extends import1.AppView<import0.EventsBl
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import17.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import24.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
-    if (((token === import17.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import24.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
-    if (((token === import25.NgClass) && (11 === requestNodeIndex))) { return this._NgClass_11_3.context; }
-    if (((token === import25.NgClass) && (13 === requestNodeIndex))) { return this._NgClass_13_3.context; }
-    if (((token === import15.RouterLinkWithHref) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 17)))) { return this._RouterLinkWithHref_16_3.context; }
+    if (((token === import23.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import29.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
+    if (((token === import23.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import29.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
+    if (((token === import30.NgClass) && (11 === requestNodeIndex))) { return this._NgClass_11_3.context; }
+    if (((token === import21.Angulartics2On) && (11 === requestNodeIndex))) { return this._Angulartics2On_11_4.context; }
+    if (((token === import30.NgClass) && (13 === requestNodeIndex))) { return this._NgClass_13_3.context; }
+    if (((token === import21.Angulartics2On) && (13 === requestNodeIndex))) { return this._Angulartics2On_13_4.context; }
+    if (((token === import20.RouterLinkWithHref) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 17)))) { return this._RouterLinkWithHref_16_3.context; }
+    if (((token === import21.Angulartics2On) && ((16 <= requestNodeIndex) && (requestNodeIndex <= 17)))) { return this._Angulartics2On_16_4.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -372,23 +403,49 @@ export class View_EventsBlockComponent0 extends import1.AppView<import0.EventsBl
     this._NgIf_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
     const currVal_11_0_0:any = ' btn-sm btn-month-back';
     this._NgClass_11_3.check_klass(currVal_11_0_0,throwOnChange,false);
-    const currVal_11_0_1:any = this._map_30((this.context.selectedMonth.getValue() === 0));
+    const currVal_11_0_1:any = this._map_33((this.context.selectedMonth.getValue() === 0));
     this._NgClass_11_3.check_ngClass(currVal_11_0_1,throwOnChange,false);
     this._NgClass_11_3.ngDoCheck(this,this._el_11,throwOnChange);
+    const currVal_11_1_0:any = 'click';
+    this._Angulartics2On_11_4.check_angulartics2On(currVal_11_1_0,throwOnChange,false);
+    const currVal_11_1_1:any = 'Action';
+    this._Angulartics2On_11_4.check_angularticsEvent(currVal_11_1_1,throwOnChange,false);
+    const currVal_11_1_2:any = 'Event Block Previous';
+    this._Angulartics2On_11_4.check_angularticsCategory(currVal_11_1_2,throwOnChange,false);
+    this._Angulartics2On_11_4.ngDoCheck(this,this._el_11,throwOnChange);
     const currVal_13_0_0:any = 'btn-sm btn-month-fwd';
     this._NgClass_13_3.check_klass(currVal_13_0_0,throwOnChange,false);
-    const currVal_13_0_1:any = this._map_31((this.context.selectedMonth.getValue() === 11));
+    const currVal_13_0_1:any = this._map_34((this.context.selectedMonth.getValue() === 11));
     this._NgClass_13_3.check_ngClass(currVal_13_0_1,throwOnChange,false);
     this._NgClass_13_3.ngDoCheck(this,this._el_13,throwOnChange);
+    const currVal_13_1_0:any = 'click';
+    this._Angulartics2On_13_4.check_angulartics2On(currVal_13_1_0,throwOnChange,false);
+    const currVal_13_1_1:any = 'Action';
+    this._Angulartics2On_13_4.check_angularticsEvent(currVal_13_1_1,throwOnChange,false);
+    const currVal_13_1_2:any = 'Event Block Next';
+    this._Angulartics2On_13_4.check_angularticsCategory(currVal_13_1_2,throwOnChange,false);
+    this._Angulartics2On_13_4.ngDoCheck(this,this._el_13,throwOnChange);
     const currVal_16_0_0:any = '/calendar';
     this._RouterLinkWithHref_16_3.check_routerLink(currVal_16_0_0,throwOnChange,false);
     this._RouterLinkWithHref_16_3.ngDoCheck(this,this._el_16,throwOnChange);
+    const currVal_16_1_0:any = 'click';
+    this._Angulartics2On_16_4.check_angulartics2On(currVal_16_1_0,throwOnChange,false);
+    const currVal_16_1_1:any = 'Navigate';
+    this._Angulartics2On_16_4.check_angularticsEvent(currVal_16_1_1,throwOnChange,false);
+    const currVal_16_1_2:any = 'Event Block Full Calendar';
+    this._Angulartics2On_16_4.check_angularticsCategory(currVal_16_1_2,throwOnChange,false);
+    this._Angulartics2On_16_4.ngDoCheck(this,this._el_16,throwOnChange);
     this._vc_5.detectChangesInNestedViews(throwOnChange);
     this._vc_7.detectChangesInNestedViews(throwOnChange);
-    const currVal_29:any = import3.inlineInterpolate(1,'\n        Events ',this.context.selectedMonthString,'\n      ');
-    if (import3.checkBinding(throwOnChange,this._expr_29,currVal_29)) {
-      this.renderer.setText(this._text_3,currVal_29);
-      this._expr_29 = currVal_29;
+    if (!throwOnChange) {
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_11_4.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_13_4.context.ngAfterContentInit(); }
+      if ((this.numberOfChecks === 0)) { this._Angulartics2On_16_4.context.ngAfterContentInit(); }
+    }
+    const currVal_32:any = import3.inlineInterpolate(1,'\n        Events ',this.context.selectedMonthString,'\n      ');
+    if (import3.checkBinding(throwOnChange,this._expr_32,currVal_32)) {
+      this.renderer.setText(this._text_3,currVal_32);
+      this._expr_32 = currVal_32;
     }
     this._RouterLinkWithHref_16_3.checkHost(this,this,this._el_16,throwOnChange);
   }

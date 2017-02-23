@@ -5,11 +5,6 @@ import { Component, HostListener } from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  public stickyHeader
-  public hideHeader = false
-  public lastScrollPos = 0
-  public animateHeader = false
-  public sticky = false
   // @HostListener('window:scroll', ['$event'])
   // scroll(event) {
   //   let main = document.querySelector('main').getBoundingClientRect()

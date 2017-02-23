@@ -16,9 +16,9 @@ export class UserListComponent {
   public profile: Profile
   public lists: any[] = []
   public items: any[] = []
-  public title
-  public id
-  public deleteDialogTitle
+  public title: string
+  public id: any
+  public deleteDialogTitle: string
   public message = ''
   public notificationMessage = ''
   public showNotification = false
@@ -55,7 +55,7 @@ export class UserListComponent {
 
   }
 
-  toggleNotification(item) {
+  toggleNotification(item: string) {
     this.notificationRemove = true
     this.notificationMessage = 'Removed ' + item
     this.showNotification = true
@@ -64,7 +64,7 @@ export class UserListComponent {
     }, 3000)
   }
 
-  highlightRow(event, list) {
+  highlightRow(event: any, list: string) {
     event.preventDefault()
     _.each(this.items, (item) => {
       if (item.title === list) {
@@ -73,7 +73,7 @@ export class UserListComponent {
     })
   }
 
-  unHighlightRow(list) {
+  unHighlightRow(list: string) {
     _.each(this.items, (item) => {
       if (item.title === list) {
         item.removing = false
@@ -81,7 +81,7 @@ export class UserListComponent {
     })
   }
 
-  removeItem(event, key) {
+  removeItem(event: any, key: string) {
     this.http.delete('https://www.truetube.co.uk/v5/api/me/' + this.id + '/' + key).subscribe(
     (data) => {
       _.each(this.items, (item) => {

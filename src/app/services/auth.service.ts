@@ -1,8 +1,8 @@
-import { Injectable }      from '@angular/core'
+import { Injectable } from '@angular/core'
 import { tokenNotExpired } from 'angular2-jwt'
 import {AuthHttp, AuthConfig} from 'angular2-jwt'
 import {Http, RequestOptions} from '@angular/http'
-import { myConfig }        from './auth.config'
+import { myConfig } from './auth.config'
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subject } from 'rxjs/Subject'
@@ -13,9 +13,9 @@ declare var Auth0Lock: any
 @Injectable()
 export class Auth {
   // Configure Auth0
-  private lock
-  private userProfile
-  public loggedInStatus = new Subject()
+  private lock: any
+  private userProfile: any
+  public loggedInStatus: any = new Subject()
   constructor(
     private route: ActivatedRoute,
     private router: Router
@@ -27,7 +27,7 @@ export class Auth {
       localStorage.setItem('id_token', authResult.idToken)
       const redirectUrl: string = localStorage.getItem('redirectUrl')
       // Fetch profile information
-       this.lock.getProfile(authResult.idToken, (error, profile) => {
+       this.lock.getProfile(authResult.idToken, (error: any, profile: any) => {
          if (error) {
            // Handle error
            return
@@ -78,12 +78,9 @@ export class Auth {
 }
 
 @Injectable()
-export class LoggedInGuard implements CanActivate
-{
+export class LoggedInGuard implements CanActivate {
   constructor(private auth: Auth) {}
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
-  {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.auth.authenticated()
   }
 }

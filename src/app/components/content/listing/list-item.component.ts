@@ -18,7 +18,7 @@ import * as _ from 'lodash'
 export class ListItemComponent implements OnInit, OnChanges {
   @Input() items: any
   @Input() paginationData: any
-  public currentType
+  public currentType: any
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,

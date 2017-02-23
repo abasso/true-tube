@@ -87,7 +87,7 @@ export class DataService {
         if (topicArray.length > 1 && index !== topicArray.length) {
           topicString += '" OR "'
         }
-        if (index === topicArray.length - 1) {
+        if (parseInt(index) === topicArray.length - 1) {
           topicString += '")'
         }
       })
@@ -133,7 +133,8 @@ export class DataService {
   itemBySlug(slug: any = null, limit = 1) {
     let slugString = ''
     _.each(slug, (part) => {
-      slugString += '/' + part.path
+      let cleanedPath = part.path.split('?')[0]
+      slugString += '/' + cleanedPath
     })
 
     let search: any = new URLSearchParams()
@@ -152,8 +153,7 @@ export class DataService {
     .map((response) => ( response.json() ))
   }
 
-  updateUser(data) {
-    console.log('Updating the user')
+  updateUser(data: any) {
     let header = new Headers()
     let options = new RequestOptions({ headers: header })
     header.append('Content-Type', 'multipart/form-data')

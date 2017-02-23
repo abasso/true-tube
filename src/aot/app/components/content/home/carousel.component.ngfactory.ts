@@ -14,13 +14,38 @@ import * as import5 from '@angular/core/src/linker/view_type';
 import * as import6 from '@angular/core/src/change_detection/constants';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../../../../app/services/data.service';
+import * as import9 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import10 from 'angulartics2/dist/core/angulartics2';
+import * as import11 from '../../../../node_modules/@angular/router/src/directives/router_link.ngfactory';
+import * as import12 from '../../../../node_modules/angulartics2/dist/core/angulartics2On.ngfactory';
+import * as import13 from '@angular/core/src/linker/view_container';
+import * as import14 from '@angular/core/src/change_detection/change_detection_util';
+import * as import15 from '@angular/router/src/router';
+import * as import16 from '@angular/router/src/router_state';
+import * as import17 from '@angular/common/src/location/location_strategy';
+import * as import18 from '@angular/core/src/linker/element_ref';
+import * as import19 from '@angular/platform-browser/src/dom/events/event_manager';
+import * as import20 from '@angular/router/src/directives/router_link';
+import * as import21 from 'angulartics2/dist/core/angulartics2On';
+import * as import22 from '../../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import23 from '@angular/core/src/linker/template_ref';
+import * as import24 from '@angular/common/src/directives/ng_if';
+import * as import25 from '@angular/core/src/security';
+import * as import26 from 'angular2-swiper-wrapper/dist/lib/swiper.component';
+import * as import27 from '../../../../node_modules/angular2-swiper-wrapper/dist/lib/swiper.component.ngfactory';
+import * as import28 from '../../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import29 from '@angular/core/src/zone/ng_zone';
+import * as import30 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import31 from 'angular2-swiper-wrapper/dist/lib/swiper.interfaces';
+import * as import32 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import33 from '@angular/common/src/directives/ng_for';
 export class Wrapper_CarouselComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CarouselComponent;
   /*private*/ _changed:boolean;
-  constructor(p0:any) {
+  constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
-    this.context = new import0.CarouselComponent(p0);
+    this.context = new import0.CarouselComponent(p0,p1,p2);
   }
   ngOnDetach(view:import1.AppView<any>,componentView:import1.AppView<any>,el:any):void {
   }
@@ -53,7 +78,7 @@ class View_CarouselComponent_Host0 extends import1.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'app-carousel',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_CarouselComponent0(this.viewUtils,this,0,this._el_0);
-    this._CarouselComponent_0_3 = new Wrapper_CarouselComponent(this.injectorGet(import8.DataService,this.parentIndex));
+    this._CarouselComponent_0_3 = new Wrapper_CarouselComponent(this.injectorGet(import8.DataService,this.parentIndex),this.injectorGet(import9.Angulartics2GoogleAnalytics,this.parentIndex),this.injectorGet(import10.Angulartics2,this.parentIndex));
     this.compView_0.create(this._CarouselComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._CarouselComponent_0_3.context);
@@ -75,22 +100,335 @@ class View_CarouselComponent_Host0 extends import1.AppView<any> {
 }
 export const CarouselComponentNgFactory:import7.ComponentFactory<import0.CarouselComponent> = new import7.ComponentFactory<import0.CarouselComponent>('app-carousel',View_CarouselComponent_Host0,import0.CarouselComponent);
 const styles_CarouselComponent:any[] = ([] as any[]);
+class View_CarouselComponent2 extends import1.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  _RouterLinkWithHref_2_3:import11.Wrapper_RouterLinkWithHref;
+  _Angulartics2On_2_4:import12.Wrapper_Angulartics2On;
+  _text_3:any;
+  _el_4:any;
+  _text_5:any;
+  _text_6:any;
+  _text_7:any;
+  _arr_10:any;
+  _map_11:any;
+  /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
+    super(View_CarouselComponent2,renderType_CarouselComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._arr_10 = import3.pureProxy1((p0:any):any[] => {
+      return [p0];
+    });
+    this._map_11 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._expr_12 = import14.UNINITIALIZED;
+    this._expr_13 = import14.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import7.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'h2',new import3.InlineArray2(2,'class','display-4'),(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'a',new import3.InlineArray8(6,'angulartics2On','click','angularticsEvent','Navigate','href','#'),(null as any));
+    this._RouterLinkWithHref_2_3 = new import11.Wrapper_RouterLinkWithHref(this.parentView.parentView.parentView.injectorGet(import15.Router,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import16.ActivatedRoute,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import17.LocationStrategy,this.parentView.parentView.parentIndex));
+    this._Angulartics2On_2_4 = new import12.Wrapper_Angulartics2On(new import18.ElementRef(this._el_2),this.parentView.parentView.parentView.injectorGet(import10.Angulartics2,this.parentView.parentView.parentIndex),this.parentView.parentView.parentView.injectorGet(import19.EventManager,this.parentView.parentView.parentIndex));
+    this._text_3 = this.renderer.createText(this._el_2,'\n          ',(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_5 = this.renderer.createText(this._el_4,'',(null as any));
+    this._text_6 = this.renderer.createText(this._el_2,'',(null as any));
+    this._text_7 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_2));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._el_4,
+      this._text_5,
+      this._text_6,
+      this._text_7
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import20.RouterLinkWithHref) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._RouterLinkWithHref_2_3.context; }
+    if (((token === import21.Angulartics2On) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._Angulartics2On_2_4.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = this._arr_10(this.parentView.context.$implicit._source.link);
+    this._RouterLinkWithHref_2_3.check_routerLink(currVal_2_0_0,throwOnChange,false);
+    this._RouterLinkWithHref_2_3.ngDoCheck(this,this._el_2,throwOnChange);
+    const currVal_2_1_0:any = 'click';
+    this._Angulartics2On_2_4.check_angulartics2On(currVal_2_1_0,throwOnChange,false);
+    const currVal_2_1_1:any = 'Navigate';
+    this._Angulartics2On_2_4.check_angularticsEvent(currVal_2_1_1,throwOnChange,false);
+    const currVal_2_1_2:any = import3.inlineInterpolate(1,'Homepage Carousel ',this.parentView.context.index,'');
+    this._Angulartics2On_2_4.check_angularticsCategory(currVal_2_1_2,throwOnChange,false);
+    const currVal_2_1_3:any = this._map_11(this.parentView.context.$implicit._source.title);
+    this._Angulartics2On_2_4.check_angularticsProperties(currVal_2_1_3,throwOnChange,false);
+    this._Angulartics2On_2_4.ngDoCheck(this,this._el_2,throwOnChange);
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Angulartics2On_2_4.context.ngAfterContentInit(); } }
+    this._RouterLinkWithHref_2_3.checkHost(this,this,this._el_2,throwOnChange);
+    const currVal_12:any = import3.inlineInterpolate(1,'',this.parentView.context.$implicit._source.sub_title,'');
+    if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
+      this.renderer.setText(this._text_5,currVal_12);
+      this._expr_12 = currVal_12;
+    }
+    const currVal_13:any = import3.inlineInterpolate(1,' ',this.parentView.context.$implicit._source.title,'\n        ');
+    if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
+      this.renderer.setText(this._text_6,currVal_13);
+      this._expr_13 = currVal_13;
+    }
+  }
+  destroyInternal():void {
+    this._RouterLinkWithHref_2_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_2(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._RouterLinkWithHref_2_3.handleEvent(eventName,$event) && result);
+    return result;
+  }
+}
+class View_CarouselComponent1 extends import1.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  _RouterLinkWithHref_2_3:import11.Wrapper_RouterLinkWithHref;
+  _Angulartics2On_2_4:import12.Wrapper_Angulartics2On;
+  _text_3:any;
+  _el_4:any;
+  _text_5:any;
+  _el_6:any;
+  _text_7:any;
+  _el_8:any;
+  _text_9:any;
+  _el_10:any;
+  _text_11:any;
+  _el_12:any;
+  _text_13:any;
+  _text_14:any;
+  _anchor_15:any;
+  /*private*/ _vc_15:import13.ViewContainer;
+  _TemplateRef_15_5:any;
+  _NgIf_15_6:import22.Wrapper_NgIf;
+  _text_16:any;
+  _text_17:any;
+  _arr_23:any;
+  _map_24:any;
+  /*private*/ _expr_25:any;
+  /*private*/ _expr_26:any;
+  /*private*/ _expr_27:any;
+  /*private*/ _expr_28:any;
+  /*private*/ _expr_29:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
+    super(View_CarouselComponent1,renderType_CarouselComponent,import5.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._arr_23 = import3.pureProxy1((p0:any):any[] => {
+      return [p0];
+    });
+    this._map_24 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {label: p0};
+    });
+    this._expr_25 = import14.UNINITIALIZED;
+    this._expr_26 = import14.UNINITIALIZED;
+    this._expr_27 = import14.UNINITIALIZED;
+    this._expr_28 = import14.UNINITIALIZED;
+    this._expr_29 = import14.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import7.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','swiper-slide'),(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n    ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'a',new import3.InlineArray8(6,'angulartics2On','click','angularticsEvent','Navigate','href','#'),(null as any));
+    this._RouterLinkWithHref_2_3 = new import11.Wrapper_RouterLinkWithHref(this.parentView.parentView.injectorGet(import15.Router,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import16.ActivatedRoute,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import17.LocationStrategy,this.parentView.parentIndex));
+    this._Angulartics2On_2_4 = new import12.Wrapper_Angulartics2On(new import18.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import10.Angulartics2,this.parentView.parentIndex),this.parentView.parentView.injectorGet(import19.EventManager,this.parentView.parentIndex));
+    this._text_3 = this.renderer.createText(this._el_2,'\n      ',(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,'picture',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_5 = this.renderer.createText(this._el_4,'\n        ',(null as any));
+    this._el_6 = import3.createRenderElement(this.renderer,this._el_4,'source',new import3.InlineArray2(2,'media','(min-width: 1024px)'),(null as any));
+    this._text_7 = this.renderer.createText(this._el_4,'\n        ',(null as any));
+    this._el_8 = import3.createRenderElement(this.renderer,this._el_4,'source',new import3.InlineArray2(2,'media','(min-width: 769px)'),(null as any));
+    this._text_9 = this.renderer.createText(this._el_4,'\n        ',(null as any));
+    this._el_10 = import3.createRenderElement(this.renderer,this._el_4,'source',new import3.InlineArray2(2,'media','(min-width: 0px)'),(null as any));
+    this._text_11 = this.renderer.createText(this._el_4,'\n        ',(null as any));
+    this._el_12 = import3.createRenderElement(this.renderer,this._el_4,'img',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_13 = this.renderer.createText(this._el_4,'\n      ',(null as any));
+    this._text_14 = this.renderer.createText(this._el_2,'\n      ',(null as any));
+    this._anchor_15 = this.renderer.createTemplateAnchor(this._el_2,(null as any));
+    this._vc_15 = new import13.ViewContainer(15,2,this,this._anchor_15);
+    this._TemplateRef_15_5 = new import23.TemplateRef_(this,15,this._anchor_15);
+    this._NgIf_15_6 = new import22.Wrapper_NgIf(this._vc_15.vcRef,this._TemplateRef_15_5);
+    this._text_16 = this.renderer.createText(this._el_2,'\n    ',(null as any));
+    this._text_17 = this.renderer.createText(this._el_0,'\n  ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_2));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._el_4,
+      this._text_5,
+      this._el_6,
+      this._text_7,
+      this._el_8,
+      this._text_9,
+      this._el_10,
+      this._text_11,
+      this._el_12,
+      this._text_13,
+      this._text_14,
+      this._anchor_15,
+      this._text_16,
+      this._text_17
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import23.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
+    if (((token === import24.NgIf) && (15 === requestNodeIndex))) { return this._NgIf_15_6.context; }
+    if (((token === import20.RouterLinkWithHref) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 16)))) { return this._RouterLinkWithHref_2_3.context; }
+    if (((token === import21.Angulartics2On) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 16)))) { return this._Angulartics2On_2_4.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = this._arr_23(this.context.$implicit._source.link);
+    this._RouterLinkWithHref_2_3.check_routerLink(currVal_2_0_0,throwOnChange,false);
+    this._RouterLinkWithHref_2_3.ngDoCheck(this,this._el_2,throwOnChange);
+    const currVal_2_1_0:any = 'click';
+    this._Angulartics2On_2_4.check_angulartics2On(currVal_2_1_0,throwOnChange,false);
+    const currVal_2_1_1:any = 'Navigate';
+    this._Angulartics2On_2_4.check_angularticsEvent(currVal_2_1_1,throwOnChange,false);
+    const currVal_2_1_2:any = import3.inlineInterpolate(1,'Homepage Carousel ',this.context.index,'');
+    this._Angulartics2On_2_4.check_angularticsCategory(currVal_2_1_2,throwOnChange,false);
+    const currVal_2_1_3:any = this._map_24(this.context.$implicit._source.title);
+    this._Angulartics2On_2_4.check_angularticsProperties(currVal_2_1_3,throwOnChange,false);
+    this._Angulartics2On_2_4.ngDoCheck(this,this._el_2,throwOnChange);
+    const currVal_15_0_0:any = (this.context.$implicit._source.hide_text !== true);
+    this._NgIf_15_6.check_ngIf(currVal_15_0_0,throwOnChange,false);
+    this._NgIf_15_6.ngDoCheck(this,this._anchor_15,throwOnChange);
+    this._vc_15.detectChangesInNestedViews(throwOnChange);
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Angulartics2On_2_4.context.ngAfterContentInit(); } }
+    this._RouterLinkWithHref_2_3.checkHost(this,this,this._el_2,throwOnChange);
+    const currVal_25:any = import3.inlineInterpolate(1,'',this.context.$implicit._source.image[0].styles.large,'');
+    if (import3.checkBinding(throwOnChange,this._expr_25,currVal_25)) {
+      this.renderer.setElementProperty(this._el_6,'srcset',this.viewUtils.sanitizer.sanitize(import25.SecurityContext.URL,currVal_25));
+      this._expr_25 = currVal_25;
+    }
+    const currVal_26:any = import3.inlineInterpolate(1,'',this.context.$implicit._source.image[0].styles.medium,'');
+    if (import3.checkBinding(throwOnChange,this._expr_26,currVal_26)) {
+      this.renderer.setElementProperty(this._el_8,'srcset',this.viewUtils.sanitizer.sanitize(import25.SecurityContext.URL,currVal_26));
+      this._expr_26 = currVal_26;
+    }
+    const currVal_27:any = import3.inlineInterpolate(1,'',this.context.$implicit._source.image[0].styles.small,'');
+    if (import3.checkBinding(throwOnChange,this._expr_27,currVal_27)) {
+      this.renderer.setElementProperty(this._el_10,'srcset',this.viewUtils.sanitizer.sanitize(import25.SecurityContext.URL,currVal_27));
+      this._expr_27 = currVal_27;
+    }
+    const currVal_28:any = import3.inlineInterpolate(1,'',this.context.$implicit._source.image[0].styles.large,'');
+    if (import3.checkBinding(throwOnChange,this._expr_28,currVal_28)) {
+      this.renderer.setElementProperty(this._el_12,'srcset',this.viewUtils.sanitizer.sanitize(import25.SecurityContext.URL,currVal_28));
+      this._expr_28 = currVal_28;
+    }
+    const currVal_29:any = import3.inlineInterpolate(1,'',this.context.$implicit._source.image[0].alt,'');
+    if (import3.checkBinding(throwOnChange,this._expr_29,currVal_29)) {
+      this.renderer.setElementProperty(this._el_12,'alt',currVal_29);
+      this._expr_29 = currVal_29;
+    }
+  }
+  destroyInternal():void {
+    this._vc_15.destroyNestedViews();
+    this._RouterLinkWithHref_2_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import1.AppView<any> {
+    if ((nodeIndex == 15)) { return new View_CarouselComponent2(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
+    return (null as any);
+  }
+  handleEvent_2(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._RouterLinkWithHref_2_3.handleEvent(eventName,$event) && result);
+    return result;
+  }
+}
 var renderType_CarouselComponent:import2.RenderComponentType = import3.createRenderComponentType('',0,import4.ViewEncapsulation.None,styles_CarouselComponent,{});
 export class View_CarouselComponent0 extends import1.AppView<import0.CarouselComponent> {
-  _text_0:any;
+  _el_0:any;
+  compView_0:import1.AppView<import26.SwiperComponent>;
+  _SwiperComponent_0_3:import27.Wrapper_SwiperComponent;
   _text_1:any;
+  _anchor_2:any;
+  /*private*/ _vc_2:import13.ViewContainer;
+  _TemplateRef_2_5:any;
+  _NgFor_2_6:import28.Wrapper_NgFor;
+  _text_3:any;
+  _text_4:any;
+  _text_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_CarouselComponent0,renderType_CarouselComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._text_0 = this.renderer.createText(parentRenderNode,'  ',(null as any));
-    this._text_1 = this.renderer.createText(parentRenderNode,'\n',(null as any));
+    this._el_0 = import3.createRenderElement(this.renderer,parentRenderNode,'swiper',new import3.InlineArray2(2,'class','homepage-carousel'),(null as any));
+    this.compView_0 = new import27.View_SwiperComponent0(this.viewUtils,this,0,this._el_0);
+    this._SwiperComponent_0_3 = new import27.Wrapper_SwiperComponent(this.parentView.injectorGet(import29.NgZone,this.parentIndex),new import18.ElementRef(this._el_0),this.parentView.injectorGet(import30.KeyValueDiffers,this.parentIndex),this.parentView.injectorGet(import31.SwiperConfig,this.parentIndex,(null as any)));
+    this._text_1 = this.renderer.createText((null as any),'\n  ',(null as any));
+    this._anchor_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
+    this._vc_2 = new import13.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import23.TemplateRef_(this,2,this._anchor_2);
+    this._NgFor_2_6 = new import28.Wrapper_NgFor(this._vc_2.vcRef,this._TemplateRef_2_5,this.parentView.injectorGet(import32.IterableDiffers,this.parentIndex),this.ref);
+    this._text_3 = this.renderer.createText((null as any),'\n\n',(null as any));
+    this.compView_0.create(this._SwiperComponent_0_3.context);
+    this._text_4 = this.renderer.createText(parentRenderNode,'\n',(null as any));
+    this._text_5 = this.renderer.createText(parentRenderNode,'\n',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._text_1
+      this._el_0,
+      this._text_1,
+      this._anchor_2,
+      this._text_3,
+      this._text_4,
+      this._text_5
     ]
     ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import23.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import33.NgFor) && (2 === requestNodeIndex))) { return this._NgFor_2_6.context; }
+    if (((token === import26.SwiperComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._SwiperComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    this._SwiperComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange);
+    const currVal_2_0_0:any = this.context.slides;
+    this._NgFor_2_6.check_ngForOf(currVal_2_0_0,throwOnChange,false);
+    this._NgFor_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
+    this._vc_2.detectChangesInNestedViews(throwOnChange);
+    this._SwiperComponent_0_3.checkHost(this,this.compView_0,this._el_0,throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_2.destroyNestedViews();
+    this.compView_0.destroy();
+    this._SwiperComponent_0_3.ngOnDestroy();
+  }
+  visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
+    if (((nodeIndex == 0) && (ngContentIndex == 0))) {
+      cb(this._text_1,ctx);
+      cb(this._vc_2.nativeElement,ctx);
+      this._vc_2.visitNestedViewRootNodes(cb,ctx);
+      cb(this._text_3,ctx);
+    }
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import1.AppView<any> {
+    if ((nodeIndex == 2)) { return new View_CarouselComponent1(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
     return (null as any);
   }
 }

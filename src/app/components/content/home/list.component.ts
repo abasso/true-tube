@@ -36,7 +36,7 @@ export class HomeListingComponent implements OnInit {
   };
   public categories: any[] = Categories
   public sortBy: any = new BehaviorSubject('created')
-  public contentLoading = true
+  public contentLoading: any = true
 
   constructor(
     public dataService: DataService,

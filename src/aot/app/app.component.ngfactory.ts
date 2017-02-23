@@ -14,15 +14,22 @@ import * as import5 from '@angular/core/src/linker/view_type';
 import * as import6 from '@angular/core/src/change_detection/constants';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../app/components/global/header.component';
-import * as import9 from './components/global/header.component.ngfactory';
-import * as import10 from '@angular/core/src/linker/view_container';
-import * as import11 from '../node_modules/@angular/router/src/directives/router_outlet.ngfactory';
-import * as import12 from '../../app/components/global/footer.component';
-import * as import13 from './components/global/footer.component.ngfactory';
-import * as import14 from '../../app/services/auth.service';
-import * as import15 from '@angular/router/src/router_outlet_map';
-import * as import16 from '@angular/core/src/linker/component_factory_resolver';
-import * as import17 from '@angular/router/src/directives/router_outlet';
+import * as import9 from '../node_modules/@angular/common/src/directives/ng_class.ngfactory';
+import * as import10 from './components/global/header.component.ngfactory';
+import * as import11 from '@angular/core/src/linker/view_container';
+import * as import12 from '../node_modules/@angular/router/src/directives/router_outlet.ngfactory';
+import * as import13 from '../../app/components/global/footer.component';
+import * as import14 from './components/global/footer.component.ngfactory';
+import * as import15 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import16 from '@angular/core/src/change_detection/differs/keyvalue_differs';
+import * as import17 from '@angular/core/src/linker/element_ref';
+import * as import18 from '../../app/services/auth.service';
+import * as import19 from 'angulartics2/dist/providers/ga/angulartics2-ga';
+import * as import20 from 'angulartics2/dist/core/angulartics2';
+import * as import21 from '@angular/router/src/router_outlet_map';
+import * as import22 from '@angular/core/src/linker/component_factory_resolver';
+import * as import23 from '@angular/common/src/directives/ng_class';
+import * as import24 from '@angular/router/src/directives/router_outlet';
 export class Wrapper_AppComponent {
   /*private*/ _eventHandler:Function;
   context:import0.AppComponent;
@@ -87,52 +94,75 @@ var renderType_AppComponent:import2.RenderComponentType = import3.createRenderCo
 export class View_AppComponent0 extends import1.AppView<import0.AppComponent> {
   _el_0:any;
   compView_0:import1.AppView<import8.HeaderComponent>;
-  _HeaderComponent_0_3:import9.Wrapper_HeaderComponent;
+  _NgClass_0_3:import9.Wrapper_NgClass;
+  _HeaderComponent_0_4:import10.Wrapper_HeaderComponent;
   _text_1:any;
   _text_2:any;
   _el_3:any;
+  _NgClass_3_3:import9.Wrapper_NgClass;
   _text_4:any;
   _el_5:any;
   _text_6:any;
   _text_7:any;
   _el_8:any;
-  /*private*/ _vc_8:import10.ViewContainer;
-  _RouterOutlet_8_5:import11.Wrapper_RouterOutlet;
+  /*private*/ _vc_8:import11.ViewContainer;
+  _RouterOutlet_8_5:import12.Wrapper_RouterOutlet;
   _text_9:any;
   _text_10:any;
   _text_11:any;
   _el_12:any;
-  compView_12:import1.AppView<import12.FooterComponent>;
-  _FooterComponent_12_3:import13.Wrapper_FooterComponent;
+  compView_12:import1.AppView<import13.FooterComponent>;
+  _NgClass_12_3:import9.Wrapper_NgClass;
+  _FooterComponent_12_4:import14.Wrapper_FooterComponent;
   _text_13:any;
   _text_14:any;
+  _map_24:any;
+  _map_25:any;
+  _map_26:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import1.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_AppComponent0,renderType_AppComponent,import5.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import6.ChangeDetectorStatus.CheckAlways);
+    this._map_24 = import3.pureProxy3((p0:any,p1:any,p2:any):{[key: string]:any} => {
+      return {
+        sticky: p0,
+        show: p1,
+        animate: p2
+      }
+      ;
+    });
+    this._map_25 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {sticky: p0};
+    });
+    this._map_26 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {sticky: p0};
+    });
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._el_0 = import3.createRenderElement(this.renderer,parentRenderNode,'app-header',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this.compView_0 = new import9.View_HeaderComponent0(this.viewUtils,this,0,this._el_0);
-    this._HeaderComponent_0_3 = new import9.Wrapper_HeaderComponent(this.parentView.injectorGet(import14.Auth,this.parentIndex));
+    this._el_0 = import3.createRenderElement(this.renderer,parentRenderNode,'app-header',new import3.InlineArray2(2,'class','sticky'),(null as any));
+    this.compView_0 = new import10.View_HeaderComponent0(this.viewUtils,this,0,this._el_0);
+    this._NgClass_0_3 = new import9.Wrapper_NgClass(this.parentView.injectorGet(import15.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import16.KeyValueDiffers,this.parentIndex),new import17.ElementRef(this._el_0),this.renderer);
+    this._HeaderComponent_0_4 = new import10.Wrapper_HeaderComponent(this.parentView.injectorGet(import18.Auth,this.parentIndex),this.parentView.injectorGet(import19.Angulartics2GoogleAnalytics,this.parentIndex),this.parentView.injectorGet(import20.Angulartics2,this.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n',(null as any));
-    this.compView_0.create(this._HeaderComponent_0_3.context);
+    this.compView_0.create(this._HeaderComponent_0_4.context);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,parentRenderNode,'main',new import3.InlineArray2(2,'role','main'),(null as any));
+    this._NgClass_3_3 = new import9.Wrapper_NgClass(this.parentView.injectorGet(import15.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import16.KeyValueDiffers,this.parentIndex),new import17.ElementRef(this._el_3),this.renderer);
     this._text_4 = this.renderer.createText(this._el_3,'\n	',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','container'),(null as any));
     this._text_6 = this.renderer.createText(this._el_5,'\n  	',(null as any));
     this._text_7 = this.renderer.createText(this._el_5,'\n		',(null as any));
     this._el_8 = import3.createRenderElement(this.renderer,this._el_5,'router-outlet',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_8 = new import10.ViewContainer(8,5,this,this._el_8);
-    this._RouterOutlet_8_5 = new import11.Wrapper_RouterOutlet(this.parentView.injectorGet(import15.RouterOutletMap,this.parentIndex),this._vc_8.vcRef,this.parentView.injectorGet(import16.ComponentFactoryResolver,this.parentIndex),(null as any));
+    this._vc_8 = new import11.ViewContainer(8,5,this,this._el_8);
+    this._RouterOutlet_8_5 = new import12.Wrapper_RouterOutlet(this.parentView.injectorGet(import21.RouterOutletMap,this.parentIndex),this._vc_8.vcRef,this.parentView.injectorGet(import22.ComponentFactoryResolver,this.parentIndex),(null as any));
     this._text_9 = this.renderer.createText(this._el_5,'\n	',(null as any));
     this._text_10 = this.renderer.createText(this._el_3,'\n',(null as any));
     this._text_11 = this.renderer.createText(parentRenderNode,'\n',(null as any));
     this._el_12 = import3.createRenderElement(this.renderer,parentRenderNode,'app-footer',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this.compView_12 = new import13.View_FooterComponent0(this.viewUtils,this,12,this._el_12);
-    this._FooterComponent_12_3 = new import13.Wrapper_FooterComponent();
+    this.compView_12 = new import14.View_FooterComponent0(this.viewUtils,this,12,this._el_12);
+    this._NgClass_12_3 = new import9.Wrapper_NgClass(this.parentView.injectorGet(import15.IterableDiffers,this.parentIndex),this.parentView.injectorGet(import16.KeyValueDiffers,this.parentIndex),new import17.ElementRef(this._el_12),this.renderer);
+    this._FooterComponent_12_4 = new import14.Wrapper_FooterComponent(this.parentView.injectorGet(import19.Angulartics2GoogleAnalytics,this.parentIndex),this.parentView.injectorGet(import20.Angulartics2,this.parentIndex));
     this._text_13 = this.renderer.createText((null as any),'\n',(null as any));
-    this.compView_12.create(this._FooterComponent_12_3.context);
+    this.compView_12.create(this._FooterComponent_12_4.context);
     this._text_14 = this.renderer.createText(parentRenderNode,'\n',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -155,15 +185,29 @@ export class View_AppComponent0 extends import1.AppView<import0.AppComponent> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import8.HeaderComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._HeaderComponent_0_3.context; }
-    if (((token === import17.RouterOutlet) && (8 === requestNodeIndex))) { return this._RouterOutlet_8_5.context; }
-    if (((token === import12.FooterComponent) && ((12 <= requestNodeIndex) && (requestNodeIndex <= 13)))) { return this._FooterComponent_12_3.context; }
+    if (((token === import23.NgClass) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._NgClass_0_3.context; }
+    if (((token === import8.HeaderComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._HeaderComponent_0_4.context; }
+    if (((token === import24.RouterOutlet) && (8 === requestNodeIndex))) { return this._RouterOutlet_8_5.context; }
+    if (((token === import23.NgClass) && ((3 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._NgClass_3_3.context; }
+    if (((token === import23.NgClass) && ((12 <= requestNodeIndex) && (requestNodeIndex <= 13)))) { return this._NgClass_12_3.context; }
+    if (((token === import13.FooterComponent) && ((12 <= requestNodeIndex) && (requestNodeIndex <= 13)))) { return this._FooterComponent_12_4.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    this._HeaderComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange);
+    const currVal_0_0_0:any = 'sticky';
+    this._NgClass_0_3.check_klass(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this._map_24((this.context.sticky === true),(this.context.hideHeader === false),(this.context.animateHeader === true));
+    this._NgClass_0_3.check_ngClass(currVal_0_0_1,throwOnChange,false);
+    this._NgClass_0_3.ngDoCheck(this,this._el_0,throwOnChange);
+    this._HeaderComponent_0_4.ngDoCheck(this,this._el_0,throwOnChange);
+    const currVal_3_0_0:any = this._map_25((this.context.sticky === true));
+    this._NgClass_3_3.check_ngClass(currVal_3_0_0,throwOnChange,false);
+    this._NgClass_3_3.ngDoCheck(this,this._el_3,throwOnChange);
     this._RouterOutlet_8_5.ngDoCheck(this,this._el_8,throwOnChange);
-    this._FooterComponent_12_3.ngDoCheck(this,this._el_12,throwOnChange);
+    const currVal_12_0_0:any = this._map_26((this.context.sticky === true));
+    this._NgClass_12_3.check_ngClass(currVal_12_0_0,throwOnChange,false);
+    this._NgClass_12_3.ngDoCheck(this,this._el_12,throwOnChange);
+    this._FooterComponent_12_4.ngDoCheck(this,this._el_12,throwOnChange);
     this._vc_8.detectChangesInNestedViews(throwOnChange);
     this.compView_0.internalDetectChanges(throwOnChange);
     this.compView_12.internalDetectChanges(throwOnChange);

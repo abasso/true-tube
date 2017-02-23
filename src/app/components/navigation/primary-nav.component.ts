@@ -37,22 +37,22 @@ export class PrimaryNavComponent implements OnInit {
     this.menuClick.emit(event)
   }
 
-  logout(event) {
+  logout(event: any) {
     this.auth.logout(event)
     this.menuClick.emit(event)
   }
 
-  login(event) {
+  login(event: any) {
     this.auth.login(event)
     this.menuClick.emit(event)
   }
 
-  register(event) {
+  register(event: any) {
     this.auth.signup(event)
     this.menuClick.emit(event)
   }
 
-  profile(event) {
+  profile(event: any) {
     this.auth.logout(event)
     this.menuClick.emit(event)
   }
