@@ -12,6 +12,8 @@ import { PrimaryNavComponent } from './components/navigation/primary-nav.compone
 import { SearchComponent } from './components/navigation/search.component'
 import { CallToActionComponent } from './components/messaging/call-to-action.component'
 import { ItemComponent } from './components/content/item/item.component'
+import { VideoComponent } from './components/content/item/video.component'
+import { AudioComponent } from './components/content/item/audio.component'
 import { ListFilterComponent } from './components/content/listing/filter.component'
 import { ListingSortComponent } from './components/content/listing/sort.component'
 import { DataService } from './services/data.service'
@@ -51,6 +53,7 @@ import { ProfileResolver } from './components/profile/profile.resolver'
 import { UserListsComponent } from './components//profile/lists.component'
 import { UserListComponent } from './components/profile/list.component'
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2'
+import {PopoverModule} from 'ngx-popover'
 
 // import { MetaModule } from 'ng2-meta'
 
@@ -218,6 +221,8 @@ export class RavenErrorHandler implements ErrorHandler {
     PagesNavComponent,
     PaginationPipe,
     PartnersCarouselComponent,
+    VideoComponent,
+    AudioComponent,
     PrimaryNavComponent,
     ProfileComponent,
     QueryStringPipe,
@@ -229,6 +234,7 @@ export class RavenErrorHandler implements ErrorHandler {
     UserNavComponent
   ],
   imports: [
+    PopoverModule,
     BrowserModule,
     ClipboardModule,
     ConfirmationPopoverModule.forRoot({

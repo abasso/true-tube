@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { Location } from '@angular/common'
 import { DataService } from './../../../services/data.service'
 import { UserService } from './../../../services/user.service'
@@ -24,7 +24,7 @@ declare var videojs: any
     SanitiseUrlPipe
   ]
 })
-export class ItemComponent implements OnInit, OnDestroy {
+export class ItemComponent implements OnInit {
   private item: any = {}
   private data: any
   public slug: string
@@ -55,7 +55,6 @@ export class ItemComponent implements OnInit, OnDestroy {
     currentPage: 0,
     itemsPerPage: 100000
   }
-  @ViewChild('player') player: ElementRef
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -76,7 +75,6 @@ export class ItemComponent implements OnInit, OnDestroy {
       (data) => {
         window.scrollTo(0, 0)
         this.item = data.hits.hits[0]._source
-        console.log(this.item)
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
         if (this.item.resource_types.length === 1) {
           this.item.hideMenu = true
@@ -97,7 +95,6 @@ export class ItemComponent implements OnInit, OnDestroy {
             }
           })
         })
-        this.resetPlayer()
         if (this.auth.authenticated()) {
           this.isItemInList()
         }
@@ -115,51 +112,6 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.auth.loggedInStatus.subscribe((data: any) => {
       this.isItemInList()
     })
-  }
-
-  ngOnDestroy() {
-    if (!_.isUndefined(this.videoJSplayer)) {
-      if (this.videoJSplayer !== null) {
-        this.videoJSplayer.dispose()
-      }
-    }
-  }
-
-  // pausePlayer() {
-  //   if (!_.isUndefined(this.videoJSplayer)) {
-  //     console.log(this.videoJSplayer)
-  //     if (this.videoJSplayer !== null) {
-  //       console.log(this.videoJSplayer)
-  //       this.videoJSplayer.pause()
-  //     }
-  //   }
-  //
-  // }
-
-  playPlayer(event: any) {
-    event.preventDefault()
-    this.videoJSplayer.play()
-    this.hideAdvisory = true
-  }
-
-  resetPlayer() {
-    if (!_.isUndefined(this.videoJSplayer) && this.videoJSplayer !== null) {
-        setTimeout(() => {
-            this.videoJSplayer.dispose()
-        }, 100)
-    }
-    if (this.activeTab === 'audio' || this.activeTab === 'film') {
-        setTimeout(
-          () => {
-          this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
-          nativeTextTracks: false
-      }})
-          if (this.activeTab === 'audio') {
-            let poster = document.querySelectorAll('.vjs-poster')
-            poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
-          }
-        }, 200)
-      }
   }
 
   hasAttributes(attribute: any) {
@@ -193,7 +145,6 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   tab(event: any) {
     this.router.navigateByUrl(this.item.slug + '?tab=' + event)
-    // this.pausePlayer()
   }
 
   embedCopySuccess(event: any) {

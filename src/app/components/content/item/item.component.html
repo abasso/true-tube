@@ -21,8 +21,28 @@
 
 		<div class="tab tab-videos" [ngClass]="{visible: activeTab === 'film'}" *ngFor="let embed of embeddedContent.film">
 			<div class="video-header">
-				<span class="info icon-clock icon-v-shift icon-small icon-left" *ngIf="embed.duration">{{dataService.duration(embed.duration)}}</span>
-				<span class="info icon-cc icon-large" *ngIf="embed.subtitles !== null"></span>
+				<span class="info icon-clock icon-v-shift icon-small icon-left" *ngIf="embed.duration" [popover]="runningTime" [popoverOnHover]="true">{{dataService.duration(embed.duration)}}</span>
+				<popover-content #runningTime
+								placement="right"
+								[animation]="true"
+								[closeOnClickOutside]="true" >
+
+						<div class="popover-bottom popover-cc">
+							<div class="popover-arrow"></div>
+							Running time
+						</div>
+				</popover-content>
+				<span class="info icon-cc icon-large" *ngIf="embed.subtitles !== null" popover="This film has closed captions (Subtitles) " [popover]="closeCaptions" [popoverOnHover]="true"></span>
+				<popover-content #closeCaptions
+                placement="right"
+                [animation]="true"
+                [closeOnClickOutside]="true" >
+
+						<div class="popover-bottom popover-cc">
+							<div class="popover-arrow"></div>
+							This film has closed captions (click to enable)
+						</div>
+				</popover-content>
 				<span class="advisory-warning" *ngIf="embed.advisory === '1'">ADVISORY</span>
 				<div class="rating" *ngIf="embed.rating">
 					<div class="rating-stars">
@@ -56,7 +76,7 @@
 					<!-- <a href="" class="hide-embed" (click)="toggleEmbed($event)">Hide</a> -->
 
 					<div class="input-group">
-						<input type="text" class="form-control" #inputTarget value="<iframe src='https://www.truetube.co.uk/v5/embed/{{embed.uuid}}' width='700' height='395' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>">
+						<input type="text" class="form-control" #inputTarget value="<div style='position:relative;height:0;overflow:hidden;padding-bottom:56.25%;'><iframe src='https://www.truetube.co.uk/v5/embed/{{embed.uuid}}' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' allowfullscreen style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>">
 						<span class="input-group-btn">
 							<button class="btn {{embedButtonClass}}" [ngxClipboard]="inputTarget" (cbOnSuccess)="embedCopySuccess()" type="button" [innerHTML]="embedButtonLabel" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Embed Video Copy" [angularticsProperties]="{label: item.title}"></button>
 						</span>
@@ -71,15 +91,8 @@
 						<span class="link">Click to play</span>
 					</span>
 				</a>
-				<video #player id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
-				poster="{{embed.thumbnail[0].url}}">
-				<source src="{{embed.source}}" type="video/mp4">
-					<track kind="captions" *ngIf="item.subtitles !== null" src="{{embed.subtitles}}" srclang="en" label="English" />
-					<p class="vjs-no-js">
-						To view this video please enable JavaScript, and consider upgrading to a web browser that
-						<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-					</p>
-				</video>
+
+				<app-video-player [embed]="embed" [embeddedContent]="embeddedContent" [subtitles]="item.subtitles" [activeTab]="activeTab"></app-video-player>
 			</div>
 
 
@@ -195,14 +208,7 @@
 				</div>
 			</div>
 			<div class="audio-wrapper">
-				<audio #player id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto">
-				<source src="{{embed.link}}" type="audio/mp3">
-					<track kind="captions" *ngIf="item.subtitles !== null" src="{{embed.subtitles}}" srclang="en" label="English" />
-					<p class="vjs-no-js">
-						To view this video please enable JavaScript, and consider upgrading to a web browser that
-						<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-					</p>
-				</audio>
+
 		</div>
 		<div class="video-footer">
 			<div class="video-share hidden-xs-down">

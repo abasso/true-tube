@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
 import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-carousel',
@@ -24,8 +25,7 @@ export class CarouselComponent implements OnInit {
   constructor(
     private dataService: DataService,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-    private angulartics2: Angulartics2
-  ) {
+    private angulartics2: Angulartics2  ) {
 
   }
   ngOnInit() {
@@ -33,8 +33,14 @@ export class CarouselComponent implements OnInit {
     .subscribe(
       (data) => {
         this.slides = data.hits.hits
+        _.each(this.slides, (slide) => {
+          if (slide._source.link.includes('http')) {
+            slide.externalLink = true
+          } else {
+            slide.externalLink = false
+          }
+        })
       }
     )
   }
-
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { ListFilterComponent } from './../content/listing/filter.component'
 import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import {PopoverModule} from 'ngx-popover'
 
 import { ContentTypes } from './../../definitions/content-types'
 import { ListService } from './../../services/list.service'
@@ -22,7 +23,8 @@ export class PrimaryNavComponent implements OnInit {
     private listService: ListService,
     public auth: Auth,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-    private angulartics2: Angulartics2
+    private angulartics2: Angulartics2,
+    public popover: PopoverModule
   ) {
     this.items = _.filter(ContentTypes, {inMenu: true})
   }
