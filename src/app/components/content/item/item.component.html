@@ -84,7 +84,12 @@
 		<div class="video-js-wrapper">
 			<a href="#" (click)="playPlayer($event)" class="advisory-warning-overlay" [ngClass]="{'hidden-xs-up': hideAdvisory}"  *ngIf="embed.advisory === '1'" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Advisory Warning" [angularticsProperties]="{label: item.title}">
 				<span class="advisory-warning"><span class="title icon-left icon icon-play">Advisory Warning</span>
-				<p>This video may contain content <strong>unsuitable for sensitive or younger students.</strong> Teacher discretion is advised.</p>
+				<span *ngIf="embed.advisory_message === ''">
+					<p>This video may contain content <strong>unsuitable for sensitive or younger students.</strong> Teacher discretion is advised.</p>
+				</span>
+				<span *ngIf="embed.advisory_message !== ''" [innerHTML]="embed.advisory_message">
+					<p>This video may contain content <strong>unsuitable for sensitive or younger students.</strong> Teacher discretion is advised.</p>
+				</span>
 				<span class="link">Click to play</span>
 			</span>
 		</a>
