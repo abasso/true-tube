@@ -79,7 +79,7 @@ header {
   .primary-nav {
     display:flex;
     flex-direction: column;
-    width:100%;
+    flex-grow:1;
     @media(min-width: $breakpoint-lg) {
       margin-left:2rem;
       align-self:center;

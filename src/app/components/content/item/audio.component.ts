@@ -21,10 +21,9 @@ export class AudioComponent implements OnInit, OnDestroy {
     this.resetPlayer()
   }
   ngOnDestroy() {
-    console.log('destroying the player')
-      setTimeout(() => {
-          this.videoJSplayer.dispose()
-      }, 1)
+    setTimeout(() => {
+      this.videoJSplayer.dispose()
+    }, 1)
   }
 
   playPlayer(event: any) {
@@ -34,24 +33,15 @@ export class AudioComponent implements OnInit, OnDestroy {
   }
 
   resetPlayer() {
-    console.log(this.videoJSplayer)
-    // if (!_.isUndefined(this.videoJSplayer) && this.videoJSplayer !== null) {
-    //   console.log('destroying the player')
-    //     setTimeout(() => {
-    //         this.videoJSplayer.dispose()
-    //     }, 100)
-    // }
-    if (this.activeTab === 'audio' || this.activeTab === 'film') {
-        setTimeout(
-          () => {
-          this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
+    setTimeout(
+      () => {
+        this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
           nativeTextTracks: false
-      }})
-          if (this.activeTab === 'audio') {
-            let poster = document.querySelectorAll('.vjs-poster')
-            poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
-          }
-        }, 1)
-      }
+        }})
+        if (this.activeTab === 'audio') {
+          let poster = document.querySelectorAll('.vjs-poster')
+          poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
+        }
+      }, 1)
+    }
   }
-}

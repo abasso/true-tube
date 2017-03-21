@@ -32,7 +32,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css"/>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script type="text/javascript" src="https://cdn.rawgit.com/scottjehl/picturefill/3.0.2/dist/picturefill.min.js" async></script>
+  <!-- <script>
+      // Picture element HTML5 shiv
+      document.createElement( "picture" );
+    </script> -->
+
+  <!-- <script type="text/javascript" src="https://cdn.rawgit.com/scottjehl/picturefill/3.0.2/dist/picturefill.min.js" async></script> -->
+  <!-- <script src=”/node_modules/picturefill/dist/plugins/mutation/pf.mutation.js”></script> -->
+
 
   <!-- Begin Inspectlet Embed Code -->
   <!-- <script type="text/javascript" id="inspectletjs">
@@ -45,8 +52,13 @@
   </script> -->
   <!-- End Inspectlet Embed Code -->
   <style type="text/css">
+  * {
+  	-moz-box-sizing: border-box;
+  	-webkit-box-sizing: border-box;
+  	box-sizing: border-box;
+  }
 
-  .spinner {
+  .page-spinner {
   height: 110px;
   width: 110px;
   -webkit-animation: rotation .6s infinite linear;
@@ -57,17 +69,19 @@
   border-bottom: 6px solid #FBE407;
   border-top: 6px solid #fff;
   border-radius: 110px;
-  position:relative;
-  margin:0;
+  position:fixed;
+  top:50%;
+  left:50%;
+  margin:-55px 0 0 -55px;
   padding:0;
   }
 
-  .spinner:before {
+  .page-spinner:before {
   content:"";
-  width:88px;
-  height:88px;
+  width:86px;
+  height:86px;
   border:solid 1px #eceeef;
-  border-radius:88px;
+  border-radius:86px;
   position:absolute;
   top:5px;
   left:5px;
@@ -131,25 +145,22 @@
 
   // ga('create', 'UA-17019852-4', 'auto');
   ga('create', 'UA-4554130-9', 'auto');
-
 </script>
+
   <app-root>
     <div style="
       width:100%;
       height:100%;
       position:fixed;
-      display:flex;
       top:0px;
       left:0px;
-      align-items: center;
-      justify-content: center;
       background:center center url(/assets/images/true-tube-logo_black.svg);
       background-size:70px auto;
       background-repeat:no-repeat;
       margin:0;
       padding:0;
       ">
-      <div class="spinner"></div>
+      <div class="page-spinner"></div>
     </div>
   </app-root>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>

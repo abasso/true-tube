@@ -12,6 +12,7 @@ import { PrimaryNavComponent } from './components/navigation/primary-nav.compone
 import { SearchComponent } from './components/navigation/search.component'
 import { CallToActionComponent } from './components/messaging/call-to-action.component'
 import { ItemComponent } from './components/content/item/item.component'
+import { ItemListComponent } from './components/content/item/list.component'
 import { VideoComponent } from './components/content/item/video.component'
 import { AudioComponent } from './components/content/item/audio.component'
 import { ListFilterComponent } from './components/content/listing/filter.component'
@@ -213,6 +214,7 @@ export class RavenErrorHandler implements ErrorHandler {
     ImagePipe,
     ItemComponent,
     ItemPageComponent,
+    ItemListComponent,
     ListFilterComponent,
     ListingComponent,
     ListItemComponent,

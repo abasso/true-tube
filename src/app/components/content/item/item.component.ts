@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Location } from '@angular/common'
 import { DataService } from './../../../services/data.service'
 import { UserService } from './../../../services/user.service'
 import { AttributePipe } from './../../../pipes/attribute.pipe'
 import { SanitiseUrlPipe } from './../../../pipes/sanitise-url.pipe'
 import { ContentTypes } from './../../../definitions/content-types'
-import { ActivatedRoute, Router, Params } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Auth } from './../../../services/auth.service'
 import * as moment from 'moment'
 import * as _ from 'lodash'
@@ -33,13 +33,14 @@ export class ItemComponent implements OnInit {
   private embedButtonClass = 'btn-video'
   private embeddedContent: any = []
   private activeTab = 'film'
-  private videoJSplayer: any
   private types: any
-  private hideAdvisory = false
+  public hideAdvisory = false
   public addedToFavourites = false
   public userData: any
   public listTitle: any
   public showLists = false
+  public play = false
+  public enableSubtitles = false
   public createListTitle = ''
   public addListError = false
   public addListErrorMessage = 'An error occured'
@@ -120,6 +121,8 @@ export class ItemComponent implements OnInit {
 
   navigateAttribute(event: any, type: string, attribute: string) {
     event.preventDefault()
+    console.log(attribute)
+    console.log(type)
     this.router.navigateByUrl('/list?' + type + '=' + attribute)
     this.angulartics2.eventTrack.next({ action: 'Navigate', properties: { category: 'Content Info ' + type, title: attribute}})
   }
@@ -145,6 +148,7 @@ export class ItemComponent implements OnInit {
 
   tab(event: any) {
     this.router.navigateByUrl(this.item.slug + '?tab=' + event)
+    this.hideAdvisory = false
   }
 
   embedCopySuccess(event: any) {
@@ -276,6 +280,20 @@ export class ItemComponent implements OnInit {
     if (event.key === 'Enter') {
       this.addList(event)
     }
+  }
+
+  playPlayer(event: any) {
+    event.preventDefault()
+    this.play = true
+    this.hideAdvisory = true
+  }
+
+  playSubtitlePlayer(event: any) {
+    event.preventDefault()
+    event.target.blur()
+    this.play = true
+    this.hideAdvisory = true
+    this.enableSubtitles = true
   }
 
   isItemInList() {
