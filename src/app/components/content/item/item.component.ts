@@ -121,8 +121,6 @@ export class ItemComponent implements OnInit {
 
   navigateAttribute(event: any, type: string, attribute: string) {
     event.preventDefault()
-    console.log(attribute)
-    console.log(type)
     this.router.navigateByUrl('/list?' + type + '=' + attribute)
     this.angulartics2.eventTrack.next({ action: 'Navigate', properties: { category: 'Content Info ' + type, title: attribute}})
   }
