@@ -29,7 +29,7 @@ export class DataService {
     let termArray: string[] = []
 
     if (data.term) {
-      termArray.push(data.term)
+      termArray.push(encodeURIComponent(data.term))
     }
 
     if (_.findLastIndex(types, {'active': true}) !== -1) {

@@ -60,6 +60,10 @@ export class VideoComponent implements OnInit, OnChanges, OnDestroy {
           this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
             nativeTextTracks: false
           }})
+          // let v = document.getElementsByTagName('video')[0]
+          // v.addEventListener('progress', function(data) {
+          //   console.log(data)
+          // }, true)
         }, 1)
       }
     }

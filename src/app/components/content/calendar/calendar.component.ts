@@ -47,6 +47,7 @@ export class CalendarComponent implements OnInit {
             let startDateOffset: number = previousMonthEndDate - currentMonthStartDay + 1
             let monthStart = 1
             let nextMonthStart = 1
+            let monthSwitch = false
             for (let i = 0; i <= 41; i++) {
               // The month starts on Sunday - the first day on the calendar
               if (currentMonthStartDay === 1) {
@@ -74,6 +75,10 @@ export class CalendarComponent implements OnInit {
                   })
                   // Add this months days
                 } else if (monthStart <= selectedMonth.daysInMonth()) {
+                  if (monthSwitch === false) {
+                    days[i - 1].lastDayOfPreviousMonth = true
+                    monthSwitch = true
+                  }
                   days.splice(i, 0, {
                     day: monthStart++,
                     month: selectedMonth.month(),
@@ -97,7 +102,7 @@ export class CalendarComponent implements OnInit {
               }
             })
             this.eventCountString = (this.eventCount > 1) ? '(' + this.eventCount + ' Events)' : '(' + this.eventCount + ' Event)'
-            _.each(days, (day) => {
+            _.each(days, (day, dayIndex) => {
               day.events = []
               _.each(this.items, (event, index) => {
                 event.startDate = moment(event._source.date.value)
@@ -105,9 +110,27 @@ export class CalendarComponent implements OnInit {
                 event.title = event._source.title
                 event.link = '/event/' + event._id
                 let eventClone: any = _.clone(event)
+                if (!_.isUndefined(days[dayIndex - 1]) && days[dayIndex - 1].events.length) {
+                    let previousDay = _.find(days[dayIndex - 1].events, {title: event.title})
+                    if (!_.isUndefined(previousDay)) {
+                      event.index = previousDay.index
+                    }
+                }
                 if (day.day === event.startDate.date() && day.month === event.startDate.month()) {
+
+
+                  // if (days[dayIndex - 1].events.length > 0) {
+                  //   console.log(_.find(days[dayIndex - 1].events, {title: event.title}))
+                  //   // let previousDay = _.find(days[dayIndex - 1].events, {title: event.title})
+                  //   // if (!_.isUndefined(previousDay)) {
+                  //   //   event.index = previousDay.index
+                  //   // }
+                  // }
+
                   if (_.isUndefined(event.index)) {
-                    if (day.events.length) {
+                    if (day.events.length === 0) {
+                      event.index = eventClone.index = 0
+                    } else {
                       // Itterate over the existing events
                       _.each(day.events, (dayEvent) => {
                         // If there is an empty slot fill it with an event
@@ -118,9 +141,6 @@ export class CalendarComponent implements OnInit {
                           event.index = eventClone.index = day.events.length
                         }
                       })
-                    } else {
-                      // If there isnt an event object make it 0
-                      event.index = eventClone.index = 0
                     }
                   }
                   eventClone.css = ''
@@ -140,14 +160,8 @@ export class CalendarComponent implements OnInit {
                   }
                   // Else if the day date is equal to the end date and the day month is the same as the event end month
                 } else if (day.day === event.endDate.date() && day.month === event.endDate.month()) {
-                  if (day.events.length === 0) {
-                    event.index = eventClone.index = 0
-                  }
-                  eventClone.css += ' event-end'
+                    eventClone.css += ' event-end'
                 } else if (moment({M: day.month, d: day.day}).isBetween(event.startDate, event.endDate, 'day', '[]')) {
-                  if (day.events.length === 0) {
-                    event.index = eventClone.index = 0
-                  }
                   eventClone.css += ' event-multi'
                 }
                 if (moment({M: day.month, d: day.day}).isBetween(event.startDate, event.endDate, 'day', '[]')) {

@@ -52,6 +52,7 @@ export class ItemComponent implements OnInit {
   public notificationRemove = false
   public notificationFavourite = false
   public apiUrl = 'https://www.truetube.co.uk/v5/api/me'
+  public advisoryMessage = '<p>This video may contain content <strong>unsuitable for sensitive or younger students.</strong> Teacher discretion is advised.</p>'
   public paginationData = {
     currentPage: 0,
     itemsPerPage: 100000

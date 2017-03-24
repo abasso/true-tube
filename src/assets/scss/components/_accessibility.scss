@@ -16,6 +16,9 @@
 
 .dyslexia {
   font-family: $font-family-body-dyslexia;
+  #calendar .event {
+    min-height:4rem;
+  }
 }
 
 .standard {

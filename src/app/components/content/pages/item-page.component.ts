@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute } from '@angular/router'
 import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
-
 import * as _ from 'lodash'
+
 @Component({
   selector: 'app-item-page',
   templateUrl: './item-page.component.html'
