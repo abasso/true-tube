@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { ContentTypes } from './../../../definitions/content-types'
 
 import * as _ from 'lodash'
-import * as moment from 'moment'
+import moment from 'moment'
 
 @Component({
   selector: 'app-event',
@@ -12,9 +12,9 @@ import * as moment from 'moment'
   styles: []
 })
 export class EventComponent implements OnInit {
-  private data: any
-  private items: any
-  private types: any
+  public data: any
+  public items: any
+  public types: any
   public paginationData = {
     currentPage: 0,
     itemsPerPage: 'All',

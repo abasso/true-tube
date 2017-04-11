@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import * as moment from 'moment'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import moment from 'moment'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 import * as Cookies from 'js-cookie'
 
 @Component({
@@ -19,7 +20,7 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleSite() {
+  toggleSite(event: any) {
     Cookies.remove('proxy_override')
     window.location.reload()
   }

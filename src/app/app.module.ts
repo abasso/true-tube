@@ -28,15 +28,15 @@ import { EmbedMenuPipe } from './pipes/embed-menu.pipe'
 import { SanitiseUrlPipe } from './pipes/sanitise-url.pipe'
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover'
 import { Auth, AUTH_PROVIDERS, LoggedInGuard } from './services/auth.service'
-import { ClipboardModule } from 'ngx-clipboard'
+// import { ClipboardModule } from 'ngx-clipboard'
 import { FooterComponent } from './components/global/footer.component'
 import { HomeComponent } from './components/content/home/home.component'
 import { HomeListingComponent } from './components/content/home/list.component'
 import { HomeSortComponent } from './components/content/home/sort.component'
 import { CarouselComponent } from './components/content/home/carousel.component'
 import { PartnersCarouselComponent } from './components/shared/partners-carousel.component'
-import { SwiperModule } from 'angular2-swiper-wrapper'
-import { SwiperConfigInterface } from 'angular2-swiper-wrapper'
+import { SwiperModule } from 'ngx-swiper-wrapper'
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper'
 import { EventsBlockComponent } from './components/shared/events.component'
 import { TopicsComponent } from './components/shared/topics.component'
 import { AwardsComponent } from './components/messaging/awards.component'
@@ -51,10 +51,13 @@ import { CalendarComponent } from './components/content/calendar/calendar.compon
 import { EventComponent } from './components/content/event/event.component'
 import { ProfileComponent } from './components/profile/profile.component'
 import { ProfileResolver } from './components/profile/profile.resolver'
-import { UserListsComponent } from './components//profile/lists.component'
+import { UserListsComponent } from './components/profile/lists.component'
 import { UserListComponent } from './components/profile/list.component'
-import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2'
-import {PopoverModule} from 'ngx-popover'
+import { Angulartics2Module } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
+import { FeedbackComponent } from './components/shared/feedback.component'
+import { RmAuthComponent } from './components/profile/rm-auth.component'
+// import {PopoverModule} from 'ngx-popover'
 
 // import { MetaModule } from 'ng2-meta'
 
@@ -173,6 +176,10 @@ const appRoutes: Routes = [
     resolve: {
       profile: ProfileResolver
     }
+  },
+  {
+    path: 'rm/callback',
+    component: RmAuthComponent
   }
 ]
 
@@ -233,12 +240,14 @@ export class RavenErrorHandler implements ErrorHandler {
     TopicsComponent,
     UserListComponent,
     UserListsComponent,
-    UserNavComponent
+    UserNavComponent,
+    FeedbackComponent,
+    RmAuthComponent
   ],
   imports: [
-    PopoverModule,
+    // PopoverModule,
     BrowserModule,
-    ClipboardModule,
+    // ClipboardModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger'
     }),

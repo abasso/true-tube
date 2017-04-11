@@ -8,10 +8,10 @@ import * as _ from 'lodash'
   templateUrl: './page.component.html'
 })
 export class PageComponent implements OnInit {
-  private content: any
-  private menu: any
-  private param: any
-  private currentId: string
+  public content: any
+  public menu: any
+  public param: any
+  public currentId: string
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute

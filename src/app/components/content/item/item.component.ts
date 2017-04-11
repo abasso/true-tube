@@ -7,12 +7,13 @@ import { SanitiseUrlPipe } from './../../../pipes/sanitise-url.pipe'
 import { ContentTypes } from './../../../definitions/content-types'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Auth } from './../../../services/auth.service'
-import * as moment from 'moment'
+import moment from 'moment'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/switchMap'
 import { Headers } from '@angular/http'
 import {AuthHttp} from 'angular2-jwt'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 
 declare var videojs: any
 
@@ -25,15 +26,15 @@ declare var videojs: any
   ]
 })
 export class ItemComponent implements OnInit {
-  private item: any = {}
-  private data: any
+  public item: any = {}
+  public data: any
   public slug: string
-  private showEmbed = false
-  private embedButtonLabel = 'Copy'
-  private embedButtonClass = 'btn-video'
-  private embeddedContent: any = []
-  private activeTab = 'film'
-  private types: any
+  public showEmbed = false
+  public embedButtonLabel = 'Copy'
+  public embedButtonClass = 'btn-video'
+  public embeddedContent: any = []
+  public activeTab = 'film'
+  public types: any
   public hideAdvisory = false
   public addedToFavourites = false
   public userData: any

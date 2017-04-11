@@ -3,7 +3,8 @@ import {Profile} from './profile.model'
 import * as _ from 'lodash'
 import {AuthHttp} from 'angular2-jwt'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 
 @Component({
   selector: 'app-lists',

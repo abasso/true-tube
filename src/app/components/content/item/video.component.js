@@ -1,0 +1,98 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import * as _ from 'lodash';
+var VideoComponent = (function () {
+    function VideoComponent() {
+    }
+    VideoComponent.prototype.ngOnInit = function () {
+        this.resetPlayer();
+    };
+    VideoComponent.prototype.ngOnChanges = function () {
+        if (this.play === true && !_.isUndefined(this.videoJSplayer)) {
+            this.playPlayer(null);
+            if (this.enableSubtitles === true) {
+                var tracks = this.videoJSplayer.textTracks();
+                for (var i = 0; i < tracks.length; i++) {
+                    var track = tracks[i];
+                    if (track.kind === 'captions' && track.language === 'en') {
+                        track.mode = 'showing';
+                    }
+                }
+            }
+        }
+    };
+    VideoComponent.prototype.ngOnDestroy = function () {
+        var _this = this;
+        setTimeout(function () {
+            if (!_.isUndefined(_this.videoJSplayer)) {
+                _this.videoJSplayer.dispose();
+            }
+        }, 1);
+    };
+    VideoComponent.prototype.playPlayer = function (event) {
+        if (event !== null) {
+            event.preventDefault();
+        }
+        this.videoJSplayer.play();
+    };
+    VideoComponent.prototype.resetPlayer = function () {
+        var _this = this;
+        if (this.activeTab === 'film') {
+            setTimeout(function () {
+                _this.videoJSplayer = videojs(_this.player.nativeElement.id, { 'html5': {
+                        nativeTextTracks: false
+                    } });
+                // let v = document.getElementsByTagName('video')[0]
+                // v.addEventListener('progress', function(data) {
+                //   console.log(data)
+                // }, true)
+            }, 1);
+        }
+    };
+    return VideoComponent;
+}());
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], VideoComponent.prototype, "embed", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], VideoComponent.prototype, "embeddedContent", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], VideoComponent.prototype, "activeTab", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], VideoComponent.prototype, "subtitles", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], VideoComponent.prototype, "enableSubtitles", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Object)
+], VideoComponent.prototype, "play", void 0);
+__decorate([
+    ViewChild('player'),
+    __metadata("design:type", ElementRef)
+], VideoComponent.prototype, "player", void 0);
+VideoComponent = __decorate([
+    Component({
+        selector: 'app-video-player',
+        templateUrl: './video.component.html'
+    }),
+    __metadata("design:paramtypes", [])
+], VideoComponent);
+export { VideoComponent };
+//# sourceMappingURL=video.component.js.map

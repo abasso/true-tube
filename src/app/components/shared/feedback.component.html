@@ -1,0 +1,36 @@
+<button class="btn btn-feedback btn-danger" (click)="toggleFeedback()">Feedback</button>
+<div class="feedback-background" *ngIf="showFeedback"></div>
+<div class="feedback-form" *ngIf="showFeedback">
+<form>
+  <h2>Feedback</h2>
+  <label>What do you want to let us know about?</label>
+  <div class="form-group">
+    <div class="form-check">
+      <label class="form-check-label">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="optionsFeedbackType" type="radio" id="typePage">
+          <div class="custom-control-indicator"></div>
+        </div>
+        Feedback about this page
+      </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label">
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="optionsFeedbackType" type="radio" id="type">
+          <div class="custom-control-indicator"></div>
+        </div>
+        Feedback about the site in general
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleTextarea">Please provide some details of your feedback</label>
+    <br>
+    <textarea class="form-control" id="textareaDetails" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-default" (click)="toggleFeedback()">Cancel</button>
+</form>
+</div>

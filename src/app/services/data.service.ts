@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Http, URLSearchParams } from '@angular/http'
 import * as _ from 'lodash'
-import * as moment from 'moment'
+import moment from 'moment'
 import 'rxjs/add/operator/map'
 import {AuthHttp} from 'angular2-jwt'
 import { Headers, RequestOptions } from '@angular/http'
@@ -18,7 +18,7 @@ export class DataService {
   private searchUrl = this.baseUrl + 'resources/_search'
   private meUrl = this.baseUrl + 'me'
   private tempUrl = this.baseUrl + 'resources/resource'
-  private carouselUrl = this.baseUrl + 'carousels/homepage/_search?sort=updated:desc'
+  private carouselUrl = this.baseUrl + 'carousels/homepage/_search?sort=weight:asc'
   private menuUrl = this.baseUrl + 'menus/menu/pages'
   private eventsUrl = this.baseUrl + 'events/_search?sort=date.value:desc'
   private pagesUrl = this.baseUrl + 'pages/_search'
@@ -109,7 +109,7 @@ export class DataService {
     .map((response) => ( response.json()))
   }
 
-  list(sort: string = null, limit = 1000) {
+  list(sort: string = 'created', limit = 1000) {
     let search: any = new URLSearchParams()
     if (sort) {
       search.set('sort', sort + ':desc')

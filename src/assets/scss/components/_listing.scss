@@ -260,24 +260,24 @@ app-list {
   position:relative;
   }
 
-  .spinner:before {
-  content:"";
-  width:88px;
-  height:88px;
-  border-radius:100%;
-  position:absolute;
-  top:5px;
-  left:5px;
-  z-index:999;
-  -webkit-animation: rotation .8s infinite linear;
-  -moz-animation: rotation .8s infinite linear;
-  animation: rotation .8s infinite linear;
-  animation-direction: reverse;
-  border-left: 1px solid $gray-lighter;
-  border-right: 1px solid $gray-lighter;
-  border-bottom: 1px solid $gray-lighter;
-  border-top: 1px solid #fff;
-  }
+  // .spinner:before {
+  // content:"";
+  // width:88px;
+  // height:88px;
+  // border-radius:100%;
+  // position:absolute;
+  // top:4px;
+  // left:4px;
+  // z-index:999;
+  // -webkit-animation: rotation .8s infinite linear;
+  // -moz-animation: rotation .8s infinite linear;
+  // animation: rotation .8s infinite linear;
+  // animation-direction: reverse;
+  // border-left: 1px solid $gray-lighter;
+  // border-right: 1px solid $gray-lighter;
+  // border-bottom: 1px solid $gray-lighter;
+  // border-top: 1px solid #fff;
+  // }
 }
 
 

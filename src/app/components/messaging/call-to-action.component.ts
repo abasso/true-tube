@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import * as Cookies from 'js-cookie'
 import * as _ from 'lodash'
 import { Auth } from './../../services/auth.service'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 
 @Component({
   selector: 'app-call-to-action',
@@ -10,8 +11,8 @@ import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
 })
 export class CallToActionComponent implements OnInit {
   private fontSize = 16
-  private dyslexiaEnabled = false
-  private dyslexiaLabel = 'Dyslexia Font'
+  public dyslexiaEnabled = false
+  public dyslexiaLabel = 'Dyslexia Font'
   constructor(
     public auth: Auth,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
@@ -57,7 +58,8 @@ export class CallToActionComponent implements OnInit {
     }
   }
 
-  toggleSite() {
+  toggleSite(event: any) {
+    event.preventDefault()
     Cookies.remove('proxy_override')
     window.location.reload()
   }

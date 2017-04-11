@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Auth } from './../../services/auth.service'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 
 @Component({
   selector: 'app-header',
@@ -25,7 +26,7 @@ export class HeaderComponent implements OnInit {
     this.menuVisible = true
     document.getElementById('search').focus()
   }
-  searchDone() {
+  searchDone(event: any) {
     this.hideMenu()
     document.getElementById('search').blur()
   }

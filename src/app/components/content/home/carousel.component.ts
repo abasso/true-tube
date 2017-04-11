@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../../services/data.service'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 import * as _ from 'lodash'
 
 @Component({
@@ -9,7 +10,7 @@ import * as _ from 'lodash'
 })
 export class CarouselComponent implements OnInit {
   private data: any
-  private slides: any
+  public slides: any
   public config = {
         pagination: '.swiper-pagination',
         slidesPerView: 1,

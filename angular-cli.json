@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.18",
+    "version": "1.0.0-beta.29",
     "name": "true-tube"
   },
   "apps": [
@@ -8,9 +8,9 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+  "assets",
+  "favicon.ico"
+],
       "index": "index.html",
       "main": "main.ts",
       "test": "test.ts",
@@ -21,13 +21,6 @@
         "styles.scss"
       ],
       "scripts": [
-        "../node_modules/core-js/client/shim.min.js",
-        "../node_modules/jquery/dist/jquery.js",
-        "../node_modules/tether/dist/js/tether.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/picturefill/dist/picturefill.min.js",
-        "../node_modules/picturefill/dist/plugins/mutation/pf.mutation.js",
-        "../node_modules/countup.js/dist/countUp.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

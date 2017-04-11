@@ -9,7 +9,8 @@ import { Subjects } from './../../../definitions/subjects'
 import { ContentTypes } from './../../../definitions/content-types'
 import { KeyStages } from './../../../definitions/key-stages'
 import { ListService } from './../../../services/list.service'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 import * as _ from 'lodash'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/debounceTime'
@@ -21,21 +22,21 @@ import 'rxjs/add/operator/switchMap'
   templateUrl: './filter.component.html'
 })
 export class ListFilterComponent implements OnInit {
-  private contentLoading = true
-  private topics: any[] = []
-  private filterSubjects: string
-  private categories: any[] = Categories
-  private types: any[] = ContentTypes
-  private subjects: any[] = Subjects
-  private keystages: any[] = KeyStages
+  public contentLoading = true
+  public topics: any[] = []
+  public filterSubjects: string
+  public categories: any[] = Categories
+  public types: any[] = ContentTypes
+  public subjects: any[] = Subjects
+  public keystages: any[] = KeyStages
   public category: any = null
-  private currentItemCount: number
-  private items: any
-  private itemsTotal = 0
-  private itemsTotalLabel = 'Items'
+  public currentItemCount: number
+  public items: any
+  public itemsTotal = 0
+  public itemsTotalLabel = 'Items'
   public filter: FormGroup
-  private currentParams: any
-  private currentCategory: string
+  public currentParams: any
+  public currentCategory: string
   public currentCategoryString: string
   public currentType: any
   constructor(

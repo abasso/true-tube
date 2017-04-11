@@ -12,10 +12,10 @@ import * as Cookies from 'js-cookie'
 })
 export class ListingSortComponent {
 
-  private pages: number[]
-  private itemsPerPage: string[]
-  private loadMoreCount: number
-  private currentParams: any
+  public pages: number[]
+  public itemsPerPage: string[]
+  public loadMoreCount: number
+  public currentParams: any
   public firstPage = true
   public lastPage = false
   constructor(

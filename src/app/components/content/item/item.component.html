@@ -21,27 +21,10 @@
 
 		<div class="tab tab-videos" [ngClass]="{visible: activeTab === 'film'}" *ngFor="let embed of embeddedContent.film">
 			<div class="video-header">
-				<span class="info icon-clock icon-v-shift icon-small icon-left" *ngIf="embed.duration" [popover]="runningTime" [popoverOnHover]="true">{{dataService.duration(embed.duration)}}</span>
-				<popover-content #runningTime
-				placement="right"
-				[animation]="true"
-				[closeOnClickOutside]="true" >
+				<span class="info icon-clock icon-v-shift icon-small icon-left" *ngIf="embed.duration" >{{dataService.duration(embed.duration)}}</span>
 
-				<div class="popover-bottom popover-cc">
-					<div class="popover-arrow"></div>
-					Running time
-				</div>
-			</popover-content>
-			<a href="#" (click)="playSubtitlePlayer($event)" class="info icon-cc icon-large" *ngIf="embed.subtitles !== null" popover="This film has closed captions (Subtitles) " [popover]="closeCaptions" [popoverOnHover]="true"></a>
-			<popover-content #closeCaptions
-			placement="right"
-			[animation]="true"
-			[closeOnClickOutside]="true" >
-			<div class="popover-bottom popover-cc">
-				<div class="popover-arrow"></div>
-				This film has closed captions (click to enable)
-			</div>
-		</popover-content>
+			<a href="#" (click)="playSubtitlePlayer($event)" class="info icon-cc icon-large" *ngIf="embed.subtitles !== null" popover="This film has closed captions (Subtitles)" ></a>
+
 		<span class="advisory-warning" *ngIf="embed.advisory === '1'">ADVISORY</span>
 		<div class="rating" *ngIf="embed.rating">
 			<div class="rating-stars">
@@ -75,7 +58,7 @@
 				<div class="input-group">
 					<input type="text" class="form-control" #inputTarget value="<div style='position:relative;height:0;overflow:hidden;padding-bottom:56.25%;'><iframe src='https://www.truetube.co.uk/v5/embed/{{embed.uuid}}' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' allowfullscreen style='position:absolute;top:0;left:0;width:100%;height:100%;'></iframe></div>">
 					<span class="input-group-btn">
-						<button class="btn {{embedButtonClass}}" [ngxClipboard]="inputTarget" (cbOnSuccess)="embedCopySuccess()" type="button" [innerHTML]="embedButtonLabel" angulartics2On="click" angularticsEvent="Action" angularticsCategory="Embed Video Copy" [angularticsProperties]="{label: item.title}"></button>
+
 					</span>
 				</div>
 			</div>

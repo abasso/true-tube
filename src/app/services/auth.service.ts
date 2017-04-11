@@ -6,6 +6,8 @@ import { myConfig } from './auth.config'
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subject } from 'rxjs/Subject'
+declare let ga: Function
+import * as _ from 'lodash'
 
 // Avoid name not found warnings
 declare var Auth0Lock: any
@@ -34,6 +36,7 @@ export class Auth {
          }
          localStorage.setItem('profile', JSON.stringify(profile))
          this.userProfile = profile
+         ga('set', 'userId', profile.user_id)
        })
        this.loggedInStatus.next('update')
       if (redirectUrl) {
@@ -42,6 +45,16 @@ export class Auth {
           this.router.navigate(['/me'])
       }
     })
+    this.lock.on('show', () => {
+      let parent: any = document.querySelectorAll('.auth0-lock-body-content')
+      parent[0].insertAdjacentHTML('beforebegin', '<div class="rm-unify-login"><a class="btn btn-rm-unify">Log In with <img src="/assets/images/logo_RM.png" /></a>or<div>')
+      document.querySelectorAll('.btn-rm-unify')[0].addEventListener('click', (event) => {
+        this.loginWithRM(event)
+      })
+
+    })
+
+
   }
 
   public login(event: any) {
@@ -60,6 +73,16 @@ export class Auth {
     event.preventDefault()
     localStorage.setItem('redirectUrl', this.router.url + state)
     this.lock.show()
+  }
+
+  public loginWithRM(event: any) {
+    event.preventDefault()
+    this.router.navigate(['/rm/callback'])
+    localStorage.setItem('rm_unify', 'true')
+  }
+
+  public checkRM(event: any) {
+    return (localStorage.getItem('rm_unify') === 'true') ? true : false
   }
 
   public authenticated() {

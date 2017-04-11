@@ -44,7 +44,7 @@
       <a href="#" class="collapse-toggle" (click)="toggleFilter($event)">
         Subject <span class="clear" *ngIf="subjectsActive(filterSubjects)" (click)="clearSubject($event)">Clear</span></a>
     </legend>
-    <select (change)="setSubject($event, value)" formControlName="subject" class="custom-select form-control">
+    <select (change)="setSubject($event)" formControlName="subject" class="custom-select form-control">
       <option selected="selected">
         All
       </option>

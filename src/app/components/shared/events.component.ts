@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core'
 import { DataService } from './../../services/data.service'
 import { BehaviorSubject } from 'rxjs/Rx'
-import * as moment from 'moment'
+import moment from 'moment'
 import * as _ from 'lodash'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 
 @Component({
   selector: 'app-events-block',
   templateUrl: './events.component.html'
 })
 export class EventsBlockComponent implements OnInit {
-  private currentTime: any = moment()
+  public currentTime: any = moment()
   public selectedMonth: any = new BehaviorSubject(moment().month())
-  private selectedMonthString: string
-  private month: any
-  private data: any
-  private subscriber: any
-  private noEvents = true
+  public selectedMonthString: string
+  public month: any
+  public data: any
+  public subscriber: any
+  public noEvents = true
   public items: any[] = []
   constructor(
     public dataService: DataService,

@@ -4,7 +4,8 @@ import { DataService } from './../../../services/data.service'
 import { Categories } from './../../../definitions/categories'
 import * as Cookies from 'js-cookie'
 import * as _ from 'lodash'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 
 @Component({
   selector: 'home-sort',

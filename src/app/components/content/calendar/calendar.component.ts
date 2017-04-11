@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs/Rx'
-import * as moment from 'moment'
+import moment from 'moment'
 import * as _ from 'lodash'
 
 @Component({
@@ -11,16 +11,16 @@ import * as _ from 'lodash'
   styles: []
 })
 export class CalendarComponent implements OnInit {
-  private currentDate: any = moment()
-  private currentMonth: any = this.currentDate.month()
+  public currentDate: any = moment()
+  public currentMonth: any = this.currentDate.month()
   public selectedMonth: any = new BehaviorSubject(moment().month())
   public selectedMonthString: string
-  private month: any
-  private data: any
-  private subscriber: any
-  private noEvents = true
+  public month: any
+  public data: any
+  public subscriber: any
+  public noEvents = true
   public items: any[] = []
-  private weeks: any[] = []
+  public weeks: any[] = []
   public toHighlight = ''
   public eventCount: number
   public eventCountString: string
@@ -113,7 +113,7 @@ export class CalendarComponent implements OnInit {
                 if (!_.isUndefined(days[dayIndex - 1]) && days[dayIndex - 1].events.length) {
                     let previousDay = _.find(days[dayIndex - 1].events, {title: event.title})
                     if (!_.isUndefined(previousDay)) {
-                      event.index = previousDay.index
+                      event.index = previousDay['index']
                     }
                 }
                 if (day.day === event.startDate.date() && day.month === event.startDate.month()) {

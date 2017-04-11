@@ -5,7 +5,8 @@ import { DataService } from './../../../services/data.service'
 import { ListService } from './../../../services/list.service'
 import { Categories } from './../../../definitions/categories'
 import { ContentTypes } from './../../../definitions/content-types'
-import { Angulartics2GoogleAnalytics, Angulartics2 } from 'angulartics2'
+import { Angulartics2 } from 'angulartics2'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 
 import * as _ from 'lodash'
 

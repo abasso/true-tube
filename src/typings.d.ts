@@ -7,3 +7,4 @@ declare module 'lodash';
 declare module 'sortablejs';
 declare module 'countup.js';
 declare module 'moment';
+declare module 'ngx-clipboard';
