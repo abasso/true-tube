@@ -178,7 +178,7 @@ const appRoutes: Routes = [
     }
   },
   {
-    path: 'rm/callback',
+    path: 'rmcallback',
     component: RmAuthComponent
   }
 ]
