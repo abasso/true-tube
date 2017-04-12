@@ -9,20 +9,22 @@ import { Headers, RequestOptions } from '@angular/http'
 @Injectable()
 export class DataService {
 
-  constructor(
-    private http: Http,
-    private authHttp: AuthHttp
-  ) {
-  }
   private baseUrl = 'https://www.truetube.co.uk/v5/api/'
   private searchUrl = this.baseUrl + 'resources/_search'
   private meUrl = this.baseUrl + 'me'
+  private feedBackUrl = this.baseUrl + 'feedback'
   private tempUrl = this.baseUrl + 'resources/resource'
   private carouselUrl = this.baseUrl + 'carousels/homepage/_search?sort=weight:asc'
   private menuUrl = this.baseUrl + 'menus/menu/pages'
   private eventsUrl = this.baseUrl + 'events/_search?sort=date.value:desc'
   private pagesUrl = this.baseUrl + 'pages/_search'
   private itemPageUrl = this.baseUrl + 'item_pages/page'
+
+  constructor(
+    private http: Http,
+    private authHttp: AuthHttp
+  ) {
+  }
 
   search(data: any, types: any, keys: any, subject: any, topics: any, category: any, limit = 1000) {
 
@@ -159,6 +161,15 @@ export class DataService {
     header.append('Content-Type', 'multipart/form-data')
     return this.authHttp
     .post(this.meUrl, data, options)
+    .subscribe((response) => ( console.log(response) ))
+  }
+
+  sendFeedback(data: any) {
+    let header = new Headers()
+    let options = new RequestOptions({ headers: header })
+    header.append('Content-Type', 'application/json')
+    return this.authHttp
+    .post(this.feedBackUrl, data, options)
     .subscribe((response) => ( console.log(response) ))
   }
 

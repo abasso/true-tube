@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 })
 export class FeedbackComponent implements OnInit {
   public showFeedback = false
+  public textarea: string
   constructor() { }
 
   ngOnInit() {
@@ -18,6 +19,12 @@ export class FeedbackComponent implements OnInit {
     } else {
       this.showFeedback = false
     }
+  }
+
+  updateTextArea(event) {
+  }
+
+  submitFeedback(event) {
   }
 
 }

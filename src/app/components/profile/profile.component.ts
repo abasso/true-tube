@@ -40,7 +40,7 @@ export class ProfileComponent {
     constructor(
       private http: AuthHttp,
       private route: ActivatedRoute,
-      private auth: Auth,
+      public auth: Auth,
       private dataService: DataService
 
     ) {
