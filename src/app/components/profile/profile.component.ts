@@ -17,6 +17,7 @@ export class ProfileComponent {
     public profile: Profile
     public showNotification = false
     public notificationMessage: string
+    public rmUnifyUser = false
     public notificationEmail = false
     public lists: any[] = []
     public menu: any[] = [
@@ -46,6 +47,8 @@ export class ProfileComponent {
         route.data.subscribe(data => {
             this.profile = data['profile']
         })
+
+        console.log(auth.checkRM())
     }
 
     setName(event: any) {

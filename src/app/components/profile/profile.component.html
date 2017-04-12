@@ -34,11 +34,11 @@
     </div>
     <button (click)="update()" class="btn btn-assembly-scripts hidden-xs-up">Update</button>
 
-  <div class="profile-password m-t-2">
-  </div>
+  <div class="profile-password m-t-2" *ngIf="auth.checkRM() === false">
   <h3>Change Password</h3>
   <p>Click below to recieve an email with a link to change your password.</p>
   <button (click)="passwordReminder()" class="btn btn-assembly-scripts">Change Password</button>
+</div>
 
     </div>
   </div>

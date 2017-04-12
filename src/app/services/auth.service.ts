@@ -78,11 +78,10 @@ export class Auth {
   public loginWithRM(event: any) {
     event.preventDefault()
     this.router.navigate(['/rm/callback'])
-    localStorage.setItem('rm_unify', 'true')
   }
 
-  public checkRM(event: any) {
-    return (localStorage.getItem('rm_unify') === 'true') ? true : false
+  public checkRM() {
+    return (_.isUndefined(localStorage.getItem('rmlogin'))) ? false : true
   }
 
   public authenticated() {
@@ -93,9 +92,15 @@ export class Auth {
 
   public logout(event: any) {
     event.preventDefault()
+
+
     // Remove token from localStorage
     localStorage.removeItem('id_token')
     this.userProfile = undefined
+    if (this.checkRM()) {
+      localStorage.removeItem('rmlogin')
+      return window.location.href = 'http://www.truetube.co.uk/rm/logout.php'
+    }
     this.router.navigate(['/'])
   }
 }

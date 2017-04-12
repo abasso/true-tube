@@ -1,5 +1,5 @@
 <button class="btn btn-feedback btn-danger" (click)="toggleFeedback()">Feedback</button>
-<div class="feedback-background" *ngIf="showFeedback"></div>
+<div class="feedback-background" *ngIf="showFeedback" (click)="toggleFeedback()"></div>
 <div class="feedback-form" *ngIf="showFeedback">
 <form>
   <h2>Feedback</h2>
