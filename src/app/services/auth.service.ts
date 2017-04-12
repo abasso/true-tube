@@ -77,17 +77,18 @@ export class Auth {
 
   public loginWithRM(event: any) {
     event.preventDefault()
-    this.router.navigate(['/rm/callback'])
+    // this.router.navigate(['/rm/callback'])
+    window.location.href = 'https://www.truetube.co.uk/rm/';
   }
 
   public checkRM() {
-    return (_.isUndefined(localStorage.getItem('rmlogin'))) ? false : true
+    return !!localStorage.getItem('rmlogin')
   }
 
   public authenticated() {
     // Check if there's an unexpired JWT
     // It searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired()
+    return tokenNotExpired() || this.checkRM()
   }
 
   public logout(event: any) {
@@ -109,7 +110,7 @@ export class Auth {
 export class LoggedInGuard implements CanActivate {
   constructor(private auth: Auth) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.auth.authenticated()
+    return this.auth.authenticated() || !!localStorage.getItem('rmlogin')
   }
 }
 
