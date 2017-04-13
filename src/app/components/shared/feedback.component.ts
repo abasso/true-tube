@@ -21,10 +21,10 @@ export class FeedbackComponent implements OnInit {
     }
   }
 
-  updateTextArea(event) {
+  updateTextArea(event: any) {
   }
 
-  submitFeedback(event) {
+  submitFeedback(event: any) {
   }
 
 }

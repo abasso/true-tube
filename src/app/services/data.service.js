@@ -21,6 +21,7 @@ var DataService = (function () {
         this.baseUrl = 'https://www.truetube.co.uk/v5/api/';
         this.searchUrl = this.baseUrl + 'resources/_search';
         this.meUrl = this.baseUrl + 'me';
+        this.feedBackUrl = this.baseUrl + 'feedback';
         this.tempUrl = this.baseUrl + 'resources/resource';
         this.carouselUrl = this.baseUrl + 'carousels/homepage/_search?sort=weight:asc';
         this.menuUrl = this.baseUrl + 'menus/menu/pages';
@@ -149,6 +150,14 @@ var DataService = (function () {
         header.append('Content-Type', 'multipart/form-data');
         return this.authHttp
             .post(this.meUrl, data, options)
+            .subscribe(function (response) { return (console.log(response)); });
+    };
+    DataService.prototype.sendFeedback = function (data) {
+        var header = new Headers();
+        var options = new RequestOptions({ headers: header });
+        header.append('Content-Type', 'application/json');
+        return this.authHttp
+            .post(this.feedBackUrl, data, options)
             .subscribe(function (response) { return (console.log(response)); });
     };
     DataService.prototype.carousel = function () {

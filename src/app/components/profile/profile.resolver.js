@@ -10,13 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Injectable } from '@angular/core';
 import { Profile } from './profile.model';
 import { AuthHttp } from 'angular2-jwt';
+import { Http } from "@angular/http";
 var ProfileResolver = (function () {
-    function ProfileResolver(http) {
+    function ProfileResolver(http, plainHttp) {
         this.http = http;
+        this.plainHttp = plainHttp;
         // TODO: load this from injectable config object?
         this.profileUrl = 'https://www.truetube.co.uk/v5/api/me';
     }
     ProfileResolver.prototype.resolve = function (route, state) {
+        if (!!localStorage.getItem('rmlogin')) {
+            return this.plainHttp.get(this.profileUrl)
+                .map(function (r) { return r.json(); })
+                .map(Profile.hydrate);
+        }
         return this.http.get(this.profileUrl)
             .map(function (r) { return r.json(); })
             .map(Profile.hydrate);
@@ -25,7 +32,7 @@ var ProfileResolver = (function () {
 }());
 ProfileResolver = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [AuthHttp])
+    __metadata("design:paramtypes", [AuthHttp, Http])
 ], ProfileResolver);
 export { ProfileResolver };
 //# sourceMappingURL=profile.resolver.js.map

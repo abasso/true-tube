@@ -21,6 +21,7 @@ var ProfileComponent = (function () {
         this.auth = auth;
         this.dataService = dataService;
         this.showNotification = false;
+        this.rmUnifyUser = false;
         this.notificationEmail = false;
         this.lists = [];
         this.menu = [
@@ -43,6 +44,7 @@ var ProfileComponent = (function () {
         route.data.subscribe(function (data) {
             _this.profile = data['profile'];
         });
+        console.log(auth.checkRM());
     }
     ProfileComponent.prototype.setName = function (event) {
         this.profile.name = event.target.value;

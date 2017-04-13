@@ -180,7 +180,7 @@ var appRoutes = [
         }
     },
     {
-        path: 'rm/callback',
+        path: 'rmcallback',
         component: RmAuthComponent
     }
 ];

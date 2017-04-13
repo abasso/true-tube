@@ -8,9 +8,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Angulartics2 } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga';
 import * as _ from 'lodash';
 var VideoComponent = (function () {
-    function VideoComponent() {
+    function VideoComponent(angulartics2GoogleAnalytics, angulartics2) {
+        this.angulartics2GoogleAnalytics = angulartics2GoogleAnalytics;
+        this.angulartics2 = angulartics2;
+        this.playHeadTime = 0;
     }
     VideoComponent.prototype.ngOnInit = function () {
         this.resetPlayer();
@@ -33,6 +38,7 @@ var VideoComponent = (function () {
         var _this = this;
         setTimeout(function () {
             if (!_.isUndefined(_this.videoJSplayer)) {
+                _this.angulartics2.eventTrack.next({ action: 'Watch', properties: { category: 'Exit time ' + _this.playHeadTime, title: _this.embed.title } });
                 _this.videoJSplayer.dispose();
             }
         }, 1);
@@ -47,13 +53,17 @@ var VideoComponent = (function () {
         var _this = this;
         if (this.activeTab === 'film') {
             setTimeout(function () {
+                var self = _this;
                 _this.videoJSplayer = videojs(_this.player.nativeElement.id, { 'html5': {
                         nativeTextTracks: false
                     } });
-                // let v = document.getElementsByTagName('video')[0]
-                // v.addEventListener('progress', function(data) {
-                //   console.log(data)
-                // }, true)
+                var v = document.getElementsByTagName('video')[0];
+                v.addEventListener('play', function (data) {
+                    self.angulartics2.eventTrack.next({ action: 'Watch', properties: { category: 'Play', title: self.embed.title } });
+                }, true);
+                v.addEventListener('progress', function (data) {
+                    self.playHeadTime = self.videoJSplayer.currentTime();
+                }, true);
             }, 1);
         }
     };
@@ -92,7 +102,8 @@ VideoComponent = __decorate([
         selector: 'app-video-player',
         templateUrl: './video.component.html'
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [Angulartics2GoogleAnalytics,
+        Angulartics2])
 ], VideoComponent);
 export { VideoComponent };
 //# sourceMappingURL=video.component.js.map

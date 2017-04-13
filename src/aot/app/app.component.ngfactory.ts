@@ -15,9 +15,7 @@ import * as import5 from 'angulartics2/dist/core/angulartics2';
 import * as import6 from '@angular/router';
 import * as import7 from './components/global/footer.component.ngfactory';
 import * as import8 from '../../app/components/global/footer.component';
-import * as import9 from './components/shared/feedback.component.ngfactory';
-import * as import10 from '../../app/components/shared/feedback.component';
-import * as import11 from '../../app/app.component';
+import * as import9 from '../../app/app.component';
 const styles_AppComponent:any[] = ([] as any[]);
 export const RenderType_AppComponent:import0.RendererType2 = import0.ɵcrt({
   encapsulation: 2,
@@ -75,23 +73,19 @@ export function View_AppComponent_0(l:any):import0.ɵViewDefinition {
     ,(null as any),(null as any)),
     (l()(),import0.ɵted((null as any),['\n'])),
     (l()(),import0.ɵted((null as any),['\n'])),
-    (l()(),import0.ɵeld(0,(null as any),(null as any),2,'app-feedback',([] as any[]),(null as any),(null as any),(null as any),import9.View_FeedbackComponent_0,import9.RenderType_FeedbackComponent)),
-    import0.ɵdid(57344,(null as any),0,import10.FeedbackComponent,([] as any[]),(null as any),(null as any)),
-    (l()(),import0.ɵted((null as any),['\n'])),
     (l()(),import0.ɵted((null as any),['\n']))
   ]
   ,(ck,v) => {
     ck(v,1,0);
     ck(v,14,0);
-    ck(v,18,0);
   },(null as any));
 }
 function View_AppComponent_Host_0(l:any):import0.ɵViewDefinition {
   return import0.ɵvid(0,[
     (l()(),import0.ɵeld(0,(null as any),(null as any),1,'app-root',([] as any[]),(null as any),(null as any),(null as any),View_AppComponent_0,RenderType_AppComponent)),
-    import0.ɵdid(24576,(null as any),0,import11.AppComponent,([] as any[]),(null as any),(null as any))
+    import0.ɵdid(24576,(null as any),0,import9.AppComponent,([] as any[]),(null as any),(null as any))
   ]
   ,(null as any),(null as any));
 }
-export const AppComponentNgFactory:import0.ComponentFactory<import11.AppComponent> = import0.ɵccf('app-root',import11.AppComponent,View_AppComponent_Host_0,{},{},([] as any[]));
-//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiL1VzZXJzL3RicC9Eb2N1bWVudHMvR2l0aHViL2N0dmMvdHJ1ZS10dWJlL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5uZ2ZhY3RvcnkudHMiLCJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJuZzovLy9Vc2Vycy90YnAvRG9jdW1lbnRzL0dpdGh1Yi9jdHZjL3RydWUtdHViZS9zcmMvYXBwL2FwcC5jb21wb25lbnQudHMiLCJuZzovLy9Vc2Vycy90YnAvRG9jdW1lbnRzL0dpdGh1Yi9jdHZjL3RydWUtdHViZS9zcmMvYXBwL2FwcC5jb21wb25lbnQuaHRtbCIsIm5nOi8vL1VzZXJzL3RicC9Eb2N1bWVudHMvR2l0aHViL2N0dmMvdHJ1ZS10dWJlL3NyYy9hcHAvYXBwLmNvbXBvbmVudC50cy5BcHBDb21wb25lbnRfSG9zdC5odG1sIl0sInNvdXJjZXNDb250ZW50IjpbIiAiLCI8YXBwLWhlYWRlciBjbGFzcz1cInN0aWNreVwiID5cbjwvYXBwLWhlYWRlcj5cbjxtYWluIHJvbGU9XCJtYWluXCI+XG5cdDxkaXYgY2xhc3M9XCJjb250YWluZXJcIj5cblx0XHQ8cm91dGVyLW91dGxldD48L3JvdXRlci1vdXRsZXQ+XG5cdDwvZGl2PlxuPC9tYWluPlxuPGFwcC1mb290ZXI+XG48L2FwcC1mb290ZXI+XG48YXBwLWZlZWRiYWNrPlxuPC9hcHAtZmVlZGJhY2s+XG4iLCI8YXBwLXJvb3Q+PC9hcHAtcm9vdD4iXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztNQ0FBO1FBQUE7UUFBQTtNQUFBO0lBQUE7Z0JBQUE7Ozs7SUFBQTtLQUFBO0lBQTRCO0lBQ2Y7TUFDYjtRQUFBO1FBQUE7TUFBQTtJQUFBO0lBQWtCO01BQ2pCO1FBQUE7UUFBQTtNQUFBO0lBQUE7SUFBdUI7SUFDdEI7Z0JBQUE7Ozs7TUFBQTtRQUFBO1FBQUE7TUFBQTs7SUFBQTtLQUFBO0lBQStCO0lBQzFCO0lBQ0E7SUFDUDtnQkFBQTs7O0lBQUE7S0FBQTtJQUFZO0lBQ0M7SUFDYjtnQkFBQTtJQUFjO0lBQ0M7OztJQVZmO0lBT0E7SUFFQTs7Ozs7SUNUQTtnQkFBQTs7OzsifQ==
+export const AppComponentNgFactory:import0.ComponentFactory<import9.AppComponent> = import0.ɵccf('app-root',import9.AppComponent,View_AppComponent_Host_0,{},{},([] as any[]));
+//# sourceMappingURL=data:application/json;base64,eyJmaWxlIjoiL1VzZXJzL3RicC9Eb2N1bWVudHMvR2l0aHViL2N0dmMvdHJ1ZS10dWJlL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5uZ2ZhY3RvcnkudHMiLCJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJuZzovLy9Vc2Vycy90YnAvRG9jdW1lbnRzL0dpdGh1Yi9jdHZjL3RydWUtdHViZS9zcmMvYXBwL2FwcC5jb21wb25lbnQudHMiLCJuZzovLy9Vc2Vycy90YnAvRG9jdW1lbnRzL0dpdGh1Yi9jdHZjL3RydWUtdHViZS9zcmMvYXBwL2FwcC5jb21wb25lbnQuaHRtbCIsIm5nOi8vL1VzZXJzL3RicC9Eb2N1bWVudHMvR2l0aHViL2N0dmMvdHJ1ZS10dWJlL3NyYy9hcHAvYXBwLmNvbXBvbmVudC50cy5BcHBDb21wb25lbnRfSG9zdC5odG1sIl0sInNvdXJjZXNDb250ZW50IjpbIiAiLCI8YXBwLWhlYWRlciBjbGFzcz1cInN0aWNreVwiID5cbjwvYXBwLWhlYWRlcj5cbjxtYWluIHJvbGU9XCJtYWluXCI+XG5cdDxkaXYgY2xhc3M9XCJjb250YWluZXJcIj5cblx0XHQ8cm91dGVyLW91dGxldD48L3JvdXRlci1vdXRsZXQ+XG5cdDwvZGl2PlxuPC9tYWluPlxuPGFwcC1mb290ZXI+XG48L2FwcC1mb290ZXI+XG48IS0tIDxhcHAtZmVlZGJhY2s+XG48L2FwcC1mZWVkYmFjaz4gLS0+XG4iLCI8YXBwLXJvb3Q+PC9hcHAtcm9vdD4iXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7TUNBQTtRQUFBO1FBQUE7TUFBQTtJQUFBO2dCQUFBOzs7O0lBQUE7S0FBQTtJQUE0QjtJQUNmO01BQ2I7UUFBQTtRQUFBO01BQUE7SUFBQTtJQUFrQjtNQUNqQjtRQUFBO1FBQUE7TUFBQTtJQUFBO0lBQXVCO0lBQ3RCO2dCQUFBOzs7O01BQUE7UUFBQTtRQUFBO01BQUE7O0lBQUE7S0FBQTtJQUErQjtJQUMxQjtJQUNBO0lBQ1A7Z0JBQUE7OztJQUFBO0tBQUE7SUFBWTtJQUNDO0lBRU07OztJQVZuQjtJQU9BOzs7OztJQ1BBO2dCQUFBOzs7OyJ9

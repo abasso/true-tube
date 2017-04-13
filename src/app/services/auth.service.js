@@ -69,22 +69,26 @@ var Auth = (function () {
     };
     Auth.prototype.loginWithRM = function (event) {
         event.preventDefault();
-        this.router.navigate(['/rm/callback']);
-        localStorage.setItem('rm_unify', 'true');
+        // this.router.navigate(['/rm/callback'])
+        window.location.href = 'https://www.truetube.co.uk/rm/';
     };
-    Auth.prototype.checkRM = function (event) {
-        return (localStorage.getItem('rm_unify') === 'true') ? true : false;
+    Auth.prototype.checkRM = function () {
+        return !!localStorage.getItem('rmlogin');
     };
     Auth.prototype.authenticated = function () {
         // Check if there's an unexpired JWT
         // It searches for an item in localStorage with key == 'id_token'
-        return tokenNotExpired();
+        return tokenNotExpired() || this.checkRM();
     };
     Auth.prototype.logout = function (event) {
         event.preventDefault();
         // Remove token from localStorage
         localStorage.removeItem('id_token');
         this.userProfile = undefined;
+        if (this.checkRM()) {
+            localStorage.removeItem('rmlogin');
+            return window.location.href = 'http://www.truetube.co.uk/rm/logout.php';
+        }
         this.router.navigate(['/']);
     };
     return Auth;
@@ -100,7 +104,7 @@ var LoggedInGuard = (function () {
         this.auth = auth;
     }
     LoggedInGuard.prototype.canActivate = function (route, state) {
-        return this.auth.authenticated();
+        return this.auth.authenticated() || !!localStorage.getItem('rmlogin');
     };
     return LoggedInGuard;
 }());

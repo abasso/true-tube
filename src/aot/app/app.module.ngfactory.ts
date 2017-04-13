@@ -332,7 +332,7 @@ class AppModuleInjector extends import0.ɵNgModuleInjector<import1.AppModule> {
     return this.__LoggedInGuard_76;
   }
   get _ProfileResolver_77():import18.ProfileResolver {
-    if ((this.__ProfileResolver_77 == null)) { (this.__ProfileResolver_77 = new import18.ProfileResolver(this._AuthHttp_70)); }
+    if ((this.__ProfileResolver_77 == null)) { (this.__ProfileResolver_77 = new import18.ProfileResolver(this._AuthHttp_70,this._Http_54)); }
     return this.__ProfileResolver_77;
   }
   get _UserService_78():import19.UserService {
@@ -507,7 +507,7 @@ class AppModuleInjector extends import0.ɵNgModuleInjector<import1.AppModule> {
         }
         ,
         {
-          path: 'rm/callback',
+          path: 'rmcallback',
           component: import42.RmAuthComponent
         }
 

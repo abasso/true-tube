@@ -10,10 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 var FeedbackComponent = (function () {
     function FeedbackComponent() {
+        this.showFeedback = false;
     }
     FeedbackComponent.prototype.ngOnInit = function () {
     };
-    FeedbackComponent.prototype.submit = function () {
+    FeedbackComponent.prototype.toggleFeedback = function () {
+        if (this.showFeedback === false) {
+            this.showFeedback = true;
+        }
+        else {
+            this.showFeedback = false;
+        }
+    };
+    FeedbackComponent.prototype.updateTextArea = function (event) {
+    };
+    FeedbackComponent.prototype.submitFeedback = function (event) {
     };
     return FeedbackComponent;
 }());

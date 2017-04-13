@@ -47,8 +47,6 @@ export class ProfileComponent {
         route.data.subscribe(data => {
             this.profile = data['profile']
         })
-
-        console.log(auth.checkRM())
     }
 
     setName(event: any) {
