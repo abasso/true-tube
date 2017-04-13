@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
   }
 
   toggleSite(event: any) {
-    Cookies.remove('proxy_override')
+    Cookies.set('proxy_override', 'true')
     window.location.reload()
   }
 

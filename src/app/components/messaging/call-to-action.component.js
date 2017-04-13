@@ -59,7 +59,7 @@ var CallToActionComponent = (function () {
     };
     CallToActionComponent.prototype.toggleSite = function (event) {
         event.preventDefault();
-        Cookies.remove('proxy_override');
+        Cookies.set('proxy_override', 'true');
         window.location.reload();
     };
     CallToActionComponent.prototype.setDyslexiaFont = function () {

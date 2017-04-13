@@ -44,7 +44,6 @@ var ProfileComponent = (function () {
         route.data.subscribe(function (data) {
             _this.profile = data['profile'];
         });
-        console.log(auth.checkRM());
     }
     ProfileComponent.prototype.setName = function (event) {
         this.profile.name = event.target.value;

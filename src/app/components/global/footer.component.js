@@ -21,7 +21,7 @@ var FooterComponent = (function () {
     FooterComponent.prototype.ngOnInit = function () {
     };
     FooterComponent.prototype.toggleSite = function (event) {
-        Cookies.remove('proxy_override');
+        Cookies.set('proxy_override', 'true');
         window.location.reload();
     };
     return FooterComponent;

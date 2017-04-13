@@ -60,7 +60,7 @@ export class CallToActionComponent implements OnInit {
 
   toggleSite(event: any) {
     event.preventDefault()
-    Cookies.remove('proxy_override')
+    Cookies.set('proxy_override', 'true')
     window.location.reload()
   }
 
