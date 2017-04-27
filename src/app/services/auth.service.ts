@@ -47,11 +47,17 @@ export class Auth {
     })
     this.lock.on('show', () => {
       let parent: any = document.querySelectorAll('.auth0-lock-body-content')
-      parent[0].insertAdjacentHTML('beforebegin', '<div class="rm-unify-login"><a class="btn btn-rm-unify">Log In with <img src="/assets/images/logo_RM.png" /></a>or<div>')
+      parent[0].insertAdjacentHTML('beforebegin', '<div class="rm-unify-login"><a class="btn btn-rm-unify">Log In with <img src="/assets/images/logo_RM.png" /></a>or<div><div class="signin-notification"><strong>PLEASE NOTE</strong><br/>Users from the old site need to reset their password. Please click "Forgotten or need to reset your password?" below to reset it. </div>')
       document.querySelectorAll('.btn-rm-unify')[0].addEventListener('click', (event) => {
         this.loginWithRM(event)
       })
 
+    })
+
+    this.lock.on('unrecoverable_error', () => {
+      console.log("AN ERROR")
+      let cats = document.querySelectorAll('.signin-notification')
+      console.log(cats)
     })
 
 
@@ -78,7 +84,7 @@ export class Auth {
   public loginWithRM(event: any) {
     event.preventDefault()
     // this.router.navigate(['/rm/callback'])
-    window.location.href = 'https://www.truetube.co.uk/rm/';
+    window.location.href = 'https://www.truetube.co.uk/rm/'
   }
 
   public checkRM() {

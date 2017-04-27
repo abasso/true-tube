@@ -72,13 +72,13 @@ export class DataService {
       let topicString = '(topic:"'
       _.each(topics, (topic, index) => {
         if (topic.active === true) {
-          topicArray.push(topic.label);
+          topicArray.push(topic.label)
         }
       })
-      let count: any = _.countBy(topics, 'active');
+      let count: any = _.countBy(topics, 'active')
       if (count.false === topics.length) {
         _.each(topics, (topic, index) => {
-          topicArray.push(topic.label);
+          topicArray.push(topic.label)
         })
       }
 
@@ -111,7 +111,7 @@ export class DataService {
     .map((response) => ( response.json()))
   }
 
-  list(sort: string = 'created', limit = 1000) {
+  list(sort = 'created', limit = 1000) {
     let search: any = new URLSearchParams()
     if (sort) {
       search.set('sort', sort + ':desc')

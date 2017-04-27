@@ -13,7 +13,14 @@ export const myConfig: AuthConfiguration = {
       languageDictionary: {
         emailInputPlaceholder: 'something@youremail.com',
         title: '',
-        signUpLabel: 'Register'
+        signUpLabel: 'Register',
+        forgotPasswordAction: "Forgotten or need to reset your password?",
+        error: {
+          login: {
+            "lock.invalid_email_password": "Wrong email or password. Are you logging in with credentials from the old site? You need to reset your password.",
+            "lock.invalid_username_password": "Wrong username or password. Are you logging in with credentials from the old site? You need to reset your password.",
+          }
+        }
       },
       popupOptions: { width: 500 },
       auth: {

@@ -109,3 +109,39 @@
     }
   }
 }
+
+.signin-notification {
+  background-color:$brand-red;
+  color:white;
+  padding:1rem;
+  text-align:center;
+  margin:.25rem -.5rem -.25rem;
+  font-size:.75rem;
+  strong {
+    margin-bottom:.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth0-lock {
+    &.auth0-lock {
+      &.auth0-lock-opened {
+        &.auth0-lock-with-tabs {
+          .auth0-lock-body-content {
+            padding-top: 0;
+            margin-top: -7rem;
+          }
+        }
+      }
+      .auth0-global-message {
+
+      }
+    }
+  }
+  .auth0-lock-form {
+    margin-top: 4rem;
+  }
+}
+.auth0-global-message-error {
+  background:$brand-red !important;
+}
