@@ -22,9 +22,12 @@ export class FeedbackComponent implements OnInit {
   }
 
   updateTextArea(event: any) {
+    console.log('Text area updating')
   }
 
   submitFeedback(event: any) {
+    console.log(event)
+    console.log(this.textarea)
   }
 
 }

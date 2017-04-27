@@ -18,10 +18,7 @@ export class CarouselComponent implements OnInit {
         spaceBetween: 0,
         loop: false,
         autoplay: 5000,
-        // nextButton: '.swiper-button-next',
-        // prevButton: '.swiper-button-prev',
-        parallax: true,
-        speed:600
+        speed: 600
       }
   constructor(
     private dataService: DataService,

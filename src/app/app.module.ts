@@ -107,6 +107,10 @@ const appRoutes: Routes = [
     component: ItemComponent
   },
   {
+    path: 'resource/:slug',
+    component: ItemComponent
+  },
+  {
     path: 'awards',
     component: ItemPageComponent
   },

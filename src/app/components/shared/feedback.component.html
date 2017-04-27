@@ -28,7 +28,7 @@
   <div class="form-group">
     <label for="textareaDetails">Please provide some details of your feedback</label>
     <br>
-    <textarea class="form-control" id="textareaDetails" [(ngModel)]="textarea" rows="3"></textarea>
+    <textarea class="form-control" id="textareaDetails" [(ngModel)]="textarea" (change)="updateTextArea($event)" rows="3"></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
   <button type="button" class="btn btn-default" (click)="toggleFeedback()">Cancel</button>
