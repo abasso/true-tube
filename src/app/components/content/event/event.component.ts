@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { PLATFORM_ID, Component, OnInit, Inject } from '@angular/core';
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ContentTypes } from './../../../definitions/content-types'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 import * as _ from 'lodash'
 import moment from 'moment'
@@ -21,6 +22,7 @@ export class EventComponent implements OnInit {
     itemsPerPageCurrent: 'All'
     }
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     public dataService: DataService,
     private route: ActivatedRoute,
     private router: Router
@@ -30,7 +32,9 @@ export class EventComponent implements OnInit {
     this.types = ContentTypes
     this.data = this.dataService.events().subscribe(
       (data) => {
-        window.scrollTo(0, 0)
+        if (isPlatformBrowser(this.platformId)) {
+          window.scrollTo(0, 0)
+        }
         this.data = this.route.url
         .subscribe(
           (route) => {

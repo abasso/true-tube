@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { PLATFORM_ID, Injectable, Inject } from '@angular/core'
 import { tokenNotExpired } from 'angular2-jwt'
 import {AuthHttp, AuthConfig} from 'angular2-jwt'
 import {Http, RequestOptions} from '@angular/http'
@@ -8,9 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Subject } from 'rxjs/Subject'
 declare let ga: Function
 import * as _ from 'lodash'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 // Avoid name not found warnings
-declare var Auth0Lock: any
+declare let Auth0Lock: any
 
 @Injectable()
 export class Auth {
@@ -19,22 +20,30 @@ export class Auth {
   private userProfile: any
   public loggedInStatus: any = new Subject()
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private route: ActivatedRoute,
     private router: Router
   ) {
+    if (isPlatformBrowser(this.platformId)) {
     // myConfig.options['auth'].params.state = JSON.stringify({pathname: route})
     this.lock = new Auth0Lock(myConfig.clientID, myConfig.domain, myConfig.options)
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
-      localStorage.setItem('id_token', authResult.idToken)
-      const redirectUrl: string = localStorage.getItem('redirectUrl')
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem('id_token', authResult.idToken)
+        const redirectUrl: string = localStorage.getItem('redirectUrl')
+      } else {
+        const redirectUrl: string = ''
+      }
       // Fetch profile information
        this.lock.getProfile(authResult.idToken, (error: any, profile: any) => {
          if (error) {
            // Handle error
            return
          }
-         localStorage.setItem('profile', JSON.stringify(profile))
+         if (isPlatformBrowser(this.platformId)) {
+           localStorage.setItem('profile', JSON.stringify(profile))
+         }
          this.userProfile = profile
          ga('set', 'userId', profile.user_id)
        })
@@ -46,55 +55,61 @@ export class Auth {
       }
     })
     this.lock.on('show', () => {
-      let parent: any = document.querySelectorAll('.auth0-lock-body-content')
-      parent[0].insertAdjacentHTML('beforebegin', '<div class="rm-unify-login"><a class="btn btn-rm-unify">Log In with <img src="/assets/images/logo_RM.png" /></a>or<div><div class="signin-notification"><strong>PLEASE NOTE</strong><br/>Users from the old site need to reset their password. Please click "Forgotten or need to reset your password?" below to reset it. </div>')
-      document.querySelectorAll('.btn-rm-unify')[0].addEventListener('click', (event) => {
-        this.loginWithRM(event)
-      })
-
+      if (isPlatformBrowser(this.platformId)) {
+        let parent: any = document.querySelectorAll('.auth0-lock-body-content')
+        parent[0].insertAdjacentHTML('beforebegin', '<div class="rm-unify-login"><a class="btn btn-rm-unify">Log In with <img src="/assets/images/logo_RM.png" /></a>or<div><div class="signin-notification"><strong>PLEASE NOTE</strong><br/>Users from the old site need to reset their password. Please click "Forgotten or need to reset your password?" below to reset it. </div>')
+        document.querySelectorAll('.btn-rm-unify')[0].addEventListener('click', (event) => {
+          this.loginWithRM(event)
+        })
+      }
     })
-
-    this.lock.on('unrecoverable_error', () => {
-      console.log("AN ERROR")
-      let cats = document.querySelectorAll('.signin-notification')
-      console.log(cats)
-    })
-
-
+    }
   }
 
   public login(event: any) {
     event.preventDefault()
-    localStorage.setItem('redirectUrl', this.router.url)
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('redirectUrl', this.router.url)
+    }
     this.lock.show()
   }
 
   public signup(event: any) {
     event.preventDefault()
-    localStorage.setItem('redirectUrl', '/me')
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('redirectUrl', '/me')
+    }
     this.lock.show({initialScreen: 'signUp'})
   }
 
   public loginWithState(event: any, state: any) {
     event.preventDefault()
-    localStorage.setItem('redirectUrl', this.router.url + state)
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('redirectUrl', this.router.url + state)
+    }
     this.lock.show()
   }
 
   public loginWithRM(event: any) {
     event.preventDefault()
     // this.router.navigate(['/rm/callback'])
-    window.location.href = 'https://www.truetube.co.uk/rm/'
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.href = 'https://www.truetube.co.uk/rm/'
+    }
   }
 
   public checkRM() {
-    return !!localStorage.getItem('rmlogin')
+    if (isPlatformBrowser(this.platformId)) {
+      return !!localStorage.getItem('rmlogin')
+    }
   }
 
   public authenticated() {
     // Check if there's an unexpired JWT
     // It searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired() || this.checkRM()
+    if (isPlatformBrowser(this.platformId)) {
+      return tokenNotExpired() || this.checkRM()
+    }
   }
 
   public logout(event: any) {
@@ -102,11 +117,15 @@ export class Auth {
 
 
     // Remove token from localStorage
-    localStorage.removeItem('id_token')
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('id_token')
+    }
     this.userProfile = undefined
     if (this.checkRM()) {
-      localStorage.removeItem('rmlogin')
-      return window.location.href = 'http://www.truetube.co.uk/rm/logout.php'
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.removeItem('rmlogin')
+        return window.location.href = 'http://www.truetube.co.uk/rm/logout.php'
+      }
     }
     this.router.navigate(['/'])
   }

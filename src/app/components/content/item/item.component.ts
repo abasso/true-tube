@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { PLATFORM_ID, Component, OnInit, Inject } from '@angular/core'
 import { Location } from '@angular/common'
 import { DataService } from './../../../services/data.service'
 import { UserService } from './../../../services/user.service'
@@ -14,6 +14,7 @@ import { Headers } from '@angular/http'
 import {AuthHttp} from 'angular2-jwt'
 import { Angulartics2 } from 'angulartics2'
 import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 declare var videojs: any
 
@@ -59,6 +60,7 @@ export class ItemComponent implements OnInit {
     itemsPerPage: 100000
   }
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
@@ -76,7 +78,9 @@ export class ItemComponent implements OnInit {
     .switchMap((url: any) => this.dataService.itemBySlug(url))
     .subscribe(
       (data) => {
-        window.scrollTo(0, 0)
+        if (isPlatformBrowser(this.platformId)) {
+          window.scrollTo(0, 0)
+        }
         this.item = data.hits.hits[0]._source
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
         if (this.item.resource_types.length === 1) {
@@ -124,7 +128,9 @@ export class ItemComponent implements OnInit {
   navigateAttribute(event: any, type: string, attribute: string) {
     event.preventDefault()
     this.router.navigateByUrl('/list?' + type + '=' + attribute)
-    this.angulartics2.eventTrack.next({ action: 'Navigate', properties: { category: 'Content Info ' + type, title: attribute}})
+    if (isPlatformBrowser(this.platformId)) {
+      this.angulartics2.eventTrack.next({ action: 'Navigate', properties: { category: 'Content Info ' + type, title: attribute}})
+    }
   }
 
   duration(seconds: number) {
@@ -143,7 +149,9 @@ export class ItemComponent implements OnInit {
   setActiveTab(event: any) {
     event = event.replace(' ', '_')
     this.activeTab = event
-    this.angulartics2.eventTrack.next({ action: event, properties: { category: 'Content Tab', title: ''}})
+    if (isPlatformBrowser(this.platformId)) {
+      this.angulartics2.eventTrack.next({ action: event, properties: { category: 'Content Tab', title: ''}})
+    }
   }
 
   tab(event: any) {
@@ -206,7 +214,9 @@ export class ItemComponent implements OnInit {
         this.addListError = false
       }, 3000)
     } else if (this.createListTitle !== '') {
-      this.angulartics2.eventTrack.next({ action: 'Create', properties: { category: 'List', title: this.createListTitle}})
+      if (isPlatformBrowser(this.platformId)) {
+        this.angulartics2.eventTrack.next({ action: 'Create', properties: { category: 'List', title: this.createListTitle}})
+      }
       this.addListError = false
       let listSlug = _.kebabCase(this.createListTitle)
       let header = new Headers()
@@ -260,7 +270,9 @@ export class ItemComponent implements OnInit {
       this.toggleNotification(title, true)
       this.http.post(this.apiUrl + '/' + key + '/' + this.item.id, {}).subscribe(
       (data) => {
-        this.angulartics2.eventTrack.next({ action: 'Add', properties: { category: 'List', title: this.item.id}})
+        if (isPlatformBrowser(this.platformId)) {
+          this.angulartics2.eventTrack.next({ action: 'Add', properties: { category: 'List', title: this.item.id}})
+        }
       })
     } else {
       this.notificationFavourite = false
@@ -271,7 +283,9 @@ export class ItemComponent implements OnInit {
       }
       this.http.delete(this.apiUrl + '/' + key + '/' + this.item.id).subscribe(
       (data) => {
-        this.angulartics2.eventTrack.next({ action: 'Remove', properties: { category: 'List', title: this.item.id}})
+        if (isPlatformBrowser(this.platformId)) {
+          this.angulartics2.eventTrack.next({ action: 'Remove', properties: { category: 'List', title: this.item.id}})
+        }
       })
     }
   }

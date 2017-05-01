@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { PLATFORM_ID, Component, OnInit, Inject } from '@angular/core'
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute } from '@angular/router'
 import * as _ from 'lodash'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 @Component({
   selector: 'app-page',
@@ -13,6 +14,7 @@ export class PageComponent implements OnInit {
   public param: any
   public currentId: string
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private dataService: DataService,
     private route: ActivatedRoute
   ) {
@@ -20,7 +22,9 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.param = this.route.url.subscribe(
       (url) => {
-        window.scrollTo(0, 0)
+        if (isPlatformBrowser(this.platformId)) {
+          window.scrollTo(0, 0)
+        }
         let path = '/'
         _.each(url, (urlPart) => {
           path += urlPart.path + '/'

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
-import * as Raven from 'raven-js'
+// import * as Raven from 'raven-js'
 import { NgModule, ErrorHandler } from '@angular/core'
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {HttpModule} from '@angular/http'
@@ -35,8 +35,9 @@ import { HomeListingComponent } from './components/content/home/list.component'
 import { HomeSortComponent } from './components/content/home/sort.component'
 import { CarouselComponent } from './components/content/home/carousel.component'
 import { PartnersCarouselComponent } from './components/shared/partners-carousel.component'
-import { SwiperModule } from 'ngx-swiper-wrapper'
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper'
+// import { SwiperModule } from 'ngx-swiper-wrapper'
+// import { SwiperConfigInterface } from 'ngx-swiper-wrapper'
+import { SwiperModule } from '../../node_modules/angular2-useful-swiper'
 import { EventsBlockComponent } from './components/shared/events.component'
 import { TopicsComponent } from './components/shared/topics.component'
 import { AwardsComponent } from './components/messaging/awards.component'
@@ -61,9 +62,9 @@ import { RmAuthComponent } from './components/profile/rm-auth.component'
 
 // import { MetaModule } from 'ng2-meta'
 
-Raven
-  .config('https://2978499738d5454a8c9bdaa1bc5ae034@sentry.io/141702')
-  .install()
+// Raven
+//   .config('https://2978499738d5454a8c9bdaa1bc5ae034@sentry.io/141702')
+//   .install()
 
 const appRoutes: Routes = [
   {
@@ -187,20 +188,11 @@ const appRoutes: Routes = [
   }
 ]
 
-const SWIPER_CONFIG: SwiperConfigInterface = {
-      pagination: '.swiper-pagination',
-      slidesPerView: 1,
-      paginationClickable: true,
-      spaceBetween: 0,
-      loop: false,
-      autoplay: 5000
-      }
-
-export class RavenErrorHandler implements ErrorHandler {
-  handleError(err: any): void {
-    Raven.captureException(err.originalError)
-  }
-}
+// export class RavenErrorHandler implements ErrorHandler {
+//   handleError(err: any): void {
+//     Raven.captureException(err.originalError)
+//   }
+// }
 
 
 @NgModule({
@@ -259,7 +251,7 @@ export class RavenErrorHandler implements ErrorHandler {
     HttpModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    SwiperModule.forRoot(SWIPER_CONFIG),
+    SwiperModule,
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
   ],
   providers: [
@@ -272,7 +264,7 @@ export class RavenErrorHandler implements ErrorHandler {
     LoggedInGuard,
     ProfileResolver,
     UserService,
-    {provide: ErrorHandler, useClass: RavenErrorHandler}
+    // {provide: ErrorHandler, useClass: RavenErrorHandler}
   ],
   bootstrap: [
     AppComponent

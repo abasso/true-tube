@@ -1,4 +1,6 @@
-<swiper class="homepage-carousel">
+<swiper class="homepage-carousel" [config]="config">
+  <div class="swiper-wrapper">
+
   <div class="swiper-slide" *ngFor="let item of slides, let i = index">
     <a href="#" *ngIf="item.externalLink === false" [routerLink]="[item._source.link]" angulartics2On="click" angularticsEvent="Navigate" angularticsCategory="Homepage Carousel {{i}}" [angularticsProperties]="{label: item._source.title}">
       <picture>
@@ -29,4 +31,5 @@
                 </a>
 
               </div>
+            </div>
             </swiper>

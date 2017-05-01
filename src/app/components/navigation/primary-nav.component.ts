@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core'
+import { PLATFORM_ID, Component, OnInit, Output, EventEmitter, Inject } from '@angular/core'
 import { ListFilterComponent } from './../content/listing/filter.component'
 import { Angulartics2 } from 'angulartics2'
 import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
@@ -9,6 +9,7 @@ import { ListService } from './../../services/list.service'
 import { ItemComponent } from './../content/item/item.component'
 import { Auth } from './../../services/auth.service'
 import * as _ from 'lodash'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 @Component({
   selector: 'app-primary-nav',
@@ -20,6 +21,7 @@ export class PrimaryNavComponent implements OnInit {
   public items: any[]
   public item: any = ItemComponent
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private filter: ListFilterComponent,
     private listService: ListService,
     public auth: Auth,
@@ -61,7 +63,9 @@ export class PrimaryNavComponent implements OnInit {
   }
 
   searchDone(event: any) {
-    this.angulartics2.eventTrack.next({ action: 'Search', properties: { category: 'Primary Nav', label: event.target.elements[0].value}})
+    if (isPlatformBrowser(this.platformId)) {
+      this.angulartics2.eventTrack.next({ action: 'Search', properties: { category: 'Primary Nav', label: event.target.elements[0].value}})
+    }
     this.searchSubmitted.emit(event)
   }
 

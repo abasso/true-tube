@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { PLATFORM_ID, Component, OnInit, Inject } from '@angular/core'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 import { DataService } from './../../../services/data.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs/Rx'
@@ -26,6 +27,7 @@ export class CalendarComponent implements OnInit {
   public eventCountString: string
   public calendarLoaded = false
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     public dataService: DataService,
     private route: ActivatedRoute,
     private router: Router
@@ -37,7 +39,9 @@ export class CalendarComponent implements OnInit {
         this.data = this.dataService.events()
         this.subscriber = this.data.subscribe(
           (data: any) => {
-            window.scrollTo(0, 0)
+            if (isPlatformBrowser(this.platformId)) {
+              window.scrollTo(0, 0)
+            }
             // Build the calendar days
             this.eventCount = 0
             let days: any[] = []

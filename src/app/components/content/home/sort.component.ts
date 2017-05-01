@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { PLATFORM_ID, Component, Inject } from '@angular/core'
 import { HomeListingComponent } from './list.component'
 import { DataService } from './../../../services/data.service'
 import { Categories } from './../../../definitions/categories'
@@ -6,6 +6,7 @@ import * as Cookies from 'js-cookie'
 import * as _ from 'lodash'
 import { Angulartics2 } from 'angulartics2'
 import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 @Component({
   selector: 'home-sort',
@@ -19,6 +20,7 @@ export class HomeSortComponent {
   public loadMoreCount: number
   public categories: any[] = Categories
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     public ListingComponent: HomeListingComponent,
     public dataService: DataService,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
@@ -46,6 +48,8 @@ export class HomeSortComponent {
   listDisplayClick(event: any, type: string) {
     event.preventDefault()
     this.setListDisplay(type)
-    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Set List Type', label: type}})
+    if (isPlatformBrowser(this.platformId)) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Set List Type', label: type}})
+    }
   }
 }

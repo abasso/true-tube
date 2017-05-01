@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core'
+import { PLATFORM_ID, Component, HostListener, Inject} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
 import { DataService } from './../../../services/data.service'
@@ -100,16 +100,5 @@ export class ListingComponent {
     }
     return category + ' ' + topics + ' ' + subject + ' ' + keystages + ' ' + term + ' ' + types
   }
-
-  @HostListener('window:scroll', ['$event'])
-  scroll(event: any) {
-    let main = document.querySelector('main').getBoundingClientRect()
-    if (main.top <= 0) {
-      this.stickyTitle = true
-    } else {
-      this.stickyTitle = false
-    }
-  }
-
 
 }

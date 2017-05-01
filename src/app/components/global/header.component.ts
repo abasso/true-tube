@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { PLATFORM_ID, Component, OnInit, Inject } from '@angular/core'
 import { Auth } from './../../services/auth.service'
 import { Angulartics2 } from 'angulartics2'
-import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
+import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga',
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angu
 export class HeaderComponent implements OnInit {
   public menuVisible = false
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     public auth: Auth,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private angulartics2: Angulartics2
@@ -24,11 +26,15 @@ export class HeaderComponent implements OnInit {
   mobileSearch(event: any) {
     event.preventDefault()
     this.menuVisible = true
-    document.getElementById('search').focus()
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById('search').focus()
+    }
   }
   searchDone(event: any) {
     this.hideMenu()
-    document.getElementById('search').blur()
+    if (isPlatformBrowser(this.platformId)) {
+      document.getElementById('search').blur()
+    }
   }
 
   menuClick() {

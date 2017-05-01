@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import { PLATFORM_ID, Component, OnInit, Inject } from '@angular/core'
 import * as Cookies from 'js-cookie'
 import * as _ from 'lodash'
 import { Auth } from './../../services/auth.service'
 import { Angulartics2 } from 'angulartics2'
 import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 @Component({
   selector: 'app-call-to-action',
@@ -14,6 +15,7 @@ export class CallToActionComponent implements OnInit {
   public dyslexiaEnabled = false
   public dyslexiaLabel = 'Dyslexia Font'
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     public auth: Auth,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     private angulartics2: Angulartics2
@@ -30,24 +32,12 @@ export class CallToActionComponent implements OnInit {
   toggleDyslexiaFont(event: any) {
     this.dyslexiaEnabled = (this.dyslexiaEnabled) ? false : true
     this.dyslexiaLabel = (this.dyslexiaEnabled) ? 'Standard Font' : 'Dyslexia Font'
-    this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Dyslexia Font', label: this.dyslexiaLabel}})
+    if (isPlatformBrowser(this.platformId)) {
+      this.angulartics2.eventTrack.next({ action: 'Action', properties: { category: 'Dyslexia Font', label: this.dyslexiaLabel}})
+    }
     event.preventDefault()
     this.setDyslexiaFont()
     this.setDyslexiaCookie()
-  }
-
-  enlargeFont(event: any) {
-    event.preventDefault()
-    let body: any = document.getElementsByTagName('body')[0]
-    let fontSize: any = this.fontSize++
-    body.setAttribute('style', 'font-size:' + fontSize + 'px')
-  }
-
-  reduceFont(event: any) {
-    event.preventDefault()
-    let body: any = document.getElementsByTagName('body')[0]
-    let fontSize: any = this.fontSize--
-    body.setAttribute('style', 'font-size:' + fontSize + 'px')
   }
 
   setDyslexiaCookie() {
@@ -61,22 +51,26 @@ export class CallToActionComponent implements OnInit {
   toggleSite(event: any) {
     event.preventDefault()
     Cookies.set('proxy_override', 'true')
-    window.location.reload()
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.reload()
+    }
   }
 
   setDyslexiaFont() {
-    let body: any = document.getElementsByTagName('body')[0]
-    let className = 'dyslexia'
-    if (body.classList) {
-      body.classList.toggle(className)
-    } else {
-      let classes: any = body.className.split(' ')
-      let existingIndex: any = classes.indexOf(className)
-      if (existingIndex >= 0) {
-        classes.splice(existingIndex, 1)
+    if (isPlatformBrowser(this.platformId)) {
+      let body: any = document.getElementsByTagName('body')[0]
+      let className = 'dyslexia'
+      if (body.classList) {
+        body.classList.toggle(className)
       } else {
-        classes.push(className)
-      body.className = classes.join(' ')
+        let classes: any = body.className.split(' ')
+        let existingIndex: any = classes.indexOf(className)
+        if (existingIndex >= 0) {
+          classes.splice(existingIndex, 1)
+        } else {
+          classes.push(className)
+        body.className = classes.join(' ')
+        }
       }
     }
   }
