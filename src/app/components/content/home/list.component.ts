@@ -110,14 +110,14 @@ export class HomeListingComponent implements OnInit {
   }
 
   resetPagination() {
-    setTimeout(() => {
+    // setTimeout(() => {
       this.paginationData.pages = []
       this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent)
       for (let i = 0; i < this.paginationData.totalPages; i++) {
         this.paginationData.pages.push(i + 1)
       }
       this.paginationData.currentPage = 0
-    }, 1)
+    // }, 1)
   }
 
 }

@@ -21,9 +21,9 @@ export class AudioComponent implements OnInit, OnDestroy {
     this.resetPlayer()
   }
   ngOnDestroy() {
-    setTimeout(() => {
+    // setTimeout(() => {
       this.videoJSplayer.dispose()
-    }, 1)
+    // }, 1)
   }
 
   playPlayer(event: any) {
@@ -33,7 +33,7 @@ export class AudioComponent implements OnInit, OnDestroy {
   }
 
   resetPlayer() {
-    setTimeout(
+    // setTimeout(
       () => {
         this.videoJSplayer = videojs(this.player.nativeElement.id, {'html5': {
           nativeTextTracks: false
@@ -42,6 +42,6 @@ export class AudioComponent implements OnInit, OnDestroy {
           let poster = document.querySelectorAll('.vjs-poster')
           poster[0].setAttribute('style', 'background-image: url("' + this.embeddedContent.audio[0].thumbnail + '")')
         }
-      }, 1)
+      // }, 1)
     }
   }

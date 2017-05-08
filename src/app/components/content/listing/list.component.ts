@@ -1,8 +1,10 @@
-import { PLATFORM_ID, Component, HostListener, Inject} from '@angular/core'
+import { Component, AfterViewInit, Renderer2} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
 import { DataService } from './../../../services/data.service'
 import { ListService } from './../../../services/list.service'
+import { MetaService } from './../../../services/meta.service'
+
 import * as _ from 'lodash'
 import { Observable, BehaviorSubject } from 'rxjs/Rx'
 
@@ -14,7 +16,7 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx'
     ListService
   ]
 })
-export class ListingComponent {
+export class ListingComponent implements AfterViewInit {
 
   public itemCount: number
   public currentItemCount: number
@@ -40,10 +42,11 @@ export class ListingComponent {
 
   constructor(
     private dataService: DataService,
+    private metaService: MetaService,
     private listService: ListService,
-    private route: ActivatedRoute
-
-  ) {
+    private route: ActivatedRoute,
+    private renderer: Renderer2,
+    ) {
     this.paginationData = {
       currentPage: 0,
       itemsPerPage: 6,
@@ -63,8 +66,13 @@ export class ListingComponent {
     })
   }
 
+  ngAfterViewInit(): void {
+    console.log('cats')
+    this.metaService.setTitle(this.renderer, 'cats')
+}
+
   resetPagination() {
-    setTimeout(() => {
+    // setTimeout(() => {
       this.paginationData.pages = []
       this.paginationData.totalPages = Math.ceil(this.paginationData.totalItems / this.paginationData.itemsPerPageCurrent)
       for (let i = 0; i < this.paginationData.totalPages; i++) {
@@ -72,7 +80,7 @@ export class ListingComponent {
       }
       this.paginationData.currentPage = this.paginationData.currentPage
       this.currentPage.next(this.paginationData.currentPage)
-    }, 1)
+    // }, 1)
   }
 
   stringifyTitleArray(array: any) {

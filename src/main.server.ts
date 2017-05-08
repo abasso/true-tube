@@ -28,7 +28,7 @@ function cacheControl(req, res, next) {
 
 console.log(__dirname)
 
-app.use('/assets', cacheControl, express.static(path.join(__dirname, 'assets'), {maxAge: 30}))
+app.use('/assets', cacheControl, express.static(path.join(__dirname, '..', 'src', 'assets'), {maxAge: 30}))
 
 app.use('/', express.static('dist', {index: false}))
 
