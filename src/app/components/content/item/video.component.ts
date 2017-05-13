@@ -68,6 +68,9 @@ export class VideoComponent implements OnInit, OnChanges, OnDestroy {
             nativeTextTracks: false
           }})
           let v = document.getElementsByTagName('video')[0]
+          v.addEventListener('contextmenu', function(e) {
+              e.preventDefault()
+          }, false)
           v.addEventListener('play', function(data) {
             self.angulartics2.eventTrack.next({ action: 'Watch', properties: { category: 'Play', title: self.embed.title}})
           }, true)

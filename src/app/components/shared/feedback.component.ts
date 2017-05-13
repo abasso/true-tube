@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { DataService } from './../../services/data.service'
 
 @Component({
   selector: 'app-feedback',
@@ -8,12 +8,35 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 export class FeedbackComponent implements OnInit {
   public showFeedback = false
   public textarea: string
-  constructor() { }
+  public feedback: any = {
+    type: '',
+    feedback: '',
+    json: {}
+  }
+  public feedbackTypes: any = [
+    {
+      value: 'general',
+      label: 'General feedback'
+    },
+    {
+      value: 'site',
+      label: 'Feedback about the site'
+    },
+    {
+      value: 'page',
+      label: 'Feedback about this page'
+    }
+  ]
+
+  constructor(
+    private dataService: DataService,
+  ) {
+  }
 
   ngOnInit() {
   }
 
-  toggleFeedback() {
+  public toggleFeedback(): void {
     if (this.showFeedback === false) {
       this.showFeedback = true
     } else {
@@ -21,13 +44,9 @@ export class FeedbackComponent implements OnInit {
     }
   }
 
-  updateTextArea(event: any) {
-    console.log('Text area updating')
-  }
-
-  submitFeedback(event: any) {
-    console.log(event)
-    console.log(this.textarea)
+  public submitFeedback(event: any): void {
+    this.feedback.json = window
+    this.dataService.sendFeedback(this.feedback)
   }
 
 }

@@ -165,6 +165,8 @@ export class DataService {
   }
 
   sendFeedback(data: any) {
+    console.log("sending feedback")
+    console.log(data)
     let header = new Headers()
     let options = new RequestOptions({ headers: header })
     header.append('Content-Type', 'application/json')
