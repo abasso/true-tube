@@ -11,7 +11,7 @@ export class FeedbackComponent implements OnInit {
   public feedback: any = {
     type: '',
     feedback: '',
-    json: {}
+    // json: {}
   }
   public feedbackTypes: any = [
     {
@@ -45,7 +45,7 @@ export class FeedbackComponent implements OnInit {
   }
 
   public submitFeedback(event: any): void {
-    this.feedback.json = window
+    // this.feedback.json = window
     this.dataService.sendFeedback(this.feedback)
   }
 

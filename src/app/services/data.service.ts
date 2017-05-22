@@ -167,11 +167,13 @@ export class DataService {
   sendFeedback(data: any) {
     console.log("sending feedback")
     console.log(data)
+    let jsonData = JSON.stringify(data)
+    console.log(jsonData)
     let header = new Headers()
     let options = new RequestOptions({ headers: header })
     header.append('Content-Type', 'application/json')
     return this.authHttp
-    .post(this.feedBackUrl, data, options)
+    .post(this.feedBackUrl, jsonData, options)
     .subscribe((response) => ( console.log(response) ))
   }
 

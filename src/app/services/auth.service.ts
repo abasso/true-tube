@@ -26,7 +26,7 @@ export class Auth {
     this.lock = new Auth0Lock(myConfig.clientID, myConfig.domain, myConfig.options)
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
-      localStorage.setItem('id_token', authResult.idToken)
+      localStorage.setItem('token', authResult.idToken)
       const redirectUrl: string = localStorage.getItem('redirectUrl')
       // Fetch profile information
        this.lock.getProfile(authResult.idToken, (error: any, profile: any) => {
@@ -102,7 +102,7 @@ export class Auth {
 
 
     // Remove token from localStorage
-    localStorage.removeItem('id_token')
+    localStorage.removeItem('token')
     this.userProfile = undefined
     if (this.checkRM()) {
       localStorage.removeItem('rmlogin')
