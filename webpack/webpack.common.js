@@ -2,8 +2,6 @@ const { root } = require('./helpers');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
 
-console.log(__dirname);
-
 /**
  * This is a common webpack config which is the base for all builds
  */

@@ -161,15 +161,19 @@ export class DataService {
     header.append('Content-Type', 'multipart/form-data')
     return this.authHttp
     .post(this.meUrl, data, options)
-    .subscribe((response) => ( console.log(response) ))
+    .subscribe((response) => ( response.json() ))
   }
 
   sendFeedback(data: any) {
+    console.log("sending feedback")
+    console.log(data)
+    let jsonData = JSON.stringify(data)
+    console.log(jsonData)
     let header = new Headers()
     let options = new RequestOptions({ headers: header })
     header.append('Content-Type', 'application/json')
-    return this.authHttp
-    .post(this.feedBackUrl, data, options)
+    return this.http
+    .post(this.feedBackUrl, jsonData, options)
     .subscribe((response) => ( console.log(response) ))
   }
 

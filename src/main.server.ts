@@ -10,7 +10,7 @@ import { ROUTES } from './routes'
 import { enableProdMode } from '@angular/core'
 enableProdMode()
 const app = express()
-const port = 8000
+const port = 4200
 const baseUrl = `http://localhost:${port}`
 
 app.engine('html', ngExpressEngine({
@@ -25,8 +25,6 @@ function cacheControl(req, res, next) {
   res.header('Cache-Control', 'max-age=60');
   next();
 }
-
-console.log(__dirname)
 
 app.use('/assets', cacheControl, express.static(path.join(__dirname, '..', 'src', 'assets'), {maxAge: 30}))
 
@@ -43,6 +41,6 @@ ROUTES.forEach(route => {
   })
 })
 
-app.listen(8000,() => {
+app.listen(4200,() => {
 	console.log(`Listening at ${baseUrl}`)
 })

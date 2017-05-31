@@ -59,6 +59,9 @@ import { Angulartics2Module } from 'angulartics2'
 import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 import { FeedbackComponent } from './components/shared/feedback.component'
 import { RmAuthComponent } from './components/profile/rm-auth.component'
+import { MetaGuard } from '@ngx-meta/core'
+import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@ngx-meta/core'
+
 // import {PopoverModule} from 'ngx-popover'
 
 // import { MetaModule } from 'ng2-meta'
@@ -69,6 +72,7 @@ import { RmAuthComponent } from './components/profile/rm-auth.component'
 
 const appRoutes: Routes = [
   {
+    canActivateChild: [MetaGuard],
     path: '',
     component: HomeComponent,
     data: {
@@ -78,7 +82,12 @@ const appRoutes: Routes = [
     }
   },
   { path: 'list',
-    component: ListingComponent
+    component: ListingComponent,
+    data: {
+      meta: {
+        description: 'Description of the home page'
+      }
+    }
   },
   { path: 'calendar',
     component: CalendarComponent
@@ -196,6 +205,18 @@ const appRoutes: Routes = [
 // }
 
 
+export function metaFactory(): MetaLoader {
+  return new MetaStaticLoader({
+    pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+    pageTitleSeparator: ' - ',
+    applicationName: 'True Tube',
+    defaults: {
+      title: '',
+      description: 'Award winning free resources for RE, PSHE and Citizenship'
+    }
+  })
+}
+
 @NgModule({
   declarations: [
     AccessibilityNavComponent,
@@ -252,6 +273,10 @@ const appRoutes: Routes = [
     HttpModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    MetaModule.forRoot({
+      provide: MetaLoader,
+      useFactory: (metaFactory)
+    }),
     SwiperModule,
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
   ],

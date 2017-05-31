@@ -15,6 +15,7 @@ import {AuthHttp} from 'angular2-jwt'
 import { Angulartics2 } from 'angulartics2'
 import { Angulartics2GoogleAnalytics } from 'angulartics2/dist/providers/ga/angulartics2-ga'
 import { isPlatformBrowser, isPlatformServer } from '@angular/common'
+import { MetaService } from '@ngx-meta/core'
 
 declare var videojs: any
 
@@ -69,7 +70,8 @@ export class ItemComponent implements OnInit {
     private auth: Auth,
     private http: AuthHttp,
     public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-    private angulartics2: Angulartics2
+    private angulartics2: Angulartics2,
+    private meta: MetaService
   ) {}
 
   ngOnInit() {
@@ -81,7 +83,18 @@ export class ItemComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
           window.scrollTo(0, 0)
         }
+
         this.item = data.hits.hits[0]._source
+
+        let strippedDescription = this.item.description.replace(/(<([^>]+)>)/ig,"")
+
+        this.meta.setTitle(this.item.title)
+        this.meta.setTag('description', strippedDescription)
+        this.meta.setTag('og:url', 'https://www.truetube.co.uk' + this.item.slug)
+        this.meta.setTag('og:image', this.item.thumbnail[0].url)
+        // this.meta.setTag('og:description', strippedDescription)
+        // this.meta.setTag('og:title', this.item.title + " - True Tube")
+
         this.embeddedContent = _.groupBy(this.item.embedded, 'type')
         if (this.item.resource_types.length === 1) {
           this.item.hideMenu = true

@@ -30,7 +30,7 @@ export class Auth {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       if (isPlatformBrowser(this.platformId)) {
-        localStorage.setItem('id_token', authResult.idToken)
+        localStorage.setItem('token', authResult.idToken)
         const redirectUrl: string = localStorage.getItem('redirectUrl')
       } else {
         const redirectUrl: string = ''
@@ -118,7 +118,7 @@ export class Auth {
 
     // Remove token from localStorage
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('id_token')
+      localStorage.removeItem('token')
     }
     this.userProfile = undefined
     if (this.checkRM()) {

@@ -4,8 +4,4 @@ import {Injectable} from '@angular/core'
 export class MetaService {
   constructor() {
   }
-  setTitle = (renderer, title) => {
-    renderer.setValue('title', 'cats')
-  }
-
 }

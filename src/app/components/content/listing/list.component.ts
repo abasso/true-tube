@@ -1,9 +1,9 @@
-import { Component, AfterViewInit, Renderer2} from '@angular/core'
+import { Component, AfterViewInit} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { PaginationPipe } from './../../../pipes/pagination.pipe'
 import { DataService } from './../../../services/data.service'
 import { ListService } from './../../../services/list.service'
-import { MetaService } from './../../../services/meta.service'
+import { MetaService } from '@ngx-meta/core'
 
 import * as _ from 'lodash'
 import { Observable, BehaviorSubject } from 'rxjs/Rx'
@@ -42,10 +42,9 @@ export class ListingComponent implements AfterViewInit {
 
   constructor(
     private dataService: DataService,
-    private metaService: MetaService,
     private listService: ListService,
     private route: ActivatedRoute,
-    private renderer: Renderer2,
+    private meta: MetaService
     ) {
     this.paginationData = {
       currentPage: 0,
@@ -67,8 +66,6 @@ export class ListingComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('cats')
-    this.metaService.setTitle(this.renderer, 'cats')
 }
 
   resetPagination() {
